@@ -1182,57 +1182,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Soft low-toned iPhone typing click synthesizer
-    let typingAudioCtx = null;
-    function playIPhoneKeySound() {
-        try {
-            if (!typingAudioCtx) {
-                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-                if (AudioCtxClass) typingAudioCtx = new AudioCtxClass();
-            }
-            if (!typingAudioCtx) return;
-            if (typingAudioCtx.state === 'suspended') {
-                typingAudioCtx.resume().catch(() => {});
-            }
-
-            const now = typingAudioCtx.currentTime;
-            
-            const osc = typingAudioCtx.createOscillator();
-            const gain = typingAudioCtx.createGain();
-            const filter = typingAudioCtx.createBiquadFilter();
-
-            // Warm low-mid iPhone keyboard click (~360Hz - 420Hz)
-            const baseFreq = 380 + (Math.random() * 40 - 20);
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(baseFreq, now);
-            osc.frequency.exponentialRampToValueAtTime(110, now + 0.024);
-
-            // Soft lowpass filter to remove harsh highs
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(1500, now);
-            filter.Q.setValueAtTime(1.5, now);
-
-            // Subtle, warm gain envelope
-            gain.gain.setValueAtTime(0.038, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
-
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(typingAudioCtx.destination);
-
-            osc.start(now);
-            osc.stop(now + 0.025);
-        } catch (_) {}
-    }
-
-    const unlockAudio = () => {
-        if (typingAudioCtx && typingAudioCtx.state === 'suspended') {
-            typingAudioCtx.resume().catch(() => {});
-        }
-    };
-    window.addEventListener('pointerdown', unlockAudio, { passive: true, once: true });
-    window.addEventListener('touchstart', unlockAudio, { passive: true, once: true });
-
     function typewriteText(fullText) {
         clearInterval(typeTimer);
         if (!twText) return;
@@ -1244,15 +1193,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const char = fullText.charAt(charIndex);
                 twText.textContent += char;
                 charIndex++;
-                
-                // Play pleasant subtle iPhone typing sound
-                if (char !== ' ' && char !== '\n') {
-                    playIPhoneKeySound();
-                }
 
-                let speed = 25 + Math.random() * 8;
-                if (char === '.' || char === '!' || char === '?') speed = 130;
-                else if (char === ',') speed = 65;
+                let speed = 24;
+                if (char === '.' || char === '!' || char === '?') speed = 120;
+                else if (char === ',') speed = 60;
 
                 typeTimer = setTimeout(typeNext, speed);
             }
