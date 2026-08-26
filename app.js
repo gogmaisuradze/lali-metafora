@@ -2051,11 +2051,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==========================================================================
+    // 17. MOBILE VIDEO AUTOPLAY CONTROLLER
+    // ==========================================================================
+    function initMobileServiceVideos() {
+        const videos = document.querySelectorAll('.card-feature-video');
+        if (!videos.length) return;
+
+        videos.forEach(video => {
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+            video.setAttribute('autoplay', '');
+            video.setAttribute('loop', '');
+            
+            const startPlay = () => {
+                const p = video.play();
+                if (p !== undefined) {
+                    p.catch(() => {});
+                }
+            };
+
+            startPlay();
+
+            // IntersectionObserver to ensure continuous smooth playback
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startPlay();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                observer.observe(video);
+            }
+        });
+
+        // Trigger on first touch/scroll for iOS Safari compatibility
+        const triggerTouchPlay = () => {
+            videos.forEach(video => {
+                if (video.paused) {
+                    const p = video.play();
+                    if (p !== undefined) p.catch(() => {});
+                }
+            });
+            window.removeEventListener('touchstart', triggerTouchPlay);
+            window.removeEventListener('scroll', triggerTouchPlay);
+        };
+
+        window.addEventListener('touchstart', triggerTouchPlay, { passive: true });
+        window.addEventListener('scroll', triggerTouchPlay, { passive: true });
+    }
+
     initBUFigure();
     initManifestoSpinningFigure();
     initThemeSwitcher();
     initMetaBot();
     initMobileNav();
+    initMobileServiceVideos();
 
 });
 
