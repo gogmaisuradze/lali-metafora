@@ -1854,7 +1854,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!launcherBtn || !chatWindow) return;
 
         // Toggle chat window
-        launcherBtn.addEventListener('click', () => {
+        launcherBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const isActive = chatWindow.classList.toggle('active');
             if (isActive) {
                 if (launcherBadge) launcherBadge.style.display = 'none';

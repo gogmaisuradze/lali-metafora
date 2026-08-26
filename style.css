@@ -2937,11 +2937,12 @@ html.direct-main-mode #main-website {
    12. METABOT AI CHAT WIDGET (მეტაბოტი)
    ========================================================================== */
 .metabot-widget-container {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 9999;
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 999999 !important;
     font-family: var(--font-main);
+    pointer-events: auto !important;
 }
 
 /* Floating Launcher Button */
@@ -2961,6 +2962,11 @@ html.direct-main-mode #main-website {
     user-select: none;
     outline: none;
     padding: 10px;
+    z-index: 1000;
+}
+
+.metabot-launcher-btn * {
+    pointer-events: none;
 }
 
 [data-theme="plum"] .metabot-launcher-btn {
@@ -3560,7 +3566,7 @@ html.direct-main-mode #main-website {
         position: fixed !important;
         bottom: 20px !important;
         right: 20px !important;
-        z-index: 99999 !important;
+        z-index: 999999 !important;
     }
 
     .metabot-chat-window {
@@ -3577,12 +3583,20 @@ html.direct-main-mode #main-website {
         box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.28) !important;
         margin: 0 !important;
         box-sizing: border-box !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
         transform: translateY(100%) !important;
         transform-origin: bottom center !important;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
     }
 
     .metabot-chat-window.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
         transform: translateY(0) !important;
+        display: flex !important;
     }
     
     .metabot-launcher-btn {
