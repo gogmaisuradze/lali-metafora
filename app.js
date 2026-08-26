@@ -2052,57 +2052,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 17. MOBILE VIDEO AUTOPLAY CONTROLLER
+    // 17. SERVICE VIDEOS CONTROLLER (Desktop: Hover Only | Mobile: Centered Card Only)
     // ==========================================================================
-    function initMobileServiceVideos() {
-        const videos = document.querySelectorAll('.card-feature-video');
-        if (!videos.length) return;
+    function initServiceVideoInteractions() {
+        const cards = document.querySelectorAll('.service-five-card');
+        if (!cards.length) return;
 
-        videos.forEach(video => {
+        let activeMobilePlayingVideo = null;
+
+        cards.forEach(card => {
+            const video = card.querySelector('.card-feature-video');
+            if (!video) return;
+
             video.muted = true;
             video.defaultMuted = true;
             video.playsInline = true;
             video.setAttribute('playsinline', '');
             video.setAttribute('webkit-playsinline', '');
-            video.setAttribute('autoplay', '');
-            video.setAttribute('loop', '');
-            
-            const startPlay = () => {
-                const p = video.play();
-                if (p !== undefined) {
-                    p.catch(() => {});
-                }
-            };
 
-            startPlay();
-
-            // IntersectionObserver to ensure continuous smooth playback
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            startPlay();
-                        }
-                    });
-                }, { threshold: 0.1 });
-                observer.observe(video);
-            }
-        });
-
-        // Trigger on first touch/scroll for iOS Safari compatibility
-        const triggerTouchPlay = () => {
-            videos.forEach(video => {
-                if (video.paused) {
+            // 1. DESKTOP: Only play when mouse is hovered over this specific card
+            card.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 992) {
                     const p = video.play();
                     if (p !== undefined) p.catch(() => {});
                 }
             });
-            window.removeEventListener('touchstart', triggerTouchPlay);
-            window.removeEventListener('scroll', triggerTouchPlay);
-        };
 
-        window.addEventListener('touchstart', triggerTouchPlay, { passive: true });
-        window.addEventListener('scroll', triggerTouchPlay, { passive: true });
+            card.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 992) {
+                    video.pause();
+                }
+            });
+        });
+
+        // 2. MOBILE: IntersectionObserver that plays ONLY the single card centered in the viewport
+        if ('IntersectionObserver' in window) {
+            const mobileObserver = new IntersectionObserver((entries) => {
+                if (window.innerWidth <= 992) {
+                    entries.forEach(entry => {
+                        const video = entry.target.querySelector('.card-feature-video');
+                        if (!video) return;
+
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                            // If another video was playing, pause it first
+                            if (activeMobilePlayingVideo && activeMobilePlayingVideo !== video) {
+                                activeMobilePlayingVideo.pause();
+                            }
+                            activeMobilePlayingVideo = video;
+                            const p = video.play();
+                            if (p !== undefined) p.catch(() => {});
+                        } else {
+                            if (activeMobilePlayingVideo === video) {
+                                video.pause();
+                                activeMobilePlayingVideo = null;
+                            } else {
+                                video.pause();
+                            }
+                        }
+                    });
+                }
+            }, {
+                threshold: [0.25, 0.5, 0.75],
+                rootMargin: "-5% 0px -5% 0px"
+            });
+
+            cards.forEach(card => mobileObserver.observe(card));
+        }
+
+        // On window resize, pause all videos if transitioning
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992 && activeMobilePlayingVideo) {
+                activeMobilePlayingVideo.pause();
+                activeMobilePlayingVideo = null;
+            }
+        });
     }
 
     initBUFigure();
@@ -2110,7 +2133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeSwitcher();
     initMetaBot();
     initMobileNav();
-    initMobileServiceVideos();
+    initServiceVideoInteractions();
 
 });
 
