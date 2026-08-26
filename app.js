@@ -1950,19 +1950,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // n8n Website Chat Agent (Gemini + ცოდნის ბაზა)
+        const METAFORA_CHAT_WEBHOOK = 'https://meticulous-oyster.pikapod.net/webhook/metaphora-website-chat';
+
+        function metaforaSessionId() {
+            try {
+                let s = localStorage.getItem('mtf_sid');
+                if (!s) { s = 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8); localStorage.setItem('mtf_sid', s); }
+                return s;
+            } catch (_) { return 'web-anon'; }
+        }
+
+        function formatBotHtml(text) {
+            const esc = escapeHtml(String(text || ''));
+            return esc.split(/\n\s*\n/).map(p => '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
+        }
+
         function handleUserMessage(query) {
             // Append User Message
             appendMessage('user', `<p>${escapeHtml(query)}</p>`);
-
             // Show Typing indicator
             showTyping(true);
 
-            // Natural AI delay (600ms - 900ms)
-            setTimeout(() => {
+            fetch(METAFORA_CHAT_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: query, sessionId: metaforaSessionId() })
+            })
+            .then(r => r.json())
+            .then(data => {
                 showTyping(false);
-                const botResponse = generateBotResponse(query);
-                appendMessage('bot', botResponse);
-            }, 750);
+                const out = (data && data.output) ? data.output : 'ბოდიში, ვერ დაგიკავშირდი. სცადე ხელახლა ან დაგვირეკე: 📞 599 22 82 28';
+                appendMessage('bot', formatBotHtml(out));
+            })
+            .catch(() => {
+                showTyping(false);
+                appendMessage('bot', '<p>ბოდიში, დროებითი შეფერხებაა 🙏 სცადე ხელახლა ან დაგვირეკე: 📞 599 22 82 28</p>');
+            });
         }
 
         function generateBotResponse(input) {
