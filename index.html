@@ -986,19 +986,38 @@
             </div>
             <nav class="mobile-nav-links">
                 <a href="index.html#hero" class="mobile-nav-item">🏠 მთავარი</a>
-                <div class="mobile-nav-subgroup">
-                    <span class="mobile-subgroup-title">✨ ჩვენს შესახებ</span>
-                    <a href="index.html#about" class="mobile-sub-item">📜 მანიფესტი &amp; ფილოსოფია</a>
-                    <a href="index.html#team" class="mobile-sub-item">👥 მეტაფორას გუნდი</a>
+                
+                <!-- Expandable Accordion: ჩვენს შესახებ -->
+                <div class="mobile-nav-accordion" id="mob-acc-about">
+                    <button type="button" class="mobile-accordion-toggle" aria-expanded="false">
+                        <span>✨ ჩვენს შესახებ</span>
+                        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion-body">
+                        <a href="index.html#about" class="mobile-sub-item">📜 მანიფესტი &amp; ფილოსოფია</a>
+                        <a href="index.html#team" class="mobile-sub-item">👥 მეტაფორას გუნდი</a>
+                    </div>
                 </div>
-                <div class="mobile-nav-subgroup">
-                    <span class="mobile-subgroup-title">🌱 სერვისები &amp; სივრცეები</span>
-                    <a href="index.html#services" class="mobile-sub-item">🌱 1. Personal Development</a>
-                    <a href="index.html#services" class="mobile-sub-item">💼 2. Business</a>
-                    <a href="index.html#services" class="mobile-sub-item">🧠 3. Think Tank</a>
-                    <a href="index.html#services" class="mobile-sub-item">🎨 4. Art &amp; Playback თეატრი</a>
-                    <a href="index.html#services" class="mobile-sub-item">🏛️ 5. Clubs &amp; Coworking</a>
+
+                <!-- Expandable Accordion: სერვისები & სივრცეები -->
+                <div class="mobile-nav-accordion" id="mob-acc-services">
+                    <button type="button" class="mobile-accordion-toggle" aria-expanded="false">
+                        <span>🌱 სერვისები &amp; სივრცეები</span>
+                        <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion-body">
+                        <a href="index.html#services" class="mobile-sub-item">🌱 1. Personal Development</a>
+                        <a href="index.html#services" class="mobile-sub-item">💼 2. Business</a>
+                        <a href="index.html#services" class="mobile-sub-item">🧠 3. Think Tank</a>
+                        <a href="index.html#services" class="mobile-sub-item">🎨 4. Art &amp; Playback თეატრი</a>
+                        <a href="index.html#services" class="mobile-sub-item">🏛️ 5. Clubs &amp; Coworking</a>
+                    </div>
                 </div>
+
                 <a href="gallery.html" class="mobile-nav-item">🖼️ გალერეა</a>
                 <a href="blog.html" class="mobile-nav-item">📖 ბლოგი</a>
                 <a href="index.html#contact" class="mobile-nav-item">📞 კონტაქტი</a>

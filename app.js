@@ -2067,8 +2067,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === overlay) closeMenu();
         });
 
-        // Close on navigation link click
-        overlay.querySelectorAll('a, button').forEach(link => {
+        // Accordion expand/collapse on category click
+        overlay.querySelectorAll('.mobile-accordion-toggle').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const acc = btn.closest('.mobile-nav-accordion');
+                if (acc) {
+                    const wasActive = acc.classList.contains('active');
+                    overlay.querySelectorAll('.mobile-nav-accordion').forEach(a => a.classList.remove('active'));
+                    if (!wasActive) {
+                        acc.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Close drawer on navigation link click
+        overlay.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 closeMenu();
             });
