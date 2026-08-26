@@ -2918,10 +2918,17 @@ html.direct-main-mode #main-website {
     .img-reveal-span { height: 38px; }
     .about-audio-badge-card { justify-content: center; text-align: center; }
 
-    /* Main Website Header on Mobile: ONLY Logo + Color Switcher & Hamburger */
-    .header-actions .search-box-wrapper,
+    /* Main Website Header on Mobile */
+    .header-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+    .header-actions .search-box-wrapper {
+        display: block !important;
+    }
     .header-actions .lang-single-btn {
-        display: none !important;
+        display: inline-flex !important;
     }
 }
 
