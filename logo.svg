@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" width="520" height="140">
+  <defs>
+    <linearGradient id="metaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#016166" />
+      <stop offset="100%" stop-color="#7a3963" />
+    </linearGradient>
+  </defs>
+
+  <!-- Flower / Dandelion Emblem inside 'O' -->
+  <g transform="translate(70, 70)">
+    <!-- Outer Ring -->
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#7a3963" stroke-width="5" />
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#016166" stroke-width="2" stroke-dasharray="8 6" />
+    
+    <!-- Central Core -->
+    <circle cx="0" cy="0" r="5" fill="#ffba00" />
+    
+    <!-- Radiating Stems and Dots -->
+    <!-- Ring 1 Stems -->
+    <g stroke="#016166" stroke-width="1.8" stroke-linecap="round">
+      <line x1="0" y1="0" x2="0" y2="-22" />
+      <line x1="0" y1="0" x2="15.5" y2="-15.5" />
+      <line x1="0" y1="0" x2="22" y2="0" />
+      <line x1="0" y1="0" x2="15.5" y2="15.5" />
+      <line x1="0" y1="0" x2="0" y2="22" />
+      <line x1="0" y1="0" x2="-15.5" y2="15.5" />
+      <line x1="0" y1="0" x2="-22" y2="0" />
+      <line x1="0" y1="0" x2="-15.5" y2="-15.5" />
+    </g>
+    
+    <!-- Ring 1 Dots -->
+    <g fill="#7a3963">
+      <circle cx="0" cy="-22" r="2.5" />
+      <circle cx="15.5" cy="-15.5" r="2.5" />
+      <circle cx="22" cy="0" r="2.5" />
+      <circle cx="15.5" cy="15.5" r="2.5" />
+      <circle cx="0" cy="22" r="2.5" />
+      <circle cx="-15.5" cy="15.5" r="2.5" />
+      <circle cx="-22" cy="0" r="2.5" />
+      <circle cx="-15.5" cy="-15.5" r="2.5" />
+    </g>
+
+    <!-- Ring 2 (Outer Stems) -->
+    <g stroke="#7a3963" stroke-width="1.2" stroke-linecap="round">
+      <line x1="0" y1="0" x2="12.2" y2="-29.5" />
+      <line x1="0" y1="0" x2="29.5" y2="-12.2" />
+      <line x1="0" y1="0" x2="29.5" y2="12.2" />
+      <line x1="0" y1="0" x2="12.2" y2="29.5" />
+      <line x1="0" y1="0" x2="-12.2" y2="29.5" />
+      <line x1="0" y1="0" x2="-29.5" y2="12.2" />
+      <line x1="0" y1="0" x2="-29.5" y2="-12.2" />
+      <line x1="0" y1="0" x2="-12.2" y2="-29.5" />
+    </g>
+
+    <!-- Outer Gold Dots -->
+    <g fill="#ffba00">
+      <circle cx="12.2" cy="-29.5" r="2" />
+      <circle cx="29.5" cy="-12.2" r="2" />
+      <circle cx="29.5" cy="12.2" r="2" />
+      <circle cx="12.2" cy="29.5" r="2" />
+      <circle cx="-12.2" cy="29.5" r="2" />
+      <circle cx="-29.5" cy="12.2" r="2" />
+      <circle cx="-29.5" cy="-12.2" r="2" />
+      <circle cx="-12.2" cy="-29.5" r="2" />
+    </g>
+  </g>
+
+  <!-- Typography -->
+  <text x="135" y="72" font-family="'Playfair Display', 'Noto Sans Georgian', Georgia, serif" font-weight="800" font-size="44" fill="#016166" letter-spacing="1">მეტაფორა</text>
+  <text x="138" y="98" font-family="'Inter', 'Noto Sans Georgian', sans-serif" font-weight="700" font-size="14" fill="#7a3963" letter-spacing="3.5">METAPHORA</text>
+
+  <!-- Subtitle -->
+  <text x="138" y="116" font-family="'Inter', 'Noto Sans Georgian', sans-serif" font-weight="600" font-size="11" fill="#ffba00" letter-spacing="2">EDUTAINMENT HUB &amp; THIRD PLACE</text>
+</svg>

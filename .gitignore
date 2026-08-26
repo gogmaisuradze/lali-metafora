@@ -1,0 +1,14 @@
+.DS_Store
+.chrome_profile/
+.venv/
+meta hub/
+babua_frames/
+babua_seq/
+*.pdf
+unnamed*.png
+Gemini_Generated_Image*.png
+frame_*.png
+test_*.jpg
+test_*.png
+test_*.webp
+video servisebi/

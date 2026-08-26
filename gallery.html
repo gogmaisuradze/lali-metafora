@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>გალერეა - მეტაფორა</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2700">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <!-- Navigation Header (Floating Pill-Bar) -->
+    <header class="site-header">
+        <div class="header-container">
+                            <div class="header-brand-group">
+                    <a href="index.html" class="logo-link" title="საწყის გვერდზე გადასვლა">
+                        <img src="logo_teal_crop.png" alt="METAPHORA" class="site-logo-brand brand-dynamic-logo" id="site-logo-img">
+                    </a>
+                    
+                    <button class="theme-spin-toggle" id="theme-spin-toggle" title="დომინანტი ფერის შეცვლა (Teal / Plum)" aria-label="დომინანტი ფერის შეცვლა">
+                        <span class="spin-disc">
+                            <span class="spin-disc-half teal-side"></span>
+                            <span class="spin-disc-half plum-side"></span>
+                        </span>
+                        <span class="spin-rotate-icon">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+
+            <!-- Main Menu -->
+            <nav class="nav-menu">
+                <a href="index.html#hero" class="nav-item">მთავარი</a>
+                <div class="nav-dropdown-wrapper">
+                    <a href="index.html#about" class="nav-item has-dropdown">
+                        <span>ჩვენს შესახებ</span>
+                        <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown-menu">
+                        <a href="index.html#about" class="dropdown-link">
+                            <span class="d-icon">✨</span>
+                            <div>
+                                <strong>მანიფესტი & ფილოსოფია</strong>
+                                <small>მესამე ადგილის კონცეფცია</small>
+                            </div>
+                        </a>
+                        <a href="index.html#team" class="dropdown-link">
+                            <span class="d-icon">👥</span>
+                            <div>
+                                <strong>მეტაფორას გუნდი</strong>
+                                <small>გაიცანით ჩვენი წევრები</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown-wrapper">
+                    <a href="index.html#services" class="nav-item has-dropdown">
+                        <span>სერვისები</span>
+                        <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown-menu services-dropdown-menu">
+                        <a href="index.html#services" class="dropdown-link">
+                            <span class="d-icon">🧠</span>
+                            <div>
+                                <strong>1. Edutainment & ვორქშოფები</strong>
+                                <small>განათლება და პიროვნული ზრდა</small>
+                            </div>
+                        </a>
+                        <a href="index.html#services" class="dropdown-link">
+                            <span class="d-icon">🌿</span>
+                            <div>
+                                <strong>2. პოზიტიური ფსიქოთერაპია</strong>
+                                <small>ინდივიდუალური & ჯგუფური სესიები</small>
+                            </div>
+                        </a>
+                        <a href="index.html#services" class="dropdown-link">
+                            <span class="d-icon">🎭</span>
+                            <div>
+                                <strong>3. Playback თეატრი</strong>
+                                <small>იმპროვიზაციული არტ-პერფორმანსი</small>
+                            </div>
+                        </a>
+                        <a href="index.html#services" class="dropdown-link">
+                            <span class="d-icon">☕</span>
+                            <div>
+                                <strong>4. Coworking & Quiet Lounge</strong>
+                                <small>კომფორტული სამუშაო სივრცე</small>
+                            </div>
+                        </a>
+                        <a href="index.html#services" class="dropdown-link">
+                            <span class="d-icon">🍸</span>
+                            <div>
+                                <strong>5. Themed Bar & Community</strong>
+                                <small>სამაგიდო თამაშები & კოქტეილები</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="gallery.html" class="nav-item active-page">გალერეა</a>
+                <a href="blog.html" class="nav-item">ბლოგი</a>
+                <a href="index.html#contact" class="nav-item">კონტაქტი</a>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                    <div class="search-box-wrapper" id="search-box-wrapper">
+                        <button class="search-toggle-btn" id="search-toggle-btn" aria-label="ძიება">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                        <div class="search-expandable" id="search-expandable">
+                            <input type="text" class="search-input" id="search-input" placeholder="მოძებნე მეტაფორაში...">
+                            <button class="search-close-btn" id="search-close-btn">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M18 6 6 18M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="lang-single-btn" id="lang-toggle-btn" title="ენის შეცვლა (KA / EN)" aria-label="Toggle Language">
+                        <span class="lang-label" id="lang-active-label">KA</span>
+                    </button>
+                <button class="open-booking-modal-btn primary-btn-header">ჯავშანი</button>
+                    <button class="mobile-menu-toggle-btn" id="mobile-menu-toggle-btn" aria-label="Open Mobile Navigation Menu">
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                    </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Page Hero Header -->
+    <section class="page-hero-section">
+        <div class="section-container">
+            <span class="section-tag">ფოტოკოლექცია</span>
+            <h1 class="page-hero-title">მეტაფორას გალერეა</h1>
+            <p class="page-hero-desc">დაათვალიერეთ ჩვენი სივრცეები, შემოქმედებითი გუნდი და დაუვიწყარი ღონისძიებები.</p>
+        </div>
+    </section>
+
+    <!-- Filterable Gallery Content -->
+    <main class="zones-section" style="padding-top: 20px;">
+        <div class="section-container">
+            
+                                    <!-- Category Filter Tabs -->
+            <div class="gallery-filter-tabs" id="gallery-filter-tabs">
+                <button class="gallery-tab-btn active" data-tab="team">👥 გუნდის წევრები</button>
+                <button class="gallery-tab-btn" data-tab="events">🎭 ღონისძიებები &amp; თეატრი</button>
+                <button class="gallery-tab-btn" data-tab="spaces">🏛️ სივრცეები &amp; ლაუნჯი</button>
+                <button class="gallery-tab-btn" data-tab="all">✨ ყველა ფოტო</button>
+            </div>
+
+                        <!-- Photos Grid (Clean Full-Image Cards) -->
+            <div class="zones-grid" id="gallery-grid">
+                
+                <!-- 1. Team Members (1 to 7) & Team Moments -->
+                <div class="zone-card gallery-item" data-category="team" title="ლალი — დამფუძნებელი &amp; ფასილიტატორი">
+                    <img src="გუნდი/1.jpg" alt="ლალი — დამფუძნებელი &amp; ფასილიტატორი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="თინათინი — პოზიტიური ფსიქოთერაპევტი">
+                    <img src="გუნდი/2.jpg" alt="თინათინი — პოზიტიური ფსიქოთერაპევტი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="გიორგი — Think Tank მოდერატორი">
+                    <img src="გუნდი/3.jpg" alt="გიორგი — Think Tank მოდერატორი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="ნინო — Playback თეატრის არტისტი">
+                    <img src="გუნდი/4.jpg" alt="ნინო — Playback თეატრის არტისტი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="დავითი — Business &amp; Partnerships Lead">
+                    <img src="გუნდი/5.jpg" alt="დავითი — Business &amp; Partnerships Lead" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="ელენე — Community Manager &amp; Clubs Host">
+                    <img src="გუნდი/6.jpg" alt="ელენე — Community Manager &amp; Clubs Host" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="სანდრო — Creative Producer &amp; Curator">
+                    <img src="გუნდი/7.jpg" alt="სანდრო — Creative Producer &amp; Curator" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="გუნდის შემოქმედებითი პროცესი">
+                    <img src="გუნდი/DO5A7109 copy.jpg" alt="გუნდის შემოქმედებითი პროცესი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="მეტაფორას გუნდი სამუშაო გარემოში">
+                    <img src="გუნდი/DO5A7586 copy.jpg" alt="მეტაფორას გუნდი სამუშაო გარემოში" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="team" title="სალონური შეხვედრა &amp; დისკუსია">
+                    <img src="გუნდი/DO5A7289 copy.jpg" alt="სალონური შეხვედრა &amp; დისკუსია" class="zone-img" loading="lazy">
+                </div>
+
+                <!-- 2. Events & Theatre -->
+                <div class="zone-card gallery-item" data-category="events" title="ვორქშოფი &amp; ჯგუფური ინტერაქცია">
+                    <img src="გუნდი/DO5A7567 copy.jpg" alt="ვორქშოფი &amp; ჯგუფური ინტერაქცია" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="events" title="მეტაფორას საღამო &amp; არტ-პერფორმანსი">
+                    <img src="გუნდი/ოცი jpeg.jpeg" alt="მეტაფორას საღამო &amp; არტ-პერფორმანსი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="events" title="ინტელექტუალური დისკუსია &amp; კლუბი">
+                    <img src="გუნდი/DO5A7378 copy.jpg" alt="ინტელექტუალური დისკუსია &amp; კლუბი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="events" title="თემატური საღამო &amp; პრეზენტაცია">
+                    <img src="გუნდი/DO5A6609 copy.jpg" alt="თემატური საღამო &amp; პრეზენტაცია" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="events" title="კომუნის შეხვედრა &amp; ნეთვორქინგი">
+                    <img src="გუნდი/DO5A6713 copy.jpg" alt="კომუნის შეხვედრა &amp; ნეთვორქინგი" class="zone-img" loading="lazy">
+                </div>
+
+                <!-- 3. Spaces & Lounge -->
+                <div class="zone-card gallery-item" data-category="spaces" title="💡 Think Tank &amp; Playback დარბაზი">
+                    <img src="სივრცე 1.JPG" alt="Think Tank დარბაზი" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="spaces" title="☕ Coworking &amp; Quiet Lounge">
+                    <img src="სამუშაო.JPG" alt="Coworking &amp; Lounge" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="spaces" title="🍸 Themed Bar &amp; Board Games">
+                    <img src="სივრცე 2.JPG" alt="Themed Bar" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="spaces" title="🚪 შესასვლელი &amp; ფოიე">
+                    <img src="შესასვლელი.webp" alt="შესასვლელი &amp; ფოიე" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="spaces" title="🎨 მეტაფორას მოზაიკა &amp; დეკორი">
+                    <img src="მოზაიკა.webp" alt="მეტაფორას მოზაიკა" class="zone-img" loading="lazy">
+                </div>
+
+                <div class="zone-card gallery-item" data-category="spaces" title="✨ მეტაფორას ატმოსფერო">
+                    <img src="გუნდი/IMG_9281.JPG" alt="მეტაფორას ინტერიერი" class="zone-img" loading="lazy">
+                </div>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="index.html#hero" class="btn btn-secondary">← მთავარ გვერდზე დაბრუნება</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Glassmorphism Booking Modal Window -->
+    <div class="booking-modal-overlay" id="booking-modal-overlay">
+        <div class="booking-modal-glass">
+            <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <span class="modal-badge">✨ ონლაინ ჯავშანი</span>
+                <h3 class="modal-title">ადგილის დაჯავშნა მეტაფორაში</h3>
+                <p class="modal-desc">აირჩიეთ სასურველი სერვისი, თარიღი და დრო — ჩვენი გუნდი მალე დაგიკავშირდებათ.</p>
+            </div>
+
+            <form class="modal-booking-form" onsubmit="event.preventDefault(); alert('თქვენი ჯავშანი წარმატებით გაიგზავნა! მეტაფორას გუნდი დაგიკავშირდებათ.'); document.getElementById('booking-modal-overlay').classList.remove('active');">
+                <div class="form-group">
+                    <label class="form-label">სერვისი / მიმართულება</label>
+                    <select class="form-input" required>
+                        <option>🌱 1. მეტაფორა Personal Development</option>
+                        <option>💼 2. მეტაფორა Business</option>
+                        <option>🧠 3. მეტაფორა Think Tank</option>
+                        <option>🎨 4. მეტაფორა Art</option>
+                        <option selected>🏛️ 5. მეტაფორა Clubs</option>
+                    </select>
+                </div>
+
+                <div class="form-row-two">
+                    <div class="form-group">
+                        <label class="form-label">თარიღი</label>
+                        <input type="date" class="form-input" required value="2026-08-28">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">დრო</label>
+                        <select class="form-input" required>
+                            <option>12:00 — 14:00</option>
+                            <option>14:30 — 16:30</option>
+                            <option>17:00 — 19:00</option>
+                            <option selected>19:30 — 22:00</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row-two">
+                    <div class="form-group">
+                        <label class="form-label">თქვენი სახელი</label>
+                        <input type="text" class="form-input" placeholder="გიორგი ბერიძე" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ტელეფონის ნომერი</label>
+                        <input type="tel" class="form-input" placeholder="+995 599 22 82 28" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-modal-submit">ჯავშნის დადასტურება ✨</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <!-- ==========================================================================
+         METABOT AI CHAT WIDGET (მეტაბოტი)
+         ========================================================================== -->
+    <div class="metabot-widget-container" id="metabot-widget-container">
+        <!-- MetaBot Floating Launcher Button -->
+        <button class="metabot-launcher-btn" id="metabot-launcher-btn" aria-label="Open MetaBot AI Assistant" title="მეტაბოტი — AI ასისტენტი">
+            <span class="metabot-launcher-pulse"></span>
+            <div class="metabot-launcher-icon-wrap"><img src="logo_o_teal.png" alt="METAPHORA Bot" class="metabot-brand-ico brand-dynamic-o"></div>
+            <span class="metabot-launcher-badge">1</span>
+        </button>
+
+        <!-- MetaBot Chat Window -->
+        <div class="metabot-chat-window" id="metabot-chat-window">
+            <!-- Chat Header -->
+            <div class="metabot-chat-header">
+                <div class="metabot-header-left">
+                    <div class="metabot-avatar-badge">
+                        <img src="logo_o_teal.png" alt="METAPHORA Bot" class="metabot-avatar-img brand-dynamic-o">
+                        <span class="metabot-status-dot"></span>
+                    </div>
+                    <div class="metabot-header-info">
+                        <h4 class="metabot-title">მეტაბოტი</h4>
+                        <span class="metabot-status-text">მეტაფორას AI ასისტენტი • 🟢 ონლაინ</span>
+                    </div>
+                </div>
+                <div class="metabot-header-actions">
+                    <button class="metabot-close-btn" id="metabot-close-btn" aria-label="Close Chat">&times;</button>
+                </div>
+            </div>
+
+            <!-- Chat Messages Container -->
+            <div class="metabot-messages-body" id="metabot-messages-body">
+                <!-- Welcome Bot Message -->
+                <div class="metabot-msg bot-msg">
+                    <div class="metabot-msg-avatar"><img src="logo_o_teal.png" alt="MetaBot" class="metabot-msg-avatar-img brand-dynamic-o"></div>
+                    <div class="metabot-msg-bubble">
+                        <p>გამარჯობა! მე ვარ <strong>მეტაბოტი</strong> ✨ — „მეტაფორას“ ვირტუალური გიდი.</p>
+                        <p>რით შემიძლია დაგეხმაროთ? მკითხეთ ჩვენს <strong>სერვისებზე</strong>, <strong>სივრცეებზე</strong>, <strong>ღონისძიებებზე</strong> ან <strong>ჯავშანზე</strong>!</p>
+                    </div>
+                </div>
+
+                <!-- Quick Action Suggestion Chips -->
+                <div class="metabot-chips-container" id="metabot-chips-container">
+                    <button class="metabot-chip" data-query="რა არის მეტაფორა?">🌿 რა არის მეტაფორა?</button>
+                    <button class="metabot-chip" data-query="რა სერვისები გაქვთ?">🌱 სერვისები</button>
+                    <button class="metabot-chip" data-query="Playback თეატრი">🎭 Playback თეატრი</button>
+                    <button class="metabot-chip" data-query="როგორ დავჯავშნო ადგილი?">📅 ონლაინ ჯავშანი</button>
+                    <button class="metabot-chip" data-query="სად მდებარეობს მეტაფორა?">📍 ლოკაცია &amp; კონტაქტი</button>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="metabot-typing-indicator" id="metabot-typing-indicator" style="display: none;">
+                <span></span><span></span><span></span>
+                <small>მეტაბოტი წერს...</small>
+            </div>
+
+            <!-- Chat Input Form -->
+            <form class="metabot-chat-footer" id="metabot-chat-form">
+                <input type="text" class="metabot-chat-input" id="metabot-chat-input" placeholder="მისწერე მეტაბოტს..." autocomplete="off" required>
+                <button type="submit" class="metabot-send-btn" id="metabot-send-btn" aria-label="Send Message">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+            <div class="mobile-nav-header">
+                <div class="header-brand-group">
+                    <img src="logo_teal_crop.png" alt="METAPHORA" class="site-logo-brand brand-dynamic-logo">
+                </div>
+                <button class="mobile-nav-close-btn" id="mobile-nav-close-btn" aria-label="Close Navigation Menu">&times;</button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="index.html#hero" class="mobile-nav-item">🏠 მთავარი</a>
+                <div class="mobile-nav-subgroup">
+                    <span class="mobile-subgroup-title">✨ ჩვენს შესახებ</span>
+                    <a href="index.html#about" class="mobile-sub-item">📜 მანიფესტი &amp; ფილოსოფია</a>
+                    <a href="index.html#team" class="mobile-sub-item">👥 მეტაფორას გუნდი</a>
+                </div>
+                <div class="mobile-nav-subgroup">
+                    <span class="mobile-subgroup-title">🌱 სერვისები &amp; სივრცეები</span>
+                    <a href="index.html#services" class="mobile-sub-item">🌱 1. Personal Development</a>
+                    <a href="index.html#services" class="mobile-sub-item">💼 2. Business</a>
+                    <a href="index.html#services" class="mobile-sub-item">🧠 3. Think Tank</a>
+                    <a href="index.html#services" class="mobile-sub-item">🎨 4. Art &amp; Playback თეატრი</a>
+                    <a href="index.html#services" class="mobile-sub-item">🏛️ 5. Clubs &amp; Coworking</a>
+                </div>
+                <a href="gallery.html" class="mobile-nav-item">🖼️ გალერეა</a>
+                <a href="blog.html" class="mobile-nav-item">📖 ბლოგი</a>
+                <a href="index.html#contact" class="mobile-nav-item">📞 კონტაქტი</a>
+            </nav>
+            <div class="mobile-nav-footer">
+                <button class="open-booking-modal-btn btn btn-primary" style="width: 100%;">📅 ონლაინ ჯავშანი</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js?v=2700"></script>
+</body>
+</html>

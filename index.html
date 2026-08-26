@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>მეტაფორა - Edutainment Hub & Third Place</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=27000">
+    <!-- GSAP & ScrollTrigger Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        // Instant Zero-Flicker check: if navigated with a hash (e.g. #hero, #about, #services), immediately show main site
+        (function() {
+            var hash = window.location.hash;
+            if (hash && hash.length > 1 && hash !== '#entrance') {
+                document.documentElement.classList.add('direct-main-mode');
+            }
+        })();
+    </script>
+</head>
+<body class="initial-lock">
+
+    <!-- ==========================================================================
+         1. Botanical 3D Dandelion Flower Entrance Portal
+         ========================================================================== -->
+    <div class="entrance-portal" id="entrance-portal">
+        <div class="portal-ambient-bg"></div>
+        <div class="portal-top-bar">
+            <div class="portal-brand-group header-brand-group">
+                <img src="logo_teal_crop.png" alt="METAPHORA" class="portal-logo-brand brand-dynamic-logo" id="portal-logo-img">
+                <button class="theme-spin-toggle" id="portal-theme-spin-toggle" title="დომინანტი ფერის შეცვლა (Teal / Plum)" aria-label="დომინანტი ფერის შეცვლა">
+                    <span class="spin-disc">
+                        <span class="spin-disc-half teal-side"></span>
+                        <span class="spin-disc-half plum-side"></span>
+                    </span>
+                    <span class="spin-rotate-icon">
+                        <svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <span class="portal-brand-tag">✨ Edutainment Hub &amp; Third Place</span>
+            <a href="#contact" class="portal-contact-btn" id="portal-contact-btn">
+                <span>კონტაქტი</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="dandelion-wrapper" id="dandelion-wrapper">
+            
+            <!-- 3D Dandelion Globe & Floating Fluffs Canvas -->
+            <canvas class="dandelion-globe-canvas" id="dandelion-globe-canvas" width="960" height="960"></canvas>
+
+            <!-- SVG Dandelion Radiating Stems & Botanical Main Stalk -->
+            <svg class="dandelion-stems-svg" id="dandelion-stems-svg" viewBox="0 0 960 960">
+                <path class="botanical-main-stem" d="M 480 480 Q 476 680 470 960" />
+            </svg>
+
+            <!-- Fully Circular Central Dandelion Hub -->
+            <div class="center-circular-hub" id="center-card">
+                <div class="hub-pulse-ring ring-1"></div>
+                <div class="hub-pulse-ring ring-2"></div>
+
+                <div class="card-avatar-wrap" id="card-avatar-wrap">
+                    <img src="მთავარის ფოტოები/Personal Development.jpeg" alt="Avatar" class="card-avatar" id="card-avatar">
+                </div>
+                
+                <h3 class="card-name" id="card-name">Personal Development</h3>
+                
+                <div class="card-role-wrap">
+                    <span class="card-role-text" id="card-role">იპოვე შენი შინაგანი ძალა</span>
+                </div>
+
+                <div class="card-actions">
+                    <button class="nav-arrow-btn" id="prev-btn" aria-label="Previous">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 18-6-6 6-6"/>
+                        </svg>
+                    </button>
+
+                    <button class="connect-btn" id="connect-btn" title="შესვლა საიტზე">
+                        <span class="btn-text">დაწყება</span>
+                        <svg class="connect-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+
+                    <button class="nav-arrow-btn" id="next-btn" aria-label="Next">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dandelion Organic Radiating Nodes Container (On Top For Guaranteed Clicks) -->
+            <div class="dandelion-nodes-container" id="dandelion-nodes-container">
+            </div>
+
+            <!-- Bottom Pagination Dots -->
+            <div class="pagination-dots" id="pagination-dots">
+            </div>
+
+        </div>
+
+        <!-- Clean Bottom Hint -->
+        <div class="portal-bottom-hint">
+            <span>💡 ორჯერ დააწკაპუნეთ წრეზე ან დააჭირეთ <strong>დაწყება</strong> ღილაკს შესასვლელად</span>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         2. Main Web Application
+         ========================================================================== -->
+    <div class="main-website" id="main-website">
+
+        <!-- Navigation Header (Floating Pill-Bar) -->
+        <header class="site-header">
+            <div class="header-container">
+                                <div class="header-brand-group">
+                    <a href="index.html#entrance" class="logo-link" id="header-logo-to-portal" title="საწყის გვერდზე დაბრუნება">
+                        <img src="logo_teal_crop.png" alt="METAPHORA" class="site-logo-brand brand-dynamic-logo" id="site-logo-img">
+                    </a>
+                    
+                    <button class="theme-spin-toggle" id="theme-spin-toggle" title="დომინანტი ფერის შეცვლა (Teal / Plum)" aria-label="დომინანტი ფერის შეცვლა">
+                        <span class="spin-disc">
+                            <span class="spin-disc-half teal-side"></span>
+                            <span class="spin-disc-half plum-side"></span>
+                        </span>
+                        <span class="spin-rotate-icon">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Main Menu with Dropdowns -->
+                <nav class="nav-menu">
+                    <a href="index.html#hero" class="nav-item" id="nav-home-btn">მთავარი</a>
+                    <!-- 1. ჩვენს შესახებ -->
+                    <div class="nav-dropdown-wrapper">
+                        <a href="#about" class="nav-item has-dropdown">
+                            <span>ჩვენს შესახებ</span>
+                            <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="#about" class="dropdown-link">
+                                <span class="d-icon">✨</span>
+                                <div>
+                                    <strong>მანიფესტი & ფილოსოფია</strong>
+                                    <small>მესამე ადგილის კონცეფცია</small>
+                                </div>
+                            </a>
+                            <a href="#team" class="dropdown-link">
+                                <span class="d-icon">👥</span>
+                                <div>
+                                    <strong>მეტაფორას გუნდი</strong>
+                                    <small>გაიცანით ჩვენი წევრები</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2. სერვისები -->
+                    <div class="nav-dropdown-wrapper">
+                        <a href="#services" class="nav-item has-dropdown">
+                            <span>სერვისები</span>
+                            <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu services-dropdown-menu">
+                            <a href="#services" class="dropdown-link">
+                                <span class="d-icon">🌱</span>
+                                <div>
+                                    <strong>1. Personal Development</strong>
+                                    <small>იპოვე შენი შინაგანი ძალა</small>
+                                </div>
+                            </a>
+                            <a href="#services" class="dropdown-link">
+                                <span class="d-icon">💼</span>
+                                <div>
+                                    <strong>2. Business</strong>
+                                    <small>გაიზარდე &amp; ითანამშრომლე</small>
+                                </div>
+                            </a>
+                            <a href="#services" class="dropdown-link">
+                                <span class="d-icon">🧠</span>
+                                <div>
+                                    <strong>3. Think Tank</strong>
+                                    <small>სიღრმისეული სალონური დისკუსიები</small>
+                                </div>
+                            </a>
+                            <a href="#services" class="dropdown-link">
+                                <span class="d-icon">🎨</span>
+                                <div>
+                                    <strong>4. Art</strong>
+                                    <small>შემოქმედებითი ენერგია &amp; ხელოვნება</small>
+                                </div>
+                            </a>
+                            <a href="#services" class="dropdown-link">
+                                <span class="d-icon">🏛️</span>
+                                <div>
+                                    <strong>5. Clubs</strong>
+                                    <small>შენი „მესამე სივრცე“</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Separate Page Navigation Links -->
+                    <a href="gallery.html" class="nav-item">გალერეა</a>
+                    <a href="blog.html" class="nav-item">ბლოგი</a>
+                    <a href="#contact" class="nav-item">კონტაქტი</a>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="search-box-wrapper" id="search-box-wrapper">
+                        <button class="search-toggle-btn" id="search-toggle-btn" aria-label="ძიება">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                        <div class="search-expandable" id="search-expandable">
+                            <input type="text" class="search-input" id="search-input" placeholder="მოძებნე მეტაფორაში...">
+                            <button class="search-close-btn" id="search-close-btn">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M18 6 6 18M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Language Switch Capsule (KA / EN) -->
+                                        <button class="lang-single-btn" id="lang-toggle-btn" title="ენის შეცვლა (KA / EN)" aria-label="Toggle Language">
+                        <span class="lang-label" id="lang-active-label">KA</span>
+                    </button>
+
+                    <!-- CTA Button -->
+                    <button class="open-booking-modal-btn primary-btn-header">ჯავშანი</button>
+                    <button class="mobile-menu-toggle-btn" id="mobile-menu-toggle-btn" aria-label="Open Mobile Navigation Menu">
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                        <span class="hamburger-bar"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+                        <!-- ======================================================================
+             SECTION 1: FEATURED VIDEO / NEWS CAROUSEL SLIDER (Contained Width)
+             ====================================================================== -->
+        <section class="slider-section" id="hero">
+            <div class="section-container">
+                <div class="slider-wrapper" id="featured-slider">
+                    
+                    <div class="slides-track" id="slides-track">
+                        
+                        <!-- Slide 1: Video Feature -->
+                        <div class="hero-slide active" style="background-image: linear-gradient(rgba(30, 24, 40, 0.55), rgba(30, 24, 40, 0.65)), url('სივრცე 1.JPG');">
+                            <div class="slide-content">
+                                <span class="slide-tag">🎬 ვიდეო მიმოხილვა</span>
+                                <h1 class="slide-title">გაიცანი <span class="accent-text-light">მეტაფორა</span> — შენი მესამე ადგილი</h1>
+                                <p class="slide-desc">სივრცე, სადაც პოზიტიური ფსიქოთერაპია, ინტელექტუალური თამაშები და თანამოაზრეთა კომუნა ქმნის ჰარმონიას.</p>
+                                <div class="slide-actions">
+                                    <a href="#events" class="btn btn-primary">აფიშის ნახვა</a>
+                                    <a href="#services" class="btn btn-secondary">მიმართულებები</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Latest News -->
+                        <div class="hero-slide" style="background-image: linear-gradient(rgba(30, 24, 40, 0.55), rgba(30, 24, 40, 0.65)), url('სამუშაო.JPG');">
+                            <div class="slide-content">
+                                <span class="slide-tag">💼 Coworking &amp; Business</span>
+                                <h1 class="slide-title">იდეალური გარემო პროდუქტიული მუშაობისა და განვითარებისთვის</h1>
+                                <p class="slide-desc">მაღალსიჩქარიანი ინტერნეტი, საავტორო ყავა, სამუშაო სივრცეები და ბიზნეს ნეთვორქინგი.</p>
+                                <div class="slide-actions">
+                                    <button class="open-booking-modal-btn btn btn-primary">ადგილის დაჯავშნა</button>
+                                    <a href="#about" class="btn btn-secondary">მანიფესტი</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: Third Place Feature -->
+                        <div class="hero-slide" style="background-image: linear-gradient(rgba(30, 24, 40, 0.55), rgba(30, 24, 40, 0.65)), url('სივრცე 2.JPG');">
+                            <div class="slide-content">
+                                <span class="slide-tag">🏛️ შენი „მესამე სივრცე“</span>
+                                <h1 class="slide-title">ადგილი, სადაც თავს ყოველთვის შინაურად იგრძნობ</h1>
+                                <p class="slide-desc">პიროვნული ზრდა, ბიზნეს შესაძლებლობები, Think Tank დისკუსიები, ხელოვნება და კლუბები.</p>
+                                <div class="slide-actions">
+                                    <button class="open-booking-modal-btn btn btn-primary">ადგილის დაჯავშნა</button>
+                                    <a href="#services" class="btn btn-secondary">მიმართულებები</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="slider-arrow prev" id="slider-prev" aria-label="Previous Slide">&#10094;</button>
+                    <button class="slider-arrow next" id="slider-next" aria-label="Next Slide">&#10095;</button>
+
+                    <div class="slider-indicators" id="slider-indicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 2: 5 ძირითადი მიმართულება (BALANCED 3 TOP + 2 BOTTOM LAYOUT WITH VIDEOS)
+             ====================================================================== -->
+        <section class="concept-section" id="services" style="background: #faf8fd;">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">მიმართულებები &amp; შესაძლებლობები</span>
+                    <h2 class="section-title">აღმოაჩინე „მეტაფორა“</h2>
+                    <p class="section-subtitle">ეს არ არის უბრალოდ სივრცე — „მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ.</p>
+                </div>
+
+                <div class="services-balanced-container">
+                    <!-- Top Row: 3 Services -->
+                    <div class="services-row-three">
+                        <div class="feature-card service-five-card">
+                            <div class="card-image-wrapper">
+                                <video class="card-feature-video" muted loop playsinline preload="auto">
+                                    <source src="video_servisebi/personal_development.mp4" type="video/mp4">
+                                </video>
+                                <div class="card-floating-badge">
+                                    <strong>შინაგანი ძალა</strong>
+                                    <small>ზრდა &amp; ბალანსი</small>
+                                </div>
+                            </div>
+                            <div class="card-body-content">
+                                <div class="card-icon-box">🌱</div>
+                                <h3 class="card-title">1. მეტაფორა Personal Development</h3>
+                                <p class="card-desc">იპოვე შენი შინაგანი ძალა. პიროვნული განვითარება, ფსიქოლოგიური მხარდაჭერა და თვითშემეცნება.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-card service-five-card">
+                            <div class="card-image-wrapper">
+                                <video class="card-feature-video" muted loop playsinline preload="auto">
+                                    <source src="video_servisebi/Business.mp4" type="video/mp4">
+                                </video>
+                                <div class="card-floating-badge">
+                                    <strong>შესაძლებლობები</strong>
+                                    <small>ნეთვორქინგი</small>
+                                </div>
+                            </div>
+                            <div class="card-body-content">
+                                <div class="card-icon-box">💼</div>
+                                <h3 class="card-title">2. მეტაფორა Business</h3>
+                                <p class="card-desc">გაიზარდე, ითანამშრომლე და შექმენი ახალი შესაძლებლობები. ბიზნეს-კონტაქტები და პარტნიორობა.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-card service-five-card">
+                            <div class="card-image-wrapper">
+                                <video class="card-feature-video" muted loop playsinline preload="auto">
+                                    <source src="video_servisebi/Think_tank.mp4" type="video/mp4">
+                                </video>
+                                <div class="card-floating-badge">
+                                    <strong>დისკუსიები</strong>
+                                    <small>სალონური გარემო</small>
+                                </div>
+                            </div>
+                            <div class="card-body-content">
+                                <div class="card-icon-box">🧠</div>
+                                <h3 class="card-title">3. მეტაფორა Think Tank</h3>
+                                <p class="card-desc">ჩაერთე სიღრმისეულ სალონურ დისკუსიებში. ინტელექტუალური დებატები, იდეების გაზიარება და ანალიტიკა.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: 2 Centered Services -->
+                    <div class="services-row-two">
+                        <div class="feature-card service-five-card">
+                            <div class="card-image-wrapper">
+                                <video class="card-feature-video" muted loop playsinline preload="auto">
+                                    <source src="video_servisebi/Art.mp4" type="video/mp4">
+                                </video>
+                                <div class="card-floating-badge">
+                                    <strong>შემოქმედება</strong>
+                                    <small>ხელოვნება &amp; ენერგია</small>
+                                </div>
+                            </div>
+                            <div class="card-body-content">
+                                <div class="card-icon-box">🎨</div>
+                                <h3 class="card-title">4. მეტაფორა Art</h3>
+                                <p class="card-desc">დაიმუხტე შემოქმედებითი ენერგიითა და ხელოვნებით. Playback თეატრი, პერფორმანსები და გამოფენები.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-card service-five-card featured-service">
+                            <div class="card-image-wrapper">
+                                <video class="card-feature-video" muted loop playsinline preload="auto">
+                                    <source src="video_servisebi/Clubs.mp4" type="video/mp4">
+                                </video>
+                                <div class="card-floating-badge">
+                                    <strong>მესამე სივრცე</strong>
+                                    <small>შინაური გარემო ★</small>
+                                </div>
+                            </div>
+                            <div class="card-body-content">
+                                <div class="card-icon-box">🏛️</div>
+                                <h3 class="card-title">5. მეტაფორა Clubs</h3>
+                                <p class="card-desc">შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები და კომუნა.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 3: აფიშა (STAGGER CARDS AFISHA)
+             ====================================================================== -->
+        <section class="zones-section stagger-afisha-section" id="events">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">განრიგი & პოსტერები</span>
+                    <h2 class="section-title">აფიშა</h2>
+                    <p class="section-subtitle">უახლოესი ღონისძიებები, ვორქშოფები და თეატრალური საღამოები მეტაფორაში.</p>
+                </div>
+
+                <div class="stagger-carousel-container" id="stagger-carousel-container">
+                    <div class="stagger-cards-track" id="stagger-cards-track">
+                    </div>
+
+                    <div class="stagger-nav-controls">
+                        <button class="stagger-nav-btn prev" id="stagger-prev-btn" aria-label="Previous Event">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button class="stagger-nav-btn next" id="stagger-next-btn" aria-label="Next Event">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 4: TYPEWRITER AUDIO TESTIMONIAL & TEAM SECTION (LARGER PHOTOS)
+             ====================================================================== -->
+        <section class="zones-section typewriter-team-section" id="team">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">გუნდის ხმა & შეფასებები</span>
+                    <h2 class="section-title">გაიცანით მეტაფორას გუნდი</h2>
+                    <p class="section-subtitle">მოუსმინეთ და გაეცანით ადამიანებს, რომლებიც ქმნიან მეტაფორას ატმოსფეროს.</p>
+                </div>
+
+                <div class="typewriter-card-container">
+                    
+                    <div class="typewriter-main-card">
+                        
+                        <!-- Left: Large High-Impact Team Avatar -->
+                        <div class="typewriter-avatar-side">
+                            <div class="typewriter-avatar-halo">
+                                <img src="გუნდი/1.jpg" alt="ლალი - მეტაფორას გუნდი" id="tw-avatar" class="tw-avatar-img">
+                                <button class="tw-audio-play-btn" id="tw-play-btn" aria-label="Play Voice Audio">
+                                    <span id="tw-play-icon">▶</span>
+                                </button>
+                            </div>
+
+                            <div class="tw-audio-visualizer" id="tw-visualizer">
+                                <span class="eq-bar bar-1"></span>
+                                <span class="eq-bar bar-2"></span>
+                                <span class="eq-bar bar-3"></span>
+                                <span class="eq-bar bar-4"></span>
+                                <span class="eq-bar bar-5"></span>
+                                <span class="eq-bar bar-6"></span>
+                                <span class="eq-bar bar-7"></span>
+                                <span class="eq-bar bar-8"></span>
+                            </div>
+                            <span class="tw-audio-time" id="tw-audio-time">0:14 / 0:45</span>
+                        </div>
+
+                        <div class="typewriter-content-side">
+                            <div class="tw-quote-mark">“</div>
+                            
+                            <div class="tw-text-box">
+                                <p class="tw-text" id="tw-text"></p>
+                                <span class="tw-cursor">|</span>
+                            </div>
+
+                            <div class="tw-footer-row">
+                                <div class="tw-author-info">
+                                    <h4 class="tw-author-name" id="tw-name">ლალი</h4>
+                                    <span class="tw-author-role" id="tw-role">დამფუძნებელი &amp; ფასილიტატორი</span>
+                                </div>
+
+                                <div class="tw-nav-arrows">
+                                    <button class="tw-nav-btn" id="tw-prev-btn" aria-label="Previous Member">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <path d="m15 18-6-6 6-6"/>
+                                        </svg>
+                                    </button>
+                                    <button class="tw-nav-btn" id="tw-next-btn" aria-label="Next Member">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <path d="m9 18 6-6-6-6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Large Team Members Ribbon -->
+                    <div class="tw-members-ribbon" id="tw-members-ribbon">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 5: ჩვენს შესახებ (IMAGE-TEXT REVEAL SCROLL ANIMATION)
+             ====================================================================== -->
+        <section class="about-image-text-reveal-section" id="about">
+            <div class="section-container" style="text-align: center; margin-bottom: 40px;">
+                <span class="section-tag">მანიფესტი & ფილოსოფია</span>
+                <h2 class="section-title">ჩვენს შესახებ</h2>
+                <p class="section-subtitle">ჩამოსქროლეთ და აღმოაჩინეთ მეტაფორას არსი.</p>
+            </div>
+
+            <!-- Floating Image Follower on Hover -->
+            <div class="mouse-img-follower" id="mouse-img-follower">
+                <img src="სივრცე 1.JPG" alt="preview follower" id="mouse-img-follower-elem">
+            </div>
+
+            <!-- Kinetic Image Text Reveal Lines Container -->
+            <div class="reveal-text-lines-container" id="reveal-text-container">
+                
+                <!-- Line 1 -->
+                <div class="reveal-line">
+                    <span class="reveal-text">ჩვენ ვქმნით</span>
+                    <span class="img-reveal-span" data-preview-img="სივრცე 1.JPG">
+                        <img src="სივრცე 1.JPG" alt="Metafora Space">
+                    </span>
+                </div>
+
+                <!-- Line 2 -->
+                <div class="reveal-line">
+                    <span class="reveal-text">მესამე</span>
+                    <span class="img-reveal-span" data-preview-img="სამუშაო.JPG">
+                        <img src="სამუშაო.JPG" alt="Coworking Space">
+                    </span>
+                    <span class="reveal-text">ადგილს</span>
+                </div>
+
+                <!-- Line 3 -->
+                <div class="reveal-line">
+                    <span class="img-reveal-span" data-preview-img="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700" alt="People Connect">
+                    </span>
+                    <span class="reveal-text">იდეებისა და</span>
+                </div>
+
+                <!-- Line 4 -->
+                <div class="reveal-line">
+                    <span class="reveal-text">ადამიანების</span>
+                </div>
+
+                <!-- Line 5 -->
+                <div class="reveal-line">
+                    <span class="reveal-text">ჰარმონიისთვის</span>
+                    <span class="img-reveal-span" data-preview-img="სივრცე 2.JPG">
+                        <img src="სივრცე 2.JPG" alt="Themed Bar & Community">
+                    </span>
+                    <span class="reveal-text">მეტაფორაში.</span>
+                </div>
+
+            </div>
+
+            <!-- Full Manifesto Live Typewriter Card (Exact Match with Team Section) -->
+            <div class="section-container" style="margin-top: 60px;">
+                <div class="typewriter-main-card" id="manifesto-typewriter-card">
+                    
+                    <!-- Left: Interactive 3D Spinning Figure Halo with Corner Play Button & Visualizer -->
+                    <div class="typewriter-avatar-side">
+                        <div class="typewriter-avatar-halo" id="manifesto-figure-stage" style="width: 165px; height: 165px; background: #ffffff; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 3px solid var(--primary-color); box-shadow: 0 10px 30px rgba(1, 97, 102, 0.25); margin-bottom: 20px; cursor: grab; user-select: none;">
+                            <!-- SVG Stems -->
+                            <svg id="manifesto-figure-svg" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></svg>
+
+                            <!-- Central Core with Letter O Dandelion Emblem -->
+                            <div id="manifesto-figure-core" style="width: 48px; height: 48px; position: relative; z-index: 20; border-radius: 50%; background: #ffffff; border: 2.2px solid var(--primary-color); box-shadow: 0 4px 12px rgba(1, 97, 102, 0.3); display: flex; align-items: center; justify-content: center; padding: 4px;">
+                                <img src="logo_o_teal.png" alt="METAPHORA" class="brand-dynamic-o" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+
+                            <!-- Outer Hollow "o" Circles Container -->
+                            <div id="manifesto-figure-rings" style="position: absolute; inset: 0; pointer-events: none; z-index: 30;"></div>
+
+                            <!-- Corner Play Button -->
+                            <button class="tw-audio-play-btn" id="about-play-btn" aria-label="Play Manifesto Voice Audio" style="z-index: 40;">
+                                <span id="about-play-icon">▶</span>
+                            </button>
+                        </div>
+
+                        <div class="tw-audio-visualizer" id="about-visualizer">
+                            <span class="eq-bar bar-1"></span>
+                            <span class="eq-bar bar-2"></span>
+                            <span class="eq-bar bar-3"></span>
+                            <span class="eq-bar bar-4"></span>
+                            <span class="eq-bar bar-5"></span>
+                            <span class="eq-bar bar-6"></span>
+                            <span class="eq-bar bar-7"></span>
+                            <span class="eq-bar bar-8"></span>
+                        </div>
+                        <span class="tw-audio-time" id="about-audio-time">0:00 / 1:18</span>
+                    </div>
+
+                    <!-- Right: Live Typewriter Text Box with Blinking Cursor -->
+                    <div class="typewriter-content-side">
+                        <div class="tw-quote-mark">“</div>
+                        
+                        <div class="tw-text-box" style="min-height: 140px;">
+                            <p class="tw-text" id="manifesto-typewriter-text"></p>
+                            <span class="tw-cursor" id="manifesto-cursor">|</span>
+                        </div>
+
+                        <div class="tw-footer-row">
+                            <div class="tw-author-info">
+                                <h4 class="tw-author-name">მეტაფორას მანიფესტი</h4>
+                                <span class="tw-author-role">Edutainment Hub & Third Place</span>
+                            </div>
+
+                            <span class="about-manifest-badge">✨ მესამე ადგილის ფილოსოფია</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 6: GLOWING CTA BOOKING SECTION (INSTANT MODAL TRIGGER)
+             ====================================================================== -->
+        <section class="booking-cta-section" id="booking">
+            <div class="section-container">
+                <div class="booking-cta-card">
+                    <div class="cta-glow-orb glow-1"></div>
+                    <div class="cta-glow-orb glow-2"></div>
+                    
+                    <span class="booking-cta-badge">✨ მყისიერი დაჯავშნა</span>
+                    <h2 class="booking-cta-title">გსურთ ადგილის დაჯავშნა მეტაფორაში?</h2>
+                    <p class="booking-cta-desc">
+                        აირჩიეთ სასურველი სივრცე, შემოგვიერთდით ვორქშოფებსა და Playback თეატრის საღამოებზე.
+                    </p>
+
+                    <!-- Attractively Shimmering & Glowing Action Button -->
+                    <div class="shimmer-btn-wrapper">
+                        <button class="open-booking-modal-btn btn-glowing-shimmer">
+                            <span class="shimmer-sweep"></span>
+                            <span class="shimmer-btn-content">
+                                <span class="shimmer-sparkle">✨</span>
+                                <strong>დაჯავშნე ეხლავე</strong>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 7: UNIFIED 50/50 CONTACT & BLACK-AND-WHITE GOOGLE MAP FOOTER
+             ====================================================================== -->
+        <footer class="site-footer" id="contact">
+            <div class="section-container footer-container">
+                <div class="unified-footer-card">
+                    
+                    <!-- Left 50%: Info, Contacts, Social Media & Brand -->
+                    <div class="footer-info-panel">
+                        <div class="footer-brand-wrap">
+                            <img src="logo_teal_crop.png" alt="METAPHORA" class="footer-brand-logo brand-dynamic-logo" id="footer-logo-img">
+                            <span class="footer-tagline">Edutainment Hub &amp; Third Place</span>
+                        </div>
+
+                        <p class="footer-summary-text">
+                            სივრცე, სადაც პოზიტიური ფსიქოთერაპია, ინტელექტუალური თამაშები და თანამოაზრეთა კომუნა ქმნის ჰარმონიულ გარემოს.
+                        </p>
+
+                        <div class="footer-details-list">
+                            <div class="footer-detail-row">
+                                <span class="f-icon">📍</span>
+                                <div>
+                                    <strong>მისამართი</strong>
+                                    <p>დ.აღმაშენებლის გამზირი 63ა, თბილისი</p>
+                                </div>
+                            </div>
+
+                            <div class="footer-detail-row">
+                                <span class="f-icon">🕒</span>
+                                <div>
+                                    <strong>სამუშაო საათები</strong>
+                                    <p>ყოველდღე: 10:00 — 23:00</p>
+                                </div>
+                            </div>
+
+                            <div class="footer-detail-row">
+                                <span class="f-icon">📞</span>
+                                <div>
+                                    <strong>ტელეფონი</strong>
+                                    <p><a href="tel:+995599228228">+995 599 22 82 28</a></p>
+                                </div>
+                            </div>
+
+                            <div class="footer-detail-row">
+                                <span class="f-icon">✉️</span>
+                                <div>
+                                    <strong>ელ-ფოსტა</strong>
+                                    <p><a href="mailto:club@metafora.ge">club@metafora.ge</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-bottom-actions">
+                            <div class="social-links-wrap">
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-chip" title="Facebook" aria-label="Facebook">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-chip" title="Instagram" aria-label="Instagram">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" ry="5.5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                </a>
+                                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-chip" title="TikTok" aria-label="TikTok">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-4.639c.319 0 .628.052.916.148V9.43a6.34 6.34 0 0 0-.916-.067 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 10.82 4.482 6.29 6.29 0 0 0 1.865-4.482V8.98a8.214 8.214 0 0 0 4.766 1.488V7.023a4.83 4.83 0 0 1-1-.337z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-chip" title="Telegram" aria-label="Telegram">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <a href="https://maps.google.com/?q=63a+David+Aghmashenebeli+Ave,+Tbilisi" target="_blank" rel="noopener noreferrer" class="btn-gmap">
+                                <span>Google Maps-ში გახსნა</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="footer-copyright-note">
+                            &copy; 2026 მეტაფორა. ყველა უფლება დაცულია.
+                        </div>
+                    </div>
+
+                    <!-- Right 50%: Black & White Google Map -->
+                    <div class="footer-map-panel">
+                        <iframe 
+                            class="bw-google-map"
+                            title="მეტაფორას Google Maps ლოკაცია"
+                            src="https://maps.google.com/maps?q=63a%20David%20Aghmashenebeli%20Ave,%20Tbilisi&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                            loading="lazy">
+                        </iframe>
+                        <div class="map-status-badge">📍 მეტაფორა ჰაბი</div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ==========================================================================
+         3. GLASSMORPHISM BOOKING MODAL POPUP WINDOW
+         ========================================================================== -->
+    <div class="booking-modal-overlay" id="booking-modal-overlay">
+        <div class="booking-modal-glass">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            
+            <div class="modal-header">
+                <span class="modal-badge">✨ ონლაინ ჯავშანი</span>
+                <h3 class="modal-title">ადგილის დაჯავშნა მეტაფორაში</h3>
+                <p class="modal-desc">აირჩიეთ სასურველი სერვისი, თარიღი და დრო — ჩვენი გუნდი მალე დაგიკავშირდებათ.</p>
+            </div>
+
+            <form class="modal-booking-form" onsubmit="event.preventDefault(); alert('თქვენი ჯავშანი წარმატებით გაიგზავნა! მეტაფორას გუნდი დაგიკავშირდებათ.'); document.getElementById('booking-modal-overlay').classList.remove('active');">
+                
+                <!-- Service Selection Chips -->
+                <div class="form-group">
+                    <label class="form-label">აირჩიეთ მიმართულება / სერვისი</label>
+                    <select class="form-input" required>
+                        <option>🌱 1. მეტაფორა Personal Development</option>
+                        <option>💼 2. მეტაფორა Business</option>
+                        <option>🧠 3. მეტაფორა Think Tank</option>
+                        <option>🎨 4. მეტაფორა Art</option>
+                        <option selected>🏛️ 5. მეტაფორა Clubs</option>
+                    </select>
+                </div>
+
+                <!-- Date & Time Row -->
+                <div class="form-row-two">
+                    <div class="form-group">
+                        <label class="form-label">📅 სასურველი თარიღი</label>
+                        <input type="date" class="form-input" required value="2026-08-28">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">🕒 დროის ინტერვალი</label>
+                        <select class="form-input" required>
+                            <option>12:00 — 14:00 (დღის ლანჩი/ლაუნჯი)</option>
+                            <option>14:30 — 16:30 (Coworking სესია)</option>
+                            <option>17:00 — 19:00 (ვორქშოფი & თერაპია)</option>
+                            <option selected>19:30 — 22:00 (Playback თეატრი/Bar)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Guests Count & Name Row -->
+                <div class="form-row-two">
+                    <div class="form-group">
+                        <label class="form-label">👤 თქვენი სახელი და გვარი</label>
+                        <input type="text" class="form-input" placeholder="მაგ: გიორგი ბერიძე" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">👥 სტუმრების რაოდენობა</label>
+                        <select class="form-input" required>
+                            <option>1 ადამიანი</option>
+                            <option selected>2 ადამიანი</option>
+                            <option>3-4 ადამიანი</option>
+                            <option>5+ ადამიანი (ჯგუფური ჯავშანი)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Contact Phone Row -->
+                <div class="form-group">
+                    <label class="form-label">📞 საკონტაქტო ტელეფონის ნომერი</label>
+                    <input type="tel" class="form-input" placeholder="+995 599 22 82 28" required>
+                </div>
+
+                <button type="submit" class="btn-modal-submit">
+                    <span>ჯავშნის დადასტურება ✨</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Script (Single Source of Truth) -->
+    <script src="app.js?v=27000"></script>
+
+    <!-- ==========================================================================
+         METABOT AI CHAT WIDGET (მეტაბოტი)
+         ========================================================================== -->
+    <div class="metabot-widget-container" id="metabot-widget-container">
+        <!-- MetaBot Floating Launcher Button -->
+        <button class="metabot-launcher-btn" id="metabot-launcher-btn" aria-label="Open MetaBot AI Assistant" title="მეტაბოტი — AI ასისტენტი">
+            <span class="metabot-launcher-pulse"></span>
+            <div class="metabot-launcher-icon-wrap"><img src="logo_o_teal.png" alt="METAPHORA Bot" class="metabot-brand-ico brand-dynamic-o"></div>
+            <span class="metabot-launcher-badge">1</span>
+        </button>
+
+        <!-- MetaBot Chat Window -->
+        <div class="metabot-chat-window" id="metabot-chat-window">
+            <!-- Chat Header -->
+            <div class="metabot-chat-header">
+                <div class="metabot-header-left">
+                    <div class="metabot-avatar-badge">
+                        <img src="logo_o_teal.png" alt="METAPHORA Bot" class="metabot-avatar-img brand-dynamic-o">
+                        <span class="metabot-status-dot"></span>
+                    </div>
+                    <div class="metabot-header-info">
+                        <h4 class="metabot-title">მეტაბოტი</h4>
+                        <span class="metabot-status-text">მეტაფორას AI ასისტენტი • 🟢 ონლაინ</span>
+                    </div>
+                </div>
+                <div class="metabot-header-actions">
+                    <button class="metabot-close-btn" id="metabot-close-btn" aria-label="Close Chat">&times;</button>
+                </div>
+            </div>
+
+            <!-- Chat Messages Container -->
+            <div class="metabot-messages-body" id="metabot-messages-body">
+                <!-- Welcome Bot Message -->
+                <div class="metabot-msg bot-msg">
+                    <div class="metabot-msg-avatar"><img src="logo_o_teal.png" alt="MetaBot" class="metabot-msg-avatar-img brand-dynamic-o"></div>
+                    <div class="metabot-msg-bubble">
+                        <p>გამარჯობა! მე ვარ <strong>მეტაბოტი</strong> ✨ — „მეტაფორას“ ვირტუალური გიდი.</p>
+                        <p>რით შემიძლია დაგეხმაროთ? მკითხეთ ჩვენს <strong>სერვისებზე</strong>, <strong>სივრცეებზე</strong>, <strong>ღონისძიებებზე</strong> ან <strong>ჯავშანზე</strong>!</p>
+                    </div>
+                </div>
+
+                <!-- Quick Action Suggestion Chips -->
+                <div class="metabot-chips-container" id="metabot-chips-container">
+                    <button class="metabot-chip" data-query="რა არის მეტაფორა?">🌿 რა არის მეტაფორა?</button>
+                    <button class="metabot-chip" data-query="რა სერვისები გაქვთ?">🌱 სერვისები</button>
+                    <button class="metabot-chip" data-query="Playback თეატრი">🎭 Playback თეატრი</button>
+                    <button class="metabot-chip" data-query="როგორ დავჯავშნო ადგილი?">📅 ონლაინ ჯავშანი</button>
+                    <button class="metabot-chip" data-query="სად მდებარეობს მეტაფორა?">📍 ლოკაცია &amp; კონტაქტი</button>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="metabot-typing-indicator" id="metabot-typing-indicator" style="display: none;">
+                <span></span><span></span><span></span>
+                <small>მეტაბოტი წერს...</small>
+            </div>
+
+            <!-- Chat Input Form -->
+            <form class="metabot-chat-footer" id="metabot-chat-form">
+                <input type="text" class="metabot-chat-input" id="metabot-chat-input" placeholder="მისწერე მეტაბოტს..." autocomplete="off" required>
+                <button type="submit" class="metabot-send-btn" id="metabot-send-btn" aria-label="Send Message">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+            <div class="mobile-nav-header">
+                <div class="header-brand-group">
+                    <img src="logo_teal_crop.png" alt="METAPHORA" class="site-logo-brand brand-dynamic-logo">
+                </div>
+                <button class="mobile-nav-close-btn" id="mobile-nav-close-btn" aria-label="Close Navigation Menu">&times;</button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="index.html#hero" class="mobile-nav-item">🏠 მთავარი</a>
+                <div class="mobile-nav-subgroup">
+                    <span class="mobile-subgroup-title">✨ ჩვენს შესახებ</span>
+                    <a href="index.html#about" class="mobile-sub-item">📜 მანიფესტი &amp; ფილოსოფია</a>
+                    <a href="index.html#team" class="mobile-sub-item">👥 მეტაფორას გუნდი</a>
+                </div>
+                <div class="mobile-nav-subgroup">
+                    <span class="mobile-subgroup-title">🌱 სერვისები &amp; სივრცეები</span>
+                    <a href="index.html#services" class="mobile-sub-item">🌱 1. Personal Development</a>
+                    <a href="index.html#services" class="mobile-sub-item">💼 2. Business</a>
+                    <a href="index.html#services" class="mobile-sub-item">🧠 3. Think Tank</a>
+                    <a href="index.html#services" class="mobile-sub-item">🎨 4. Art &amp; Playback თეატრი</a>
+                    <a href="index.html#services" class="mobile-sub-item">🏛️ 5. Clubs &amp; Coworking</a>
+                </div>
+                <a href="gallery.html" class="mobile-nav-item">🖼️ გალერეა</a>
+                <a href="blog.html" class="mobile-nav-item">📖 ბლოგი</a>
+                <a href="index.html#contact" class="mobile-nav-item">📞 კონტაქტი</a>
+            </nav>
+            <div class="mobile-nav-footer">
+                <button class="open-booking-modal-btn btn btn-primary" style="width: 100%;">📅 ონლაინ ჯავშანი</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
