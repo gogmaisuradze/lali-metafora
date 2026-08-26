@@ -808,7 +808,7 @@
                 <p class="modal-desc">აირჩიეთ სასურველი სერვისი, თარიღი და დრო — ჩვენი გუნდი მალე დაგიკავშირდებათ.</p>
             </div>
 
-            <form class="modal-booking-form" onsubmit="event.preventDefault(); alert('თქვენი ჯავშანი წარმატებით გაიგზავნა! მეტაფორას გუნდი დაგიკავშირდებათ.'); document.getElementById('booking-modal-overlay').classList.remove('active');">
+            <form class="modal-booking-form" onsubmit="return metaforaSubmitBooking(event, this);">
                 
                 <!-- Service Selection Chips -->
                 <div class="form-group">
@@ -868,6 +868,39 @@
             </form>
         </div>
     </div>
+
+    <!-- ჯავშნის გაგზავნა n8n webhook-ით → Telegram ჯგუფი -->
+    <script>
+    function metaforaSubmitBooking(e, form){
+        e.preventDefault();
+        var selects = form.querySelectorAll('select');
+        var payload = {
+            service: selects[0] ? selects[0].value : '',
+            time:    selects[1] ? selects[1].value : '',
+            guests:  selects[2] ? selects[2].value : '',
+            date:  (form.querySelector('input[type="date"]') || {}).value || '',
+            name:  (form.querySelector('input[type="text"]') || {}).value || '',
+            phone: (form.querySelector('input[type="tel"]')  || {}).value || ''
+        };
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        fetch('https://meticulous-oyster.pikapod.net/webhook/metafora-booking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-booking-secret': 'aeYMKQvGD2j-Sh_j-5aOJvTg6Kg' },
+            body: JSON.stringify(payload)
+        }).then(function(){
+            alert('თქვენი ჯავშანი წარმატებით გაიგზავნა! მეტაფორას გუნდი დაგიკავშირდებათ. ✨');
+        }).catch(function(){
+            alert('ჯავშანი მიღებულია. მალე დაგიკავშირდებით. ✨');
+        }).finally(function(){
+            if (btn) btn.disabled = false;
+            var ov = document.getElementById('booking-modal-overlay');
+            if (ov) ov.classList.remove('active');
+            try { form.reset(); } catch (_) {}
+        });
+        return false;
+    }
+    </script>
 
     <!-- Application Script (Single Source of Truth) -->
     <script src="app.js?v=27000"></script>
