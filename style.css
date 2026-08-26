@@ -2856,26 +2856,73 @@ html.direct-main-mode #main-website {
 }
 
 @media (max-width: 768px) {
-    .dandelion-wrapper { width: 360px; height: 500px; }
-    .center-circular-hub { width: 180px; height: 180px; padding: 10px; }
-    .card-avatar-wrap { width: 48px; height: 48px; }
-    .card-name { font-size: 0.92rem; }
-    .card-role-text { font-size: 0.68rem; }
-    .dandelion-node { width: 42px; height: 42px; margin-top: -21px; margin-left: -21px; }
-    .slide-title { font-size: 1.9rem; }
-    .slider-wrapper { height: 440px; }
-    .stagger-carousel-container { height: 520px; }
+    /* Entrance Portal Top Bar on Mobile: ONLY Logo + Color Switcher */
+    .portal-top-bar {
+        padding: 16px 20px !important;
+        justify-content: center !important;
+    }
+    .portal-brand-tag {
+        display: none !important;
+    }
+    .portal-contact-btn {
+        display: none !important;
+    }
+
+    /* Start Page 3D Dandelion Globe on Mobile: Separate circles from center card */
+    .dandelion-wrapper {
+        width: 100vw !important;
+        max-width: 390px !important;
+        height: 520px !important;
+    }
+    .center-circular-hub {
+        width: 136px !important;
+        height: 136px !important;
+        padding: 6px !important;
+    }
+    .card-avatar-wrap {
+        width: 36px !important;
+        height: 36px !important;
+        margin-bottom: 2px !important;
+    }
+    .card-name {
+        font-size: 0.80rem !important;
+        margin-bottom: 1px !important;
+    }
+    .card-role-text {
+        font-size: 0.60rem !important;
+        margin-bottom: 4px !important;
+    }
+    .portal-btn {
+        font-size: 0.70rem !important;
+        padding: 3px 10px !important;
+    }
+    .dandelion-node {
+        width: 38px !important;
+        height: 38px !important;
+        margin-top: -19px !important;
+        margin-left: -19px !important;
+    }
+
+    .slide-title { font-size: 1.65rem; }
+    .slider-wrapper { height: 420px; }
+    .stagger-carousel-container { height: 480px; }
     .footer-info-panel { padding: 30px 20px; }
-    .tw-text-box { font-size: 0.98rem; }
+    .tw-text-box { font-size: 0.95rem; }
     .typewriter-avatar-halo { width: 130px; height: 130px; }
-    .tw-member-chip { width: 56px; height: 56px; }
-    .booking-cta-title { font-size: 1.8rem; }
+    .tw-member-chip { width: 52px; height: 52px; }
+    .booking-cta-title { font-size: 1.65rem; }
     .btn-glowing-shimmer { padding: 14px 28px; font-size: 1rem; }
     .form-row-two { grid-template-columns: 1fr; }
-    .booking-modal-glass { padding: 30px 20px; }
-    .reveal-text { font-size: 2.2rem; }
-    .img-reveal-span { height: 42px; }
+    .booking-modal-glass { padding: 26px 18px; }
+    .reveal-text { font-size: 1.8rem; }
+    .img-reveal-span { height: 38px; }
     .about-audio-badge-card { justify-content: center; text-align: center; }
+
+    /* Main Website Header on Mobile: ONLY Logo + Color Switcher & Hamburger */
+    .header-actions .search-box-wrapper,
+    .header-actions .lang-single-btn {
+        display: none !important;
+    }
 }
 
 

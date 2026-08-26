@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const time = timestamp * 0.0012;
                 const isMobile = window.innerWidth <= 768;
-                const scaleFactor = isMobile ? 0.46 : 1.0;
+                const scaleFactor = isMobile ? 0.78 : 1.0;
                 const svgCenter = 480;
                 const cameraDistance = 880;
 
@@ -473,8 +473,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     for (let b = 0; b < crownBristles; b++) {
                         const bAng = (b / crownBristles) * Math.PI * 2 + gYaw * 0.3;
-                        const innerR = 115 * scaleFactor;
-                        const outerR = (145 + Math.sin(time * 1.5 + b) * 8) * scaleFactor;
+                        const innerR = (isMobile ? 85 : 115) * scaleFactor;
+                        const outerR = ((isMobile ? 115 : 145) + Math.sin(time * 1.5 + b) * 8) * scaleFactor;
 
                         const bx1 = Math.cos(bAng) * innerR;
                         const by1 = Math.sin(bAng) * innerR;
@@ -563,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 for (let j = 0; j < numSeedHeads; j++) {
                     const prop = seedProps[j];
-                    const sR = baseOrbitRadius * prop.radiusRatio * windMultiplier * scaleFactor;
+                    const sR = baseOrbitRadius * (isMobile ? (prop.radiusRatio + 0.12) : prop.radiusRatio) * windMultiplier * scaleFactor;
 
                     // 3D Spherical + organic wave motion in all directions
                     const currentPhi = prop.phi + (currentYaw * 0.75);
