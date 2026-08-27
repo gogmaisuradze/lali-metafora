@@ -1470,7 +1470,7 @@ html.direct-main-mode #main-website {
     font-weight: 800;
     margin: 8px 0 12px 0;
     letter-spacing: -0.5px;
-    color: #1e293b;
+    color: var(--primary-color);
 }
 
 .section-subtitle {
