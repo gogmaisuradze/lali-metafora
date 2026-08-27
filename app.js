@@ -402,16 +402,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        let isHoveringPortal = false;
-        if (entrancePortal) {
-            entrancePortal.addEventListener('mouseenter', () => { isHoveringPortal = true; });
-            entrancePortal.addEventListener('mouseleave', () => { isHoveringPortal = false; });
+        if (dandelionWrapper) {
+            dandelionWrapper.addEventListener('animationend', (e) => {
+                if (e.animationName === 'dandelionBloomIn') {
+                    dandelionWrapper.classList.remove('bloom-enter');
+                }
+            });
         }
 
         function renderDandelionLoop(timestamp) {
             if (!entrancePortal || entrancePortal.style.display !== 'none') {
-                if (!isHoveringPortal) {
-                    targetYaw += 0.0024; // Continuous elegant 3D ambient rotation
+                if (!isDraggingStage) {
+                    targetYaw += 0.0032; // Continuous smooth, elegant 3D ambient rotation that never freezes
                 }
 
                 const forceYaw = (targetYaw - currentYaw) * stiffness;
