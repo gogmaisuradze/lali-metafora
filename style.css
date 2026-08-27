@@ -1903,7 +1903,7 @@ html.direct-main-mode #main-website {
 .tw-author-header {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 2px;
 }
 
@@ -1914,12 +1914,18 @@ html.direct-main-mode #main-website {
     margin: 0;
 }
 
+.tw-author-socials {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
 .tw-author-social-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: rgba(1, 97, 102, 0.08);
     color: var(--primary-color);
@@ -1928,24 +1934,34 @@ html.direct-main-mode #main-website {
     border: 1px solid rgba(1, 97, 102, 0.15);
 }
 
-.tw-author-social-link:hover {
+.tw-author-social-link.tw-social-fb:hover {
     background: #1877f2;
     color: #ffffff;
     border-color: #1877f2;
-    transform: translateY(-2px) scale(1.1);
-    box-shadow: 0 4px 10px rgba(24, 119, 242, 0.3);
+    transform: translateY(-2px) scale(1.12);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.38);
+}
+
+.tw-author-social-link.tw-social-insta:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-2px) scale(1.12);
+    box-shadow: 0 4px 12px rgba(214, 36, 159, 0.38);
+}
+
+.tw-author-social-link.tw-social-wa:hover {
+    background: #25d366;
+    color: #ffffff;
+    border-color: #25d366;
+    transform: translateY(-2px) scale(1.12);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.38);
 }
 
 [data-theme="plum"] .tw-author-social-link {
     background: rgba(122, 57, 99, 0.08);
     color: var(--brand-plum);
     border-color: rgba(122, 57, 99, 0.15);
-}
-
-[data-theme="plum"] .tw-author-social-link:hover {
-    background: #1877f2;
-    color: #ffffff;
-    border-color: #1877f2;
 }
 
 .tw-author-role {

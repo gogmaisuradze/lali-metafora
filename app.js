@@ -1103,6 +1103,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fullname: 'ლალი ბადრიძე',
             jobtitle: 'დამფუძნებელი & ფასილიტატორი',
             facebook: 'https://www.facebook.com/lali.badridze',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:14 / 0:45'
         },
         {
@@ -1110,7 +1112,11 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_2.mp3',
             text: 'Personal Development მიმართულება ეხმარება ადამიანებს შინაგანი ძალის, ბალანსისა და ემოციური ჰარმონიის პოვნაში პროფესიული მხარდაჭერით.',
             name: 'თინათინი',
+            fullname: 'თინათინ გოგუაძე',
             jobtitle: 'პოზიტიური ფსიქოთერაპევტი',
+            facebook: 'https://www.facebook.com/metaphora.geo',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:22 / 0:50'
         },
         {
@@ -1118,7 +1124,11 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_3.mp3',
             text: 'Think Tank სალონური დისკუსიები და ინტელექტუალური დებატები ქმნის სივრცეს, სადაც იდეები გარდაიქმნება რეალურ ცვლილებებად და ინოვაციებად.',
             name: 'გიორგი',
+            fullname: 'გიორგი მაისურაძე',
             jobtitle: 'Think Tank მოდერატორი',
+            facebook: 'https://www.facebook.com/metaphora.geo',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:18 / 0:42'
         },
         {
@@ -1126,7 +1136,11 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_4.mp3',
             text: 'Playback თეატრი მაყურებლის ემოციებსა და ისტორიებს აცოცხლებს სცენაზე — ეს არის უნიკალური შემოქმედებითი და არტ-თერაპიული გამოცდილება.',
             name: 'ნინო',
+            fullname: 'ნინო კვარაცხელია',
             jobtitle: 'Playback თეატრის არტისტი',
+            facebook: 'https://www.facebook.com/metaphora.geo',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:31 / 1:05'
         },
         {
@@ -1134,7 +1148,11 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_5.mp3',
             text: 'მეტაფორა Business აერთიანებს მეწარმეებსა და პროფესიონალებს ნაყოფიერი თანამშრომლობის, პარტნიორობისა და ახალი შესაძლებლობების შესაქმნელად.',
             name: 'დავითი',
+            fullname: 'დავით ბერიძე',
             jobtitle: 'Business & Partnerships Lead',
+            facebook: 'https://www.facebook.com/metaphora.geo',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:12 / 0:38'
         },
         {
@@ -1142,7 +1160,11 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_6.mp3',
             text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.',
             name: 'ელენე',
+            fullname: 'ელენე ჩხეიძე',
             jobtitle: 'Community Manager & Clubs Host',
+            facebook: 'https://www.facebook.com/metaphora.geo',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:25 / 0:48'
         },
         {
@@ -1150,7 +1172,11 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_7.mp3',
             text: 'ჩვენ ვქმნით შთამაგონებელ გარემოს, ვორქშოფებსა და არტ-საღამოებს, რომლებიც ადამიანებს აკავშირებს და ავსებს შემოქმედებითი ენერგიით.',
             name: 'სანდრო',
+            fullname: 'სანდრო ჯაფარიძე',
             jobtitle: 'Creative Producer & Curator',
+            facebook: 'https://www.facebook.com/metaphora.geo',
+            instagram: 'https://instagram.com',
+            whatsapp: 'https://wa.me/995599228228',
             time: '0:19 / 0:52'
         }
     ];
@@ -1221,13 +1247,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const twSocialFb = document.getElementById('tw-social-fb');
         if (twSocialFb) {
-            if (current.facebook) {
-                twSocialFb.href = current.facebook;
-                twSocialFb.style.display = 'inline-flex';
-                twSocialFb.title = `${current.name} — Facebook პროფილი`;
-            } else {
-                twSocialFb.style.display = 'none';
-            }
+            twSocialFb.href = current.facebook || 'https://www.facebook.com/metaphora.geo';
+            twSocialFb.title = `${current.name} — Facebook`;
+        }
+
+        const twSocialInsta = document.getElementById('tw-social-insta');
+        if (twSocialInsta) {
+            twSocialInsta.href = current.instagram || 'https://instagram.com';
+            twSocialInsta.title = `${current.name} — Instagram`;
+        }
+
+        const twSocialWa = document.getElementById('tw-social-wa');
+        if (twSocialWa) {
+            twSocialWa.href = current.whatsapp || 'https://wa.me/995599228228';
+            twSocialWa.title = `${current.name} — WhatsApp`;
         }
 
         typewriteText(current.text);
