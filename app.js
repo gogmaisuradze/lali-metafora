@@ -736,6 +736,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hashIdx !== -1) {
             const hash = href.substring(hashIdx);
             if (hash.length > 1 && hash !== '#entrance') {
+                if (typeof window.setActiveNav === 'function') {
+                    window.setActiveNav(hash);
+                }
                 const targetEl = document.querySelector(hash);
                 if (targetEl) {
                     e.preventDefault();
@@ -2938,77 +2941,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 17. ACTIVE NAVIGATION & SCROLLSPY (Yellow Indicator For Active Sections)
+    // 17. ACTIVE NAVIGATION (Yellow Indicator For Active Menu Items - Click Only)
     // ==========================================================================
     function initScrollSpyAndActiveNav() {
         const path = (window.location.pathname || "").toLowerCase();
         const navLinks = document.querySelectorAll('.site-header .nav-item');
         const mobLinks = document.querySelectorAll('.mobile-nav-item');
 
-        // Detect if on standalone separate pages
-        const isBlog = path.includes('blog.html');
-        const isGallery = path.includes('gallery.html');
-        const isServicePage = path.includes('service-') || path.includes('services.html');
-
-        if (isBlog) {
-            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
-            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
-            document.querySelectorAll('.site-header a[href*="blog.html"], .mobile-nav-item[href*="blog.html"]').forEach(el => el.classList.add('active-page'));
-            return;
-        }
-
-        if (isGallery) {
-            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
-            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
-            document.querySelectorAll('.site-header a[href*="gallery.html"], .mobile-nav-item[href*="gallery.html"]').forEach(el => el.classList.add('active-page'));
-            return;
-        }
-
-        if (isServicePage) {
-            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
-            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
-            document.querySelectorAll('.site-header .nav-dropdown-wrapper > a[href*="service"], .mobile-nav-accordion#mob-acc-services > .mobile-accordion-toggle').forEach(el => el.classList.add('active-page'));
-            return;
-        }
-
-        // On Index / Main Landing Page: Click-only active switching (No scroll tracking)
-        function setActiveNav(targetEl) {
+        window.setActiveNav = function(targetHrefOrEl) {
             navLinks.forEach(l => l.classList.remove('active', 'active-page'));
             mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
 
-            if (!targetEl) return;
+            let href = '';
+            if (typeof targetHrefOrEl === 'string') {
+                href = targetHrefOrEl;
+            } else if (targetHrefOrEl && targetHrefOrEl.getAttribute) {
+                href = targetHrefOrEl.getAttribute('href') || targetHrefOrEl.getAttribute('data-href') || '';
+            }
 
-            // If it's inside a nav-dropdown-wrapper or has a parent dropdown
-            const parentDropdown = targetEl.closest('.nav-dropdown-wrapper');
-            if (parentDropdown) {
-                const trigger = parentDropdown.querySelector('.nav-item.has-dropdown');
-                if (trigger) trigger.classList.add('active');
-            } else if (targetEl.classList.contains('nav-item')) {
-                targetEl.classList.add('active');
+            href = href.toLowerCase();
+
+            if (href.includes('contact')) {
+                document.querySelectorAll('.site-header a[href*="contact"], .mobile-nav-item[href*="contact"]').forEach(el => el.classList.add('active'));
+            } else if (href.includes('gallery')) {
+                document.querySelectorAll('.site-header a[href*="gallery"], .mobile-nav-item[href*="gallery"]').forEach(el => el.classList.add('active-page', 'active'));
+            } else if (href.includes('blog')) {
+                document.querySelectorAll('.site-header a[href*="blog"], .mobile-nav-item[href*="blog"]').forEach(el => el.classList.add('active-page', 'active'));
+            } else if (href.includes('service')) {
+                document.querySelectorAll('.site-header .nav-dropdown-wrapper > a[href*="service"], .mobile-nav-accordion#mob-acc-services > .mobile-accordion-toggle').forEach(el => el.classList.add('active'));
+            } else if (href.includes('about') || href.includes('team')) {
+                document.querySelectorAll('.site-header .nav-dropdown-wrapper > a[href*="about"], .mobile-nav-accordion#mob-acc-about > .mobile-accordion-toggle').forEach(el => el.classList.add('active'));
+            } else if (href.includes('hero') || href.includes('#home') || href.includes('index.html') || href === '#') {
+                const homeBtn = document.getElementById('nav-home-btn') || document.querySelector('.site-header a[href*="#hero"]');
+                if (homeBtn) homeBtn.classList.add('active');
+                const mobHome = document.querySelector('.mobile-nav-item[href*="#hero"]');
+                if (mobHome) mobHome.classList.add('active');
+            } else if (targetHrefOrEl && targetHrefOrEl.classList && targetHrefOrEl.classList.contains('nav-item')) {
+                targetHrefOrEl.classList.add('active');
+            }
+        };
+
+        // Standalone subpage initial check
+        if (path.includes('blog.html')) {
+            window.setActiveNav('blog.html');
+        } else if (path.includes('gallery.html')) {
+            window.setActiveNav('gallery.html');
+        } else if (path.includes('service-') || path.includes('services.html')) {
+            window.setActiveNav('services.html');
+        } else {
+            const hash = (window.location.hash || "").toLowerCase();
+            if (hash.includes('contact')) {
+                window.setActiveNav('#contact');
+            } else if (hash.includes('service')) {
+                window.setActiveNav('#services');
+            } else if (hash.includes('about') || hash.includes('team')) {
+                window.setActiveNav('#about');
+            } else {
+                window.setActiveNav('#hero');
             }
         }
 
-        // Initial setup on index page load based on current hash or default to Home
-        const hash = (window.location.hash || "").toLowerCase();
-        if (hash.includes('contact')) {
-            const el = document.querySelector('.site-header a[href="#contact"], .site-header a[href="index.html#contact"]');
-            if (el) setActiveNav(el);
-        } else if (hash.includes('service')) {
-            const el = document.querySelector('.site-header .nav-dropdown-wrapper > a[href*="service"]');
-            if (el) setActiveNav(el);
-        } else if (hash.includes('about') || hash.includes('team')) {
-            const el = document.querySelector('.site-header .nav-dropdown-wrapper > a[href="#about"]');
-            if (el) setActiveNav(el);
-        } else {
-            const homeBtn = document.getElementById('nav-home-btn') || document.querySelector('.site-header a[href*="#hero"]');
-            if (homeBtn) setActiveNav(homeBtn);
-        }
-
-        // On Click of any nav link or dropdown link: only change on explicit user click
-        document.querySelectorAll('.site-header .nav-item, .site-header .dropdown-link').forEach(link => {
+        // On Click of any nav link or dropdown link across desktop and mobile:
+        document.querySelectorAll('.site-header .nav-item, .site-header .dropdown-link, .mobile-nav-item, .mobile-sub-item, .portal-contact-btn').forEach(link => {
             link.addEventListener('click', function() {
-                setActiveNav(this);
+                window.setActiveNav(this);
             });
+        });
+
+        // Listen to hashchange
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash) {
+                window.setActiveNav(window.location.hash);
+            }
         });
     }
 
