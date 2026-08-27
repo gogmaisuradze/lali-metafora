@@ -1468,14 +1468,15 @@ html.direct-main-mode #main-website {
     font-weight: 800;
     margin: 8px 0 12px 0;
     letter-spacing: -0.5px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #1e293b;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: default;
 }
 
 .section-title:hover {
-    color: var(--primary-color, #014d51) !important;
-    transform: translateY(-3px);
-    text-shadow: 0 4px 15px rgba(1, 77, 81, 0.18);
+    color: var(--brand-gold, #f59e0b) !important;
+    transform: translateY(-4px);
+    text-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
 }
 
 .section-subtitle {
@@ -2035,6 +2036,15 @@ html.direct-main-mode #main-website {
     font-weight: 800;
     color: var(--primary-color);
     margin: 0;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.tw-author-name:hover {
+    color: var(--brand-gold, #f59e0b) !important;
+    transform: translateY(-3px);
+    text-shadow: 0 3px 12px rgba(245, 158, 11, 0.35);
 }
 
 .tw-author-socials {
@@ -2454,6 +2464,13 @@ html.direct-main-mode #main-website {
     line-height: 1.25;
     margin-bottom: 16px;
     letter-spacing: -0.5px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-cta-title:hover {
+    color: var(--brand-gold, #f59e0b) !important;
+    transform: translateY(-3px);
+    text-shadow: 0 4px 20px rgba(245, 158, 11, 0.45);
 }
 
 .booking-cta-desc {
