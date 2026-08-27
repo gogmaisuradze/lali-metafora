@@ -1232,6 +1232,69 @@ html.direct-main-mode #main-website {
     align-items: center;
     justify-content: center;
     gap: 16px;
+    flex-wrap: wrap;
+}
+
+.slide-actions .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 32px;
+    background: var(--primary-color, #014d51);
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 24px rgba(1, 77, 81, 0.4);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-actions .btn-primary:hover {
+    background: var(--brand-plum, #5c2c54) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.65);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(92, 44, 84, 0.55) !important;
+}
+
+.slide-actions .btn-primary:active {
+    transform: scale(0.96);
+}
+
+.slide-actions .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 32px;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-actions .btn-secondary:hover {
+    background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%) !important;
+    color: #0f172a !important;
+    border-color: #f59e0b !important;
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.6) !important;
+}
+
+.slide-actions .btn-secondary:active {
+    background: linear-gradient(135deg, #b45309 0%, #92400e 100%) !important;
+    color: #ffffff !important;
+    transform: scale(0.96);
 }
 
 .btn-video-play {
