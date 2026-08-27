@@ -1220,10 +1220,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1. Gentle keyboard typewriter typing sound (Automatic during typing)
+    // 1. Gentle keyboard typewriter typing sound (Strictly synchronized with active typing dynamics)
+    let isTypingSoundEnabled = true;
+    let isCurrentlyTyping = false;
     let twTypingAudio = null;
 
     function startTwTypingAudio() {
+        if (!isTypingSoundEnabled) return;
         try {
             if (!twTypingAudio) {
                 twTypingAudio = new Audio('typewriter.mp3');
@@ -1311,13 +1314,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function typewriteText(fullText, playSound = true) {
-        clearInterval(typeTimer);
+        clearTimeout(typeTimer);
         stopTwTypingAudio();
         if (!twText) return;
         twText.textContent = '';
         let charIndex = 0;
+        isCurrentlyTyping = true;
 
-        if (playSound) {
+        if (playSound && isTypingSoundEnabled) {
             startTwTypingAudio();
         }
 
@@ -1333,6 +1337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 typeTimer = setTimeout(typeNext, speed);
             } else {
+                isCurrentlyTyping = false;
                 stopTwTypingAudio();
             }
         }
@@ -1409,10 +1414,15 @@ document.addEventListener('DOMContentLoaded', () => {
         quoteMark.style.cursor = 'pointer';
         quoteMark.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (twTypingAudio && !twTypingAudio.paused) {
+            isTypingSoundEnabled = !isTypingSoundEnabled;
+            if (!isTypingSoundEnabled) {
                 stopTwTypingAudio();
+                quoteMark.style.opacity = '0.4';
             } else {
-                startTwTypingAudio();
+                quoteMark.style.opacity = '1';
+                if (isCurrentlyTyping) {
+                    startTwTypingAudio();
+                }
             }
         });
     });
@@ -1501,11 +1511,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const manifestoCard = document.getElementById('manifesto-typewriter-card');
     let manifestoTypeTimer = null;
 
-    function startManifestoTypewriter(playSound = false) {
+    function startManifestoTypewriter(playSound = true) {
         if (!manifestoTextElem) return;
-        clearInterval(manifestoTypeTimer);
+        clearTimeout(manifestoTypeTimer);
+        stopTwTypingAudio();
         manifestoTextElem.textContent = '';
         let charIndex = 0;
+        isCurrentlyTyping = true;
+
+        if (playSound && isTypingSoundEnabled) {
+            startTwTypingAudio();
+        }
 
         function typeNextChar() {
             if (charIndex < manifestoFullText.length) {
@@ -1520,7 +1536,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 manifestoTypeTimer = setTimeout(typeNextChar, speed);
             } else {
-                if (playSound) stopTwTypingAudio();
+                isCurrentlyTyping = false;
+                stopTwTypingAudio();
             }
         }
         typeNextChar();
@@ -1530,7 +1547,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    startManifestoTypewriter();
+                    startManifestoTypewriter(true);
                 }
             });
         }, { threshold: 0.25 });
