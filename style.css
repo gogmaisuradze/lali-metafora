@@ -449,27 +449,32 @@ html.direct-main-mode #main-website {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    padding: 7px 20px;
+    gap: 6px;
+    padding: 8px 22px;
     border-radius: 9999px;
-    background: var(--dandelion-purple);
+    background: var(--primary-color, #014d51);
     color: #ffffff;
-    font-size: 0.82rem;
-    font-weight: 700;
-    border: none;
+    font-size: 0.84rem;
+    font-weight: 800;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(139, 123, 168, 0.35);
+    box-shadow: 0 4px 15px rgba(1, 77, 81, 0.35);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .connect-btn:hover {
-    background: var(--dandelion-purple-dark);
-    box-shadow: 0 6px 20px rgba(139, 123, 168, 0.45);
-    transform: scale(1.06);
+    background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%) !important;
+    color: #0f172a !important;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.55) !important;
+    transform: translateY(-2px) scale(1.08);
 }
 
 .connect-btn:active {
-    transform: scale(0.95);
+    background: linear-gradient(135deg, #b45309 0%, #92400e 100%) !important;
+    color: #ffffff !important;
+    transform: scale(0.94);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3) !important;
 }
 
 .connect-arrow {
@@ -477,7 +482,7 @@ html.direct-main-mode #main-website {
 }
 
 .connect-btn:hover .connect-arrow {
-    transform: translateX(3px);
+    transform: translateX(4px);
 }
 
 .pagination-dots {
