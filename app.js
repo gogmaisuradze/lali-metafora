@@ -643,15 +643,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function exitWithDandelionCollapse(targetHash) {
         const dandelionWrapper = document.getElementById('dandelion-wrapper');
+        const entrancePortal = document.getElementById('entrance-portal');
+        const mainWebsite = document.getElementById('main-website');
 
         if (dandelionWrapper) {
             dandelionWrapper.classList.remove('bloom-enter');
             dandelionWrapper.classList.add('collapse-exit');
         }
 
-        setTimeout(() => {
-            exitPortalAndScroll(targetHash || '#hero');
-        }, 340);
+        // Parallel transition: shrink and fade/scroll simultaneously
+        if (entrancePortal && entrancePortal.style.display !== 'none') {
+            entrancePortal.classList.add('portal-exit');
+            document.body.classList.remove('initial-lock');
+            if (mainWebsite) mainWebsite.classList.add('active');
+
+            if (targetHash && targetHash !== '#hero' && targetHash !== '#entrance') {
+                scrollToAnchor(targetHash);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
+
+            setTimeout(() => {
+                entrancePortal.style.display = 'none';
+                if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                }
+            }, 420);
+        } else if (targetHash && targetHash !== '#entrance') {
+            scrollToAnchor(targetHash);
+        }
     }
 
     function navigateToProfile(profile) {
@@ -684,29 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function exitPortalAndScroll(targetHash) {
-        const entrancePortal = document.getElementById('entrance-portal');
-        const mainWebsite = document.getElementById('main-website');
-
-        if (entrancePortal && entrancePortal.style.display !== 'none') {
-            entrancePortal.classList.add('portal-exit');
-            document.body.classList.remove('initial-lock');
-            if (mainWebsite) mainWebsite.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'instant' });
-
-            setTimeout(() => {
-                entrancePortal.style.display = 'none';
-                if (typeof ScrollTrigger !== 'undefined') {
-                    ScrollTrigger.refresh();
-                }
-                if (targetHash && targetHash !== '#hero' && targetHash !== '#entrance') {
-                    scrollToAnchor(targetHash);
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }, 180);
-        } else if (targetHash && targetHash !== '#entrance') {
-            scrollToAnchor(targetHash);
-        }
+        exitWithDandelionCollapse(targetHash);
     }
 
     // Re-open Entrance 3D Portal

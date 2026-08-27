@@ -108,7 +108,7 @@ html.direct-main-mode #main-website {
     justify-content: center;
     overflow: hidden;
     perspective: 1200px;
-    transition: opacity 0.28s ease, visibility 0.28s;
+    transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.42s ease;
 }
 
 .entrance-portal.portal-exit {
@@ -213,9 +213,9 @@ html.direct-main-mode #main-website {
     }
 }
 
-/* Collapsing / Imploding straight back into center point on Exit (No rotation) */
+/* Collapsing / Imploding straight back into center point on Exit (Parallel with transition) */
 .dandelion-wrapper.collapse-exit {
-    animation: dandelionCollapseOut 0.34s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    animation: dandelionCollapseOut 0.42s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
 }
 
 @keyframes dandelionCollapseOut {
