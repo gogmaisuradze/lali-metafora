@@ -4674,59 +4674,51 @@ document.addEventListener('DOMContentLoaded', () => {
             window.removeEventListener('keydown', unlockAudio);
         };
 
-        window.addEventListener('pointerdown', unlockAudio, { once: true });
-        window.addEventListener('touchstart', unlockAudio, { once: true });
-        window.addEventListener('keydown', unlockAudio, { once: true });
+        // Robust interactive element detection
+        function isInteractiveElement(target) {
+            if (!target || target === document.body || target === document.documentElement) return false;
 
-        // Global delegated pointerdown listener for any clickable/interactive element
-        const interactiveSelector = [
-            'button',
-            'a',
-            'input[type="button"]',
-            'input[type="submit"]',
-            'input[type="checkbox"]',
-            'input[type="radio"]',
-            'select',
-            '[role="button"]',
-            '[role="tab"]',
-            '[role="menuitem"]',
-            '.dandelion-node',
-            '.dandelion-seed-head',
-            '.center-circular-hub',
-            '.tw-member-chip',
-            '.tw-nav-btn',
-            '.metabot-chip',
-            '.metabot-launcher-btn',
-            '.metabot-close-btn',
-            '.metabot-send-btn',
-            '.lang-single-btn',
-            '.theme-toggle-btn',
-            '.mobile-menu-toggle-btn',
-            '.mobile-nav-close',
-            '.mobile-accordion-toggle',
-            '.modal-close-btn',
-            '.btn-modal-submit',
-            '.bank-app-btn',
-            '.open-booking-modal-btn',
-            '.portal-btn',
-            '.portal-contact-btn',
-            '.card-explore-btn',
-            '.read-more-btn',
-            '.audio-badge-play-btn',
-            '.search-toggle-btn',
-            '.search-close-btn',
-            '.filter-btn',
-            '.gallery-item',
-            '.accordion-header',
-            '.faq-item'
-        ].join(', ');
+            // 1. Direct interactive tags & ARIA roles
+            if (target.closest('a, button, select, input, textarea, summary, details, label, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="radio"]')) {
+                return true;
+            }
 
-        document.addEventListener('pointerdown', (e) => {
-            const interactiveEl = e.target.closest(interactiveSelector);
-            if (interactiveEl) {
+            // 2. Navigation items, headers, dropdowns, accordions, mobile drawer elements
+            if (target.closest('.nav-item, .dropdown-link, .nav-dropdown-wrapper, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, .brand-wrapper, .site-header, .mobile-nav-drawer')) {
+                // If it's inside menu/drawer, check if it's a clickable item
+                if (target.closest('.nav-item, .dropdown-link, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, a, button, .lang-single-btn, .theme-toggle-btn, .open-booking-modal-btn')) {
+                    return true;
+                }
+            }
+
+            // 3. Modals, search, theme, language, metabot, bookings, media players
+            if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .pagination-dots, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card')) {
+                return true;
+            }
+
+            // 4. Any element with click handlers or pointer styling
+            if (target.closest('[onclick], [data-action], [data-filter], [data-index], .btn, .clickable, [style*="cursor: pointer"], [style*="cursor:pointer"]')) {
+                return true;
+            }
+
+            // 5. Computed cursor pointer check
+            try {
+                const cursor = window.getComputedStyle(target).cursor;
+                if (cursor === 'pointer') return true;
+            } catch (e) {}
+
+            return false;
+        }
+
+        const handleInteractiveTrigger = (e) => {
+            if (isInteractiveElement(e.target)) {
                 playNextClickSound();
             }
-        }, { passive: true });
+        };
+
+        // Capture phase listeners ensure sound triggers even if child handlers stop propagation
+        document.addEventListener('pointerdown', handleInteractiveTrigger, true);
+        document.addEventListener('click', handleInteractiveTrigger, true);
 
         window.playNextClickSound = playNextClickSound;
         window.playClickSound = playNextClickSound;
