@@ -48,7 +48,7 @@
     const audioPool = soundFiles.map(file => {
         const a = new Audio(file);
         a.preload = 'auto';
-        a.volume = 0.65;
+        a.volume = 0.40;
         return a;
     });
 
@@ -67,7 +67,7 @@
                 const source = ctx.createBufferSource();
                 source.buffer = audioBuffers[soundIdx];
                 const gainNode = ctx.createGain();
-                gainNode.gain.value = 0.65;
+                gainNode.gain.value = 0.40;
                 source.connect(gainNode);
                 gainNode.connect(ctx.destination);
                 source.start(0);
@@ -80,7 +80,7 @@
             const audio = audioPool[soundIdx];
             if (audio) {
                 const clone = audio.cloneNode();
-                clone.volume = 0.65;
+                clone.volume = 0.40;
                 clone.play().catch(() => {});
             }
         } catch (e) {}
