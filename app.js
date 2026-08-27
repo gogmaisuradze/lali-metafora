@@ -1219,11 +1219,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTwTypingAudio() {
         try {
             if (!twTypingAudio) {
-                twTypingAudio = new Audio('metafora.mp3');
-                twTypingAudio.volume = 0.15; // Low volume as requested
+                twTypingAudio = new Audio('typewriter.mp3');
+                twTypingAudio.volume = 0.22; // Gentle low volume
                 twTypingAudio.loop = true;
             }
-            twTypingAudio.volume = 0.15;
+            twTypingAudio.volume = 0.22;
             twTypingAudio.currentTime = 0;
             const p = twTypingAudio.play();
             if (p !== undefined) p.catch(() => {});
