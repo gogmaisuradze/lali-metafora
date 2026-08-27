@@ -1238,15 +1238,13 @@ html.direct-main-mode #main-website {
 
 .metafora-glow-text {
     display: inline-block;
-    color: var(--primary-color, #014d51);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
-    font-weight: 800;
+    font-weight: inherit;
 }
 
-.metafora-glow-text:hover,
-.section-title:hover .metafora-glow-text,
-.booking-cta-title:hover .metafora-glow-text {
+.metafora-glow-text:hover {
     color: var(--brand-gold, #f59e0b) !important;
     transform: translateY(-3px) scale(1.04);
     text-shadow: 0 4px 20px rgba(245, 158, 11, 0.55);
@@ -1464,14 +1462,6 @@ html.direct-main-mode #main-website {
     color: var(--primary-color, #014d51);
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: default;
-}
-
-.section-tag:hover {
-    color: var(--brand-gold, #f59e0b) !important;
-    transform: translateY(-2px);
-    text-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
 }
 
 .section-title {
@@ -1481,14 +1471,6 @@ html.direct-main-mode #main-website {
     margin: 8px 0 12px 0;
     letter-spacing: -0.5px;
     color: #1e293b;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: default;
-}
-
-.section-title:hover {
-    color: var(--brand-gold, #f59e0b) !important;
-    transform: translateY(-4px);
-    text-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
 }
 
 .section-subtitle {
@@ -2476,13 +2458,6 @@ html.direct-main-mode #main-website {
     line-height: 1.25;
     margin-bottom: 16px;
     letter-spacing: -0.5px;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.booking-cta-title:hover {
-    color: var(--brand-gold, #f59e0b) !important;
-    transform: translateY(-3px);
-    text-shadow: 0 4px 20px rgba(245, 158, 11, 0.45);
 }
 
 .booking-cta-desc {
