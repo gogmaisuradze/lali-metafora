@@ -1977,18 +1977,42 @@ document.addEventListener('DOMContentLoaded', () => {
         showBookingStep('payment');
     }
 
+    function copyTextToClipboard(text) {
+        if (!text) return false;
+        let copied = false;
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text);
+                copied = true;
+            }
+        } catch (e) {}
+
+        try {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            textArea.setAttribute("readonly", "");
+            document.body.appendChild(textArea);
+            textArea.select();
+            textArea.setSelectionRange(0, 99999);
+            const successful = document.execCommand("copy");
+            document.body.removeChild(textArea);
+            if (successful) copied = true;
+        } catch (err) {}
+
+        return copied;
+    }
+
     function handleMetaforaBankClick(bankType, btnElement) {
         const targetIban = "GE93BG0000000192399800";
         const priceText = (pendingBookingPayload?.price || '').trim();
         const amountNum = priceText ? (parseInt(priceText.replace(/[^\d.]/g, ''), 10) || 0) : 0;
         const purposeStr = `მეტაფორას ჯავშანი - ${pendingBookingPayload?.name || 'სტუმარი'} (${pendingBookingPayload?.service || 'მეტაფორა'})`;
 
-        // 1. Copy Clean IBAN to clipboard synchronously
-        try {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(targetIban);
-            }
-        } catch (e) {}
+        // 1. Synchronously copy Clean IBAN to clipboard
+        copyTextToClipboard(targetIban);
 
         // 2. Visual feedback on button
         const bankName = bankType === "bog" ? "საქართველოს ბანკ" : "თიბისი ბანკ";
@@ -2002,7 +2026,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             setTimeout(() => {
                 btnElement.innerHTML = originalHTML;
-            }, 3200);
+            }, 3500);
         }
 
         // 3. Deep link redirect with prefilled transfer parameters
@@ -2016,26 +2040,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const encodedPurpose = encodeURIComponent(purposeStr);
             const amountParam = amountNum > 0 ? `&amount=${amountNum}` : '';
             if (bankType === "bog") {
-                const bogSchemes = [
-                    `bogmbank://transfer?iban=${targetIban}${amountParam}&desc=${encodedPurpose}`,
-                    `bogmobile://transfer?account=${targetIban}${amountParam}`,
-                    "bogmbank://",
-                    "bogmobile://"
-                ];
-                bogSchemes.forEach((scheme, index) => {
-                    setTimeout(() => { window.location.href = scheme; }, index * 250);
-                });
+                const primaryBog = `bogmbank://transfer?iban=${targetIban}${amountParam}&desc=${encodedPurpose}`;
+                window.location.href = primaryBog;
+                setTimeout(() => {
+                    window.location.href = `bogmobile://transfer?account=${targetIban}${amountParam}`;
+                }, 400);
             } else if (bankType === "tbc") {
-                const tbcSchemes = [
-                    `tbcbank://transfer?iban=${targetIban}${amountParam}&purpose=${encodedPurpose}`,
-                    `tbc-mobile://transfer?to=${targetIban}${amountParam}`,
-                    "tbcbank://",
-                    "tbc-mobile://",
-                    "tbc://"
-                ];
-                tbcSchemes.forEach((scheme, index) => {
-                    setTimeout(() => { window.location.href = scheme; }, index * 250);
-                });
+                const primaryTbc = `tbcbank://transfer?iban=${targetIban}${amountParam}&purpose=${encodedPurpose}`;
+                window.location.href = primaryTbc;
+                setTimeout(() => {
+                    window.location.href = `tbc-mobile://transfer?to=${targetIban}${amountParam}`;
+                }, 400);
             }
         }
     }
@@ -2067,14 +2082,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Copy IBAN
     if (btnCopyIban && metaforaIbanVal) {
         btnCopyIban.addEventListener('click', () => {
-            try {
-                navigator.clipboard.writeText(metaforaIbanVal.textContent.trim()).then(() => {
-                    if (copyBtnText) copyBtnText.textContent = "✓ დაკოპირდა!";
-                    setTimeout(() => {
-                        if (copyBtnText) copyBtnText.textContent = "📋 კოპირება";
-                    }, 2000);
-                }).catch(() => {});
-            } catch (e) {}
+            const iban = metaforaIbanVal.textContent.trim();
+            copyTextToClipboard(iban);
+            if (copyBtnText) copyBtnText.textContent = "✓ დაკოპირდა!";
+            setTimeout(() => {
+                if (copyBtnText) copyBtnText.textContent = "📋 კოპირება";
+            }, 2000);
         });
     }
 
@@ -2082,14 +2095,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCopyAmount && bookingPaymentAmount) {
         btnCopyAmount.addEventListener('click', () => {
             const rawAmount = bookingPaymentAmount.textContent.replace(/[^\d.]/g, '').trim();
-            try {
-                navigator.clipboard.writeText(rawAmount).then(() => {
-                    if (copyAmountBtnText) copyAmountBtnText.textContent = "✓ დაკოპირდა!";
-                    setTimeout(() => {
-                        if (copyAmountBtnText) copyAmountBtnText.textContent = "📋 კოპირება";
-                    }, 2000);
-                }).catch(() => {});
-            } catch (e) {}
+            copyTextToClipboard(rawAmount);
+            if (copyAmountBtnText) copyAmountBtnText.textContent = "✓ დაკოპირდა!";
+            setTimeout(() => {
+                if (copyAmountBtnText) copyAmountBtnText.textContent = "📋 კოპირება";
+            }, 2000);
         });
     }
 
@@ -2105,14 +2115,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const fullText = `მიმღები: ანი მაისურაძე\nბანკი: საქართველოს ბანკი (BOG)\nIBAN: ${iban}${priceLine}\nდანიშნულება: ${purpose}`;
 
-            try {
-                navigator.clipboard.writeText(fullText).then(() => {
-                    if (copyFullText) copyFullText.textContent = "✓ სრული რეკვიზიტები დაკოპირდა!";
-                    setTimeout(() => {
-                        if (copyFullText) copyFullText.textContent = "📋 სრული რეკვიზიტების კოპირება (IBAN, მიმღები, თანხა, დანიშნულება)";
-                    }, 2500);
-                }).catch(() => {});
-            } catch (e) {}
+            copyTextToClipboard(fullText);
+            if (copyFullText) copyFullText.textContent = "✓ სრული რეკვიზიტები დაკოპირდა!";
+            setTimeout(() => {
+                if (copyFullText) copyFullText.textContent = "📋 სრული რეკვიზიტების კოპირება (IBAN, მიმღები, თანხა, დანიშნულება)";
+            }, 2500);
         });
     }
 
