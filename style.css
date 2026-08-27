@@ -3628,32 +3628,56 @@ input[type="time"].form-input {
         height: 520px !important;
     }
     .center-circular-hub {
-        width: 136px !important;
-        height: 136px !important;
-        padding: 6px !important;
+        width: 154px !important;
+        height: 154px !important;
+        padding: 8px !important;
+        box-sizing: border-box !important;
     }
     .card-avatar-wrap {
-        width: 36px !important;
-        height: 36px !important;
-        margin-bottom: 2px !important;
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 50% !important;
+        aspect-ratio: 1 / 1 !important;
+        overflow: hidden !important;
+        margin-bottom: 4px !important;
+        border: 2px solid var(--dandelion-purple) !important;
+        box-shadow: 0 4px 12px rgba(139, 123, 168, 0.3) !important;
+    }
+    .card-avatar {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
     }
     .card-name {
-        font-size: 0.80rem !important;
+        font-size: 0.88rem !important;
+        font-weight: 700 !important;
         margin-bottom: 1px !important;
+        line-height: 1.2 !important;
     }
     .card-role-text {
-        font-size: 0.60rem !important;
-        margin-bottom: 4px !important;
+        font-size: 0.65rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 5px !important;
     }
     .portal-btn {
-        font-size: 0.70rem !important;
-        padding: 3px 10px !important;
+        font-size: 0.72rem !important;
+        padding: 3.5px 12px !important;
+        border-radius: 9999px !important;
     }
     .dandelion-node {
-        width: 38px !important;
-        height: 38px !important;
-        margin-top: -19px !important;
-        margin-left: -19px !important;
+        width: 46px !important;
+        height: 46px !important;
+        margin-top: -23px !important;
+        margin-left: -23px !important;
+        border: 2px solid #ffffff !important;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16) !important;
+    }
+    .dandelion-node img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 50% !important;
     }
 
     .slide-title { font-size: 1.65rem; }
