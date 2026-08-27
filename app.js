@@ -4543,5 +4543,164 @@ document.addEventListener('DOMContentLoaded', () => {
         window.setLanguage = setLanguage;
     }
 
+    // ==========================================================================
+    // 18. INTERACTIVE UI CLICK SOUND SYSTEM (მონაცვლეობითი ხმები: კნ1, კნ2, კნ3)
+    // ==========================================================================
+    function initInteractiveClickSounds() {
+        const soundFiles = ['kn1.mp3', 'kn2.mp3', 'kn3.mp3'];
+        let currentSoundIndex = 0;
+        let lastPlayedTime = 0;
+
+        let audioCtx = null;
+        const audioBuffers = [null, null, null];
+        let hasUnlocked = false;
+
+        const getAudioContext = () => {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume().catch(() => {});
+            }
+            return audioCtx;
+        };
+
+        // Preload and decode audio buffers for ultra-low latency playback
+        const loadBuffers = async () => {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+
+            soundFiles.forEach((file, index) => {
+                fetch(file)
+                    .then(response => response.arrayBuffer())
+                    .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+                    .then(decodedData => {
+                        audioBuffers[index] = decodedData;
+                    })
+                    .catch(() => {});
+            });
+        };
+
+        // Fallback HTML5 audio pool
+        const audioPool = soundFiles.map(file => {
+            const a = new Audio(file);
+            a.preload = 'auto';
+            a.volume = 0.55;
+            return a;
+        });
+
+        const playNextClickSound = () => {
+            const now = Date.now();
+            if (now - lastPlayedTime < 25) return; // Prevent double-trigger
+            lastPlayedTime = now;
+
+            const soundIdx = currentSoundIndex;
+            currentSoundIndex = (currentSoundIndex + 1) % soundFiles.length;
+
+            const ctx = getAudioContext();
+            if (ctx && audioBuffers[soundIdx]) {
+                try {
+                    const source = ctx.createBufferSource();
+                    source.buffer = audioBuffers[soundIdx];
+                    const gainNode = ctx.createGain();
+                    gainNode.gain.value = 0.55;
+                    source.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+                    source.start(0);
+                    return;
+                } catch (err) {
+                    // Fallback to HTML5 audio
+                }
+            }
+
+            // HTML5 Audio fallback
+            try {
+                const audio = audioPool[soundIdx];
+                if (audio) {
+                    const clone = audio.cloneNode();
+                    clone.volume = 0.55;
+                    clone.play().catch(() => {});
+                }
+            } catch (e) {}
+        };
+
+        // Unlock audio on first user interaction
+        const unlockAudio = () => {
+            if (hasUnlocked) return;
+            hasUnlocked = true;
+            loadBuffers();
+            const ctx = getAudioContext();
+            if (ctx && ctx.state === 'suspended') {
+                ctx.resume().catch(() => {});
+            }
+            window.removeEventListener('pointerdown', unlockAudio);
+            window.removeEventListener('touchstart', unlockAudio);
+            window.removeEventListener('keydown', unlockAudio);
+        };
+
+        window.addEventListener('pointerdown', unlockAudio, { once: true });
+        window.addEventListener('touchstart', unlockAudio, { once: true });
+        window.addEventListener('keydown', unlockAudio, { once: true });
+
+        // Global delegated pointerdown listener for any clickable/interactive element
+        const interactiveSelector = [
+            'button',
+            'a',
+            'input[type="button"]',
+            'input[type="submit"]',
+            'input[type="checkbox"]',
+            'input[type="radio"]',
+            'select',
+            '[role="button"]',
+            '[role="tab"]',
+            '[role="menuitem"]',
+            '.dandelion-node',
+            '.dandelion-seed-head',
+            '.center-circular-hub',
+            '.tw-member-chip',
+            '.tw-nav-btn',
+            '.metabot-chip',
+            '.metabot-launcher-btn',
+            '.metabot-close-btn',
+            '.metabot-send-btn',
+            '.lang-single-btn',
+            '.theme-toggle-btn',
+            '.mobile-menu-toggle-btn',
+            '.mobile-nav-close',
+            '.mobile-accordion-toggle',
+            '.modal-close-btn',
+            '.btn-modal-submit',
+            '.bank-app-btn',
+            '.open-booking-modal-btn',
+            '.portal-btn',
+            '.portal-contact-btn',
+            '.card-explore-btn',
+            '.read-more-btn',
+            '.audio-badge-play-btn',
+            '.search-toggle-btn',
+            '.search-close-btn',
+            '.filter-btn',
+            '.gallery-item',
+            '.accordion-header',
+            '.faq-item'
+        ].join(', ');
+
+        document.addEventListener('pointerdown', (e) => {
+            const interactiveEl = e.target.closest(interactiveSelector);
+            if (interactiveEl) {
+                playNextClickSound();
+            }
+        }, { passive: true });
+
+        window.playNextClickSound = playNextClickSound;
+        window.playClickSound = playNextClickSound;
+
+        loadBuffers();
+    }
+
     initI18nLanguageSwitcher();
+    initInteractiveClickSounds();
 });
