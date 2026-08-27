@@ -2551,14 +2551,16 @@ html.direct-main-mode #main-website {
 .booking-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(20, 16, 28, 0.38);
+    background: rgba(20, 16, 28, 0.48);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
@@ -2573,15 +2575,20 @@ html.direct-main-mode #main-website {
     position: relative;
     width: 100%;
     max-width: 580px;
-    background: rgba(255, 255, 255, 0.68);
+    max-height: calc(100dvh - 36px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(28px) saturate(200%);
     -webkit-backdrop-filter: blur(28px) saturate(200%);
-    border-radius: 36px;
+    border-radius: 32px;
     border: 1.5px solid rgba(255, 255, 255, 0.95);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12), inset 0 1.5px 1.5px #ffffff, inset 0 -1px 1px rgba(0, 0, 0, 0.02);
-    padding: 40px 36px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18), inset 0 1.5px 1.5px #ffffff, inset 0 -1px 1px rgba(0, 0, 0, 0.02);
+    padding: 38px 34px;
     transform: scale(0.92) translateY(20px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin: auto 0;
 }
 
 .booking-modal-overlay.active .booking-modal-glass {
@@ -2605,6 +2612,7 @@ html.direct-main-mode #main-website {
     justify-content: center;
     cursor: pointer;
     transition: all 0.25s ease;
+    z-index: 10;
 }
 
 .modal-close-btn:hover {
@@ -2648,18 +2656,25 @@ html.direct-main-mode #main-website {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .form-row-two {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-label {
@@ -2670,10 +2685,13 @@ html.direct-main-mode #main-website {
 
 .form-input {
     width: 100%;
-    padding: 12px 16px;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px 14px;
     border-radius: 16px;
     border: 1.5px solid rgba(255, 255, 255, 0.95);
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.05), 0 1px 1px #ffffff;
     font-family: inherit;
@@ -2681,6 +2699,16 @@ html.direct-main-mode #main-website {
     color: #1e293b;
     outline: none;
     transition: all 0.25s ease;
+    display: block;
+}
+
+input[type="date"].form-input,
+input[type="time"].form-input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    display: block;
 }
 
 .form-input:focus {
@@ -3631,8 +3659,10 @@ html.direct-main-mode #main-website {
     .tw-member-chip { width: 52px; height: 52px; }
     .booking-cta-title { font-size: 1.65rem; }
     .btn-glowing-shimmer { padding: 14px 28px; font-size: 1rem; }
-    .form-row-two { grid-template-columns: 1fr; }
-    .booking-modal-glass { padding: 26px 18px; }
+    .form-row-two { grid-template-columns: 1fr !important; gap: 12px !important; width: 100% !important; }
+    .booking-modal-glass { padding: 28px 18px 24px 18px !important; border-radius: 24px !important; max-height: calc(100dvh - 24px) !important; margin: auto 0 !important; width: 100% !important; }
+    .payment-grid-layout { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .modal-close-btn { top: 12px !important; right: 12px !important; width: 34px !important; height: 34px !important; font-size: 1.2rem !important; }
     .reveal-text { font-size: 1.8rem; }
     .img-reveal-span { height: 38px; }
     .about-audio-badge-card { justify-content: center; text-align: center; }
