@@ -186,6 +186,55 @@ html.direct-main-mode #main-website {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+/* Blooming / Unfolding from tiny center point with rotation on Enter */
+.dandelion-wrapper.bloom-enter {
+    animation: dandelionBloomIn 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dandelionBloomIn {
+    0% {
+        transform: scale(0.001) rotate(-160deg);
+        opacity: 0;
+        filter: blur(6px);
+    }
+    30% {
+        opacity: 0.6;
+    }
+    85% {
+        transform: scale(1.03) rotate(3deg);
+        filter: blur(0px);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+/* Collapsing / Imploding back into tiny center point with rotation on Exit */
+.dandelion-wrapper.collapse-exit {
+    animation: dandelionCollapseOut 0.55s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
+}
+
+@keyframes dandelionCollapseOut {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    40% {
+        transform: scale(0.7) rotate(45deg);
+        opacity: 0.85;
+    }
+    100% {
+        transform: scale(0.001) rotate(160deg);
+        opacity: 0;
+        filter: blur(6px);
+    }
 }
 
 .dandelion-globe-canvas {

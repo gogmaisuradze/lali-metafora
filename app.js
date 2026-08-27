@@ -629,28 +629,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Portal Exit Transition & Connect Button (სულ თავში ჩართვა)
+        // Portal Exit Transition & Connect Button (დაწყების ღილაკზე დაჭერისას ცენტრში შეკუმშვა ტრიალით და გადასვლა)
         if (connectBtn && entrancePortal && mainWebsite) {
             connectBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 connectBtn.style.transform = 'scale(0.92)';
-                setTimeout(() => {
-                    exitPortalAndScroll('#hero');
-                }, 150);
+                exitWithDandelionCollapse('#hero');
             });
         }
     }
 
+    function exitWithDandelionCollapse(targetHash) {
+        const dandelionWrapper = document.getElementById('dandelion-wrapper');
+        const entrancePortal = document.getElementById('entrance-portal');
+        const mainWebsite = document.getElementById('main-website');
+
+        if (dandelionWrapper) {
+            dandelionWrapper.classList.remove('bloom-enter');
+            dandelionWrapper.classList.add('collapse-exit');
+        }
+
+        setTimeout(() => {
+            exitPortalAndScroll(targetHash || '#hero');
+        }, 520);
+    }
+
     function navigateToProfile(profile) {
         if (!profile) {
-            exitPortalAndScroll('#hero');
+            exitWithDandelionCollapse('#hero');
             return;
         }
         const target = profile.target || '#hero';
         if (target.endsWith('.html')) {
             window.location.href = target;
         } else {
-            exitPortalAndScroll(target);
+            exitWithDandelionCollapse(target);
         }
     }
 
@@ -700,6 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function reopenPortal() {
         const entrancePortal = document.getElementById('entrance-portal');
         const mainWebsite = document.getElementById('main-website');
+        const dandelionWrapper = document.getElementById('dandelion-wrapper');
         if (entrancePortal && mainWebsite) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             entrancePortal.style.display = 'flex';
@@ -707,6 +721,13 @@ document.addEventListener('DOMContentLoaded', () => {
             entrancePortal.classList.remove('portal-exit');
             mainWebsite.classList.remove('active');
             document.body.classList.add('initial-lock');
+
+            if (dandelionWrapper) {
+                dandelionWrapper.classList.remove('collapse-exit');
+                void dandelionWrapper.offsetWidth; // Force reflow
+                dandelionWrapper.classList.add('bloom-enter');
+            }
+
             if (window.history && window.history.pushState) {
                 window.history.pushState(null, '', window.location.pathname);
             }
@@ -742,7 +763,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetEl = document.querySelector(hash);
                 if (targetEl) {
                     e.preventDefault();
-                    exitPortalAndScroll(hash);
+                    const entrancePortal = document.getElementById('entrance-portal');
+                    if (entrancePortal && entrancePortal.style.display !== 'none') {
+                        exitWithDandelionCollapse(hash);
+                    } else {
+                        exitPortalAndScroll(hash);
+                    }
                 }
             }
         }
