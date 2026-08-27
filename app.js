@@ -1454,30 +1454,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Quote mark ( “ ) click interaction to trigger typing sound
+    // Quote mark ( “ ) click interaction to toggle typing sound on / off
     document.querySelectorAll('.tw-quote-mark').forEach(quoteMark => {
-        quoteMark.setAttribute('title', 'დააწკაპუნეთ ბეჭდვის საუნდისთვის ✨');
+        quoteMark.setAttribute('title', 'ბეჭდვის საუნდის ჩართვა / გამორთვა (Play/Pause) ✨');
         quoteMark.addEventListener('click', () => {
             const card = quoteMark.closest('#manifesto-typewriter-card') || quoteMark.closest('.typewriter-team-section');
             if (card && card.id === 'manifesto-typewriter-card') {
-                startTwTypingAudio();
-                if (typeof startManifestoTypewriter === 'function') {
-                    startManifestoTypewriter(true);
+                if (twTypingAudio && !twTypingAudio.paused) {
+                    stopTwTypingAudio();
+                    if (typeof manifestoTypeTimer !== 'undefined') {
+                        clearInterval(manifestoTypeTimer);
+                    }
+                } else {
+                    startTwTypingAudio();
+                    if (typeof startManifestoTypewriter === 'function') {
+                        startManifestoTypewriter(true);
+                    }
                 }
             } else {
-                startTwTypingAudio();
-                setTestimonial(currentTwIdx, true);
+                if (twTypingAudio && !twTypingAudio.paused) {
+                    stopTwTypingAudio();
+                    clearInterval(typeTimer);
+                } else {
+                    startTwTypingAudio();
+                    setTestimonial(currentTwIdx, true);
+                }
             }
         });
     });
 
-    // 3. Keyboard typing sound & arrow navigation (← / → arrow keys to switch team members)
+    // 3. Keyboard Arrow Navigation (← / → arrow keys to switch team members)
     document.addEventListener('keydown', (e) => {
-        // Play single key click note on every keyboard keypress
-        if (!['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(e.key)) {
-            playSingleKeyClick(0.14);
-        }
-
         const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
         if (activeTag === 'input' || activeTag === 'textarea' || (document.activeElement && document.activeElement.isContentEditable)) {
             return;
