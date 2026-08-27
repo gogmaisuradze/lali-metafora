@@ -3079,6 +3079,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. DESKTOP: Only play when mouse is hovered over this specific card
             card.addEventListener('mouseenter', () => {
                 if (window.innerWidth > 992) {
+                    card.classList.add('is-playing');
                     const p = video.play();
                     if (p !== undefined) p.catch(() => {});
                 }
@@ -3086,6 +3087,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             card.addEventListener('mouseleave', () => {
                 if (window.innerWidth > 992) {
+                    card.classList.remove('is-playing');
                     video.pause();
                 }
             });
@@ -3103,11 +3105,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             // If another video was playing, pause it first
                             if (activeMobilePlayingVideo && activeMobilePlayingVideo !== video) {
                                 activeMobilePlayingVideo.pause();
+                                if (activeMobilePlayingVideo.closest('.service-five-card')) {
+                                    activeMobilePlayingVideo.closest('.service-five-card').classList.remove('is-playing');
+                                }
                             }
                             activeMobilePlayingVideo = video;
+                            entry.target.classList.add('is-playing');
                             const p = video.play();
                             if (p !== undefined) p.catch(() => {});
                         } else {
+                            entry.target.classList.remove('is-playing');
                             if (activeMobilePlayingVideo === video) {
                                 video.pause();
                                 activeMobilePlayingVideo = null;
