@@ -133,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Node Pointer & Dragging Events (მაუსით გადაწევა და ადგილის შეცვლა)
             node.addEventListener('pointerdown', (e) => {
+                if (typeof window.playNextClickSound === 'function') {
+                    window.playNextClickSound();
+                }
                 e.preventDefault();
                 e.stopPropagation();
                 clearInterval(autoTimer);
@@ -612,6 +615,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Center Circular Hub Double-Click to Navigate
         const centerCard = document.getElementById('center-card');
         if (centerCard) {
+            centerCard.addEventListener('pointerdown', () => {
+                if (typeof window.playNextClickSound === 'function') window.playNextClickSound();
+            });
+
             centerCard.addEventListener('dblclick', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -984,8 +991,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const staggerCardDoms = [];
     let eventOrder = afishaEvents.map((_, i) => i);
 
-    if (staggerTrack) {
+    function renderAfishaCards() {
+        if (!staggerTrack) return;
         staggerTrack.innerHTML = '';
+        staggerCardDoms.length = 0;
+        const currentLang = localStorage.getItem('metafora_lang') || 'KA';
+        const bookBtnText = currentLang === 'EN' ? 'Book Now' : 'დაჯავშნა';
+
         afishaEvents.forEach((item, originalIndex) => {
             const card = document.createElement('div');
             card.className = 'stagger-card';
@@ -1003,7 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <span class="stagger-card-author">${item.by.split('•')[1] || ''}</span>
-                    <button class="open-booking-modal-btn btn btn-primary" style="padding: 4px 14px; font-size: 0.78rem;">დაჯავშნა</button>
+                    <button class="open-booking-modal-btn btn btn-primary" style="padding: 4px 14px; font-size: 0.78rem;">${bookBtnText}</button>
                 </div>
             `;
 
@@ -1015,6 +1027,12 @@ document.addEventListener('DOMContentLoaded', () => {
             staggerTrack.appendChild(card);
             staggerCardDoms.push(card);
         });
+
+        updateStaggerLayout();
+    }
+
+    if (staggerTrack) {
+        renderAfishaCards();
     }
 
     function getCardSize() {
@@ -1575,7 +1593,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // About Us Manifesto Live Typewriter Logic
-    const manifestoFullText = "ეს არ არის უბრალოდ სივრცე — „მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარების, ახალი კონტაქტებისა და შთაგონებისთვის: Personal Development, Business, Think Tank, Art და Clubs.";
+    const manifestoTexts = {
+        KA: "ეს არ არის უბრალოდ სივრცე — „მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარების, ახალი კონტაქტებისა და შთაგონებისთვის: Personal Development, Business, Think Tank, Art და Clubs.",
+        EN: "This is more than just a space — “Metaphora” is an environment where ideas come to life, and people and opportunities find each other. Everything here is crafted for your growth, meaningful connections, and inspiration: Personal Development, Business, Think Tank, Art, and Clubs."
+    };
+
+    function getManifestoFullText() {
+        const currentLang = localStorage.getItem('metafora_lang') || 'KA';
+        return manifestoTexts[currentLang] || manifestoTexts.KA;
+    }
+
     const manifestoTextElem = document.getElementById('manifesto-typewriter-text');
     const manifestoCard = document.getElementById('manifesto-typewriter-card');
     let manifestoTypeTimer = null;
@@ -1589,6 +1616,8 @@ document.addEventListener('DOMContentLoaded', () => {
         manifestoIsTyping = true;
         manifestoSoundActive = playSound;
 
+        const currentFullText = getManifestoFullText();
+
         const manifestoQuote = document.querySelector('#manifesto-typewriter-card .tw-quote-mark');
         if (manifestoQuote) {
             manifestoQuote.style.opacity = manifestoSoundActive ? '1' : '0.4';
@@ -1599,12 +1628,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function typeNextChar() {
-            if (charIndex < manifestoFullText.length) {
-                const char = manifestoFullText.charAt(charIndex);
+            if (charIndex < currentFullText.length) {
+                const char = currentFullText.charAt(charIndex);
                 manifestoTextElem.textContent += char;
                 charIndex++;
 
-                const prevChar = manifestoFullText.charAt(charIndex - 1);
+                const prevChar = currentFullText.charAt(charIndex - 1);
                 let speed = 20;
                 if (prevChar === '.' || prevChar === '!' || prevChar === '?') speed = 120;
                 else if (prevChar === '—' || prevChar === ',') speed = 55;
@@ -4504,6 +4533,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof updateCenterCard === 'function') updateCenterCard();
             if (typeof setTestimonial === 'function' && typeof currentTwIdx !== 'undefined') setTestimonial(currentTwIdx, false);
             if (typeof renderAfishaCards === 'function') renderAfishaCards();
+            if (typeof startManifestoTypewriter === 'function') startManifestoTypewriter(false);
 
             // Update MetaBot welcome msg
             const firstBotMsg = document.querySelector('.metabot-msg.bot-msg .metabot-msg-bubble');
