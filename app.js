@@ -1223,6 +1223,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Gentle keyboard typewriter typing sound (Strictly synchronized with active typing dynamics)
     let isTypingSoundEnabled = true;
     let isCurrentlyTyping = false;
+    let manifestoIsTyping = false;
+    let manifestoSoundActive = false;
     let twTypingAudio = null;
 
     function startTwTypingAudio() {
@@ -1429,18 +1431,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Quote mark ( “ ) click interaction
+    // Quote mark ( “ ) click interaction: Mute/Unmute sound without restarting text
     document.querySelectorAll('.tw-quote-mark').forEach(quoteMark => {
-        quoteMark.setAttribute('title', 'ხმის ჩართვა / გამორთვა (Mute / Unmute) 🔊');
+        quoteMark.setAttribute('title', 'ბეჭდვის საუნდის ჩართვა / გამორთვა (Mute / Unmute) 🔊');
         quoteMark.style.cursor = 'pointer';
         quoteMark.addEventListener('click', (e) => {
             e.stopPropagation();
             const manifestoCard = quoteMark.closest('#manifesto-typewriter-card');
             if (manifestoCard) {
-                // In Manifesto: Clicking “ starts typing WITH typing sound!
-                startManifestoTypewriter(true);
+                // In Manifesto: Toggle sound on/off during typing WITHOUT restarting the text!
+                manifestoSoundActive = !manifestoSoundActive;
+                if (manifestoSoundActive) {
+                    quoteMark.style.opacity = '1';
+                    if (manifestoIsTyping) {
+                        startTwTypingAudio();
+                    } else {
+                        // If typing was already finished, replay with sound
+                        startManifestoTypewriter(true);
+                    }
+                } else {
+                    quoteMark.style.opacity = '0.4';
+                    stopTwTypingAudio();
+                }
             } else {
-                // In Team cards: Toggle typing sound on/off
+                // In Team cards: Toggle typing sound on/off without restarting text
                 isTypingSoundEnabled = !isTypingSoundEnabled;
                 if (!isTypingSoundEnabled) {
                     stopTwTypingAudio();
@@ -1545,9 +1559,15 @@ document.addEventListener('DOMContentLoaded', () => {
         stopTwTypingAudio();
         manifestoTextElem.textContent = '';
         let charIndex = 0;
-        isCurrentlyTyping = true;
+        manifestoIsTyping = true;
+        manifestoSoundActive = playSound;
 
-        if (playSound && isTypingSoundEnabled) {
+        const manifestoQuote = document.querySelector('#manifesto-typewriter-card .tw-quote-mark');
+        if (manifestoQuote) {
+            manifestoQuote.style.opacity = manifestoSoundActive ? '1' : '0.4';
+        }
+
+        if (manifestoSoundActive) {
             startTwTypingAudio();
         }
 
@@ -1564,7 +1584,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 manifestoTypeTimer = setTimeout(typeNextChar, speed);
             } else {
-                isCurrentlyTyping = false;
+                manifestoIsTyping = false;
+                manifestoSoundActive = false;
                 stopTwTypingAudio();
             }
         }
