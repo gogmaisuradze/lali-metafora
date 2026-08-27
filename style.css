@@ -108,12 +108,13 @@ html.direct-main-mode #main-website {
     justify-content: center;
     overflow: hidden;
     perspective: 1200px;
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s ease, visibility 0.55s;
+    transition: transform 1.4s cubic-bezier(0.7, 0, 0.2, 1), opacity 1.4s ease-in-out, filter 1.4s ease-in-out, visibility 1.4s;
 }
 
 .entrance-portal.portal-exit {
+    transform: scale(2.2);
     opacity: 0;
-    filter: blur(4px);
+    filter: blur(8px);
     visibility: hidden;
     pointer-events: none;
 }
@@ -349,7 +350,7 @@ html.direct-main-mode #main-website {
     justify-content: center;
     text-align: center;
     padding: 14px;
-    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .hub-pulse-ring {
