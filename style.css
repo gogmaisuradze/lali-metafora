@@ -2581,6 +2581,19 @@ html.direct-main-mode #main-website {
     box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.12);
 }
 
+.form-input.input-error {
+    border-color: #ef4444 !important;
+    background: rgba(254, 242, 242, 0.95) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+    animation: shake-error 0.35s ease-in-out;
+}
+
+@keyframes shake-error {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
+}
+
 .btn-modal-submit {
     margin-top: 8px;
     padding: 14px;

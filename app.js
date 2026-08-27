@@ -1836,16 +1836,54 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingFormStatus.classList.remove('hidden');
     }
 
-    function validateBookingInputs() {
-        const name = (document.getElementById('booking-name-input')?.value || '').trim();
-        const phone = (document.getElementById('booking-phone-input')?.value || '').trim().replace(/\s+/g, '');
-        const date = (document.getElementById('booking-date-input')?.value || '').trim();
-        const time = (document.getElementById('booking-time-select')?.value || '').trim();
-        const guests = (document.getElementById('booking-guests-select')?.value || '').trim();
-        const service = (document.getElementById('booking-service-select')?.value || '').trim();
+    function clearInputErrors() {
+        const inputs = document.querySelectorAll('#metafora-booking-form input, #metafora-booking-form select');
+        inputs.forEach(inp => inp.classList.remove('input-error'));
+        if (bookingFormStatus) bookingFormStatus.classList.add('hidden');
+    }
 
-        if (!name || !phone || !date || !time || !service) {
-            showBookingStatus('გთხოვთ შეავსოთ ყველა სავალდებულო ველი.', true);
+    function validateBookingInputs() {
+        clearInputErrors();
+        const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+
+        const nameInput = document.getElementById('booking-name-input');
+        const phoneInput = document.getElementById('booking-phone-input');
+        const dateInput = document.getElementById('booking-date-input');
+        const timeSelect = document.getElementById('booking-time-select');
+        const guestsSelect = document.getElementById('booking-guests-select');
+        const serviceSelect = document.getElementById('booking-service-select');
+
+        const name = (nameInput?.value || '').trim();
+        const phone = (phoneInput?.value || '').trim().replace(/\s+/g, '');
+        const date = (dateInput?.value || '').trim();
+        const time = (timeSelect?.value || '').trim();
+        const guests = (guestsSelect?.value || '').trim();
+        const service = (serviceSelect?.value || '').trim();
+
+        if (!name) {
+            if (nameInput) {
+                nameInput.classList.add('input-error');
+                nameInput.focus();
+            }
+            showBookingStatus(isEn ? '⚠️ Please enter your full name.' : '⚠️ გთხოვთ შეავსოთ თქვენი სახელი და გვარი.', true);
+            return null;
+        }
+
+        if (!date) {
+            if (dateInput) {
+                dateInput.classList.add('input-error');
+                dateInput.focus();
+            }
+            showBookingStatus(isEn ? '⚠️ Please select a date.' : '⚠️ გთხოვთ აირჩიოთ სასურველი თარიღი.', true);
+            return null;
+        }
+
+        if (!phone) {
+            if (phoneInput) {
+                phoneInput.classList.add('input-error');
+                phoneInput.focus();
+            }
+            showBookingStatus(isEn ? '⚠️ Please enter your contact phone number.' : '⚠️ გთხოვთ მიუთითოთ საკონტაქტო ტელეფონის ნომერი.', true);
             return null;
         }
 
@@ -1857,7 +1895,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!/^5\d{8}$/.test(normalizedPhone)) {
-            showBookingStatus('შეცდომა: ტელეფონის ნომერი არასწორია (უნდა იწყებოდეს 5-ით და შედგებოდეს 9 ციფრისგან).', true);
+            if (phoneInput) {
+                phoneInput.classList.add('input-error');
+                phoneInput.focus();
+            }
+            showBookingStatus(isEn ? '⚠️ Invalid phone number (must start with 5 and contain 9 digits, e.g. 599 22 82 28).' : '⚠️ ტელეფონის ნომერი არასწორია (უნდა იწყებოდეს 5-ით და შედგებოდეს 9 ციფრისგან, მაგ: 599 22 82 28).', true);
             return null;
         }
 
@@ -1873,6 +1915,29 @@ document.addEventListener('DOMContentLoaded', () => {
             price: price
         };
     }
+
+    // Attach real-time clearing of error styles and custom Georgian validity tooltips
+    function initBookingInputListeners() {
+        const formInputs = document.querySelectorAll('#metafora-booking-form input, #metafora-booking-form select');
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('input-error');
+                input.setCustomValidity('');
+                if (bookingFormStatus) bookingFormStatus.classList.add('hidden');
+            });
+            input.addEventListener('change', () => {
+                input.classList.remove('input-error');
+                input.setCustomValidity('');
+                if (bookingFormStatus) bookingFormStatus.classList.add('hidden');
+            });
+            input.addEventListener('invalid', (e) => {
+                const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+                input.classList.add('input-error');
+                input.setCustomValidity(isEn ? 'Please fill out this field.' : 'გთხოვთ შეავსოთ ეს ველი.');
+            });
+        });
+    }
+    initBookingInputListeners();
 
     function openPaymentStep(payload) {
         if (payload.price === undefined) {
