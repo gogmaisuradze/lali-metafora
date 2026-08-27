@@ -2971,90 +2971,45 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // On Index / Main Landing Page: Dynamic Section ScrollSpy
-        const sectionMap = [
-            { id: 'hero', linkSelectors: ['#nav-home-btn', 'a[href="index.html#hero"]', 'a[href="#hero"]'] },
-            { id: 'about', linkSelectors: ['.nav-dropdown-wrapper > a[href="#about"]'] },
-            { id: 'services', linkSelectors: ['.nav-dropdown-wrapper > a[href*="service"]'] },
-            { id: 'contact', linkSelectors: ['a[href="#contact"]', 'a[href="index.html#contact"]'] }
-        ];
-
-        function setActiveSection(targetId) {
+        // On Index / Main Landing Page: Click-only active switching (No scroll tracking)
+        function setActiveNav(targetEl) {
             navLinks.forEach(l => l.classList.remove('active', 'active-page'));
             mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
 
-            const found = sectionMap.find(s => s.id === targetId);
-            if (found) {
-                found.linkSelectors.forEach(sel => {
-                    document.querySelectorAll(`.site-header ${sel}`).forEach(el => el.classList.add('active'));
-                });
+            if (!targetEl) return;
+
+            // If it's inside a nav-dropdown-wrapper or has a parent dropdown
+            const parentDropdown = targetEl.closest('.nav-dropdown-wrapper');
+            if (parentDropdown) {
+                const trigger = parentDropdown.querySelector('.nav-item.has-dropdown');
+                if (trigger) trigger.classList.add('active');
+            } else if (targetEl.classList.contains('nav-item')) {
+                targetEl.classList.add('active');
             }
         }
 
-        const secContact = document.getElementById('contact');
-        const secServices = document.getElementById('services');
-        const secAbout = document.getElementById('about') || document.getElementById('team');
-        const secHero = document.getElementById('hero');
-
-        const sections = [
-            { id: 'contact', el: secContact },
-            { id: 'services', el: secServices },
-            { id: 'about', el: secAbout },
-            { id: 'hero', el: secHero }
-        ].filter(s => s.el !== null);
-
-        if (sections.length > 0) {
-            let ticking = false;
-            const onScroll = () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        const scrollY = window.scrollY + 220; // Offset for header viewline
-                        let currentId = 'hero';
-
-                        for (const sec of sections) {
-                            const top = sec.el.offsetTop;
-                            if (scrollY >= top) {
-                                currentId = sec.id;
-                                break;
-                            }
-                        }
-
-                        if (window.scrollY < 120) {
-                            currentId = 'hero';
-                        }
-
-                        setActiveSection(currentId);
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            };
-
-            window.addEventListener('scroll', onScroll, { passive: true });
-
-            // On Click of any nav link, immediately update active state
-            document.querySelectorAll('.site-header .nav-item, .dropdown-link, .mobile-sub-item').forEach(link => {
-                link.addEventListener('click', () => {
-                    const href = link.getAttribute('href') || '';
-                    if (href.includes('#contact')) setActiveSection('contact');
-                    else if (href.includes('#services') || href.includes('service-')) setActiveSection('services');
-                    else if (href.includes('#about') || href.includes('#team')) setActiveSection('about');
-                    else if (href.includes('#hero')) setActiveSection('hero');
-                });
-            });
-
-            // Handle hashchange events
-            window.addEventListener('hashchange', () => {
-                const hash = window.location.hash;
-                if (hash.includes('contact')) setActiveSection('contact');
-                else if (hash.includes('services')) setActiveSection('services');
-                else if (hash.includes('about') || hash.includes('team')) setActiveSection('about');
-                else if (hash.includes('hero')) setActiveSection('hero');
-            });
-
-            // Initial check
-            onScroll();
+        // Initial setup on index page load based on current hash or default to Home
+        const hash = (window.location.hash || "").toLowerCase();
+        if (hash.includes('contact')) {
+            const el = document.querySelector('.site-header a[href="#contact"], .site-header a[href="index.html#contact"]');
+            if (el) setActiveNav(el);
+        } else if (hash.includes('service')) {
+            const el = document.querySelector('.site-header .nav-dropdown-wrapper > a[href*="service"]');
+            if (el) setActiveNav(el);
+        } else if (hash.includes('about') || hash.includes('team')) {
+            const el = document.querySelector('.site-header .nav-dropdown-wrapper > a[href="#about"]');
+            if (el) setActiveNav(el);
+        } else {
+            const homeBtn = document.getElementById('nav-home-btn') || document.querySelector('.site-header a[href*="#hero"]');
+            if (homeBtn) setActiveNav(homeBtn);
         }
+
+        // On Click of any nav link or dropdown link: only change on explicit user click
+        document.querySelectorAll('.site-header .nav-item, .site-header .dropdown-link').forEach(link => {
+            link.addEventListener('click', function() {
+                setActiveNav(this);
+            });
+        });
     }
 
     // ==========================================================================
