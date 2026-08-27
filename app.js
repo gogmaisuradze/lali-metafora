@@ -402,15 +402,70 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        let isHoveringPortal = false;
-        if (entrancePortal) {
-            entrancePortal.addEventListener('mouseenter', () => { isHoveringPortal = true; });
-            entrancePortal.addEventListener('mouseleave', () => { isHoveringPortal = false; });
-        }
+        const centerCircularHub = document.querySelector('.center-circular-hub');
+        let bloomProgress = 0.0;
+        let isBlooming = true;
+        let isCollapsing = false;
+        let bloomStartTime = performance.now();
+        const BLOOM_DURATION = 1550; // ms
+        const COLLAPSE_DURATION = 480; // ms
+
+        window.triggerPortalBloom = function() {
+            isCollapsing = false;
+            isBlooming = true;
+            bloomStartTime = performance.now();
+            bloomProgress = 0.0;
+        };
+
+        window.collapseDandelionAndExit = function(targetHash) {
+            if (isCollapsing) return;
+            isCollapsing = true;
+            isBlooming = false;
+            const collapseStartTime = performance.now();
+            const startBloom = Math.max(0.1, bloomProgress);
+            
+            // Add a swift satisfying spin during suction into center
+            targetYaw -= 0.55;
+
+            function stepCollapse(now) {
+                const elapsed = now - collapseStartTime;
+                const t = Math.min(1, elapsed / COLLAPSE_DURATION);
+                // Ease-in cubic: starts gently and snaps into center
+                const easeIn = t * t * t;
+                bloomProgress = startBloom * (1 - easeIn);
+
+                if (t < 1) {
+                    requestAnimationFrame(stepCollapse);
+                } else {
+                    bloomProgress = 0.0;
+                    exitPortalAndScroll(targetHash || '#hero');
+                    isCollapsing = false;
+                }
+            }
+            requestAnimationFrame(stepCollapse);
+        };
 
         function renderDandelionLoop(timestamp) {
             if (!entrancePortal || entrancePortal.style.display !== 'none') {
-                if (!isHoveringPortal) {
+                if (isBlooming) {
+                    const elapsed = performance.now() - bloomStartTime;
+                    const t = Math.min(1, Math.max(0, elapsed / BLOOM_DURATION));
+                    // Organic blooming ease-out back curve (smooth bloom with graceful soft overshoot)
+                    const c1 = 1.15;
+                    const c3 = c1 + 1;
+                    bloomProgress = t >= 1 ? 1.0 : (1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2));
+                    bloomProgress = Math.max(0, Math.min(1.05, bloomProgress));
+                    
+                    // Initial graceful blooming spin burst that smoothly decelerates
+                    targetYaw += (1 - t) * 0.032;
+                    
+                    if (t >= 1) {
+                        isBlooming = false;
+                        bloomProgress = 1.0;
+                    }
+                }
+
+                if (!isHoveringPortal && !isBlooming && !isCollapsing) {
                     targetYaw += 0.0024; // Continuous elegant 3D ambient rotation
                 }
 
@@ -429,8 +484,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const scaleFactor = isMobile ? 0.78 : 1.0;
                 const svgCenter = 480;
                 const cameraDistance = 880;
+                const effBloom = Math.max(0, bloomProgress);
 
                 const windMultiplier = 1.0 + (puffExpansion * 0.15);
+
+                // Animate Central Circular Hub with bloomProgress
+                if (centerCircularHub) {
+                    const hubScale = Math.max(0, Math.min(1, effBloom * 1.05));
+                    const hubOpacity = Math.max(0, Math.min(1, effBloom * 1.8));
+                    centerCircularHub.style.transform = `scale(${hubScale.toFixed(3)})`;
+                    centerCircularHub.style.opacity = hubOpacity.toFixed(2);
+                }
 
                 if (ctx) {
                     ctx.clearRect(0, 0, 960, 960);
@@ -442,24 +506,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (fluff.y < -30) fluff.y = 990;
                         if (fluff.y > 990) fluff.y = -20;
 
+                        const fluffAlpha = fluff.opacity * Math.min(1, effBloom * 1.5);
+                        if (fluffAlpha <= 0.01) return;
+
                         ctx.save();
                         ctx.translate(fluff.x, fluff.y);
                         ctx.rotate(time * 0.4 + fluff.angle);
 
                         ctx.beginPath();
-                        ctx.arc(0, 0, fluff.size, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(139, 123, 168, ${fluff.opacity})`;
+                        ctx.arc(0, 0, fluff.size * Math.min(1, effBloom), 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(139, 123, 168, ${fluffAlpha.toFixed(2)})`;
                         ctx.fill();
 
                         ctx.beginPath();
                         for (let w = 0; w < 6; w++) {
                             const wAng = (w / 6) * Math.PI * 2;
-                            const wx = Math.cos(wAng) * (fluff.size * 2.8);
-                            const wy = Math.sin(wAng) * (fluff.size * 2.8);
+                            const wx = Math.cos(wAng) * (fluff.size * 2.8 * Math.min(1, effBloom));
+                            const wy = Math.sin(wAng) * (fluff.size * 2.8 * Math.min(1, effBloom));
                             ctx.moveTo(0, 0);
                             ctx.lineTo(wx, wy);
                         }
-                        ctx.strokeStyle = `rgba(122, 57, 99, ${(fluff.opacity * 0.6).toFixed(2)})`;
+                        ctx.strokeStyle = `rgba(122, 57, 99, ${(fluffAlpha * 0.6).toFixed(2)})`;
                         ctx.lineWidth = 0.8;
                         ctx.stroke();
 
@@ -473,8 +540,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     for (let b = 0; b < crownBristles; b++) {
                         const bAng = (b / crownBristles) * Math.PI * 2 + gYaw * 0.3;
-                        const innerR = (isMobile ? 85 : 115) * scaleFactor;
-                        const outerR = ((isMobile ? 115 : 145) + Math.sin(time * 1.5 + b) * 8) * scaleFactor;
+                        const innerR = (isMobile ? 85 : 115) * scaleFactor * effBloom;
+                        const outerR = ((isMobile ? 115 : 145) + Math.sin(time * 1.5 + b) * 8) * scaleFactor * effBloom;
 
                         const bx1 = Math.cos(bAng) * innerR;
                         const by1 = Math.sin(bAng) * innerR;
@@ -484,13 +551,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         ctx.beginPath();
                         ctx.moveTo(bx1, by1);
                         ctx.lineTo(bx2, by2);
-                        ctx.strokeStyle = 'rgba(139, 123, 168, 0.28)';
+                        ctx.strokeStyle = `rgba(139, 123, 168, ${(0.28 * Math.min(1, effBloom * 1.5)).toFixed(2)})`;
                         ctx.lineWidth = 1.2;
                         ctx.stroke();
 
                         ctx.beginPath();
-                        ctx.arc(bx2, by2, 2 * scaleFactor, 0, Math.PI * 2);
-                        ctx.fillStyle = 'rgba(139, 123, 168, 0.45)';
+                        ctx.arc(bx2, by2, 2 * scaleFactor * Math.min(1, effBloom), 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(139, 123, 168, ${(0.45 * Math.min(1, effBloom * 1.5)).toFixed(2)})`;
                         ctx.fill();
                     }
                     ctx.restore();
@@ -498,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 profiles.forEach((profile, i) => {
                     const angleOffset = i * (2 * Math.PI / total);
-                    const r = baseOrbitRadius * windMultiplier * scaleFactor;
+                    const r = baseOrbitRadius * effBloom * windMultiplier * scaleFactor;
 
                     const ang = currentYaw + angleOffset - Math.PI / 2;
                     const x0 = r * Math.cos(ang);
@@ -527,16 +594,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     const isBeingDragged = (activeDragNode === i);
 
                     const node = nodeElements[i];
-                    const normalizedZ = z1 / (baseOrbitRadius * scaleFactor);
+                    const normalizedZ = z1 / (baseOrbitRadius * scaleFactor || 1);
                     
                     // Active node elevates upwards and scales up dynamically
-                    const activeLift = (isCurrentActive && !isBeingDragged) ? (35 * scaleFactor) : 0;
+                    const activeLift = (isCurrentActive && !isBeingDragged) ? (35 * scaleFactor * effBloom) : 0;
                     const nodeScale = isBeingDragged ? (1.38 * scaleFactor) : (isCurrentActive ? (1.30 + puffExpansion * 0.12) : (0.82 + (normalizedZ + 1) * 0.18));
-                    const nodeOpacity = (isCurrentActive || isBeingDragged) ? 1.0 : (0.55 + (normalizedZ + 1) * 0.22);
+                    const finalNodeScale = nodeScale * Math.min(1, effBloom * 1.25);
+                    const finalNodeOpacity = ((isCurrentActive || isBeingDragged) ? 1.0 : (0.55 + (normalizedZ + 1) * 0.22)) * Math.min(1, effBloom * 2.0);
                     const zIndex = isBeingDragged ? 150 : (isCurrentActive ? 120 : Math.round(50 + normalizedZ * 20));
 
-                    node.style.transform = `translate(${projX.toFixed(1)}px, ${(projY - activeLift).toFixed(1)}px) scale(${nodeScale.toFixed(2)})`;
-                    node.style.opacity = nodeOpacity.toFixed(2);
+                    node.style.transform = `translate(${projX.toFixed(1)}px, ${(projY - activeLift).toFixed(1)}px) scale(${finalNodeScale.toFixed(2)})`;
+                    node.style.opacity = finalNodeOpacity.toFixed(2);
                     node.style.zIndex = zIndex;
 
                     if (isCurrentActive || isBeingDragged) {
@@ -553,6 +621,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     stem.setAttribute('y1', svgCenter.toString());
                     stem.setAttribute('x2', targetX.toFixed(1));
                     stem.setAttribute('y2', targetY.toFixed(1));
+                    stem.style.opacity = Math.min(1, effBloom * 1.6).toFixed(2);
 
                     if (isCurrentActive || isBeingDragged) {
                         stem.classList.add('active');
@@ -563,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 for (let j = 0; j < numSeedHeads; j++) {
                     const prop = seedProps[j];
-                    const sR = baseOrbitRadius * (isMobile ? (prop.radiusRatio + 0.12) : prop.radiusRatio) * windMultiplier * scaleFactor;
+                    const sR = baseOrbitRadius * (isMobile ? (prop.radiusRatio + 0.12) : prop.radiusRatio) * windMultiplier * scaleFactor * effBloom;
 
                     // 3D Spherical + organic wave motion in all directions
                     const currentPhi = prop.phi + (currentYaw * 0.75);
@@ -573,9 +642,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const floatY = Math.cos(time * prop.speed + prop.phaseY) * prop.ampY * scaleFactor;
                     const floatZ = Math.sin(time * prop.speed * 0.8 + prop.phaseZ) * prop.ampZ * scaleFactor;
 
-                    const sx0 = (sR * Math.sin(currentTheta) * Math.cos(currentPhi)) + floatX;
-                    const sy0 = (sR * Math.sin(currentTheta) * Math.sin(currentPhi) * 0.85) + floatY;
-                    const sz0 = (sR * Math.cos(currentTheta) * 0.65) + floatZ;
+                    const sx0 = (sR * Math.sin(currentTheta) * Math.cos(currentPhi)) + (floatX * effBloom);
+                    const sy0 = (sR * Math.sin(currentTheta) * Math.sin(currentPhi) * 0.85) + (floatY * effBloom);
+                    const sz0 = (sR * Math.cos(currentTheta) * 0.65) + (floatZ * effBloom);
 
                     const pitchTilt = 0.12;
                     const sy1 = sy0 * Math.cos(pitchTilt) - sz0 * Math.sin(pitchTilt);
@@ -585,9 +654,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const sProjX = sx0 * sPerspective;
                     const sProjY = sy1 * sPerspective;
 
-                    const sNormalizedZ = sz1 / (baseOrbitRadius * scaleFactor);
-                    const sScale = 0.65 + (sNormalizedZ + 1) * 0.22;
-                    const sOpacity = 0.35 + (sNormalizedZ + 1) * 0.28;
+                    const sNormalizedZ = sz1 / (baseOrbitRadius * scaleFactor || 1);
+                    const sScale = (0.65 + (sNormalizedZ + 1) * 0.22) * Math.min(1, effBloom * 1.2);
+                    const sOpacity = (0.35 + (sNormalizedZ + 1) * 0.28) * Math.min(1, effBloom * 2.0);
                     const sZIndex = Math.round(20 + sNormalizedZ * 15);
 
                     const seedHead = seedHeadElements[j];
@@ -600,6 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     seedStem.setAttribute('y1', svgCenter.toString());
                     seedStem.setAttribute('x2', (svgCenter + sProjX).toFixed(1));
                     seedStem.setAttribute('y2', (svgCenter + sProjY).toFixed(1));
+                    seedStem.style.opacity = Math.min(1, effBloom * 1.6).toFixed(2);
                 }
             }
 
@@ -629,28 +699,36 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Portal Exit Transition & Connect Button (სულ თავში ჩართვა)
+        // Portal Exit Transition & Connect Button (დაწყების ღილაკზე დაჭერისას ცენტრში ჩაკეცვა და გადასვლა)
         if (connectBtn && entrancePortal && mainWebsite) {
             connectBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 connectBtn.style.transform = 'scale(0.92)';
                 setTimeout(() => {
-                    exitPortalAndScroll('#hero');
-                }, 150);
+                    window.collapseDandelionAndExit('#hero');
+                }, 100);
             });
         }
     }
 
     function navigateToProfile(profile) {
         if (!profile) {
-            exitPortalAndScroll('#hero');
+            if (typeof window.collapseDandelionAndExit === 'function') {
+                window.collapseDandelionAndExit('#hero');
+            } else {
+                exitPortalAndScroll('#hero');
+            }
             return;
         }
         const target = profile.target || '#hero';
         if (target.endsWith('.html')) {
             window.location.href = target;
         } else {
-            exitPortalAndScroll(target);
+            if (typeof window.collapseDandelionAndExit === 'function') {
+                window.collapseDandelionAndExit(target);
+            } else {
+                exitPortalAndScroll(target);
+            }
         }
     }
 
@@ -707,6 +785,12 @@ document.addEventListener('DOMContentLoaded', () => {
             entrancePortal.classList.remove('portal-exit');
             mainWebsite.classList.remove('active');
             document.body.classList.add('initial-lock');
+            
+            // Re-trigger blooming animation from center outwards!
+            if (typeof window.triggerPortalBloom === 'function') {
+                window.triggerPortalBloom();
+            }
+
             if (window.history && window.history.pushState) {
                 window.history.pushState(null, '', window.location.pathname);
             }
