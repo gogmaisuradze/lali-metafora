@@ -1369,11 +1369,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (twName) twName.textContent = current.name;
         if (twRole) twRole.textContent = current.jobtitle;
 
-        // When switching member with playSound, play Galaktion at their exact timestamp!
-        if (playSound) {
+        // Galaktion Play button is NOT auto-pressed unless user manually started it before!
+        if (isGalaktionPlaying && galaktionAudio && !galaktionAudio.paused) {
             playGalaktionForMember(currentTwIdx);
         } else {
             if (twTime) twTime.textContent = current.time;
+            if (twVisualizer) twVisualizer.classList.remove('playing');
+            if (twPlayIcon) twPlayIcon.textContent = '▶';
+            if (twPlayBtn) twPlayBtn.style.background = '';
         }
 
         const twSocialFb = document.getElementById('tw-social-fb');
@@ -1394,6 +1397,7 @@ document.addEventListener('DOMContentLoaded', () => {
             twSocialWa.title = `${current.name} — WhatsApp`;
         }
 
+        // On team member switch: typewriter typing sound plays during typing!
         typewriteText(current.text, playSound);
 
         const chips = Array.from(document.querySelectorAll('.tw-member-chip'));
@@ -1425,20 +1429,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Quote mark ( “ ) click interaction: ONLY toggles typing sound on / off without stopping or affecting the text!
+    // Quote mark ( “ ) click interaction
     document.querySelectorAll('.tw-quote-mark').forEach(quoteMark => {
         quoteMark.setAttribute('title', 'ხმის ჩართვა / გამორთვა (Mute / Unmute) 🔊');
         quoteMark.style.cursor = 'pointer';
         quoteMark.addEventListener('click', (e) => {
             e.stopPropagation();
-            isTypingSoundEnabled = !isTypingSoundEnabled;
-            if (!isTypingSoundEnabled) {
-                stopTwTypingAudio();
-                quoteMark.style.opacity = '0.4';
+            const manifestoCard = quoteMark.closest('#manifesto-typewriter-card');
+            if (manifestoCard) {
+                // In Manifesto: Clicking “ starts typing WITH typing sound!
+                startManifestoTypewriter(true);
             } else {
-                quoteMark.style.opacity = '1';
-                if (isCurrentlyTyping) {
-                    startTwTypingAudio();
+                // In Team cards: Toggle typing sound on/off
+                isTypingSoundEnabled = !isTypingSoundEnabled;
+                if (!isTypingSoundEnabled) {
+                    stopTwTypingAudio();
+                    quoteMark.style.opacity = '0.4';
+                } else {
+                    quoteMark.style.opacity = '1';
+                    if (isCurrentlyTyping) {
+                        startTwTypingAudio();
+                    }
                 }
             }
         });
@@ -1528,7 +1539,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const manifestoCard = document.getElementById('manifesto-typewriter-card');
     let manifestoTypeTimer = null;
 
-    function startManifestoTypewriter(playSound = true) {
+    function startManifestoTypewriter(playSound = false) {
         if (!manifestoTextElem) return;
         clearTimeout(manifestoTypeTimer);
         stopTwTypingAudio();
@@ -1564,14 +1575,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    startManifestoTypewriter(true);
+                    startManifestoTypewriter(false);
                 }
             });
         }, { threshold: 0.25 });
 
         obs.observe(manifestoCard);
     } else {
-        startManifestoTypewriter();
+        startManifestoTypewriter(false);
     }
 
     // ==========================================================================
