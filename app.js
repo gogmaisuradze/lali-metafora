@@ -2198,7 +2198,127 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 17. SERVICE VIDEOS CONTROLLER (Desktop: Hover Only | Mobile: Centered Card Only)
+    // 17. ACTIVE NAVIGATION & SCROLLSPY (Yellow Indicator For Active Sections)
+    // ==========================================================================
+    function initScrollSpyAndActiveNav() {
+        const path = (window.location.pathname || "").toLowerCase();
+        const navLinks = document.querySelectorAll('.site-header .nav-item');
+        const mobLinks = document.querySelectorAll('.mobile-nav-item');
+
+        // Detect if on standalone separate pages
+        const isBlog = path.includes('blog.html');
+        const isGallery = path.includes('gallery.html');
+        const isServicePage = path.includes('service-') || path.includes('services.html');
+
+        if (isBlog) {
+            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            document.querySelectorAll('.site-header a[href*="blog.html"], .mobile-nav-item[href*="blog.html"]').forEach(el => el.classList.add('active-page'));
+            return;
+        }
+
+        if (isGallery) {
+            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            document.querySelectorAll('.site-header a[href*="gallery.html"], .mobile-nav-item[href*="gallery.html"]').forEach(el => el.classList.add('active-page'));
+            return;
+        }
+
+        if (isServicePage) {
+            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            document.querySelectorAll('.site-header .nav-dropdown-wrapper > a[href*="service"], .mobile-nav-accordion#mob-acc-services > .mobile-accordion-toggle').forEach(el => el.classList.add('active-page'));
+            return;
+        }
+
+        // On Index / Main Landing Page: Dynamic Section ScrollSpy
+        const sectionMap = [
+            { id: 'hero', linkSelectors: ['#nav-home-btn', 'a[href="index.html#hero"]', 'a[href="#hero"]'] },
+            { id: 'about', linkSelectors: ['.nav-dropdown-wrapper > a[href="#about"]'] },
+            { id: 'services', linkSelectors: ['.nav-dropdown-wrapper > a[href*="service"]'] },
+            { id: 'contact', linkSelectors: ['a[href="#contact"]', 'a[href="index.html#contact"]'] }
+        ];
+
+        function setActiveSection(targetId) {
+            navLinks.forEach(l => l.classList.remove('active', 'active-page'));
+            mobLinks.forEach(l => l.classList.remove('active', 'active-page'));
+
+            const found = sectionMap.find(s => s.id === targetId);
+            if (found) {
+                found.linkSelectors.forEach(sel => {
+                    document.querySelectorAll(`.site-header ${sel}`).forEach(el => el.classList.add('active'));
+                });
+            }
+        }
+
+        const secContact = document.getElementById('contact');
+        const secServices = document.getElementById('services');
+        const secAbout = document.getElementById('about') || document.getElementById('team');
+        const secHero = document.getElementById('hero');
+
+        const sections = [
+            { id: 'contact', el: secContact },
+            { id: 'services', el: secServices },
+            { id: 'about', el: secAbout },
+            { id: 'hero', el: secHero }
+        ].filter(s => s.el !== null);
+
+        if (sections.length > 0) {
+            let ticking = false;
+            const onScroll = () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollY = window.scrollY + 220; // Offset for header viewline
+                        let currentId = 'hero';
+
+                        for (const sec of sections) {
+                            const top = sec.el.offsetTop;
+                            if (scrollY >= top) {
+                                currentId = sec.id;
+                                break;
+                            }
+                        }
+
+                        if (window.scrollY < 120) {
+                            currentId = 'hero';
+                        }
+
+                        setActiveSection(currentId);
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // On Click of any nav link, immediately update active state
+            document.querySelectorAll('.site-header .nav-item, .dropdown-link, .mobile-sub-item').forEach(link => {
+                link.addEventListener('click', () => {
+                    const href = link.getAttribute('href') || '';
+                    if (href.includes('#contact')) setActiveSection('contact');
+                    else if (href.includes('#services') || href.includes('service-')) setActiveSection('services');
+                    else if (href.includes('#about') || href.includes('#team')) setActiveSection('about');
+                    else if (href.includes('#hero')) setActiveSection('hero');
+                });
+            });
+
+            // Handle hashchange events
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash;
+                if (hash.includes('contact')) setActiveSection('contact');
+                else if (hash.includes('services')) setActiveSection('services');
+                else if (hash.includes('about') || hash.includes('team')) setActiveSection('about');
+                else if (hash.includes('hero')) setActiveSection('hero');
+            });
+
+            // Initial check
+            onScroll();
+        }
+    }
+
+    // ==========================================================================
+    // 18. SERVICE VIDEOS CONTROLLER (Desktop: Hover Only | Mobile: Centered Card Only)
     // ==========================================================================
     function initServiceVideoInteractions() {
         const cards = document.querySelectorAll('.service-five-card');
@@ -2507,6 +2627,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeSwitcher();
     initMetaBot();
     initMobileNav();
+    initScrollSpyAndActiveNav();
     initServiceVideoInteractions();
     initArticleReader();
 

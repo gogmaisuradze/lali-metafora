@@ -653,20 +653,27 @@ html.direct-main-mode #main-website {
 
 .nav-item.active-page,
 .nav-item.active {
-    color: var(--primary-color);
-    font-weight: 700;
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="plum"] .nav-item.active-page,
+[data-theme="plum"] .nav-item.active {
+    color: var(--brand-plum) !important;
 }
 
 .nav-item.active-page::after,
 .nav-item.active::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -3px;
     left: 0;
     width: 100%;
-    height: 2.5px;
-    background: var(--brand-gold); /* Yellow/Gold accent underline matching brand palette */
-    border-radius: 2px;
+    height: 3px;
+    background: var(--brand-gold) !important; /* Bright Yellow/Gold accent indicator */
+    border-radius: 99px;
+    box-shadow: 0 2px 8px rgba(255, 186, 0, 0.6);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropdown-chevron {
