@@ -298,10 +298,10 @@ html.direct-main-mode #main-website {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 76px;
-    height: 76px;
-    margin-top: -38px;
-    margin-left: -38px;
+    width: 82px;
+    height: 82px;
+    margin-top: -41px;
+    margin-left: -41px;
     border-radius: 50%;
     cursor: grab !important;
     pointer-events: auto !important;
@@ -311,17 +311,19 @@ html.direct-main-mode #main-website {
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    border: 3px solid var(--brand-teal);
-    box-shadow: 0 10px 26px rgba(1, 97, 102, 0.22);
+    border: 2.5px solid var(--brand-teal);
+    box-shadow: 0 8px 24px rgba(1, 97, 102, 0.22);
     will-change: transform, opacity, filter;
-    filter: grayscale(100%) opacity(0.75);
-    transition: filter 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    filter: grayscale(0%) contrast(1.04) brightness(0.98);
+    opacity: 0.94;
+    transition: filter 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     z-index: 100 !important;
+    overflow: hidden;
 }
 
 .dandelion-node.dragging {
     cursor: grabbing !important;
-    filter: grayscale(0%) opacity(1) !important;
+    filter: grayscale(0%) contrast(1.1) saturate(125%) !important;
     border-color: var(--brand-gold) !important;
     box-shadow: 0 20px 45px rgba(255, 186, 0, 0.45) !important;
     z-index: 150 !important;
@@ -337,17 +339,18 @@ html.direct-main-mode #main-website {
 }
 
 .dandelion-node:hover {
-    filter: grayscale(0%) opacity(1) !important;
+    filter: grayscale(0%) contrast(1.1) saturate(125%) !important;
     border-color: var(--brand-plum) !important;
-    box-shadow: 0 16px 36px rgba(122, 57, 99, 0.35) !important;
+    box-shadow: 0 14px 34px rgba(122, 57, 99, 0.35) !important;
     z-index: 110 !important;
 }
 
 .dandelion-node.active {
-    filter: grayscale(0%) opacity(1) !important;
+    filter: grayscale(0%) contrast(1.12) saturate(130%) !important;
     border-color: var(--brand-gold) !important;
-    box-shadow: 0 16px 40px rgba(1, 97, 102, 0.35), 0 0 0 4px rgba(255, 186, 0, 0.35) !important;
+    box-shadow: 0 16px 40px rgba(1, 97, 102, 0.35), 0 0 0 4px rgba(255, 186, 0, 0.4) !important;
     z-index: 120 !important;
+    opacity: 1 !important;
 }
 
 .dandelion-node img {
@@ -355,8 +358,10 @@ html.direct-main-mode #main-website {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center center;
     display: block;
     pointer-events: none;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .dandelion-seed-head {
@@ -424,22 +429,29 @@ html.direct-main-mode #main-website {
 }
 
 .card-avatar-wrap {
-    width: 60px;
-    height: 60px;
+    width: 74px;
+    height: 74px;
     border-radius: 50%;
     margin-bottom: 6px;
     overflow: hidden;
-    border: 2.5px solid var(--dandelion-purple);
-    box-shadow: 0 4px 14px rgba(139, 123, 168, 0.35);
+    border: 3px solid var(--brand-teal);
+    box-shadow: 0 6px 18px rgba(1, 97, 102, 0.25);
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .card-avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
     display: block;
-    filter: grayscale(0%) saturate(120%);
-    transition: opacity 0.4s ease, filter 0.4s ease;
+    filter: grayscale(0%) saturate(115%) contrast(1.05);
+    image-rendering: -webkit-optimize-contrast;
+    transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 .card-name {
@@ -3677,50 +3689,52 @@ input[type="time"].form-input {
         height: 520px !important;
     }
     .center-circular-hub {
-        width: 154px !important;
-        height: 154px !important;
-        padding: 8px !important;
+        width: 164px !important;
+        height: 164px !important;
+        padding: 10px 8px !important;
         box-sizing: border-box !important;
     }
     .card-avatar-wrap {
-        width: 48px !important;
-        height: 48px !important;
+        width: 58px !important;
+        height: 58px !important;
         border-radius: 50% !important;
         aspect-ratio: 1 / 1 !important;
         overflow: hidden !important;
         margin-bottom: 4px !important;
-        border: 2px solid var(--dandelion-purple) !important;
-        box-shadow: 0 4px 12px rgba(139, 123, 168, 0.3) !important;
+        border: 2.5px solid var(--brand-teal) !important;
+        box-shadow: 0 4px 14px rgba(1, 97, 102, 0.22) !important;
+        flex-shrink: 0 !important;
     }
     .card-avatar {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        object-position: center center !important;
         display: block !important;
     }
     .card-name {
-        font-size: 0.88rem !important;
+        font-size: 0.92rem !important;
         font-weight: 700 !important;
         margin-bottom: 1px !important;
         line-height: 1.2 !important;
     }
     .card-role-text {
-        font-size: 0.65rem !important;
+        font-size: 0.68rem !important;
         line-height: 1.2 !important;
         margin-bottom: 5px !important;
     }
     .portal-btn {
-        font-size: 0.72rem !important;
-        padding: 3.5px 12px !important;
+        font-size: 0.74rem !important;
+        padding: 4px 14px !important;
         border-radius: 9999px !important;
     }
     .dandelion-node {
-        width: 46px !important;
-        height: 46px !important;
-        margin-top: -23px !important;
-        margin-left: -23px !important;
-        border: 2px solid #ffffff !important;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16) !important;
+        width: 52px !important;
+        height: 52px !important;
+        margin-top: -26px !important;
+        margin-left: -26px !important;
+        border: 2px solid var(--brand-teal) !important;
+        box-shadow: 0 6px 18px rgba(1, 97, 102, 0.20) !important;
     }
     .dandelion-node img {
         width: 100% !important;
@@ -4354,7 +4368,8 @@ input[type="time"].form-input {
     gap: 10px;
 }
 
-.mobile-nav-close-btn {
+.mobile-nav-close-btn,
+.mobile-nav-close {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -4371,7 +4386,8 @@ input[type="time"].form-input {
     -webkit-tap-highlight-color: transparent;
 }
 
-.mobile-nav-close-btn:hover {
+.mobile-nav-close-btn:hover,
+.mobile-nav-close:hover {
     background: #e2e8f0;
     color: #0f172a;
 }

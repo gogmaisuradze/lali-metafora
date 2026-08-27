@@ -2886,7 +2886,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initMobileNav() {
         const toggleBtns = document.querySelectorAll('#mobile-menu-toggle-btn, #mobile-menu-btn, .mobile-menu-toggle-btn, .mobile-menu-btn');
         const overlay = document.getElementById('mobile-nav-overlay');
-        const closeBtn = document.getElementById('mobile-nav-close-btn');
+        const closeBtns = document.querySelectorAll('#mobile-nav-close, #mobile-nav-close-btn, .mobile-nav-close, .mobile-nav-close-btn');
 
         if (!overlay) return;
 
@@ -2914,11 +2914,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        if (closeBtn) {
-            closeBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                closeMenu();
+        if (closeBtns && closeBtns.length > 0) {
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMenu();
+                });
             });
         }
 
@@ -2958,9 +2960,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Close drawer on navigation link or button click
+        // Close drawer on navigation link or booking button click
         overlay.querySelectorAll('a, .open-booking-modal-btn').forEach(link => {
             link.addEventListener('click', () => {
+                if (link.classList.contains('mobile-accordion-toggle')) return;
                 closeMenu();
             });
         });
