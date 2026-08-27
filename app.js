@@ -3322,12 +3322,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function setLanguage(lang, save = true) {
-        const labelText = (lang === 'KA') ? 'ქართ' : 'ENG';
+        const labelText = (lang === 'KA') ? 'GE' : 'EN';
         document.querySelectorAll('.lang-label, #lang-active-label, #portal-lang-active-label').forEach(lbl => {
             lbl.textContent = labelText;
         });
         document.querySelectorAll('.lang-single-btn, #lang-toggle-btn, #portal-lang-toggle-btn').forEach(btn => {
-            btn.setAttribute('title', lang === 'KA' ? 'ენა: ქართული (დააწკაპუნეთ ინგლისურზე გადასართავად)' : 'Language: English (Click to switch to Georgian)');
+            btn.setAttribute('title', lang === 'KA' ? 'ენა: GE (დააწკაპუნეთ ინგლისურზე გადასართავად)' : 'Language: English (Click to switch to Georgian)');
         });
         document.documentElement.setAttribute('lang', lang.toLowerCase());
 
@@ -3402,7 +3402,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setLanguage('EN', false);
         } else {
             document.querySelectorAll('.lang-label, #lang-active-label, #portal-lang-active-label').forEach(lbl => {
-                lbl.textContent = 'ქართ';
+                lbl.textContent = 'GE';
             });
         }
 
