@@ -1220,53 +1220,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 0. Single Mechanical Key Click Note (Extracted from typewriter audio)
-    let audioCtx = null;
-    let keyClickBuffer = null;
-
-    function initKeyClickAudio() {
-        if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
-            try {
-                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioCtxClass();
-                fetch('key_click.mp3')
-                    .then(res => res.arrayBuffer())
-                    .then(buf => audioCtx.decodeAudioData(buf))
-                    .then(decoded => {
-                        keyClickBuffer = decoded;
-                    })
-                    .catch(() => {});
-            } catch (e) {}
-        }
-    }
-
-    function playSingleKeyClick(volume = 0.12) {
-        try {
-            if (!audioCtx) initKeyClickAudio();
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            if (audioCtx && keyClickBuffer) {
-                const source = audioCtx.createBufferSource();
-                source.buffer = keyClickBuffer;
-                source.playbackRate.value = 0.94 + Math.random() * 0.12;
-                const gain = audioCtx.createGain();
-                gain.gain.value = volume;
-                source.connect(gain);
-                gain.connect(audioCtx.destination);
-                source.start(0);
-                return;
-            }
-
-            // Fallback
-            const snd = new Audio('key_click.mp3');
-            snd.volume = volume;
-            const p = snd.play();
-            if (p !== undefined) p.catch(() => {});
-        } catch (e) {}
-    }
-
     // 1. Gentle keyboard typewriter typing sound (Automatic during typing)
     let twTypingAudio = null;
 
@@ -1373,10 +1326,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const char = fullText.charAt(charIndex);
                 twText.textContent += char;
                 charIndex++;
-
-                if (playSound && char !== ' ') {
-                    playSingleKeyClick(0.12);
-                }
 
                 let speed = 22;
                 if (char === '.' || char === '!' || char === '?') speed = 90;
@@ -1578,10 +1527,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const char = manifestoFullText.charAt(charIndex);
                 manifestoTextElem.textContent += char;
                 charIndex++;
-
-                if (playSound && char !== ' ') {
-                    playSingleKeyClick(0.12);
-                }
 
                 const prevChar = manifestoFullText.charAt(charIndex - 1);
                 let speed = 20;
