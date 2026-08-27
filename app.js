@@ -1097,7 +1097,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const testimonials = [
         {
             image: 'გუნდი/1.jpg',
-            audio: 'audio_1.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 0.0,
             text: '„მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარებისა და შთაგონებისთვის.',
             name: 'ლალი',
             fullname: 'ლალი ბადრიძე',
@@ -1105,11 +1106,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/lali.badridze',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:14 / 0:45'
+            time: '0:00 / 1:20'
         },
         {
             image: 'გუნდი/2.jpg',
-            audio: 'audio_2.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 11.5,
             text: 'Personal Development მიმართულება ეხმარება ადამიანებს შინაგანი ძალის, ბალანსისა და ემოციური ჰარმონიის პოვნაში პროფესიული მხარდაჭერით.',
             name: 'თინათინი',
             fullname: 'თინათინ გოგუაძე',
@@ -1117,11 +1119,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:22 / 0:50'
+            time: '0:11 / 1:20'
         },
         {
             image: 'გუნდი/3.jpg',
-            audio: 'audio_3.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 23.0,
             text: 'Think Tank სალონური დისკუსიები და ინტელექტუალური დებატები ქმნის სივრცეს, სადაც იდეები გარდაიქმნება რეალურ ცვლილებებად და ინოვაციებად.',
             name: 'გიორგი',
             fullname: 'გიორგი მაისურაძე',
@@ -1129,11 +1132,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:18 / 0:42'
+            time: '0:23 / 1:20'
         },
         {
             image: 'გუნდი/4.jpg',
-            audio: 'audio_4.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 34.5,
             text: 'Playback თეატრი მაყურებლის ემოციებსა და ისტორიებს აცოცხლებს სცენაზე — ეს არის უნიკალური შემოქმედებითი და არტ-თერაპიული გამოცდილება.',
             name: 'ნინო',
             fullname: 'ნინო კვარაცხელია',
@@ -1141,11 +1145,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:31 / 1:05'
+            time: '0:34 / 1:20'
         },
         {
             image: 'გუნდი/5.jpg',
-            audio: 'audio_5.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 46.0,
             text: 'მეტაფორა Business აერთიანებს მეწარმეებსა და პროფესიონალებს ნაყოფიერი თანამშრომლობის, პარტნიორობისა და ახალი შესაძლებლობების შესაქმნელად.',
             name: 'დავითი',
             fullname: 'დავით ბერიძე',
@@ -1153,11 +1158,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:12 / 0:38'
+            time: '0:46 / 1:20'
         },
         {
             image: 'გუნდი/6.jpg',
-            audio: 'audio_6.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 57.5,
             text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.',
             name: 'ელენე',
             fullname: 'ელენე ჩხეიძე',
@@ -1165,11 +1171,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:25 / 0:48'
+            time: '0:57 / 1:20'
         },
         {
             image: 'გუნდი/7.jpg',
-            audio: 'audio_7.mp3',
+            audio: 'galaktion.mp3',
+            galaktionStart: 68.0,
             text: 'ჩვენ ვქმნით შთამაგონებელ გარემოს, ვორქშოფებსა და არტ-საღამოებს, რომლებიც ადამიანებს აკავშირებს და ავსებს შემოქმედებითი ენერგიით.',
             name: 'სანდრო',
             fullname: 'სანდრო ჯაფარიძე',
@@ -1177,13 +1184,12 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:19 / 0:52'
+            time: '1:08 / 1:20'
         }
     ];
 
     let currentTwIdx = 0;
     let typeTimer = null;
-    let isAudioPlaying = false;
 
     const twAvatar = document.getElementById('tw-avatar');
     const twText = document.getElementById('tw-text');
@@ -1214,21 +1220,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 1. Gentle keyboard typewriter typing sound (Automatic during typing)
     let twTypingAudio = null;
 
     function startTwTypingAudio() {
         try {
             if (!twTypingAudio) {
                 twTypingAudio = new Audio('typewriter.mp3');
-                twTypingAudio.volume = 0.22; // Gentle low volume
+                twTypingAudio.volume = 0.08; // Subtle gentle low volume
                 twTypingAudio.loop = true;
             }
-            twTypingAudio.volume = 0.22;
+            twTypingAudio.volume = 0.08;
             twTypingAudio.currentTime = 0;
             const p = twTypingAudio.play();
             if (p !== undefined) p.catch(() => {});
-            if (twVisualizer) twVisualizer.classList.add('playing');
-            if (twPlayIcon) twPlayIcon.textContent = '❚❚';
         } catch (e) {}
     }
 
@@ -1239,9 +1244,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 twTypingAudio.currentTime = 0;
             } catch (e) {}
         }
-        if (twVisualizer) twVisualizer.classList.remove('playing');
-        if (twPlayIcon) twPlayIcon.textContent = '▶';
-        if (twPlayBtn) twPlayBtn.style.background = '';
+    }
+
+    // 2. Galaktion Tabidze Audio Player (Manual Play Button for poem segments)
+    let galaktionAudio = null;
+    let isGalaktionPlaying = false;
+
+    function formatAudioTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function initGalaktionAudio() {
+        if (!galaktionAudio) {
+            galaktionAudio = new Audio('galaktion.mp3');
+            galaktionAudio.volume = 0.65;
+
+            galaktionAudio.addEventListener('timeupdate', () => {
+                if (twTime && !galaktionAudio.paused) {
+                    twTime.textContent = `${formatAudioTime(galaktionAudio.currentTime)} / 1:20`;
+                }
+            });
+
+            galaktionAudio.addEventListener('ended', () => {
+                isGalaktionPlaying = false;
+                if (twVisualizer) twVisualizer.classList.remove('playing');
+                if (twPlayIcon) twPlayIcon.textContent = '▶';
+                if (twPlayBtn) twPlayBtn.style.background = '';
+                if (twTime) twTime.textContent = testimonials[currentTwIdx].time;
+            });
+
+            galaktionAudio.addEventListener('pause', () => {
+                if (!isGalaktionPlaying) {
+                    if (twVisualizer) twVisualizer.classList.remove('playing');
+                    if (twPlayIcon) twPlayIcon.textContent = '▶';
+                    if (twPlayBtn) twPlayBtn.style.background = '';
+                }
+            });
+        }
+    }
+
+    function playGalaktionForMember(idx) {
+        initGalaktionAudio();
+        const startSec = testimonials[idx].galaktionStart || 0;
+        galaktionAudio.currentTime = startSec;
+        const p = galaktionAudio.play();
+        if (p !== undefined) p.catch(() => {});
+        isGalaktionPlaying = true;
+        if (twVisualizer) twVisualizer.classList.add('playing');
+        if (twPlayIcon) twPlayIcon.textContent = '❚❚';
+        if (twPlayBtn) twPlayBtn.style.background = '#014d51';
+    }
+
+    function toggleGalaktionAudio() {
+        initGalaktionAudio();
+        if (isGalaktionPlaying && !galaktionAudio.paused) {
+            galaktionAudio.pause();
+            isGalaktionPlaying = false;
+            if (twVisualizer) twVisualizer.classList.remove('playing');
+            if (twPlayIcon) twPlayIcon.textContent = '▶';
+            if (twPlayBtn) twPlayBtn.style.background = '';
+        } else {
+            playGalaktionForMember(currentTwIdx);
+        }
     }
 
     function typewriteText(fullText, playSound = true) {
@@ -1280,7 +1346,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (twAvatar) twAvatar.src = current.image;
         if (twName) twName.textContent = current.name;
         if (twRole) twRole.textContent = current.jobtitle;
-        if (twTime) twTime.textContent = current.time;
+
+        // If Galaktion audio is playing, switch to new member's section seamlessly
+        if (isGalaktionPlaying && galaktionAudio && !galaktionAudio.paused) {
+            playGalaktionForMember(currentTwIdx);
+        } else {
+            if (twTime) twTime.textContent = current.time;
+        }
 
         const twSocialFb = document.getElementById('tw-social-fb');
         if (twSocialFb) {
@@ -1325,13 +1397,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (twPlayBtn && twVisualizer && twPlayIcon) {
+    if (twPlayBtn) {
         twPlayBtn.addEventListener('click', () => {
-            if (twTypingAudio && !twTypingAudio.paused) {
-                stopTwTypingAudio();
-            } else {
-                startTwTypingAudio();
-            }
+            toggleGalaktionAudio();
         });
     }
 
