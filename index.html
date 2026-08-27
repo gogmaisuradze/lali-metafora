@@ -821,7 +821,7 @@
 
     </div>
 
-    <!-- ==========================================================================
+        <!-- ==========================================================================
          3. GLASSMORPHISM BOOKING & PAYMENT MODAL POPUP WINDOW
          ========================================================================== -->
     <div class="booking-modal-overlay" id="booking-modal-overlay">
@@ -973,9 +973,21 @@
                                 <span id="metafora-iban-val" class="iban-number-text">GE93BG0000000192399800</span>
                             </div>
                             <div class="iban-field-row">
+                                <div class="iban-copy-header">
+                                    <span class="iban-field-label">გადასარიცხი თანხა (საფასური)</span>
+                                    <button type="button" id="btn-copy-amount" class="btn-copy-iban-trigger">
+                                        <span id="copy-amount-btn-text">📋 კოპირება</span>
+                                    </button>
+                                </div>
+                                <span id="booking-payment-amount" class="iban-field-val price-badge-val">50 ₾</span>
+                            </div>
+                            <div class="iban-field-row">
                                 <span class="iban-field-label">დანიშნულება</span>
                                 <span id="booking-payment-purpose" class="iban-field-val purpose-text">მეტაფორას ჯავშანი</span>
                             </div>
+                            <button type="button" id="btn-copy-full-requisites" class="btn-copy-full-req">
+                                <span id="copy-full-text">📋 სრული რეკვიზიტების კოპირება (IBAN, მიმღები, თანხა, დანიშნულება)</span>
+                            </button>
                         </div>
 
                         <!-- Actions Row -->
@@ -989,6 +1001,24 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- STEP 3: SUCCESS CONFIRMATION VIEW -->
+            <div id="booking-step-success" class="booking-step-content hidden text-center" style="padding: 20px 0;">
+                <div class="success-icon-badge">✨</div>
+                <h3 class="modal-title">ჯავშანი და გადახდა დადასტურდა!</h3>
+                <p class="modal-desc" id="booking-success-message" style="margin-top: 10px; line-height: 1.6;">
+                    გმადლობთ! თქვენი ჯავშანი წარმატებით დაფიქსირდა. მეტაფორას გუნდი უმოკლეს დროში დაგიკავშირდებათ დეტალების დასაზუსტებლად.
+                </p>
+                <div style="margin-top: 24px;">
+                    <button type="button" class="btn-modal-submit" id="btn-close-success">
+                        <span>დახურვა ✨</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
             </div>
 
             <!-- STEP 3: SUCCESS CONFIRMATION VIEW -->

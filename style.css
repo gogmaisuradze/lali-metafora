@@ -2859,6 +2859,33 @@ html.direct-main-mode #main-website {
     word-break: break-all;
 }
 
+.iban-field-val.price-badge-val {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #059669;
+    letter-spacing: -0.2px;
+}
+
+.btn-copy-full-req {
+    background: rgba(1, 77, 81, 0.06);
+    border: 1px dashed rgba(1, 97, 102, 0.25);
+    border-radius: 12px;
+    padding: 8px 12px;
+    color: var(--primary-color);
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.btn-copy-full-req:hover {
+    background: rgba(1, 77, 81, 0.12);
+    border-color: var(--primary-color);
+}
+
 .payment-action-buttons {
     display: flex;
     gap: 10px;
