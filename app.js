@@ -1403,6 +1403,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 3. Keyboard Arrow Navigation (← / → arrow keys to switch team members)
+    document.addEventListener('keydown', (e) => {
+        const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+        if (activeTag === 'input' || activeTag === 'textarea' || (document.activeElement && document.activeElement.isContentEditable)) {
+            return;
+        }
+
+        if (!twText) return;
+
+        if (e.key === 'ArrowRight' || e.key === 'Right') {
+            setTestimonial(currentTwIdx + 1, true);
+        } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+            setTestimonial(currentTwIdx - 1, true);
+        }
+    });
+
     // ==========================================================================
     // 4. KINETIC IMAGE-TEXT REVEAL SCROLL ANIMATION (About Us Section Parts 1 & 2)
     // ==========================================================================
