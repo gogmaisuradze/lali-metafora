@@ -1220,6 +1220,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 0. Single Mechanical Key Click Note (Extracted from typewriter audio)
+    let audioCtx = null;
+    let keyClickBuffer = null;
+
+    function initKeyClickAudio() {
+        if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+            try {
+                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioCtxClass();
+                fetch('key_click.mp3')
+                    .then(res => res.arrayBuffer())
+                    .then(buf => audioCtx.decodeAudioData(buf))
+                    .then(decoded => {
+                        keyClickBuffer = decoded;
+                    })
+                    .catch(() => {});
+            } catch (e) {}
+        }
+    }
+
+    function playSingleKeyClick(volume = 0.12) {
+        try {
+            if (!audioCtx) initKeyClickAudio();
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (audioCtx && keyClickBuffer) {
+                const source = audioCtx.createBufferSource();
+                source.buffer = keyClickBuffer;
+                source.playbackRate.value = 0.94 + Math.random() * 0.12;
+                const gain = audioCtx.createGain();
+                gain.gain.value = volume;
+                source.connect(gain);
+                gain.connect(audioCtx.destination);
+                source.start(0);
+                return;
+            }
+
+            // Fallback
+            const snd = new Audio('key_click.mp3');
+            snd.volume = volume;
+            const p = snd.play();
+            if (p !== undefined) p.catch(() => {});
+        } catch (e) {}
+    }
+
     // 1. Gentle keyboard typewriter typing sound (Automatic during typing)
     let twTypingAudio = null;
 
@@ -1327,6 +1374,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 twText.textContent += char;
                 charIndex++;
 
+                if (playSound && char !== ' ') {
+                    playSingleKeyClick(0.12);
+                }
+
                 let speed = 22;
                 if (char === '.' || char === '!' || char === '?') speed = 90;
                 else if (char === ',') speed = 45;
@@ -1403,8 +1454,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Keyboard Arrow Navigation (← / → arrow keys to switch team members)
+    // Quote mark ( “ ) click interaction to trigger typing sound
+    document.querySelectorAll('.tw-quote-mark').forEach(quoteMark => {
+        quoteMark.setAttribute('title', 'დააწკაპუნეთ ბეჭდვის საუნდისთვის ✨');
+        quoteMark.addEventListener('click', () => {
+            const card = quoteMark.closest('#manifesto-typewriter-card') || quoteMark.closest('.typewriter-team-section');
+            if (card && card.id === 'manifesto-typewriter-card') {
+                startTwTypingAudio();
+                if (typeof startManifestoTypewriter === 'function') {
+                    startManifestoTypewriter(true);
+                }
+            } else {
+                startTwTypingAudio();
+                setTestimonial(currentTwIdx, true);
+            }
+        });
+    });
+
+    // 3. Keyboard typing sound & arrow navigation (← / → arrow keys to switch team members)
     document.addEventListener('keydown', (e) => {
+        // Play single key click note on every keyboard keypress
+        if (!['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(e.key)) {
+            playSingleKeyClick(0.14);
+        }
+
         const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
         if (activeTag === 'input' || activeTag === 'textarea' || (document.activeElement && document.activeElement.isContentEditable)) {
             return;
@@ -1487,7 +1560,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const manifestoCard = document.getElementById('manifesto-typewriter-card');
     let manifestoTypeTimer = null;
 
-    function startManifestoTypewriter() {
+    function startManifestoTypewriter(playSound = false) {
         if (!manifestoTextElem) return;
         clearInterval(manifestoTypeTimer);
         manifestoTextElem.textContent = '';
@@ -1495,15 +1568,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function typeNextChar() {
             if (charIndex < manifestoFullText.length) {
-                manifestoTextElem.textContent += manifestoFullText.charAt(charIndex);
+                const char = manifestoFullText.charAt(charIndex);
+                manifestoTextElem.textContent += char;
                 charIndex++;
 
-                const char = manifestoFullText.charAt(charIndex - 1);
+                if (playSound && char !== ' ') {
+                    playSingleKeyClick(0.12);
+                }
+
+                const prevChar = manifestoFullText.charAt(charIndex - 1);
                 let speed = 20;
-                if (char === '.' || char === '!' || char === '?') speed = 120;
-                else if (char === '—' || char === ',') speed = 55;
+                if (prevChar === '.' || prevChar === '!' || prevChar === '?') speed = 120;
+                else if (prevChar === '—' || prevChar === ',') speed = 55;
 
                 manifestoTypeTimer = setTimeout(typeNextChar, speed);
+            } else {
+                if (playSound) stopTwTypingAudio();
             }
         }
         typeNextChar();
