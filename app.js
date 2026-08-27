@@ -1,5 +1,172 @@
 /* app.js - Botanical 3D Dandelion Flower, Kinetic Image-Text Reveal, Stagger Cards, Team & Glassmorphism Booking Modal */
 
+// ==========================================================================
+// TOP-LEVEL PERSISTENT UI CLICK SOUND ENGINE (მონაცვლეობითი ხმები: კნ1, კნ2, კნ3)
+// ==========================================================================
+(function initGlobalInteractiveClickSounds() {
+    const soundFiles = ['kn1.mp3', 'kn2.mp3', 'kn3.mp3'];
+    let currentSoundIndex = parseInt(sessionStorage.getItem('metafora_sound_idx') || '0', 10) % 3;
+    if (isNaN(currentSoundIndex)) currentSoundIndex = 0;
+    let lastPlayedTime = 0;
+
+    let audioCtx = null;
+    const audioBuffers = [null, null, null];
+    let isPreloading = false;
+
+    const getAudioContext = () => {
+        if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) {
+                audioCtx = new AudioContextClass();
+            }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume().catch(() => {});
+        }
+        return audioCtx;
+    };
+
+    // Preload and decode audio buffers for zero latency
+    const preloadBuffers = () => {
+        if (isPreloading) return;
+        isPreloading = true;
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        soundFiles.forEach((file, index) => {
+            fetch(file)
+                .then(r => r.arrayBuffer())
+                .then(buf => ctx.decodeAudioData(buf))
+                .then(decoded => {
+                    audioBuffers[index] = decoded;
+                })
+                .catch(() => {});
+        });
+    };
+
+    // Fallback HTML5 Audio pool
+    const audioPool = soundFiles.map(file => {
+        const a = new Audio(file);
+        a.preload = 'auto';
+        a.volume = 0.65;
+        return a;
+    });
+
+    const playNextClickSound = () => {
+        const now = Date.now();
+        if (now - lastPlayedTime < 30) return;
+        lastPlayedTime = now;
+
+        const soundIdx = currentSoundIndex;
+        currentSoundIndex = (currentSoundIndex + 1) % soundFiles.length;
+        try { sessionStorage.setItem('metafora_sound_idx', currentSoundIndex); } catch(e) {}
+
+        const ctx = getAudioContext();
+        if (ctx && audioBuffers[soundIdx]) {
+            try {
+                const source = ctx.createBufferSource();
+                source.buffer = audioBuffers[soundIdx];
+                const gainNode = ctx.createGain();
+                gainNode.gain.value = 0.65;
+                source.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                source.start(0);
+                return;
+            } catch (err) {}
+        }
+
+        // HTML5 fallback
+        try {
+            const audio = audioPool[soundIdx];
+            if (audio) {
+                const clone = audio.cloneNode();
+                clone.volume = 0.65;
+                clone.play().catch(() => {});
+            }
+        } catch (e) {}
+    };
+
+    const unlockAndPreload = () => {
+        preloadBuffers();
+        const ctx = getAudioContext();
+        if (ctx && ctx.state === 'suspended') {
+            ctx.resume().catch(() => {});
+        }
+    };
+
+    ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'click'].forEach(evt => {
+        window.addEventListener(evt, unlockAndPreload, { once: true, capture: true, passive: true });
+    });
+
+    // Check if target or ancestor is interactive
+    function isInteractiveTarget(target) {
+        if (!target || target === document.body || target === document.documentElement) return false;
+
+        // Tags & interactive roles
+        if (target.closest('a, button, select, input, textarea, summary, details, label, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="radio"]')) {
+            return true;
+        }
+
+        // Navigation and menu items
+        if (target.closest('.nav-item, .dropdown-link, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, .brand-wrapper')) {
+            return true;
+        }
+
+        // Cards, buttons, chips, modals, players
+        if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card, .btn, .clickable')) {
+            return true;
+        }
+
+        if (target.closest('[onclick], [data-action], [data-filter], [data-index]')) {
+            return true;
+        }
+
+        try {
+            if (window.getComputedStyle(target).cursor === 'pointer') return true;
+        } catch(e) {}
+
+        return false;
+    }
+
+    // Capture on pointerdown / mousedown for instant zero-latency feedback
+    document.addEventListener('pointerdown', (e) => {
+        if (isInteractiveTarget(e.target)) {
+            unlockAndPreload();
+            playNextClickSound();
+        }
+    }, true);
+
+    // Also capture click for keyboard navigation or touch devices
+    document.addEventListener('click', (e) => {
+        if (isInteractiveTarget(e.target)) {
+            unlockAndPreload();
+            playNextClickSound();
+        }
+    }, true);
+
+    // Smooth navigation delay for cross-page navigation links so the sound completes
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('tel:') || href.startsWith('mailto:') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) {
+            return;
+        }
+
+        // It is an internal page transition (e.g. blog.html, gallery.html, services.html, service-*.html)
+        e.preventDefault();
+        playNextClickSound();
+        setTimeout(() => {
+            window.location.href = href;
+        }, 80);
+    }, false);
+
+    window.playNextClickSound = playNextClickSound;
+    window.playClickSound = playNextClickSound;
+
+    preloadBuffers();
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================================================
@@ -4576,156 +4743,5 @@ document.addEventListener('DOMContentLoaded', () => {
         window.setLanguage = setLanguage;
     }
 
-    // ==========================================================================
-    // 18. INTERACTIVE UI CLICK SOUND SYSTEM (მონაცვლეობითი ხმები: კნ1, კნ2, კნ3)
-    // ==========================================================================
-    function initInteractiveClickSounds() {
-        const soundFiles = ['kn1.mp3', 'kn2.mp3', 'kn3.mp3'];
-        let currentSoundIndex = 0;
-        let lastPlayedTime = 0;
-
-        let audioCtx = null;
-        const audioBuffers = [null, null, null];
-        let hasUnlocked = false;
-
-        const getAudioContext = () => {
-            if (!audioCtx) {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (AudioContextClass) {
-                    audioCtx = new AudioContextClass();
-                }
-            }
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume().catch(() => {});
-            }
-            return audioCtx;
-        };
-
-        // Preload and decode audio buffers for ultra-low latency playback
-        const loadBuffers = async () => {
-            const ctx = getAudioContext();
-            if (!ctx) return;
-
-            soundFiles.forEach((file, index) => {
-                fetch(file)
-                    .then(response => response.arrayBuffer())
-                    .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
-                    .then(decodedData => {
-                        audioBuffers[index] = decodedData;
-                    })
-                    .catch(() => {});
-            });
-        };
-
-        // Fallback HTML5 audio pool
-        const audioPool = soundFiles.map(file => {
-            const a = new Audio(file);
-            a.preload = 'auto';
-            a.volume = 0.55;
-            return a;
-        });
-
-        const playNextClickSound = () => {
-            const now = Date.now();
-            if (now - lastPlayedTime < 25) return; // Prevent double-trigger
-            lastPlayedTime = now;
-
-            const soundIdx = currentSoundIndex;
-            currentSoundIndex = (currentSoundIndex + 1) % soundFiles.length;
-
-            const ctx = getAudioContext();
-            if (ctx && audioBuffers[soundIdx]) {
-                try {
-                    const source = ctx.createBufferSource();
-                    source.buffer = audioBuffers[soundIdx];
-                    const gainNode = ctx.createGain();
-                    gainNode.gain.value = 0.55;
-                    source.connect(gainNode);
-                    gainNode.connect(ctx.destination);
-                    source.start(0);
-                    return;
-                } catch (err) {
-                    // Fallback to HTML5 audio
-                }
-            }
-
-            // HTML5 Audio fallback
-            try {
-                const audio = audioPool[soundIdx];
-                if (audio) {
-                    const clone = audio.cloneNode();
-                    clone.volume = 0.55;
-                    clone.play().catch(() => {});
-                }
-            } catch (e) {}
-        };
-
-        // Unlock audio on first user interaction
-        const unlockAudio = () => {
-            if (hasUnlocked) return;
-            hasUnlocked = true;
-            loadBuffers();
-            const ctx = getAudioContext();
-            if (ctx && ctx.state === 'suspended') {
-                ctx.resume().catch(() => {});
-            }
-            window.removeEventListener('pointerdown', unlockAudio);
-            window.removeEventListener('touchstart', unlockAudio);
-            window.removeEventListener('keydown', unlockAudio);
-        };
-
-        // Robust interactive element detection
-        function isInteractiveElement(target) {
-            if (!target || target === document.body || target === document.documentElement) return false;
-
-            // 1. Direct interactive tags & ARIA roles
-            if (target.closest('a, button, select, input, textarea, summary, details, label, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="radio"]')) {
-                return true;
-            }
-
-            // 2. Navigation items, headers, dropdowns, accordions, mobile drawer elements
-            if (target.closest('.nav-item, .dropdown-link, .nav-dropdown-wrapper, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, .brand-wrapper, .site-header, .mobile-nav-drawer')) {
-                // If it's inside menu/drawer, check if it's a clickable item
-                if (target.closest('.nav-item, .dropdown-link, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, a, button, .lang-single-btn, .theme-toggle-btn, .open-booking-modal-btn')) {
-                    return true;
-                }
-            }
-
-            // 3. Modals, search, theme, language, metabot, bookings, media players
-            if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .pagination-dots, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card')) {
-                return true;
-            }
-
-            // 4. Any element with click handlers or pointer styling
-            if (target.closest('[onclick], [data-action], [data-filter], [data-index], .btn, .clickable, [style*="cursor: pointer"], [style*="cursor:pointer"]')) {
-                return true;
-            }
-
-            // 5. Computed cursor pointer check
-            try {
-                const cursor = window.getComputedStyle(target).cursor;
-                if (cursor === 'pointer') return true;
-            } catch (e) {}
-
-            return false;
-        }
-
-        const handleInteractiveTrigger = (e) => {
-            if (isInteractiveElement(e.target)) {
-                playNextClickSound();
-            }
-        };
-
-        // Capture phase listeners ensure sound triggers even if child handlers stop propagation
-        document.addEventListener('pointerdown', handleInteractiveTrigger, true);
-        document.addEventListener('click', handleInteractiveTrigger, true);
-
-        window.playNextClickSound = playNextClickSound;
-        window.playClickSound = playNextClickSound;
-
-        loadBuffers();
-    }
-
     initI18nLanguageSwitcher();
-    initInteractiveClickSounds();
 });
