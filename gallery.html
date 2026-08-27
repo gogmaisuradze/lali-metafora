@@ -374,42 +374,192 @@
     </footer>
 
     <!-- Glassmorphism Booking Modal Window -->
+        <!-- ==========================================================================
+         3. GLASSMORPHISM BOOKING & PAYMENT MODAL POPUP WINDOW
+         ========================================================================== -->
     <div class="booking-modal-overlay" id="booking-modal-overlay">
-        <div class="booking-modal-glass">
-            <button class="modal-close-btn" id="modal-close-btn">&times;</button>
-            <div class="modal-header">
-                <span class="modal-badge">✨ ონლაინ ჯავშანი</span>
-                <h3 class="modal-title">ადგილის დაჯავშნა მეტაფორაში</h3>
-                <p class="modal-desc">აირჩიეთ სასურველი სერვისი, თარიღი და დრო — ჩვენი გუნდი მალე დაგიკავშირდებათ.</p>
-            </div>
-
-            <form class="modal-booking-form" onsubmit="event.preventDefault(); alert('თქვენი ჯავშანი წარმატებით გაიგზავნა! მეტაფორას გუნდი დაგიკავშირდებათ.'); document.getElementById('booking-modal-overlay').classList.remove('active');">
-                <div class="form-group">
-                    <label class="form-label">სერვისი / მიმართულება</label>
-                    <select class="form-input" required>
-                        <option>🌱 1. მეტაფორა Personal Development</option>
-                        <option>💼 2. მეტაფორა Business</option>
-                        <option>🧠 3. მეტაფორა Think Tank</option>
-                        <option>🎨 4. მეტაფორა Art</option>
-                        <option selected>🏛️ 5. მეტაფორა Clubs</option>
-                    </select>
+        <div class="booking-modal-glass" id="booking-modal-glass-card">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            
+            <!-- STEP 1: BOOKING DETAILS FORM -->
+            <div id="booking-step-form" class="booking-step-content active">
+                <div class="modal-header">
+                    <span class="modal-badge">✨ ონლაინ ჯავშანი</span>
+                    <h3 class="modal-title">ადგილის დაჯავშნა მეტაფორაში</h3>
+                    <p class="modal-desc">აირჩიეთ სასურველი მიმართულება და დრო რეგისტრაციისთვის.</p>
                 </div>
 
-                <div class="form-row-two">
+                <form class="modal-booking-form" id="metafora-booking-form">
+                    
+                    <!-- Service Selection Chips -->
                     <div class="form-group">
-                        <label class="form-label">თარიღი</label>
-                        <input type="date" class="form-input" required value="2026-08-28">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">დრო</label>
-                        <select class="form-input" required>
-                            <option>12:00 — 14:00</option>
-                            <option>14:30 — 16:30</option>
-                            <option>17:00 — 19:00</option>
-                            <option selected>19:30 — 22:00</option>
+                        <label class="form-label">აირჩიეთ მიმართულება / სერვისი</label>
+                        <select class="form-input" id="booking-service-select" required>
+                            <option value="Personal Development">🌱 1. მეტაფორა Personal Development</option>
+                            <option value="Business">💼 2. მეტაფორა Business</option>
+                            <option value="Think Tank">🧠 3. მეტაფორა Think Tank</option>
+                            <option value="Art">🎨 4. მეტაფორა Art (Playback & თერაპია)</option>
+                            <option value="Clubs" selected>🏛️ 5. მეტაფორა Clubs (მესამე სივრცე)</option>
                         </select>
                     </div>
+
+                    <!-- Date & Time Row -->
+                    <div class="form-row-two">
+                        <div class="form-group">
+                            <label class="form-label">📅 სასურველი თარიღი</label>
+                            <input type="date" class="form-input" id="booking-date-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">🕒 დროის ინტერვალი</label>
+                            <select class="form-input" id="booking-time-select" required>
+                                <option>12:00 — 14:00 (დღის ლანჩი/ლაუნჯი)</option>
+                                <option>14:30 — 16:30 (Coworking სესია)</option>
+                                <option>17:00 — 19:00 (ვორქშოფი & თერაპია)</option>
+                                <option selected>19:30 — 22:00 (Playback თეატრი/Bar)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Guests Count & Name Row -->
+                    <div class="form-row-two">
+                        <div class="form-group">
+                            <label class="form-label">👤 თქვენი სახელი და გვარი</label>
+                            <input type="text" class="form-input" id="booking-name-input" placeholder="მაგ: გიორგი მაისურაძე" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">👥 სტუმრების რაოდენობა</label>
+                            <select class="form-input" id="booking-guests-select" required>
+                                <option>1 ადამიანი</option>
+                                <option selected>2 ადამიანი</option>
+                                <option>3-4 ადამიანი</option>
+                                <option>5+ ადამიანი (ჯგუფური)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Contact Phone Row -->
+                    <div class="form-group">
+                        <label class="form-label">📞 საკონტაქტო ტელეფონის ნომერი</label>
+                        <input type="tel" class="form-input" id="booking-phone-input" placeholder="599 22 82 28" required>
+                    </div>
+
+                    <div id="booking-form-status" class="booking-status-box hidden"></div>
+
+                    <button type="submit" class="btn-modal-submit" id="btn-proceed-to-payment">
+                        <span>გადახდაზე გადასვლა 💳</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- STEP 2: PAYMENT BY BANK TRANSFER (PORTED & TAILORED FROM IDC) -->
+            <div id="booking-step-payment" class="booking-step-content hidden">
+                <div class="modal-header text-center">
+                    <div class="payment-icon-glow">
+                        <span class="payment-glow-badge">💳</span>
+                    </div>
+                    <h3 class="modal-title">გადახდა საბანკო გადარიცხვით</h3>
+                    <p class="modal-desc">ჯავშნის დასასრულებლად გადაიხადეთ საფასური</p>
                 </div>
+
+                <div class="metafora-payment-grid">
+                    <!-- Left: QR Code for Desktop phone scan -->
+                    <div class="payment-qr-card" id="desktop-qr-container">
+                        <div class="qr-image-wrapper">
+                            <img id="booking-qr-img" src="" alt="Scan QR Code with phone" class="qr-code-image">
+                        </div>
+                        <div class="qr-hint-title">
+                            <span>📸 დაასკანერეთ ტელეფონის კამერით</span>
+                        </div>
+                        <p class="qr-hint-desc">
+                            დასკანერებისას ავტომატურად გაგეხსნებათ საქართველოს ბანკისა და თიბისის გადახდის აპლიკაციები 📱
+                        </p>
+                    </div>
+
+                    <!-- Right: Bank buttons & Details -->
+                    <div class="payment-details-col">
+                        <div class="bank-apps-container" id="mobile-apps-container">
+                            <div class="bank-apps-header" id="bank-buttons-header-text">აირჩიეთ ბანკი გადასასვლელად:</div>
+                            <div class="bank-buttons-stack">
+                                <!-- BOG Bank Button -->
+                                <button type="button" id="btn-bog-pay" class="bank-app-btn bank-btn-bog">
+                                    <div class="bank-btn-left">
+                                        <img src="assets/bog-logo.svg" alt="Bank of Georgia" class="bank-logo-icon">
+                                        <div class="bank-names">
+                                            <span class="bank-main-name">საქართველოს ბანკი</span>
+                                            <span class="bank-sub-name">BANK OF GEORGIA</span>
+                                        </div>
+                                    </div>
+                                    <span class="bank-badge" id="bog-badge-text">BOG</span>
+                                </button>
+
+                                <!-- TBC Bank Button -->
+                                <button type="button" id="btn-tbc-pay" class="bank-app-btn bank-btn-tbc">
+                                    <div class="bank-btn-left">
+                                        <img src="assets/tbc-logo.svg" alt="TBC Bank" class="bank-logo-icon">
+                                        <div class="bank-names">
+                                            <span class="bank-main-name">თიბისი ბანკი</span>
+                                            <span class="bank-sub-name">TBC BANK</span>
+                                        </div>
+                                    </div>
+                                    <span class="bank-badge" id="tbc-badge-text">TBC</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bank Account Transfer Details -->
+                        <div class="metafora-iban-box">
+                            <div class="iban-field-row">
+                                <span class="iban-field-label">მიმღები</span>
+                                <span class="iban-field-val gold-accent">ანი მაისურაძე</span>
+                            </div>
+                            <div class="iban-field-row">
+                                <span class="iban-field-label">ბანკი</span>
+                                <span class="iban-field-val">საქართველოს ბანკი (Bank of Georgia)</span>
+                            </div>
+                            <div class="iban-field-row">
+                                <div class="iban-copy-header">
+                                    <span class="iban-field-label">ანგარიშის ნომერი (IBAN)</span>
+                                    <button type="button" id="btn-copy-iban" class="btn-copy-iban-trigger">
+                                        <span id="copy-btn-text">📋 კოპირება</span>
+                                    </button>
+                                </div>
+                                <span id="metafora-iban-val" class="iban-number-text">GE93BG0000000192399800</span>
+                            </div>
+                            <div class="iban-field-row">
+                                <span class="iban-field-label">დანიშნულება</span>
+                                <span id="booking-payment-purpose" class="iban-field-val purpose-text">მეტაფორას ჯავშანი</span>
+                            </div>
+                        </div>
+
+                        <!-- Actions Row -->
+                        <div class="payment-action-buttons">
+                            <button type="button" id="btn-payment-back" class="btn-payment-back">
+                                <span>← უკან</span>
+                            </button>
+                            <button type="button" id="btn-payment-confirm" class="btn-payment-confirm">
+                                <span id="confirm-btn-label">✅ გადახდა დავასრულე - დადასტურება</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: SUCCESS CONFIRMATION VIEW -->
+            <div id="booking-step-success" class="booking-step-content hidden text-center" style="padding: 20px 0;">
+                <div class="success-icon-badge">✨</div>
+                <h3 class="modal-title">ჯავშანი და გადახდა დადასტურდა!</h3>
+                <p class="modal-desc" id="booking-success-message" style="margin-top: 10px; line-height: 1.6;">
+                    გმადლობთ! თქვენი ჯავშანი წარმატებით დაფიქსირდა. მეტაფორას გუნდი უმოკლეს დროში დაგიკავშირდებათ დეტალების დასაზუსტებლად.
+                </p>
+                <div style="margin-top: 24px;">
+                    <button type="button" class="btn-modal-submit" id="btn-close-success">
+                        <span>დახურვა ✨</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
                 <div class="form-row-two">
                     <div class="form-group">

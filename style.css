@@ -2594,12 +2594,368 @@ html.direct-main-mode #main-website {
     cursor: pointer;
     box-shadow: 0 8px 24px rgba(30, 41, 59, 0.25);
     transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
 }
 
 .btn-modal-submit:hover {
     background: #0f172a;
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(30, 41, 59, 0.35);
+}
+
+/* Payment Step Styles (Ported from IDC & Styled for Metafora) */
+.booking-modal-glass.payment-mode {
+    max-width: 780px;
+}
+
+.booking-step-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.booking-step-content.hidden {
+    display: none !important;
+}
+
+.payment-icon-glow {
+    margin: 0 auto 10px auto;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255, 186, 0, 0.12);
+    border: 1px solid rgba(255, 186, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 0 25px rgba(255, 186, 0, 0.2);
+}
+
+.metafora-payment-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 22px;
+    align-items: stretch;
+    margin-top: 18px;
+}
+
+.payment-qr-card {
+    background: #ffffff;
+    border: 1.5px solid rgba(1, 97, 102, 0.18);
+    border-radius: 20px;
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-image-wrapper {
+    width: 180px;
+    height: 180px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-code-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.qr-hint-title {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 12px;
+}
+
+.qr-hint-desc {
+    font-size: 0.74rem;
+    color: #64748b;
+    line-height: 1.4;
+    margin-top: 4px;
+}
+
+.payment-details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.bank-apps-header {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.bank-buttons-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bank-app-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.bank-app-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.bank-app-btn:active {
+    transform: scale(0.98);
+}
+
+.bank-btn-bog {
+    background: #ff6700;
+    box-shadow: 0 6px 18px rgba(255, 103, 0, 0.32);
+}
+
+.bank-btn-tbc {
+    background: #00adef;
+    box-shadow: 0 6px 18px rgba(0, 173, 239, 0.32);
+}
+
+.bank-btn-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bank-logo-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 3px;
+    object-fit: contain;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.bank-names {
+    display: flex;
+    flex-direction: column;
+}
+
+.bank-main-name {
+    font-size: 0.88rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.bank-sub-name {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+}
+
+.bank-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.22);
+    padding: 3px 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+}
+
+.metafora-iban-box {
+    background: rgba(1, 77, 81, 0.08);
+    border: 1px solid rgba(1, 97, 102, 0.15);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.iban-field-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.iban-field-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #64748b;
+}
+
+.iban-field-val {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.iban-field-val.gold-accent {
+    color: var(--primary-color);
+}
+
+.iban-field-val.purpose-text {
+    font-size: 0.8rem;
+    color: #334155;
+}
+
+.iban-copy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-copy-iban-trigger {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-iban-trigger:hover {
+    background: rgba(1, 77, 81, 0.1);
+}
+
+.iban-number-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.86rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+}
+
+.payment-action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.btn-payment-back {
+    padding: 12px 18px;
+    border-radius: 9999px;
+    background: #e2e8f0;
+    color: #334155;
+    border: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-payment-back:hover {
+    background: #cbd5e1;
+}
+
+.btn-payment-confirm {
+    flex: 1;
+    padding: 13px 18px;
+    border-radius: 9999px;
+    background: #059669;
+    color: #ffffff;
+    border: none;
+    font-size: 0.92rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-payment-confirm:hover {
+    background: #047857;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.45);
+}
+
+.btn-payment-confirm:active {
+    transform: scale(0.98);
+}
+
+.booking-status-box {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.booking-status-box.error {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #b91c1c;
+}
+
+.success-icon-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(5, 150, 105, 0.12);
+    border: 1.5px solid rgba(5, 150, 105, 0.35);
+    color: #059669;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto;
+}
+
+@media (max-width: 768px) {
+    .metafora-payment-grid {
+        grid-template-columns: 1fr;
+    }
+    .payment-qr-card {
+        display: none !important;
+    }
+    .booking-modal-glass.payment-mode {
+        max-width: 95%;
+        padding: 28px 18px;
+    }
+    .payment-action-buttons {
+        flex-direction: column-reverse;
+    }
+    .btn-payment-back, .btn-payment-confirm {
+        width: 100%;
+    }
 }
 
 /* ==========================================================================

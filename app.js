@@ -1672,13 +1672,122 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 6. GLASSMORPHISM BOOKING MODAL POPUP WINDOW ENGINE
+    // 6. GLASSMORPHISM BOOKING & PAYMENT SYSTEM ENGINE (PORTED & ADAPTED FROM IDC)
     // ==========================================================================
     const bookingModalOverlay = document.getElementById('booking-modal-overlay');
+    const bookingGlassCard = document.getElementById('booking-modal-glass-card');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    function openBookingModal() {
+    const bookingStepForm = document.getElementById('booking-step-form');
+    const bookingStepPayment = document.getElementById('booking-step-payment');
+    const bookingStepSuccess = document.getElementById('booking-step-success');
+
+    const bookingForm = document.getElementById('metafora-booking-form');
+    const bookingFormStatus = document.getElementById('booking-form-status');
+    const btnProceedToPayment = document.getElementById('btn-proceed-to-payment');
+
+    const btnPaymentBack = document.getElementById('btn-payment-back');
+    const btnPaymentConfirm = document.getElementById('btn-payment-confirm');
+    const btnCloseSuccess = document.getElementById('btn-close-success');
+
+    const btnCopyIban = document.getElementById('btn-copy-iban');
+    const copyBtnText = document.getElementById('copy-btn-text');
+    const metaforaIbanVal = document.getElementById('metafora-iban-val');
+    const bookingPaymentPurpose = document.getElementById('booking-payment-purpose');
+
+    const btnBogPay = document.getElementById('btn-bog-pay');
+    const btnTbcPay = document.getElementById('btn-tbc-pay');
+
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    let pendingBookingPayload = null;
+
+    // Helper: Set dynamic QR code with fallback providers
+    function setBookingQrCodeUrl(url) {
+        const qrImg = document.getElementById('booking-qr-img');
+        if (!qrImg) return;
+
+        const encoded = encodeURIComponent(url);
+        const qrProviders = [
+            `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encoded}`,
+            `https://quickchart.io/qr?size=300&text=${encoded}`,
+            `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encoded}`
+        ];
+
+        let providerIndex = 0;
+        qrImg.onerror = () => {
+            providerIndex++;
+            if (providerIndex < qrProviders.length) {
+                qrImg.src = qrProviders[providerIndex];
+            }
+        };
+        qrImg.src = qrProviders[0];
+    }
+
+    // Helper: Telegram bot notifications
+    async function sendTelegramBookingNotification(payload) {
+        const botToken = "8563426842:AAEuhg8EXmAV18NXtlAaiky0ZzWGvNXkJQU";
+        const chatId = "443575738";
+
+        const text = `🏛️ *მეტაფორა — ახალი ჯავშანი & გადახდა!* 💳\n\n` +
+            `👤 *სტუმარი:* ${payload.name}\n` +
+            `📞 *ტელეფონი:* ${payload.phone}\n` +
+            `✨ *მიმართულება:* ${payload.service}\n` +
+            `📅 *თარიღი:* ${payload.date}\n` +
+            `🕒 *დრო:* ${payload.time}\n` +
+            `👥 *სტუმრები:* ${payload.guests}\n` +
+            `✅ *სტატუსი:* ${payload.payment_status || 'გადახდილია (დადასტურებული)'}`;
+
+        try {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: "Markdown"
+                })
+            });
+        } catch (e) {
+            console.error("Telegram notification error:", e);
+        }
+    }
+
+    function showBookingStep(step) {
+        if (bookingStepForm) bookingStepForm.classList.add('hidden');
+        if (bookingStepPayment) bookingStepPayment.classList.add('hidden');
+        if (bookingStepSuccess) bookingStepSuccess.classList.add('hidden');
+
+        if (bookingGlassCard) {
+            if (step === 'payment') {
+                bookingGlassCard.classList.add('payment-mode');
+            } else {
+                bookingGlassCard.classList.remove('payment-mode');
+            }
+        }
+
+        if (step === 'form' && bookingStepForm) {
+            bookingStepForm.classList.remove('hidden');
+        } else if (step === 'payment' && bookingStepPayment) {
+            bookingStepPayment.classList.remove('hidden');
+        } else if (step === 'success' && bookingStepSuccess) {
+            bookingStepSuccess.classList.remove('hidden');
+        }
+    }
+
+    function openBookingModal(preselectedService = '') {
         if (bookingModalOverlay) {
+            if (preselectedService) {
+                const sSelect = document.getElementById('booking-service-select');
+                if (sSelect) {
+                    for (let opt of sSelect.options) {
+                        if (opt.value.toLowerCase().includes(preselectedService.toLowerCase()) || opt.text.toLowerCase().includes(preselectedService.toLowerCase())) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            showBookingStep('form');
             bookingModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1688,10 +1797,205 @@ document.addEventListener('DOMContentLoaded', () => {
         if (bookingModalOverlay) {
             bookingModalOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            setTimeout(() => {
+                showBookingStep('form');
+                if (bookingFormStatus) bookingFormStatus.classList.add('hidden');
+            }, 300);
         }
     }
 
-    // Universal delegated click for any booking button on page or in drawers/cards
+    function showBookingStatus(msg, isError = false) {
+        if (!bookingFormStatus) return;
+        bookingFormStatus.textContent = msg;
+        bookingFormStatus.className = `booking-status-box ${isError ? 'error' : ''}`;
+        bookingFormStatus.classList.remove('hidden');
+    }
+
+    function validateBookingInputs() {
+        const name = (document.getElementById('booking-name-input')?.value || '').trim();
+        const phone = (document.getElementById('booking-phone-input')?.value || '').trim().replace(/\s+/g, '');
+        const date = (document.getElementById('booking-date-input')?.value || '').trim();
+        const time = (document.getElementById('booking-time-select')?.value || '').trim();
+        const guests = (document.getElementById('booking-guests-select')?.value || '').trim();
+        const service = (document.getElementById('booking-service-select')?.value || '').trim();
+
+        if (!name || !phone || !date || !time || !service) {
+            showBookingStatus('გთხოვთ შეავსოთ ყველა სავალდებულო ველი.', true);
+            return null;
+        }
+
+        let normalizedPhone = phone;
+        if (normalizedPhone.startsWith("+995")) {
+            normalizedPhone = normalizedPhone.slice(4);
+        } else if (normalizedPhone.startsWith("995")) {
+            normalizedPhone = normalizedPhone.slice(3);
+        }
+
+        if (!/^5\d{8}$/.test(normalizedPhone)) {
+            showBookingStatus('შეცდომა: ტელეფონის ნომერი არასწორია (უნდა იწყებოდეს 5-ით და შედგებოდეს 9 ციფრისგან).', true);
+            return null;
+        }
+
+        return {
+            name: name,
+            phone: "+995 " + normalizedPhone,
+            date: date,
+            time: time,
+            guests: guests || '1 ადამიანი',
+            service: service
+        };
+    }
+
+    function openPaymentStep(payload) {
+        pendingBookingPayload = payload;
+
+        if (bookingPaymentPurpose) {
+            bookingPaymentPurpose.innerHTML = `მეტაფორას ჯავშანი — <strong>${payload.name} (${payload.service})</strong>`;
+        }
+
+        const mobilePayUrl = `${window.location.origin}${window.location.pathname}?pay_mobile=true&name=${encodeURIComponent(payload.name)}&service=${encodeURIComponent(payload.service)}&date=${encodeURIComponent(payload.date)}`;
+        setBookingQrCodeUrl(mobilePayUrl);
+
+        const headerText = document.getElementById('bank-buttons-header-text');
+        const bogBadge = document.getElementById('bog-badge-text');
+        const tbcBadge = document.getElementById('tbc-badge-text');
+
+        if (isMobileDevice) {
+            if (headerText) headerText.textContent = "აირჩიეთ მობაილ ბანკი გადასასვლელად:";
+            if (bogBadge) bogBadge.textContent = "BOG Mobile";
+            if (tbcBadge) tbcBadge.textContent = "TBC Mobile";
+        } else {
+            if (headerText) headerText.textContent = "აირჩიეთ ბანკი ან გადადით ინტერნეტ ბანკში:";
+            if (bogBadge) bogBadge.textContent = "iBank Web";
+            if (tbcBadge) tbcBadge.textContent = "TBC Web";
+        }
+
+        showBookingStep('payment');
+    }
+
+    function handleMetaforaBankClick(bankType, btnElement) {
+        const targetIban = "GE93BG0000000192399800";
+
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(targetIban);
+            }
+        } catch (e) {}
+
+        const bankName = bankType === "bog" ? "საქართველოს ბანკ" : "თიბისი ბანკ";
+        if (btnElement) {
+            const originalHTML = btnElement.innerHTML;
+            btnElement.innerHTML = `
+                <div style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:4px 0;">
+                    <span style="font-weight:800; font-size:0.85rem;">✓ IBAN დაკოპირდა! გადადიხართ ${bankName}-ში...</span>
+                </div>
+            `;
+            setTimeout(() => {
+                btnElement.innerHTML = originalHTML;
+            }, 3000);
+        }
+
+        if (!isMobileDevice) {
+            if (bankType === "bog") {
+                window.open("https://ibank.bog.ge/", "_blank");
+            } else if (bankType === "tbc") {
+                window.open("https://tbconline.ge/tbcrd/login?", "_blank");
+            }
+        } else {
+            if (bankType === "bog") {
+                const bogSchemes = ["bogmbank://", "bogmobile://"];
+                bogSchemes.forEach((scheme, index) => {
+                    setTimeout(() => { window.location.href = scheme; }, index * 300);
+                });
+            } else if (bankType === "tbc") {
+                const tbcSchemes = ["tbcbank://", "tbc-mobile://", "tbc://", "tbconline://"];
+                tbcSchemes.forEach((scheme, index) => {
+                    setTimeout(() => { window.location.href = scheme; }, index * 300);
+                });
+            }
+        }
+    }
+
+    // Event Listeners for Booking Form & Buttons
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const payload = validateBookingInputs();
+            if (!payload) return;
+            openPaymentStep(payload);
+        });
+    }
+
+    if (btnPaymentBack) {
+        btnPaymentBack.addEventListener('click', () => {
+            showBookingStep('form');
+        });
+    }
+
+    if (btnBogPay) {
+        btnBogPay.addEventListener('click', () => handleMetaforaBankClick('bog', btnBogPay));
+    }
+
+    if (btnTbcPay) {
+        btnTbcPay.addEventListener('click', () => handleMetaforaBankClick('tbc', btnTbcPay));
+    }
+
+    if (btnCopyIban && metaforaIbanVal) {
+        btnCopyIban.addEventListener('click', () => {
+            try {
+                navigator.clipboard.writeText(metaforaIbanVal.textContent.trim()).then(() => {
+                    if (copyBtnText) copyBtnText.textContent = "✓ დაკოპირდა!";
+                    setTimeout(() => {
+                        if (copyBtnText) copyBtnText.textContent = "📋 კოპირება";
+                    }, 2000);
+                }).catch(() => {});
+            } catch (e) {}
+        });
+    }
+
+    if (btnPaymentConfirm) {
+        btnPaymentConfirm.addEventListener('click', async () => {
+            if (!pendingBookingPayload) {
+                closeBookingModal();
+                return;
+            }
+
+            const confirmBtnLabel = document.getElementById('confirm-btn-label');
+            const originalLabel = confirmBtnLabel ? confirmBtnLabel.textContent : btnPaymentConfirm.innerHTML;
+            btnPaymentConfirm.disabled = true;
+            if (confirmBtnLabel) confirmBtnLabel.textContent = "⏳ იგზავნება...";
+
+            const payload = {
+                ...pendingBookingPayload,
+                payment_status: "გადახდილია (მომხმარებელმა დაადასტურა)",
+                payment_method: "საბანკო გადარიცხვა (BOG / TBC)"
+            };
+
+            // 1. Send Telegram Notification
+            await sendTelegramBookingNotification(payload);
+
+            // 2. Send Webhook
+            try {
+                fetch('https://meticulous-oyster.pikapod.net/webhook/metafora-booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-booking-secret': 'aeYMKQvGD2j-Sh_j-5aOJvTg6Kg' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.warn("Webhook warning:", err));
+            } catch (e) {}
+
+            btnPaymentConfirm.disabled = false;
+            if (confirmBtnLabel) confirmBtnLabel.textContent = originalLabel;
+            if (bookingForm) bookingForm.reset();
+
+            showBookingStep('success');
+        });
+    }
+
+    if (btnCloseSuccess) {
+        btnCloseSuccess.addEventListener('click', closeBookingModal);
+    }
+
+    // Delegated click for all booking buttons across all pages
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('.open-booking-modal-btn');
         if (btn) {
@@ -1700,7 +2004,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mobOverlay) {
                 mobOverlay.classList.remove('active');
             }
-            openBookingModal();
+            
+            // Extract preselected service if button is on a specific service card/header
+            let sName = '';
+            const card = btn.closest('.service-deep-section, .service-card, .afisha-event-card');
+            if (card) {
+                const titleElem = card.querySelector('.service-deep-title, .card-title, .afisha-title');
+                if (titleElem) sName = titleElem.textContent;
+            }
+            openBookingModal(sName);
         }
     });
 
@@ -1721,6 +2033,28 @@ document.addEventListener('DOMContentLoaded', () => {
             closeBookingModal();
         }
     });
+
+    // Check if opened on mobile via QR scan (?pay_mobile=true)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('pay_mobile') === 'true') {
+        const name = urlParams.get('name') || 'სტუმარი';
+        const service = urlParams.get('service') || 'მეტაფორა Clubs';
+        const date = urlParams.get('date') || new Date().toISOString().split('T')[0];
+
+        openPaymentStep({
+            name: name,
+            phone: 'N/A (Mobile QR Scan)',
+            date: date,
+            time: '19:30 — 22:00',
+            guests: '2 ადამიანი',
+            service: service
+        });
+
+        if (bookingModalOverlay) {
+            bookingModalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
 
     // ==========================================================================
     // DOMINANT COLOR THEME SWITCHER (TEAL vs PLUM) - SPIN TOGGLE
@@ -3290,8 +3624,35 @@ document.addEventListener('DOMContentLoaded', () => {
         "🏛️ სივრცეები": "🏛️ Spaces",
         "📅 ღონისძიებები": "📅 Events",
         "ენის შეცვლა (KA / EN)": "Change Language (KA / EN)",
-        "დომინანტი ფერის შეცვლა": "Change Dominant Theme Color"
-};
+        "დომინანტი ფერის შეცვლა": "Change Dominant Theme Color",
+        "გადახდაზე გადასვლა 💳": "Proceed to Payment 💳",
+        "გადახდაზე გადასვლა": "Proceed to Payment",
+        "გადახდა საბანკო გადარიცხვით": "Payment by Bank Transfer",
+        "ჯავშნის დასასრულებლად გადაიხადეთ საფასური": "Please complete the bank transfer to confirm your booking",
+        "📸 დაასკანერეთ ტელეფონის კამერით": "📸 Scan with your phone camera",
+        "დაასკანერეთ ტელეფონის კამერით": "Scan with your phone camera",
+        "დასკანერებისას ავტომატურად გაგეხსნებათ საქართველოს ბანკისა და თიბისის გადახდის აპლიკაციები 📱": "Scanning automatically opens Bank of Georgia and TBC Bank apps 📱",
+        "აირჩიეთ ბანკი გადასასვლელად:": "Choose your mobile bank:",
+        "აირჩიეთ ბანკი ან გადადით ინტერნეტ ბანკში:": "Choose your bank or open Web Banking:",
+        "საქართველოს ბანკი": "Bank of Georgia",
+        "თიბისი ბანკი": "TBC Bank",
+        "მიმღები": "Recipient",
+        "ანი მაისურაძე": "Ani Maisuradze",
+        "ბანკი": "Bank",
+        "საქართველოს ბანკი (Bank of Georgia)": "Bank of Georgia (BOG)",
+        "ანგარიშის ნომერი (IBAN)": "Account Number (IBAN)",
+        "📋 კოპირება": "📋 Copy",
+        "კოპირება": "Copy",
+        "✓ დაკოპირდა!": "✓ Copied!",
+        "დანიშნულება": "Payment Purpose",
+        "მეტაფორას ჯავშანი": "Metaphora Booking",
+        "← უკან": "← Back",
+        "✅ გადახდა დავასრულე - დადასტურება": "✅ Payment Completed - Confirm",
+        "გადახდა დავასრულე - დადასტურება": "Payment Completed - Confirm",
+        "ჯავშანი და გადახდა დადასტურდა!": "Booking & Payment Confirmed!",
+        "გმადლობთ! თქვენი ჯავშანი წარმატებით დაფიქსირდა. მეტაფორას გუნდი უმოკლეს დროში დაგიკავშირდებათ დეტალების დასაზუსტებლად.": "Thank you! Your booking has been registered successfully. The Metafora team will contact you shortly to confirm all details.",
+        "დახურვა ✨": "Close ✨"
+    };
 
     const I18N_REVERSE_DICTIONARY = {};
     Object.keys(I18N_DICTIONARY).forEach(ka => {
