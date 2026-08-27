@@ -3110,6 +3110,62 @@ html.direct-main-mode #main-website {
     .img-reveal-span { height: 38px; }
     .about-audio-badge-card { justify-content: center; text-align: center; }
 
+    /* Team Section Typewriter on Mobile */
+    .tw-footer-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+    }
+    .tw-author-info {
+        width: 100% !important;
+    }
+    .tw-author-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        gap: 8px !important;
+        flex-wrap: wrap !important;
+    }
+    .tw-author-socials {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+    .tw-author-social-link {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    .tw-author-role {
+        font-size: 0.82rem !important;
+        margin-top: 4px !important;
+    }
+    .tw-nav-arrows {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        margin-top: 4px !important;
+    }
+    .tw-members-ribbon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 14px !important;
+        padding: 10px 6px !important;
+        margin-top: 25px !important;
+        scrollbar-width: none !important;
+    }
+    .tw-members-ribbon::-webkit-scrollbar {
+        display: none !important;
+    }
+    .tw-member-chip {
+        width: 60px !important;
+        height: 60px !important;
+        flex-shrink: 0 !important;
+    }
+
     /* Main Website Header on Mobile */
     .header-actions {
         display: flex !important;
@@ -3121,6 +3177,17 @@ html.direct-main-mode #main-website {
     }
     .header-actions .lang-single-btn {
         display: inline-flex !important;
+    }
+
+    /* Footer Social Chips on Mobile */
+    .footer-social-chips {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+    .footer-map-panel {
+        height: 280px !important;
     }
 }
 
@@ -4898,6 +4965,41 @@ html.direct-main-mode #main-website {
     }
     .service-cta-banner-card {
         padding: 28px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-nav-switcher-bar {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 4px 6px 12px 6px;
+        gap: 8px;
+        scrollbar-width: none;
+    }
+    .service-nav-switcher-bar::-webkit-scrollbar {
+        display: none;
+    }
+    .svc-pill-btn {
+        flex-shrink: 0;
+        font-size: 0.82rem;
+        padding: 7px 14px;
+        white-space: nowrap;
+    }
+    .single-service-title {
+        font-size: 1.65rem;
+    }
+    .single-service-lead {
+        font-size: 0.94rem;
+    }
+    .single-service-video-frame {
+        max-height: 240px;
+    }
+    .service-cta-banner-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
     }
 }
 
