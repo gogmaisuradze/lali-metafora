@@ -108,13 +108,11 @@ html.direct-main-mode #main-website {
     justify-content: center;
     overflow: hidden;
     perspective: 1200px;
-    transition: transform 1.4s cubic-bezier(0.7, 0, 0.2, 1), opacity 1.4s ease-in-out, filter 1.4s ease-in-out, visibility 1.4s;
+    transition: opacity 0.28s ease, visibility 0.28s;
 }
 
 .entrance-portal.portal-exit {
-    transform: scale(2.2);
     opacity: 0;
-    filter: blur(8px);
     visibility: hidden;
     pointer-events: none;
 }
@@ -188,52 +186,54 @@ html.direct-main-mode #main-website {
     justify-content: center;
     transform-origin: center center;
     will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
-/* Blooming / Unfolding from tiny center point with rotation on Enter */
+/* Blooming / Unfolding from tiny center point with full 360deg rotation on Enter */
 .dandelion-wrapper.bloom-enter {
-    animation: dandelionBloomIn 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: dandelionBloomIn 0.82s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes dandelionBloomIn {
     0% {
-        transform: scale(0.001) rotate(-160deg);
+        transform: scale(0.001) rotate(-360deg);
         opacity: 0;
-        filter: blur(6px);
     }
-    30% {
-        opacity: 0.6;
+    40% {
+        opacity: 0.85;
     }
     85% {
-        transform: scale(1.03) rotate(3deg);
-        filter: blur(0px);
+        transform: scale(1.04) rotate(4deg);
+        opacity: 1;
     }
     100% {
         transform: scale(1) rotate(0deg);
         opacity: 1;
-        filter: blur(0px);
     }
 }
 
-/* Collapsing / Imploding back into tiny center point with rotation on Exit */
+/* Collapsing / Imploding back into tiny center point with full 360deg rotation on Exit */
 .dandelion-wrapper.collapse-exit {
-    animation: dandelionCollapseOut 0.55s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
+    animation: dandelionCollapseOut 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 }
 
 @keyframes dandelionCollapseOut {
     0% {
         transform: scale(1) rotate(0deg);
         opacity: 1;
-        filter: blur(0px);
     }
-    40% {
-        transform: scale(0.7) rotate(45deg);
-        opacity: 0.85;
+    30% {
+        transform: scale(0.75) rotate(120deg);
+        opacity: 0.9;
+    }
+    70% {
+        transform: scale(0.3) rotate(260deg);
+        opacity: 0.5;
     }
     100% {
-        transform: scale(0.001) rotate(160deg);
+        transform: scale(0.001) rotate(360deg);
         opacity: 0;
-        filter: blur(6px);
     }
 }
 

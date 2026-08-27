@@ -641,8 +641,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function exitWithDandelionCollapse(targetHash) {
         const dandelionWrapper = document.getElementById('dandelion-wrapper');
-        const entrancePortal = document.getElementById('entrance-portal');
-        const mainWebsite = document.getElementById('main-website');
 
         if (dandelionWrapper) {
             dandelionWrapper.classList.remove('bloom-enter');
@@ -651,7 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             exitPortalAndScroll(targetHash || '#hero');
-        }, 520);
+        }, 380);
     }
 
     function navigateToProfile(profile) {
@@ -703,7 +701,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
-            }, 450);
+            }, 180);
         } else if (targetHash && targetHash !== '#entrance') {
             scrollToAnchor(targetHash);
         }
