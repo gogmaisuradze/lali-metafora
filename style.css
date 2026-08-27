@@ -1222,16 +1222,22 @@ html.direct-main-mode #main-website {
 }
 
 .accent-text-light {
-    color: var(--brand-gold, #f59e0b);
+    color: #ffffff;
     display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: var(--brand-gold, #f59e0b);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: default;
+    cursor: pointer;
 }
 
-.accent-text-light:hover {
-    color: #fbbf24 !important;
-    transform: translateY(-3px) scale(1.05);
-    text-shadow: 0 4px 20px rgba(251, 191, 36, 0.65);
+.accent-text-light:hover,
+.slide-title:hover .accent-text-light {
+    color: var(--brand-gold, #f59e0b) !important;
+    text-decoration-color: #ffffff;
+    transform: translateY(-4px) scale(1.06);
+    text-shadow: 0 4px 22px rgba(245, 158, 11, 0.85);
 }
 
 .slide-desc {
