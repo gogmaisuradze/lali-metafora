@@ -1403,31 +1403,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Quote mark ( “ ) click interaction to toggle typing sound on / off
+    // Quote mark ( “ ) click interaction: ONLY toggles typing sound on / off without stopping or affecting the text!
     document.querySelectorAll('.tw-quote-mark').forEach(quoteMark => {
-        quoteMark.setAttribute('title', 'ბეჭდვის საუნდის ჩართვა / გამორთვა (Play/Pause) ✨');
-        quoteMark.addEventListener('click', () => {
-            const card = quoteMark.closest('#manifesto-typewriter-card') || quoteMark.closest('.typewriter-team-section');
-            if (card && card.id === 'manifesto-typewriter-card') {
-                if (twTypingAudio && !twTypingAudio.paused) {
-                    stopTwTypingAudio();
-                    if (typeof manifestoTypeTimer !== 'undefined') {
-                        clearInterval(manifestoTypeTimer);
-                    }
-                } else {
-                    startTwTypingAudio();
-                    if (typeof startManifestoTypewriter === 'function') {
-                        startManifestoTypewriter(true);
-                    }
-                }
+        quoteMark.setAttribute('title', 'ხმის ჩართვა / გამორთვა (Mute / Unmute) 🔊');
+        quoteMark.style.cursor = 'pointer';
+        quoteMark.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (twTypingAudio && !twTypingAudio.paused) {
+                stopTwTypingAudio();
             } else {
-                if (twTypingAudio && !twTypingAudio.paused) {
-                    stopTwTypingAudio();
-                    clearInterval(typeTimer);
-                } else {
-                    startTwTypingAudio();
-                    setTestimonial(currentTwIdx, true);
-                }
+                startTwTypingAudio();
             }
         });
     });
