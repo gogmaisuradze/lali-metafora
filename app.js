@@ -1035,8 +1035,11 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAfishaCards();
     }
 
-    function getCardSize() {
-        return window.innerWidth <= 640 ? 290 : 365;
+    function getCardDimensions() {
+        const isMobile = window.innerWidth <= 640;
+        const width = isMobile ? Math.min(310, window.innerWidth - 44) : 365;
+        const height = isMobile ? 360 : 365;
+        return { width, height, isMobile };
     }
 
     function getPositionOf(originalIdx) {
@@ -1047,7 +1050,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateStaggerLayout() {
         if (!staggerTrack) return;
-        const cardSize = getCardSize();
+        const { width: cardW, height: cardH, isMobile } = getCardDimensions();
         const len = eventOrder.length;
 
         eventOrder.forEach((originalIdx, orderIdx) => {
@@ -1059,11 +1062,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardDom = staggerCardDoms[originalIdx];
             if (!cardDom) return;
 
-            cardDom.style.width = `${cardSize}px`;
-            cardDom.style.height = `${cardSize}px`;
+            cardDom.style.width = `${cardW}px`;
+            cardDom.style.height = `${cardH}px`;
 
-            const translateX = (cardSize / 1.5) * position;
-            const translateY = isCenter ? -60 : (position % 2 ? 15 : -15);
+            const translateX = (cardW / (isMobile ? 1.45 : 1.5)) * position;
+            const translateY = isCenter ? (isMobile ? -36 : -60) : (position % 2 ? (isMobile ? 18 : 15) : (isMobile ? -8 : -15));
             const rotate = isCenter ? 0 : (position % 2 ? 2.5 : -2.5);
 
             cardDom.style.transform = `translate(-50%, -50%) translateX(${translateX.toFixed(1)}px) translateY(${translateY}px) rotate(${rotate}deg)`;

@@ -3747,7 +3747,14 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
 
     .slide-title { font-size: 1.65rem; }
     .slider-wrapper { height: 420px; }
-    .stagger-carousel-container { height: 480px; }
+    .stagger-carousel-container { height: 570px; border-radius: 26px; }
+    .stagger-card { padding: 22px 18px !important; box-sizing: border-box !important; }
+    .stagger-card-title { font-size: 1.05rem !important; line-height: 1.3 !important; margin-bottom: 6px !important; }
+    .stagger-card-desc { font-size: 0.82rem !important; line-height: 1.45 !important; margin-bottom: 10px !important; -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+    .stagger-card-img { width: 44px !important; height: 48px !important; }
+    .stagger-card .open-booking-modal-btn { padding: 6px 16px !important; font-size: 0.82rem !important; }
+    .stagger-nav-controls { bottom: 14px !important; }
+    .stagger-nav-btn { width: 42px !important; height: 42px !important; }
     .footer-info-panel { padding: 30px 20px; }
     .tw-text-box { font-size: 0.95rem; }
     .typewriter-avatar-halo { width: 130px; height: 130px; }
