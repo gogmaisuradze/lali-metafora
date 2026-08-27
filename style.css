@@ -2742,7 +2742,12 @@ html.direct-main-mode #main-website {
     color: #1e293b;
 }
 
-.form-input {
+.form-input,
+select.form-input,
+input[type="text"].form-input,
+input[type="tel"].form-input,
+input[type="date"].form-input,
+input[type="time"].form-input {
     width: 100%;
     max-width: 100%;
     min-width: 0;
@@ -2759,15 +2764,20 @@ html.direct-main-mode #main-website {
     outline: none;
     transition: all 0.25s ease;
     display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-input[type="date"].form-input,
-input[type="time"].form-input {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    display: block;
+input[type="date"].form-input::-webkit-date-and-time-value {
+    text-align: left;
+}
+
+input[type="date"].form-input::-webkit-calendar-picker-indicator {
+    opacity: 0.75;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 
 .form-input:focus {
@@ -3744,10 +3754,17 @@ input[type="time"].form-input {
     .tw-member-chip { width: 52px; height: 52px; }
     .booking-cta-title { font-size: 1.65rem; }
     .btn-glowing-shimmer { padding: 14px 28px; font-size: 1rem; }
-    .form-row-two { grid-template-columns: 1fr !important; gap: 12px !important; width: 100% !important; }
-    .booking-modal-glass { padding: 28px 18px 24px 18px !important; border-radius: 24px !important; max-height: calc(100dvh - 24px) !important; margin: auto 0 !important; width: 100% !important; }
+    .form-row-two { display: flex !important; flex-direction: column !important; grid-template-columns: none !important; gap: 12px !important; width: 100% !important; box-sizing: border-box !important; }
+    .booking-modal-overlay { padding: 10px 8px !important; overflow-x: hidden !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; touch-action: pan-y !important; overscroll-behavior-y: contain !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+    .booking-modal-glass { padding: 24px 16px 20px 16px !important; border-radius: 22px !important; max-height: calc(100dvh - 20px) !important; margin: auto 0 !important; width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; touch-action: pan-y !important; overscroll-behavior-y: contain !important; box-sizing: border-box !important; }
+    .modal-close-btn { top: 12px !important; right: 12px !important; width: 36px !important; height: 36px !important; font-size: 1.3rem !important; z-index: 25 !important; }
+    .modal-booking-form { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; overflow-x: hidden !important; gap: 12px !important; }
+    .form-group { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; }
+    .form-input, select.form-input, input[type="text"].form-input, input[type="tel"].form-input, input[type="date"].form-input { width: 100% !important; max-width: 100% !important; min-width: 0 !important; height: 46px !important; padding: 10px 12px !important; border-radius: 14px !important; box-sizing: border-box !important; -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important; font-size: 0.90rem !important; display: block !important; margin: 0 !important; }
+    input[type="date"].form-input::-webkit-date-and-time-value { text-align: left !important; }
+    .btn-modal-submit { width: 100% !important; height: 48px !important; padding: 12px 18px !important; font-size: 0.96rem !important; border-radius: 9999px !important; margin-top: 8px !important; margin-bottom: 2px !important; box-sizing: border-box !important; flex-shrink: 0 !important; }
+    .metafora-payment-grid { grid-template-columns: 1fr !important; gap: 14px !important; width: 100% !important; box-sizing: border-box !important; }
     .payment-grid-layout { grid-template-columns: 1fr !important; gap: 16px !important; }
-    .modal-close-btn { top: 12px !important; right: 12px !important; width: 34px !important; height: 34px !important; font-size: 1.2rem !important; }
     .reveal-text { font-size: 1.8rem; }
     .img-reveal-span { height: 38px; }
     .about-audio-badge-card { justify-content: center; text-align: center; }
@@ -3864,6 +3881,15 @@ input[type="time"].form-input {
     outline: none;
     padding: 10px;
     z-index: 1000;
+}
+
+.metabot-launcher-btn.is-hidden,
+body.metabot-open .metabot-launcher-btn {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: scale(0.4) !important;
+    display: none !important;
 }
 
 .metabot-launcher-btn * {
@@ -4592,44 +4618,46 @@ input[type="time"].form-input {
 @media (max-width: 768px) {
     .metabot-widget-container {
         position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
+        bottom: 18px !important;
+        right: 18px !important;
         z-index: 999999 !important;
     }
 
     .metabot-chat-window {
         position: fixed !important;
         top: auto !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        height: 72vh !important;
-        max-height: 80vh !important;
-        border-radius: 26px 26px 0 0 !important;
-        box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.28) !important;
-        margin: 0 !important;
+        bottom: 12px !important;
+        left: 10px !important;
+        right: 10px !important;
+        width: auto !important;
+        max-width: calc(100vw - 20px) !important;
+        height: 68vh !important;
+        max-height: calc(100dvh - 28px) !important;
+        border-radius: 22px !important;
+        border: 1.5px solid rgba(1, 97, 102, 0.25) !important;
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.28) !important;
+        margin: 0 auto !important;
         box-sizing: border-box !important;
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
-        transform: translateY(100%) !important;
+        transform: translateY(20px) scale(0.96) !important;
         transform-origin: bottom center !important;
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease !important;
+        z-index: 1000000 !important;
     }
 
     .metabot-chat-window.active {
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateY(0) !important;
+        transform: translateY(0) scale(1) !important;
         display: flex !important;
     }
     
     .metabot-launcher-btn {
-        width: 54px !important;
-        height: 54px !important;
+        width: 52px !important;
+        height: 52px !important;
     }
 
     .card-feature-video {

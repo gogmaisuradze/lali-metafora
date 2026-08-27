@@ -2689,22 +2689,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!launcherBtn || !chatWindow) return;
 
+        const openChat = () => {
+            chatWindow.classList.add('active');
+            launcherBtn.classList.add('is-hidden');
+            document.body.classList.add('metabot-open');
+            if (launcherBadge) launcherBadge.style.display = 'none';
+            if (chatInput) setTimeout(() => chatInput.focus(), 300);
+        };
+
+        const closeChat = () => {
+            chatWindow.classList.remove('active');
+            launcherBtn.classList.remove('is-hidden');
+            document.body.classList.remove('metabot-open');
+        };
+
         // Toggle chat window
         launcherBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            const isActive = chatWindow.classList.toggle('active');
-            if (isActive) {
-                if (launcherBadge) launcherBadge.style.display = 'none';
-                if (chatInput) setTimeout(() => chatInput.focus(), 300);
+            if (chatWindow.classList.contains('active')) {
+                closeChat();
+            } else {
+                openChat();
             }
         });
 
         if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                chatWindow.classList.remove('active');
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeChat();
             });
         }
+
+        // Close when tapping outside chat window
+        document.addEventListener('click', (e) => {
+            if (chatWindow.classList.contains('active') && !e.target.closest('#metabot-chat-window') && !e.target.closest('#metabot-launcher-btn')) {
+                closeChat();
+            }
+        });
+
+        // Close on ESC key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && chatWindow.classList.contains('active')) {
+                closeChat();
+            }
+        });
 
         // Handle Chip click
         if (chipsContainer) {
