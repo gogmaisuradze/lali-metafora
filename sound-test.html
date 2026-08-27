@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>მეტაფორა — კლავიშის საუნდების ტესტერი</title>
+    <style>
+        body {
+            background: #061c1e;
+            color: #f7f9f9;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .tester-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 186, 0, 0.3);
+            border-radius: 24px;
+            padding: 36px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-size: 1.5rem;
+            color: #ffba00;
+            margin-top: 0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        p.subtitle {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .sound-row {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+        .sound-row:hover {
+            border-color: #ffba00;
+            background: rgba(255, 186, 0, 0.08);
+        }
+        .sound-info {
+            flex: 1;
+        }
+        .sound-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .sound-desc {
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+        .play-btn {
+            background: #ffba00;
+            color: #061c1e;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .play-btn:hover {
+            transform: scale(1.05);
+            background: #ffd053;
+        }
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+        .test-box {
+            margin-top: 24px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed rgba(255, 186, 0, 0.4);
+            border-radius: 16px;
+            padding: 18px;
+        }
+        .test-input {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            outline: none;
+        }
+        .test-input:focus {
+            border-color: #ffba00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tester-card">
+        <h1>⌨️ კლავიშის 1 დაჭერის საუნდები</h1>
+        <p class="subtitle">შექმნილია თქვენი <code>mp3.wav</code> საუნდის საფუძველზე</p>
+
+        <!-- Sound 1 -->
+        <div class="sound-row">
+            <div class="sound-info">
+                <span class="sound-title">1. Crisp Click (სუფთა კლიკი)</span>
+                <span class="sound-desc">გამოკვეთილი, სუფთა მექანიკური დარტყმა</span>
+            </div>
+            <button class="play-btn" onclick="playSound('click_var1_crisp.mp3')">▶ მოსმენა</button>
+        </div>
+
+        <!-- Sound 2 -->
+        <div class="sound-row">
+            <div class="sound-info">
+                <span class="sound-title">2. Soft Vintage (რბილი ვინტაჟი)</span>
+                <span class="sound-desc">რბილი, ხავერდოვანი ვინტაჟური დაჭერა</span>
+            </div>
+            <button class="play-btn" onclick="playSound('click_var2_soft.mp3')">▶ მოსმენა</button>
+        </div>
+
+        <!-- Sound 3 -->
+        <div class="sound-row">
+            <div class="sound-info">
+                <span class="sound-title">3. Deep Strike (ღრმა კნოპკა)</span>
+                <span class="sound-desc">ღრმა რეზონანსული მექანიკური დაჭერა</span>
+            </div>
+            <button class="play-btn" onclick="playSound('click_var3_deep.mp3')">▶ მოსმენა</button>
+        </div>
+
+        <!-- Sound 4 -->
+        <div class="sound-row">
+            <div class="sound-info">
+                <span class="sound-title">4. Quick Snap (სწრაფი წკაპი)</span>
+                <span class="sound-desc">მკაფიო და სწრაფი მსუბუქი წკაპი</span>
+            </div>
+            <button class="play-btn" onclick="playSound('click_var4_snap.mp3')">▶ მოსმენა</button>
+        </div>
+
+        <!-- Interactive Typing Box -->
+        <div class="test-box">
+            <label for="live-input" style="font-size: 0.85rem; color: #ffba00; font-weight: 600;">
+                ✍️ აკრიფეთ ტექსტი აქ და მოისმინეთ დაჭერისას:
+            </label>
+            <input type="text" id="live-input" class="test-input" placeholder="დააკლიკეთ აქ და დააჭირეთ კლავიატურას..." onkeydown="handleType(event)">
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="index.html" style="color: #a0aec0; font-size: 0.85rem; text-decoration: none;">← მთავარ გვერდზე დაბრუნება</a>
+        </div>
+    </div>
+
+    <script>
+        let currentActiveFile = 'click_var1_crisp.mp3';
+
+        function playSound(file) {
+            currentActiveFile = file;
+            const audio = new Audio(file);
+            audio.volume = 0.9;
+            audio.play().catch(e => console.error(e));
+        }
+
+        function handleType(e) {
+            if (['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(e.key)) return;
+            const audio = new Audio(currentActiveFile);
+            audio.volume = 0.85;
+            audio.play().catch(() => {});
+        }
+    </script>
+</body>
+</html>
