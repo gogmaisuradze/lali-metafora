@@ -1,5 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#ffffff"/>
-  <!-- Official TBC 3-wing propeller logo -->
-  <path d="M 50,14 C 54,32 64,44 84,50 C 64,56 54,68 50,86 C 46,68 36,56 16,50 C 36,44 46,32 50,14 Z" fill="#00adef"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <rect width="120" height="120" rx="24" fill="#ffffff"/>
+  <g transform="translate(18, 18) scale(0.85)">
+    <!-- Official TBC Bank Modern Propeller / Tri-Leaf Symbol -->
+    <!-- Top Leaf -->
+    <path d="M 49,6 C 48,24 44,38 28,45 C 38,48 48,46 54,40 C 58,32 58,18 49,6 Z" fill="#00adef"/>
+    <!-- Bottom Left Leaf -->
+    <path d="M 6,56 C 22,60 36,54 42,40 C 34,34 24,36 16,42 C 8,48 4,50 6,56 Z" fill="#00adef"/>
+    <!-- Bottom Right Leaf -->
+    <path d="M 88,62 C 72,54 62,60 54,74 C 64,78 76,74 82,68 C 86,64 88,64 88,62 Z" fill="#00adef"/>
+    <!-- Center Core Connection -->
+    <circle cx="49" cy="49" r="7" fill="#00adef"/>
+  </g>
 </svg>
