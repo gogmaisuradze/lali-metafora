@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 8080;
 const MIME_TYPES = {
     '.html': 'text/html; charset=utf-8',
     '.css': 'text/css; charset=utf-8',
@@ -13,6 +13,8 @@ const MIME_TYPES = {
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
     '.mp4': 'video/mp4',
+    '.mp3': 'audio/mpeg',
+    '.wav': 'audio/wav',
     '.json': 'application/json',
     '.pdf': 'application/pdf'
 };
@@ -36,7 +38,7 @@ const server = http.createServer((req, res) => {
         const range = req.headers.range;
         const total = stats.size;
 
-        if (range && ext === '.mp4') {
+        if (range && (ext === '.mp4' || ext === '.mp3' || ext === '.wav')) {
             const parts = range.replace(/bytes=/, '').split('-');
             const partialstart = parts[0];
             const partialend = parts[1];
@@ -67,5 +69,13 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-    console.log('Server running at http://localhost:' + PORT);
+    console.log('🚀 METAPHORA Server running at:');
+    console.log('👉 Home:                    http://localhost:' + PORT);
+    console.log('👉 1. Personal Development: http://localhost:' + PORT + '/service-personal-development.html');
+    console.log('👉 2. Business:             http://localhost:' + PORT + '/service-business.html');
+    console.log('👉 3. Think Tank:           http://localhost:' + PORT + '/service-think-tank.html');
+    console.log('👉 4. Art:                  http://localhost:' + PORT + '/service-art.html');
+    console.log('👉 5. Clubs:                http://localhost:' + PORT + '/service-clubs.html');
+    console.log('👉 Blog:                    http://localhost:' + PORT + '/blog.html');
+    console.log('👉 Gallery:                 http://localhost:' + PORT + '/gallery.html');
 });

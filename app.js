@@ -812,8 +812,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    });
-
     // Featured Slider Auto-Play Logic
     const slides = Array.from(document.querySelectorAll('.hero-slide'));
     const indicators = Array.from(document.querySelectorAll('.slider-indicators .indicator'));
@@ -1066,24 +1064,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const serviceVideoCards = document.querySelectorAll('.service-five-card');
     serviceVideoCards.forEach(card => {
         const video = card.querySelector('video');
-        if (!video) return;
+        if (!video || typeof video.pause !== 'function') return;
 
         video.muted = true;
-        video.pause();
+        try { video.pause(); } catch(e) {}
 
-        video.addEventListener('loadedmetadata', () => {
-            video.currentTime = 0.01;
-        });
+        if (typeof video.addEventListener === 'function') {
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = 0.01;
+            });
+        }
 
         card.addEventListener('mouseenter', () => {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {});
+            if (typeof video.play === 'function') {
+                const playPromise = video.play();
+                if (playPromise !== undefined && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
             }
         });
 
         card.addEventListener('mouseleave', () => {
-            video.pause();
+            if (typeof video.pause === 'function') {
+                video.pause();
+            }
         });
     });
 
@@ -1096,7 +1100,9 @@ document.addEventListener('DOMContentLoaded', () => {
             audio: 'audio_1.mp3',
             text: '„მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარებისა და შთაგონებისთვის.',
             name: 'ლალი',
+            fullname: 'ლალი ბადრიძე',
             jobtitle: 'დამფუძნებელი & ფასილიტატორი',
+            facebook: 'https://www.facebook.com/lali.badridze',
             time: '0:14 / 0:45'
         },
         {
@@ -1212,6 +1218,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (twName) twName.textContent = current.name;
         if (twRole) twRole.textContent = current.jobtitle;
         if (twTime) twTime.textContent = current.time;
+
+        const twSocialFb = document.getElementById('tw-social-fb');
+        if (twSocialFb) {
+            if (current.facebook) {
+                twSocialFb.href = current.facebook;
+                twSocialFb.style.display = 'inline-flex';
+                twSocialFb.title = `${current.name} — Facebook პროფილი`;
+            } else {
+                twSocialFb.style.display = 'none';
+            }
+        }
 
         typewriteText(current.text);
 
@@ -1357,28 +1374,75 @@ document.addEventListener('DOMContentLoaded', () => {
         startManifestoTypewriter();
     }
 
-    // About Audio Player
+    // ==========================================================================
+    // 4.5. MANIFESTO MUSIC PLAYER (metafora.mp3)
+    // ==========================================================================
     const aboutPlayBtn = document.getElementById('about-play-btn');
     const aboutPlayIcon = document.getElementById('about-play-icon');
     const aboutPlayText = document.getElementById('about-play-text');
     const aboutVisualizer = document.getElementById('about-visualizer');
     const aboutAudioTime = document.getElementById('about-audio-time');
-    let isAboutAudioPlaying = false;
+    
+    let manifestoAudio = null;
+    try {
+        if (typeof Audio !== 'undefined') {
+            manifestoAudio = new Audio('metafora.mp3');
+            manifestoAudio.preload = 'metadata';
+        }
+    } catch (e) {
+        console.warn('Audio initialization skipped in this environment:', e);
+    }
 
-    if (aboutPlayBtn && aboutVisualizer && aboutPlayIcon) {
-        aboutPlayBtn.addEventListener('click', () => {
-            isAboutAudioPlaying = !isAboutAudioPlaying;
-            if (isAboutAudioPlaying) {
-                aboutVisualizer.classList.add('playing');
-                aboutPlayIcon.textContent = '❚❚';
-                if (aboutPlayText) aboutPlayText.textContent = 'პაუზა';
-                aboutPlayBtn.style.background = '#582847';
-                if (aboutAudioTime) aboutAudioTime.textContent = '0:18 / 1:18';
+    function formatAudioSeconds(sec) {
+        if (isNaN(sec) || sec < 0) return '0:00';
+        const mins = Math.floor(sec / 60);
+        const secs = Math.floor(sec % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    if (aboutPlayBtn && manifestoAudio) {
+        manifestoAudio.addEventListener('loadedmetadata', () => {
+            const total = formatAudioSeconds(manifestoAudio.duration);
+            if (aboutAudioTime) aboutAudioTime.textContent = `0:00 / ${total}`;
+        });
+
+        manifestoAudio.addEventListener('timeupdate', () => {
+            const cur = formatAudioSeconds(manifestoAudio.currentTime);
+            const total = formatAudioSeconds(manifestoAudio.duration || 179);
+            if (aboutAudioTime) aboutAudioTime.textContent = `${cur} / ${total}`;
+        });
+
+        manifestoAudio.addEventListener('ended', () => {
+            if (aboutVisualizer) aboutVisualizer.classList.remove('playing');
+            if (aboutPlayIcon) aboutPlayIcon.textContent = '▶';
+            if (aboutPlayText) aboutPlayText.textContent = 'მოსმენა';
+            aboutPlayBtn.style.background = '';
+            const total = formatAudioSeconds(manifestoAudio.duration || 179);
+            if (aboutAudioTime) aboutAudioTime.textContent = `0:00 / ${total}`;
+        });
+
+        manifestoAudio.addEventListener('pause', () => {
+            if (aboutVisualizer) aboutVisualizer.classList.remove('playing');
+            if (aboutPlayIcon) aboutPlayIcon.textContent = '▶';
+            if (aboutPlayText) aboutPlayText.textContent = 'მოსმენა';
+            aboutPlayBtn.style.background = '';
+        });
+
+        manifestoAudio.addEventListener('play', () => {
+            if (aboutVisualizer) aboutVisualizer.classList.add('playing');
+            if (aboutPlayIcon) aboutPlayIcon.textContent = '❚❚';
+            if (aboutPlayText) aboutPlayText.textContent = 'პაუზა';
+            aboutPlayBtn.style.background = 'var(--brand-plum)';
+        });
+
+        aboutPlayBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (manifestoAudio.paused) {
+                manifestoAudio.play().catch(err => {
+                    console.log('Audio autoplay prevented or error:', err);
+                });
             } else {
-                aboutVisualizer.classList.remove('playing');
-                aboutPlayIcon.textContent = '▶';
-                if (aboutPlayText) aboutPlayText.textContent = 'მოსმენა';
-                aboutPlayBtn.style.background = '#7a3963';
+                manifestoAudio.pause();
             }
         });
     }
@@ -1431,7 +1495,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     const bookingModalOverlay = document.getElementById('booking-modal-overlay');
     const modalCloseBtn = document.getElementById('modal-close-btn');
-    const openModalButtons = document.querySelectorAll('.open-booking-modal-btn');
 
     function openBookingModal() {
         if (bookingModalOverlay) {
@@ -1447,11 +1510,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    openModalButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    // Universal delegated click for any booking button on page or in drawers/cards
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.open-booking-modal-btn');
+        if (btn) {
             e.preventDefault();
+            const mobOverlay = document.getElementById('mobile-nav-overlay');
+            if (mobOverlay) {
+                mobOverlay.classList.remove('active');
+            }
             openBookingModal();
-        });
+        }
     });
 
     if (modalCloseBtn) {
@@ -1945,66 +2014,94 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show Typing indicator
             showTyping(true);
 
+            // Timeout controller (2.5s) to guarantee instant fallback
+            let answered = false;
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => {
+                if (!answered) {
+                    controller.abort();
+                    answered = true;
+                    showTyping(false);
+                    appendMessage('bot', generateBotResponse(query));
+                }
+            }, 2500);
+
             fetch(METAFORA_CHAT_WEBHOOK, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: query, sessionId: metaforaSessionId() })
+                body: JSON.stringify({ message: query, sessionId: metaforaSessionId() }),
+                signal: controller.signal
             })
-            .then(r => r.json())
+            .then(r => {
+                if (!r.ok) throw new Error('Webhook error ' + r.status);
+                return r.json();
+            })
             .then(data => {
-                showTyping(false);
-                const out = (data && data.output) ? data.output : 'ბოდიში, ვერ დაგიკავშირდი. სცადე ხელახლა ან დაგვირეკე: 📞 599 22 82 28';
-                appendMessage('bot', formatBotHtml(out));
+                if (!answered) {
+                    clearTimeout(timeoutId);
+                    answered = true;
+                    showTyping(false);
+                    if (data && data.output && data.output.trim().length > 0) {
+                        appendMessage('bot', formatBotHtml(data.output));
+                    } else {
+                        appendMessage('bot', generateBotResponse(query));
+                    }
+                }
             })
             .catch(() => {
-                showTyping(false);
-                appendMessage('bot', '<p>ბოდიში, დროებითი შეფერხებაა 🙏 სცადე ხელახლა ან დაგვირეკე: 📞 599 22 82 28</p>');
+                if (!answered) {
+                    clearTimeout(timeoutId);
+                    answered = true;
+                    showTyping(false);
+                    appendMessage('bot', generateBotResponse(query));
+                }
             });
         }
 
         function generateBotResponse(input) {
             const q = input.toLowerCase();
 
-            if (q.includes('რა არის') || q.includes('მეტაფორა') || q.includes('იდეა') || q.includes('კონცეფცია') || q.includes('about')) {
-                return `<p>✨ <strong>მეტაფორა</strong> არის <em>Edutainment Hub &amp; Third Place</em> — მესამე ადგილი სახლსა და სამსახურს მიღმა!</p><p>ეს არის სივრცე პიროვნული ზრდისთვის, ინტელექტუალური დისკუსიებისთვის, ხელოვნებისთვის და შინაური, მყუდრო კომუნისთვის.</p>`;
+            if (q.includes('რა არის') || q.includes('მეტაფორა') || q.includes('იდეა') || q.includes('კონცეფცია') || q.includes('about') || q.includes('მესამე ადგილი') || q.includes('third place')) {
+                return `<p>✨ <strong>მეტაფორა</strong> არის <em>Edutainment Hub &amp; Third Place</em> — მესამე ადგილი სახლსა და სამსახურს მიღმა!</p><p>ეს არის უნიკალური სივრცე თბილისში, რომელიც აერთიანებს პიროვნულ განვითარებას, ბიზნეს-ნეთვორქინგს, სალონურ დისკუსიებს (Think Tank), Playback თეატრსა და თემატურ კლუბებს.</p>`;
             }
 
-            if (q.includes('სერვის') || q.includes('მიმართულებ') || q.includes('რას გვთავაზობთ') || q.includes('service')) {
-                return `<p>🌱 <strong>მეტაფორას 5 ძირითადი მიმართულება:</strong></p>
-                <ol style=\"margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px;\">
-                    <li><strong>1. Personal Development</strong> — პიროვნული ზრდა და ფსიქოლოგია;</li>
-                    <li><strong>2. Business</strong> — B2B შეხვედრები &amp; ნეთვორქინგი;</li>
-                    <li><strong>3. Think Tank</strong> — სალონური დისკუსიები &amp; დებატები;</li>
-                    <li><strong>4. Art</strong> — Playback თეატრი &amp; არტ-თერაპია;</li>
-                    <li><strong>5. Clubs</strong> — მესამე სივრცე &amp; Coworking Lounge.</li>
-                </ol>`;
+            if (q.includes('სერვის') || q.includes('მიმართულებ') || q.includes('რას გვთავაზობთ') || q.includes('service') || q.includes('ფასი') || q.includes('რა გაქვთ')) {
+                return `<p>🌱 <strong>მეტაფორას 5 ინდივიდუალური მიმართულება:</strong></p>
+                <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="service-personal-development.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🌱 1. Personal Development</a> — ფსიქოთერაპია &amp; ბალანსი</li>
+                    <li><a href="service-business.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">💼 2. Business</a> — B2B &amp; Mastermind შეხვედრები</li>
+                    <li><a href="service-think-tank.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🧠 3. Think Tank</a> — სალონური დისკუსიები</li>
+                    <li><a href="service-art.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🎨 4. Art</a> — Playback თეატრი &amp; არტ-თერაპია</li>
+                    <li><a href="service-clubs.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🏛️ 5. Clubs</a> — მესამე სივრცე &amp; სამაგიდო თამაშები</li>
+                </ul>
+                <p style="margin-top: 8px;">👉 დააჭირეთ სასურველ სერვისს მის ინდივიდუალურ გვერდზე გადასასვლელად!</p>`;
             }
 
-            if (q.includes('თეატრ') || q.includes('playback') || q.includes('პლეიბექ') || q.includes('art') || q.includes('ხელოვნებ')) {
-                return `<p>🎭 <strong>Playback თეატრი &amp; Art:</strong></p><p>Playback თეატრი არის ინტერაქციული იმპროვიზაციული ხელოვნება, სადაც მაყურებლების მიერ მოყოლილი ისტორიები და ემოციები სცენაზე ცოცხლდება. ეს არის საუკეთესო გზა ემოციური განტვირთვისა და თვითშემეცნებისთვის!</p>`;
+            if (q.includes('თეატრ') || q.includes('playback') || q.includes('პლეიბექ') || q.includes('art') || q.includes('ხელოვნებ') || q.includes('სპექტაკლ')) {
+                return `<p>🎭 <strong>Playback თეატრი &amp; Art:</strong></p><p>Playback თეატრი არის ინტერაქციული იმპროვიზაციული ხელოვნება, სადაც მაყურებლების მიერ მოყოლილი ისტორიები და ემოციები სცენაზე ცოცხლდება. ეს არის საუკეთესო გზა ემოციური განტვირთვისა და თვითშემეცნებისთვის!</p><p>გვესტუმრეთ და გახდით სპექტაკლის თანაავტორი ✨</p>`;
             }
 
-            if (q.includes('ჯავშან') || q.includes('დაჯავშნ') || q.includes('ადგილ') || q.includes('ფას') || q.includes('რეგისტრაცი') || q.includes('book')) {
-                return `<p>📅 <strong>ადგილის დაჯავშნა:</strong></p><p>ადგილის დასაჯავშნად შეგიძლიათ გამოიყენოთ ღილაკი <strong>„ჯავშანი“</strong> ზედა მენიუში, ან გადახვიდეთ კონტაქტის სექციაში. ჩვენი გუნდი უმოკლეს დროში დაგიკავშირდებათ დეტალების შესათანხმებლად! ✨</p>`;
+            if (q.includes('ჯავშან') || q.includes('დაჯავშნ') || q.includes('ადგილ') || q.includes('რეგისტრაცი') || q.includes('book') || q.includes('ვიზიტი')) {
+                return `<p>📅 <strong>ადგილის დაჯავშნა:</strong></p><p>ადგილის დასაჯავშნად შეგიძლიათ დააჭიროთ ღილაკს <strong>„ჯავშანი“</strong> ზედა მენიუში, ან გადახვიდეთ კონტაქტის ფორმაზე. ჩვენი გუნდი უმოკლეს დროში დაგიკავშირდებათ დეტალების შესათანხმებლად! ✨</p>`;
             }
 
-            if (q.includes('გუნდ') || q.includes('ვინ ხართ') || q.includes('წევრ') || q.includes('team')) {
-                return `<p>👥 <strong>მეტაფორას გუნდი:</strong></p><p>ჩვენს გუნდში არიან პოზიტიური ფსიქოთერაპევტები, ბიზნეს-მენტორები, Playback თეატრის მსახიობები და საზოგადოებრივი მოდერატორები. გაიცანით ჩვენი გუნდის სრული წრე მთავარი გვერდის გუნდის სექციაში!</p>`;
+            if (q.includes('გუნდ') || q.includes('ვინ ხართ') || q.includes('წევრ') || q.includes('team') || q.includes('დამფუძნებელ')) {
+                return `<p>👥 <strong>მეტაფორას გუნდი:</strong></p><p>ჩვენს გუნდში არიან სერტიფიცირებული პოზიტიური ფსიქოთერაპევტები, ბიზნეს-მენტორები, Playback თეატრის მსახიობები და საზოგადოებრივი მოდერატორები. გაიცანით ჩვენი გუნდის სრული წრე მთავარი გვერდის გუნდის სექციაში!</p>`;
             }
 
-            if (q.includes('ლოკაცი') || q.includes('სად') || q.includes('მისამართ') || q.includes('კონტაქტ') || q.includes('ტელეფონ') || q.includes('location')) {
-                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში. <br>📞 ტელეფონი: <strong>+995 599 00 00 00</strong><br>✉️ ელ.ფოსტა: <strong>info@metafora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
+            if (q.includes('ლოკაცი') || q.includes('სად') || q.includes('მისამართ') || q.includes('კონტაქტ') || q.includes('ტელეფონ') || q.includes('ნომერ') || q.includes('location')) {
+                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, საქართველოში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>info@metafora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
             }
 
-            if (q.includes('გალერე') || q.includes('ფოტო') || q.includes('gallery')) {
-                return `<p>🖼️ <strong>ფოტოგალერეა:</strong></p><p>გალერეის გვერდზე შეგიძლიათ იხილოთ მეტაფორას უნიკალური სივრცეები (შესასვლელი, მოზაიკა, Themed Bar, კლუბების ოთახი) და ჩვენი გუნდის ფოტოები!</p>`;
+            if (q.includes('გალერე') || q.includes('ფოტო') || q.includes('gallery') || q.includes('სივრცე')) {
+                return `<p>🖼️ <strong>ფოტოგალერეა:</strong></p><p>გალერეის გვერდზე შეგიძლიათ იხილოთ მეტაფორას უნიკალური სივრცეები (შესასვლელი, მოზაიკა, Themed Bar, კლუბების ოთახი) და ჩვენი გუნდის ფოტოები! 👉 <a href="gallery.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">გალერეის ნახვა</a></p>`;
             }
 
-            if (q.includes('ბლოგ') || q.includes('სტატი') || q.includes('blog')) {
-                return `<p>📖 <strong>ბლოგი:</strong></p><p>ბლოგის გვერდზე გაეცნობით საინტერესო სტატიებს „მესამე ადგილის“ ფენომენზე, Playback თეატრის თერაპიულ ეფექტზე, ემოციურ ინტელექტსა და პიროვნულ ბალანსზე.</p>`;
+            if (q.includes('ბლოგ') || q.includes('სტატი') || q.includes('ნაშრომ') || q.includes('blog')) {
+                return `<p>📖 <strong>მეტაფორას ბლოგი &amp; სტატიები:</strong></p><p>ბლოგის გვერდზე გაეცნობით საინტერესო სტატიებს „მესამე ადგილის“ ფენომენზე, Playback თეატრის თერაპიულ ეფექტზე, ემოციურ ინტელექტსა და პიროვნულ ბალანსზე. 👉 <a href="blog.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">ბლოგის გახსნა</a></p>`;
             }
 
-            return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ან დაგვიკავშირდეთ ნომერზე <strong>+995 599 00 00 00</strong>.</p>`;
+            return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ქვემოთ, ან დაგვიკავშირდეთ ნომერზე <strong>📞 599 22 82 28</strong>.</p>`;
         }
 
         function escapeHtml(text) {
@@ -2018,31 +2115,68 @@ document.addEventListener('DOMContentLoaded', () => {
     // 16. MOBILE NAVIGATION DRAWER
     // ==========================================================================
     function initMobileNav() {
-        const toggleBtn = document.getElementById('mobile-menu-toggle-btn');
+        const toggleBtns = document.querySelectorAll('#mobile-menu-toggle-btn, #mobile-menu-btn, .mobile-menu-toggle-btn, .mobile-menu-btn');
         const overlay = document.getElementById('mobile-nav-overlay');
         const closeBtn = document.getElementById('mobile-nav-close-btn');
 
-        if (!toggleBtn || !overlay) return;
+        if (!overlay) return;
 
-        toggleBtn.addEventListener('click', () => {
+        const openMenu = () => {
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-        });
+        };
 
         const closeMenu = () => {
             overlay.classList.remove('active');
             document.body.style.overflow = '';
         };
 
-        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+        if (toggleBtns && toggleBtns.length > 0) {
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (overlay.classList.contains('active')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
 
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) closeMenu();
+            if (e.target === overlay) {
+                closeMenu();
+            }
+        });
+
+        // Close on ESC key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Auto close if window is resized above 992px
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992 && overlay.classList.contains('active')) {
+                closeMenu();
+            }
         });
 
         // Accordion expand/collapse on category click
         overlay.querySelectorAll('.mobile-accordion-toggle').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 const acc = btn.closest('.mobile-nav-accordion');
                 if (acc) {
@@ -2055,8 +2189,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Close drawer on navigation link click
-        overlay.querySelectorAll('a').forEach(link => {
+        // Close drawer on navigation link or button click
+        overlay.querySelectorAll('a, .open-booking-modal-btn').forEach(link => {
             link.addEventListener('click', () => {
                 closeMenu();
             });
@@ -2140,12 +2274,241 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==========================================================================
+    // 17.5. ARTICLE READER DRAWER CONTROLLER (Right Sliding Glassmorphism Drawer)
+    // ==========================================================================
+    const ARTICLES_DATABASE = {
+        'article-featured': {
+            badge: '🌟 რჩეული სტატია • 5 წთ',
+            duration: '5 წთ საკითხავი',
+            img: 'მთავარის ფოტოები/ჩვენს შესახებ.jpeg',
+            title: 'რა არის „მესამე ადგილი“ და რატომ სჭირდება ის თანამედროვე ადამიანს?',
+            author: 'მეტაფორას გუნდი',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>თანამედროვე ურბანულ ცხოვრებაში ადამიანების უმრავლესობის ყოველდღიურობა ორ ძირითად წერტილს შორის მოძრაობით შემოიფარგლება: <strong>სახლი</strong> (პირველი ადგილი) და <strong>სამსახური</strong> (მეორე ადგილი).</p>
+                <p>1989 წელს ცნობილმა ამერიკელმა ურბან-სოციოლოგმა <strong>რეი ოლდენბურგმა</strong> შემოიტანა რევოლუციური კონცეფცია — <em>„მესამე ადგილი“ (The Third Place)</em>. ეს არის სივრცე, სადაც ადამიანი არ არის შებოჭილი არც ოჯახური ვალდებულებებით და არც პროფესიული იერარქიით.</p>
+                <blockquote>
+                    „მესამე ადგილი არის საზოგადოების სულიერი წამყვანი. იქ, სადაც ადამიანები თანასწორად საუბრობენ, იბადება ნამდვილი კავშირები და შინაგანი თავისუფლება.“
+                </blockquote>
+                <h3>რატომ არის მეტაფორა შენი მესამე ადგილი?</h3>
+                <p>„მეტაფორა“ შეიქმნა სწორედ ამ იდეის გარშემო — გავხდეთ შენი მესამე ადგილი თბილისში. სივრცე, სადაც შეგიძლია მოხვიდე, დალიო ყავა, იკითხო წიგნი, ჩაერთო სალონურ დისკუსიაში ან უბრალოდ მოუსმინო Playback თეატრის იმპროვიზაციას.</p>
+                <div class="article-takeaway-box">
+                    <h4>✨ მესამე ადგილის 4 მთავარი ნიშანი:</h4>
+                    <ul>
+                        <li><strong>ნეიტრალური ტერიტორია:</strong> არანაირი ვალდებულება ან ფორმალური წესები;</li>
+                        <li><strong>თანასწორობა:</strong> სოციალური სტატუსი კარს მიღმა რჩება;</li>
+                        <li><strong>მთავარი აქტივობა — ცოცხალი საუბარი:</strong> გულწრფელი და შინაარსიანი დიალოგი;</li>
+                        <li><strong>შინაური გარემო:</strong> განცდა, რომ ყოველთვის გელიან.</li>
+                    </ul>
+                </div>
+                <p>გვეწვიეთ მეტაფორაში და აღმოაჩინეთ თქვენი პირადი მესამე ადგილი!</p>
+            `
+        },
+        'article-playback': {
+            badge: '🎭 Playback თეატრი • 4 წთ',
+            duration: '4 წთ საკითხავი',
+            img: 'blog_playback.jpg',
+            title: 'Playback თეატრის მაგია და არტ-თერაპია',
+            author: 'არტ-ფასილიტატორი • მეტაფორა',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>წარმოიდგინეთ თეატრი, სადაც არ არსებობს წინასწარ დაწერილი სცენარი, რეპეტიციები და როლები. სცენარი იწერება აქ და ახლა — მაყურებლის მოყოლილი რეალური ისტორიებით.</p>
+                <p><strong>Playback თეატრი</strong> არის ინტერაქციული იმპროვიზაციის უნიკალური ფორმა, რომელიც 1975 წელს ჯონათან ფოქსმა და ჯო სალასმა დააფუძნეს. მაყურებელი უზიარებს დარბაზს საკუთარ განცდას, მოგონებას ან სიზმარს, ხოლო მსახიობები და მუსიკოსი მას წამიერად ცოცხალ სცენურ ეტიუდად გარდაქმნიან.</p>
+                <blockquote>
+                    „საკუთარი ისტორიის სცენიდან დანახვა ადამიანს აძლევს უნიკალურ განცდას: მე არ ვარ მარტო, ჩემი ხმა და ემოცია მნიშვნელოვანია.“
+                </blockquote>
+                <h3>როგორ მუშაობს თერაპიული ეფექტი?</h3>
+                <p>როდესაც ჩვენს ისტორიას გარედან ვუყურებთ, ხდება ე.წ. <em>ემპათიური რეფლექსია</em>. მძიმე გამოცდილება კარგავს ტოქსიკურობას, ხოლო სასიხარულო მომენტები მრავალჯერადად ძლიერდება.</p>
+                <div class="article-takeaway-box">
+                    <h4>🎭 რას მოგანიჭებთ Playback საღამო მეტაფორაში:</h4>
+                    <ul>
+                        <li>ემოციური სტრესისა და დაძაბულობისგან განტვირთვა;</li>
+                        <li>საკუთარი თავის და სხვების უკეთ გაგება;</li>
+                        <li>უსაფრთხო და მიმღები გარემო თვითგამოხატვისთვის;</li>
+                        <li>თანაშემოქმედების დაუვიწყარი ემოცია.</li>
+                    </ul>
+                </div>
+            `
+        },
+        'article-psychology': {
+            badge: '🧠 ფსიქოლოგია • 6 წთ',
+            duration: '6 წთ საკითხავი',
+            img: 'blog_psychology.jpg',
+            title: 'პოზიტიური ფსიქოთერაპიის 5 ოქროს წესი',
+            author: 'პოზიტიური ფსიქოთერაპევტი • მეტაფორა',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>პოზიტიური ფსიქოთერაპია (დამფუძნებელი ნოსრატ პეზეშკიანი) არ ნიშნავს „ყალბ ოპტიმიზმს“ ან პრობლემების უარყოფას. პირიქით — სიტყვა <em>Positum</em> ლათინურად ნიშნავს „ფაქტობრივს“, „რეალურს“, „იმას, რაც უკვე მოცემულია“.</p>
+                <p>ეს მიმართულება ადამიანს ხედავს როგორც რესურსებით სავსე მთლიანობას, რომელსაც უკვე გააჩნია ყველა საჭირო შესაძლებლობა გამოწვევებთან გასამკლავებლად.</p>
+                <blockquote>
+                    „თუ გსურთ გქონდეთ ის, რაც არასდროს გქონიათ, უნდა გააკეთოთ ის, რაც არასდროს გაგიკეთებიათ — ოღონდ საკუთარ შინაგან რესურსებზე დაყრდნობით.“
+                </blockquote>
+                <div class="article-takeaway-box">
+                    <h4>🌿 5 ოქროს პრინციპი ყოველდღიურობისთვის:</h4>
+                    <ul>
+                        <li><strong>1. სიმპტომი არის სიგნალი:</strong> ნებისმიერი შფოთვა ან დაღლილობა ორგანიზმის მინიშნებაა, რომ რაღაც შესაცვლელია;</li>
+                        <li><strong>2. ბალანსის მოდელი:</strong> სხეული, საქმიანობა, ურთიერთობები და მომავლის ხედვა — ოთხივე სფერო თანაბარ ყურადღებას მოითხოვს;</li>
+                        <li><strong>3. კონფლიქტი როგორც ზრდის რესურსი:</strong> განსხვავებული აზრი გვაძლევს ახალ პერსპექტივას;</li>
+                        <li><strong>4. მეტაფორების ძალა:</strong> იგავები და შედარებები გვეხმარება ქვეცნობიერი ბლოკების მარტივად მოხსნაში;</li>
+                        <li><strong>5. თვითდახმარების უნარი:</strong> თერაპიის მიზანია ადამიანი გახდეს საკუთარი თავის საუკეთესო მეგზური.</li>
+                    </ul>
+                </div>
+            `
+        },
+        'article-coworking': {
+            badge: '☕ პროდუქტიულობა • 3 წთ',
+            duration: '3 წთ საკითხავი',
+            img: 'blog_coworking.jpg',
+            title: 'როგორ შევქმნათ Deep Work გარემო?',
+            author: 'მეტაფორას გუნდი',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>ციფრული შეტყობინებების, უსასრულო სქროლინგისა და ზედაპირული ყურადღების ეპოქაში ღრმა, კონცენტრირებული მუშაობის უნარი (Deep Work) სუპერძალად იქცა.</p>
+                <p>კვლევები ადასტურებს, რომ შეწყვეტილი ყურადღების შემდეგ თავდაპირველ ფოკუსში დასაბრუნებლად ტვინს საშუალოდ <strong>23 წუთი</strong> სჭირდება. სწორედ ამიტომ, მეტაფორას Coworking & Quiet Lounge შექმნილია მინიმალისტური, ესთეტიკური და მშვიდი აკუსტიკით.</p>
+                <div class="article-takeaway-box">
+                    <h4>💡 Deep Work-ის 3 წესი მეტაფორაში:</h4>
+                    <ul>
+                        <li><strong>90-წუთიანი ფოკუს-ბლოკები:</strong> მუშაობა შეფერხებების გარეშე;</li>
+                        <li><strong>სენსორული სიმშვიდე:</strong> ბუნებრივი განათება, ხარისხიანი მცენარეული ჩაი და ერგონომიული სივრცე;</li>
+                        <li><strong>შესვენება როგორც რიტუალი:</strong> მუშაობის შემდეგ გონების განტვირთვა მოზაიკის ზონაში ან ლაუნჯში.</li>
+                    </ul>
+                </div>
+            `
+        },
+        'article-community': {
+            badge: '🍸 კომუნა • 4 წთ',
+            duration: '4 წთ საკითხავი',
+            img: 'blog_boardgames.jpg',
+            title: 'სამაგიდო თამაშები როგორც სოციალური ხიდი',
+            author: 'Clubs Host • მეტაფორა',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>რატომ არის სამაგიდო თამაშები ერთ-ერთი ყველაზე სწრაფი და ბუნებრივი საშუალება ახალი ადამიანების გასაცნობად?</p>
+                <p>სამაგიდო თამაში ქმნის ე.წ. <em>„უსაფრთხო თამაშის ველს“</em>. როდესაც მაგიდასთან ზიხარ, არ გჭირდება ხელოვნური „Small Talk“ — თამაშის წესები და სტრატეგია თავისთავად წარმართავს დიალოგს, იუმორსა და ჯანსაღ აზარტს.</p>
+                <blockquote>
+                    „თამაშისას ადამიანი ავლენს თავის ნამდვილ ხასიათს, სტრატეგიულ აზროვნებასა და გუნდურობას გაცილებით სწრაფად, ვიდრე ჩვეულებრივი საუბრისას.“
+                </blockquote>
+                <p>მეტაფორას Themed Bar-ში გელოდებათ 50-ზე მეტი მსოფლიო სამაგიდო თამაში — სტრატეგიულიდან დაწყებული, სახალისო პარტი-თამაშებით დამთავრებული!</p>
+            `
+        },
+        'article-art-therapy': {
+            badge: '🎨 თვითგამოხატვა • 5 წთ',
+            duration: '5 წთ საკითხავი',
+            img: 'blog_art_therapy.jpg',
+            title: 'არტ-თერაპია და შინაგანი ბალანსი',
+            author: 'არტ-თერაპევტი • მეტაფორა',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>„მე ხატვა არ ვიცი“ — ეს არის ყველაზე გავრცელებული ფრაზა, რომელსაც არტ-თერაპიის დაწყებამდე ვისმენთ. არტ-თერაპიის არსი კი სწორედ იმაშია, რომ აქ <strong>ესთეტიკური შეფასება არ არსებობს</strong>.</p>
+                <p>ფერები, ხაზები, მოცულობა და ტექსტურა არის ჩვენი ემოციების პირდაპირი პროექცია ქაღალდზე. როდესაც ემოციას ვერ ვხსნით სიტყვებით, ფუნჯი და ტილო ხდება ჩვენი ყველაზე გულწრფელი მთარგმნელი.</p>
+                <div class="article-takeaway-box">
+                    <h4>🎨 რას გვაძლევს რეგულარული არტ-სესიები:</h4>
+                    <ul>
+                        <li>შინაგანი დაძაბულობისა და აკვიატებული ფიქრების მოხსნა;</li>
+                        <li>კრეატიული აზროვნებისა და წარმოსახვის გააქტიურება;</li>
+                        <li>შინაგანი თავისუფლებისა და სიხარულის განცდა;</li>
+                        <li>საკუთარი ემოციების უსაფრთხო გამოხატვა.</li>
+                    </ul>
+                </div>
+            `
+        },
+        'article-book-club': {
+            badge: '📚 წიგნის კლუბი • 4 წთ',
+            duration: '4 წთ საკითხავი',
+            img: 'blog_book_club.jpg',
+            title: 'რას ვკითხულობთ ამ თვეში მეტაფორაში?',
+            author: 'წიგნის კლუბის მოდერატორი • მეტაფორა',
+            date: '2026 წლის აგვისტო',
+            html: `
+                <p>მეტაფორას წიგნების კლუბი ყოველთვიურად არჩევს ერთ განსაკუთრებულ ნაწარმოებს, რომელიც ეხმიანება ადამიანურ ურთიერთობებს, ფილოსოფიასა და ცნობიერების ევოლუციას.</p>
+                <p>თვის ბოლოს, მყუდრო სალონურ გარემოში, ჩაისა და სასიამოვნო მუსიკის თანხლებით ვიკრიბებით და ვმსჯელობთ ავტორის იდეებზე, პერსონაჟთა არჩევანზე და იმაზე, თუ როგორ პასუხობს ეს წიგნი ჩვენს რეალურ ცხოვრებას.</p>
+                <div class="article-takeaway-box">
+                    <h4>📖 მიმდინარე თვის რეკომენდაციები:</h4>
+                    <ul>
+                        <li><strong>რეი ოლდენბურგი:</strong> <em>„The Great Good Place“</em> — მესამე ადგილების ფილოსოფია;</li>
+                        <li><strong>ვიქტორ ფრანკლი:</strong> <em>„ადამიანის მიერ აზრის ძიება“</em> — ლოგოთერაპია და შინაგანი ძალა;</li>
+                        <li><strong>მიჰაი ჩიქსენტმიჰაი:</strong> <em>„დინება (Flow)“</em> — ოპტიმალური გამოცდილების ფსიქოლოგია.</li>
+                    </ul>
+                </div>
+                <p>შემოგვიერთდით ჩვენს უახლოეს შეხვედრაზე!</p>
+            `
+        }
+    };
+
+    function initArticleReader() {
+        const overlay = document.getElementById('article-reader-overlay');
+        const closeBtn = document.getElementById('article-reader-close-btn');
+        const topicBadge = document.getElementById('reader-topic-badge');
+        const durationEl = document.getElementById('reader-duration');
+        const heroImg = document.getElementById('reader-hero-img');
+        const titleEl = document.getElementById('reader-title');
+        const authorEl = document.getElementById('reader-author');
+        const dateEl = document.getElementById('reader-date');
+        const contentEl = document.getElementById('reader-content');
+
+        if (!overlay) return;
+
+        function openArticle(id) {
+            const article = ARTICLES_DATABASE[id] || ARTICLES_DATABASE['article-featured'];
+            if (!article) return;
+
+            if (topicBadge) topicBadge.textContent = article.badge;
+            if (durationEl) durationEl.textContent = article.duration;
+            if (heroImg) {
+                heroImg.src = article.img;
+                heroImg.alt = article.title;
+            }
+            if (titleEl) titleEl.textContent = article.title;
+            if (authorEl) authorEl.textContent = article.author;
+            if (dateEl) dateEl.textContent = article.date;
+            if (contentEl) contentEl.innerHTML = article.html;
+
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticle() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.blog-post-card[data-article-id]');
+            if (card && !e.target.closest('.open-booking-modal-btn')) {
+                e.preventDefault();
+                const articleId = card.getAttribute('data-article-id');
+                openArticle(articleId);
+            }
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeArticle();
+            });
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeArticle();
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeArticle();
+            }
+        });
+    }
+
     initBUFigure();
     initManifestoSpinningFigure();
     initThemeSwitcher();
     initMetaBot();
     initMobileNav();
     initServiceVideoInteractions();
+    initArticleReader();
 
     // ==========================================================================
     // 18. ROBUST BILINGUAL I18N ENGINE (KA ⇄ EN)
@@ -2154,17 +2517,34 @@ document.addEventListener('DOMContentLoaded', () => {
         "მეტაფორა - Edutainment Hub & Third Place": "METAPHORA - Edutainment Hub & Third Place",
         "გალერეა - მეტაფორა": "Gallery - METAPHORA",
         "ბლოგი - მეტაფორა": "Blog - METAPHORA",
+        "სერვისები - მეტაფორა": "Services - METAPHORA",
+        "მიმართულებები & შესაძლებლობები": "Pillars & Opportunities",
+        "მეტაფორას სერვისები & სივრცეები": "Metaphora Services & Spaces",
+        "გაეცანით ჩვენს 5 მთავარ მიმართულებას — პიროვნული განვითარებიდან დაწყებული, სალონური დისკუსიებითა და თემატური კლუბებით დასრულებული.": "Explore our 5 core pillars — from personal growth and salon discussions to creative arts and themed clubs.",
+        "სტატიის წაკითხვა 📖": "Read Article 📖",
+        "სრულად წაკითხვა →": "Read Full Story →",
+        "სრული სტატიის წაკითხვა →": "Read Full Article →",
+        "დაჯავშნე კონსულტაცია ✨": "Book Consultation ✨",
+        "გახდი პარტნიორი 💼": "Become a Partner 💼",
+        "ჩაერთე დისკუსიაში 🧠": "Join Discussion 🧠",
+        "დაესწარი პერფორმანსს 🎭": "Attend Performance 🎭",
+        "დაჯავშნე მაგიდა 🏛️": "Reserve a Table 🏛️",
+        "დაინტერესდით თემით?": "Interested in this topic?",
+        "ეწვიეთ მეტაფორას და ჩაერთეთ ჩვენს ცოცხალ შეხვედრებში.": "Visit Metaphora and join our live community gatherings.",
+        "დაჯავშნე ვიზიტი ✨": "Book a Visit ✨",
         "მთავარი": "Home",
         "🏠 მთავარი": "🏠 Home",
         "ჩვენს შესახებ": "About Us",
         "✨ ჩვენს შესახებ": "✨ About Us",
         "მანიფესტი & ფილოსოფია": "Manifesto & Philosophy",
+        "✨ მანიფესტი & ფილოსოფია": "✨ Manifesto & Philosophy",
         "📜 მანიფესტი & ფილოსოფია": "📜 Manifesto & Philosophy",
         "მესამე ადგილის კონცეფცია": "The Third Place Concept",
         "მეტაფორას გუნდი": "Metaphora Team",
         "👥 მეტაფორას გუნდი": "👥 Metaphora Team",
         "გაიცანით ჩვენი წევრები": "Meet Our Team",
         "სერვისები": "Services",
+        "🌱 სერვისები": "🌱 Services",
         "სერვისები & სივრცეები": "Services & Spaces",
         "🌱 სერვისები & სივრცეები": "🌱 Services & Spaces",
         "1. Edutainment & ვორქშოფები": "1. Edutainment & Workshops",
@@ -2183,6 +2563,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "📖 ბლოგი": "📖 Blog",
         "კონტაქტი": "Contact",
         "📞 კონტაქტი": "📞 Contact",
+        "დაგვიკავშირდით": "Contact Us",
+        "📞 დაგვიკავშირდით": "📞 Contact Us",
         "ჯავშანი": "Book Now",
         "ონლაინ ჯავშანი": "Online Booking",
         "✨ ონლაინ ჯავშანი": "✨ Online Booking",
@@ -2190,7 +2572,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "ადგილის დაჯავშნა მეტაფორაში": "Reserve a Spot at Metaphora",
         "დაჯავშნე ადგილი": "Reserve a Spot",
         "დაჯავშნე ვიზიტი": "Book a Visit",
-        "დაწყება": "Start",
+        "დაწყება": "Explore",
+        "ნახვა": "Explore",
         "შედი მეტაფორაში": "Enter Metaphora",
         "გადადი სივრცეში": "Explore Space",
         "გაიგე მეტი": "Learn More",
@@ -2250,9 +2633,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "შინაური გარემო ★": "Homey Vibe ★",
         "შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები და კომუნა.": "Your “Third Place” — where you always feel at home. Themed community clubs and inspiring circles.",
         "🌱 1. Personal Development": "🌱 1. Personal Development",
+        "1. Personal Development": "1. Personal Development",
         "💼 2. Business": "💼 2. Business",
+        "2. Business": "2. Business",
         "🧠 3. Think Tank": "🧠 3. Think Tank",
+        "3. Think Tank": "3. Think Tank",
+        "🎨 4. Art": "🎨 4. Art",
+        "4. Art": "4. Art",
         "🎨 4. Art & Playback თეატრი": "🎨 4. Art & Playback Theatre",
+        "🏛️ 5. Clubs": "🏛️ 5. Clubs",
+        "5. Clubs": "5. Clubs",
         "🏛️ 5. Clubs & Coworking": "🏛️ 5. Clubs & Coworking",
         "გაიცანი მეტაფორას გუნდი": "Meet the Metaphora Team",
         "პროფესიონალები, რომლებიც ქმნიან მეტაფორას ატმოსფეროს": "The dedicated professionals shaping Metaphora’s atmosphere",
@@ -2540,3 +2930,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initI18nLanguageSwitcher();
+});

@@ -1,6 +1,9 @@
 .DS_Store
 .chrome_profile/
 .venv/
+__pycache__/
+icons_extracted/
+*.pyc
 meta hub/
 babua_frames/
 babua_seq/

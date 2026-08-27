@@ -44,12 +44,17 @@
                 </button>
             </div>
             <span class="portal-brand-tag">✨ Edutainment Hub &amp; Third Place</span>
-            <a href="#contact" class="portal-contact-btn" id="portal-contact-btn">
-                <span>კონტაქტი</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
+            <div class="portal-actions-group" style="display: flex; align-items: center; gap: 10px;">
+                <button class="lang-single-btn" id="portal-lang-toggle-btn" title="ენის შეცვლა (KA / EN)" aria-label="Toggle Language">
+                    <span class="lang-label" id="portal-lang-active-label">KA</span>
+                </button>
+                <a href="#contact" class="portal-contact-btn" id="portal-contact-btn">
+                    <span>დაგვიკავშირდით</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
         </div>
 
         <div class="dandelion-wrapper" id="dandelion-wrapper">
@@ -85,7 +90,7 @@
                     </button>
 
                     <button class="connect-btn" id="connect-btn" title="შესვლა საიტზე">
-                        <span class="btn-text">დაწყება</span>
+                        <span class="btn-text">ნახვა</span>
                         <svg class="connect-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -111,7 +116,7 @@
 
         <!-- Clean Bottom Hint -->
         <div class="portal-bottom-hint">
-            <span>💡 ორჯერ დააწკაპუნეთ წრეზე ან დააჭირეთ <strong>დაწყება</strong> ღილაკს შესასვლელად</span>
+            <span>💡 ორჯერ დააწკაპუნეთ წრეზე ან დააჭირეთ <strong>ნახვა</strong> ღილაკს შესასვლელად</span>
         </div>
     </div>
 
@@ -154,14 +159,14 @@
                         </a>
                         <div class="nav-dropdown-menu">
                             <a href="#about" class="dropdown-link">
-                                <span class="d-icon">✨</span>
+                                <span class="d-icon"><svg class="d-svg-icon icon-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4.5l1.6 3.9 3.9 1.6-3.9 1.6L15 15.5l-1.6-3.9-3.9-1.6 3.9-1.6z"/><path d="M6 3l1 2.5L9.5 6.5 7 7.5 6 10l-1-2.5L2.5 6.5 5 5.5z"/><path d="M8 15.5l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z"/></svg></span>
                                 <div>
                                     <strong>მანიფესტი & ფილოსოფია</strong>
                                     <small>მესამე ადგილის კონცეფცია</small>
                                 </div>
                             </a>
                             <a href="#team" class="dropdown-link">
-                                <span class="d-icon">👥</span>
+                                <span class="d-icon"><svg class="d-svg-icon icon-team" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 8a3.5 3.5 0 1 0-7 0 3.5 3.5 0 0 0 7 0z"/><path d="M2 19.5v-1a4.5 4.5 0 0 1 9 0v1H2z"/><path d="M14.5 5.5a3 3 0 0 1 3 3c0 1.2-.7 2.2-1.7 2.7"/><path d="M18.5 19.5h3.5v-1a4.5 4.5 0 0 0-7-3.7"/></svg></span>
                                 <div>
                                     <strong>მეტაფორას გუნდი</strong>
                                     <small>გაიცანით ჩვენი წევრები</small>
@@ -172,43 +177,43 @@
 
                     <!-- 2. სერვისები -->
                     <div class="nav-dropdown-wrapper">
-                        <a href="#services" class="nav-item has-dropdown">
+                        <a href="service-personal-development.html" class="nav-item has-dropdown">
                             <span>სერვისები</span>
                             <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <path d="m6 9 6 6 6-6"/>
                             </svg>
                         </a>
                         <div class="nav-dropdown-menu services-dropdown-menu">
-                            <a href="#services" class="dropdown-link">
-                                <span class="d-icon">🌱</span>
+                            <a href="service-personal-development.html" class="dropdown-link">
+                                <span class="d-icon"><svg class="d-svg-icon icon-plant" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7c0-5 4-8 8-8"/><path d="M12 15c2.5-5.5 8-8 8-8s-2 5.5-8 8z"/><path d="M12 15c-2.5-4-7-5-7-5s1 4 7 5z"/></svg></span>
                                 <div>
                                     <strong>1. Personal Development</strong>
                                     <small>იპოვე შენი შინაგანი ძალა</small>
                                 </div>
                             </a>
-                            <a href="#services" class="dropdown-link">
-                                <span class="d-icon">💼</span>
+                            <a href="service-business.html" class="dropdown-link">
+                                <span class="d-icon"><svg class="d-svg-icon icon-business" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5" ry="2.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 12v3"/><path d="M3 12h18"/><path d="M9 12v-1"/><path d="M15 12v-1"/></svg></span>
                                 <div>
                                     <strong>2. Business</strong>
                                     <small>გაიზარდე &amp; ითანამშრომლე</small>
                                 </div>
                             </a>
-                            <a href="#services" class="dropdown-link">
-                                <span class="d-icon">🧠</span>
+                            <a href="service-think-tank.html" class="dropdown-link">
+                                <span class="d-icon"><svg class="d-svg-icon icon-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4a4.2 4.2 0 0 0-4.5 3.8A3.8 3.8 0 0 0 4 12a4.2 4.2 0 0 0 3.2 4.1L8 19.5h1.5V4z"/><path d="M14.5 4a4.2 4.2 0 0 1 4.5 3.8A3.8 3.8 0 0 1 20 12a4.2 4.2 0 0 1-3.2 4.1L16 19.5h-1.5V4z"/><path d="M6 10a2.2 2.2 0 0 1 3.5-1.5"/><path d="M18 10a2.2 2.2 0 0 0-3.5-1.5"/><path d="M6.5 14a2.5 2.5 0 0 0 3 0"/><path d="M17.5 14a2.5 2.5 0 0 1-3 0"/></svg></span>
                                 <div>
                                     <strong>3. Think Tank</strong>
                                     <small>სიღრმისეული სალონური დისკუსიები</small>
                                 </div>
                             </a>
-                            <a href="#services" class="dropdown-link">
-                                <span class="d-icon">🎨</span>
+                            <a href="service-art.html" class="dropdown-link">
+                                <span class="d-icon"><svg class="d-svg-icon icon-art" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12c0 3.8 2.2 7 5.5 8.5 1 .5 2.2-.3 2.2-1.5 0-.7-.4-1.4-.4-2.1 0-1.2 1-2.2 2.2-2.2H13c4.4 0 8-3.6 8-8 0-4.7-4-8.7-9-8.7z"/><circle cx="7.5" cy="9.5" r="1.1" fill="currentColor"/><circle cx="11.5" cy="6.5" r="1.1" fill="currentColor"/><circle cx="16" cy="8.5" r="1.1" fill="currentColor"/><circle cx="16.5" cy="13" r="1.1" fill="currentColor"/></svg></span>
                                 <div>
                                     <strong>4. Art</strong>
                                     <small>შემოქმედებითი ენერგია &amp; ხელოვნება</small>
                                 </div>
                             </a>
-                            <a href="#services" class="dropdown-link">
-                                <span class="d-icon">🏛️</span>
+                            <a href="service-clubs.html" class="dropdown-link">
+                                <span class="d-icon"><svg class="d-svg-icon icon-clubs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5 12 2l10 5.5z"/><path d="M3 7.5h18v2H3z"/><line x1="5" y1="9.5" x2="5" y2="17.5"/><line x1="8.5" y1="9.5" x2="8.5" y2="17.5"/><line x1="12" y1="9.5" x2="12" y2="17.5"/><line x1="15.5" y1="9.5" x2="15.5" y2="17.5"/><line x1="19" y1="9.5" x2="19" y2="17.5"/><path d="M2 17.5h20v2H2z"/><path d="M1 19.5h22v2H1z"/></svg></span>
                                 <div>
                                     <strong>5. Clubs</strong>
                                     <small>შენი „მესამე სივრცე“</small>
@@ -220,7 +225,7 @@
                     <!-- Separate Page Navigation Links -->
                     <a href="gallery.html" class="nav-item">გალერეა</a>
                     <a href="blog.html" class="nav-item">ბლოგი</a>
-                    <a href="#contact" class="nav-item">კონტაქტი</a>
+                    <a href="#contact" class="nav-item">დაგვიკავშირდით</a>
                 </nav>
 
                 <!-- Header Actions -->
@@ -334,7 +339,7 @@
                 <div class="services-balanced-container">
                     <!-- Top Row: 3 Services -->
                     <div class="services-row-three">
-                        <div class="feature-card service-five-card">
+                        <div class="feature-card service-five-card" onclick="window.location.href='service-personal-development.html'" style="cursor: pointer;">
                             <div class="card-image-wrapper">
                                 <video class="card-feature-video" muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/personal_development.mp4" type="video/mp4">
@@ -345,13 +350,13 @@
                                 </div>
                             </div>
                             <div class="card-body-content">
-                                <div class="card-icon-box">🌱</div>
+                                <div class="card-icon-box"><svg class="d-svg-icon icon-plant" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7c0-5 4-8 8-8"/><path d="M12 15c2.5-5.5 8-8 8-8s-2 5.5-8 8z"/><path d="M12 15c-2.5-4-7-5-7-5s1 4 7 5z"/></svg></div>
                                 <h3 class="card-title">1. მეტაფორა Personal Development</h3>
                                 <p class="card-desc">იპოვე შენი შინაგანი ძალა. პიროვნული განვითარება, ფსიქოლოგიური მხარდაჭერა და თვითშემეცნება.</p>
                             </div>
                         </div>
 
-                        <div class="feature-card service-five-card">
+                        <div class="feature-card service-five-card" onclick="window.location.href='service-business.html'" style="cursor: pointer;">
                             <div class="card-image-wrapper">
                                 <video class="card-feature-video" muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Business.mp4" type="video/mp4">
@@ -362,13 +367,13 @@
                                 </div>
                             </div>
                             <div class="card-body-content">
-                                <div class="card-icon-box">💼</div>
+                                <div class="card-icon-box"><svg class="d-svg-icon icon-business" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5" ry="2.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 12v3"/><path d="M3 12h18"/><path d="M9 12v-1"/><path d="M15 12v-1"/></svg></div>
                                 <h3 class="card-title">2. მეტაფორა Business</h3>
                                 <p class="card-desc">გაიზარდე, ითანამშრომლე და შექმენი ახალი შესაძლებლობები. ბიზნეს-კონტაქტები და პარტნიორობა.</p>
                             </div>
                         </div>
 
-                        <div class="feature-card service-five-card">
+                        <div class="feature-card service-five-card" onclick="window.location.href='service-think-tank.html'" style="cursor: pointer;">
                             <div class="card-image-wrapper">
                                 <video class="card-feature-video" muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Think_tank.mp4" type="video/mp4">
@@ -379,7 +384,7 @@
                                 </div>
                             </div>
                             <div class="card-body-content">
-                                <div class="card-icon-box">🧠</div>
+                                <div class="card-icon-box"><svg class="d-svg-icon icon-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4a4.2 4.2 0 0 0-4.5 3.8A3.8 3.8 0 0 0 4 12a4.2 4.2 0 0 0 3.2 4.1L8 19.5h1.5V4z"/><path d="M14.5 4a4.2 4.2 0 0 1 4.5 3.8A3.8 3.8 0 0 1 20 12a4.2 4.2 0 0 1-3.2 4.1L16 19.5h-1.5V4z"/><path d="M6 10a2.2 2.2 0 0 1 3.5-1.5"/><path d="M18 10a2.2 2.2 0 0 0-3.5-1.5"/><path d="M6.5 14a2.5 2.5 0 0 0 3 0"/><path d="M17.5 14a2.5 2.5 0 0 1-3 0"/></svg></div>
                                 <h3 class="card-title">3. მეტაფორა Think Tank</h3>
                                 <p class="card-desc">ჩაერთე სიღრმისეულ სალონურ დისკუსიებში. ინტელექტუალური დებატები, იდეების გაზიარება და ანალიტიკა.</p>
                             </div>
@@ -388,7 +393,7 @@
 
                     <!-- Bottom Row: 2 Centered Services -->
                     <div class="services-row-two">
-                        <div class="feature-card service-five-card">
+                        <div class="feature-card service-five-card" onclick="window.location.href='service-art.html'" style="cursor: pointer;">
                             <div class="card-image-wrapper">
                                 <video class="card-feature-video" muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Art.mp4" type="video/mp4">
@@ -399,13 +404,13 @@
                                 </div>
                             </div>
                             <div class="card-body-content">
-                                <div class="card-icon-box">🎨</div>
+                                <div class="card-icon-box"><svg class="d-svg-icon icon-art" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12c0 3.8 2.2 7 5.5 8.5 1 .5 2.2-.3 2.2-1.5 0-.7-.4-1.4-.4-2.1 0-1.2 1-2.2 2.2-2.2H13c4.4 0 8-3.6 8-8 0-4.7-4-8.7-9-8.7z"/><circle cx="7.5" cy="9.5" r="1.1" fill="currentColor"/><circle cx="11.5" cy="6.5" r="1.1" fill="currentColor"/><circle cx="16" cy="8.5" r="1.1" fill="currentColor"/><circle cx="16.5" cy="13" r="1.1" fill="currentColor"/></svg></div>
                                 <h3 class="card-title">4. მეტაფორა Art</h3>
                                 <p class="card-desc">დაიმუხტე შემოქმედებითი ენერგიითა და ხელოვნებით. Playback თეატრი, პერფორმანსები და გამოფენები.</p>
                             </div>
                         </div>
 
-                        <div class="feature-card service-five-card featured-service">
+                        <div class="feature-card service-five-card featured-service" onclick="window.location.href='service-clubs.html'" style="cursor: pointer;">
                             <div class="card-image-wrapper">
                                 <video class="card-feature-video" muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Clubs.mp4" type="video/mp4">
@@ -416,7 +421,7 @@
                                 </div>
                             </div>
                             <div class="card-body-content">
-                                <div class="card-icon-box">🏛️</div>
+                                <div class="card-icon-box"><svg class="d-svg-icon icon-clubs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5 12 2l10 5.5z"/><path d="M3 7.5h18v2H3z"/><line x1="5" y1="9.5" x2="5" y2="17.5"/><line x1="8.5" y1="9.5" x2="8.5" y2="17.5"/><line x1="12" y1="9.5" x2="12" y2="17.5"/><line x1="15.5" y1="9.5" x2="15.5" y2="17.5"/><line x1="19" y1="9.5" x2="19" y2="17.5"/><path d="M2 17.5h20v2H2z"/><path d="M1 19.5h22v2H1z"/></svg></div>
                                 <h3 class="card-title">5. მეტაფორა Clubs</h3>
                                 <p class="card-desc">შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები და კომუნა.</p>
                             </div>
@@ -505,7 +510,14 @@
 
                             <div class="tw-footer-row">
                                 <div class="tw-author-info">
-                                    <h4 class="tw-author-name" id="tw-name">ლალი</h4>
+                                    <div class="tw-author-header">
+                                        <h4 class="tw-author-name" id="tw-name">ლალი</h4>
+                                        <a href="https://www.facebook.com/lali.badridze" target="_blank" rel="noopener noreferrer" id="tw-social-fb" class="tw-author-social-link" title="ლალი ბადრიძე — Facebook" aria-label="Facebook პროფილი">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
                                     <span class="tw-author-role" id="tw-role">დამფუძნებელი &amp; ფასილიტატორი</span>
                                 </div>
 
@@ -612,12 +624,12 @@
                             <div id="manifesto-figure-rings" style="position: absolute; inset: 0; pointer-events: none; z-index: 30;"></div>
 
                             <!-- Corner Play Button -->
-                            <button class="tw-audio-play-btn" id="about-play-btn" aria-label="Play Manifesto Voice Audio" style="z-index: 40;">
+                            <button class="tw-audio-play-btn" id="about-play-btn" aria-label="მეტაფორას მუსიკის მოსმენა (Play/Pause)" title="მეტაფორას მუსიკის ჩართვა / პაუზა" style="z-index: 40; cursor: pointer;">
                                 <span id="about-play-icon">▶</span>
                             </button>
                         </div>
 
-                        <div class="tw-audio-visualizer" id="about-visualizer">
+                        <div class="tw-audio-visualizer" id="about-visualizer" title="მეტაფორას აუდიო ვიზუალიზატორი">
                             <span class="eq-bar bar-1"></span>
                             <span class="eq-bar bar-2"></span>
                             <span class="eq-bar bar-3"></span>
@@ -627,7 +639,7 @@
                             <span class="eq-bar bar-7"></span>
                             <span class="eq-bar bar-8"></span>
                         </div>
-                        <span class="tw-audio-time" id="about-audio-time">0:00 / 1:18</span>
+                        <span class="tw-audio-time" id="about-audio-time">0:00 / 2:59</span>
                     </div>
 
                     <!-- Right: Live Typewriter Text Box with Blinking Cursor -->
@@ -739,7 +751,7 @@
 
                         <div class="footer-bottom-actions">
                             <div class="social-links-wrap">
-                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-chip" title="Facebook" aria-label="Facebook">
+                                <a href="https://www.facebook.com/metaphora.geo" target="_blank" rel="noopener noreferrer" class="social-chip" title="Facebook" aria-label="Facebook">
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
                                     </svg>
@@ -751,12 +763,12 @@
                                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                     </svg>
                                 </a>
-                                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-chip" title="TikTok" aria-label="TikTok">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-4.639c.319 0 .628.052.916.148V9.43a6.34 6.34 0 0 0-.916-.067 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 10.82 4.482 6.29 6.29 0 0 0 1.865-4.482V8.98a8.214 8.214 0 0 0 4.766 1.488V7.023a4.83 4.83 0 0 1-1-.337z"/>
-                                    </svg>
-                                </a>
-                                <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-chip" title="Telegram" aria-label="Telegram">
+                                <a href="https://wa.me/995599228228" target="_blank" rel="noopener noreferrer" class="social-chip" title="WhatsApp" aria-label="WhatsApp">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.031 2C6.516 2 2.031 6.484 2.031 12c0 1.86.512 3.597 1.398 5.094L2 22l5.059-1.328A9.92 9.92 0 0 0 12.031 22c5.516 0 10-4.484 10-10s-4.484-10-10-10zm5.82 14.156c-.246.691-1.223 1.328-1.996 1.492-.527.113-1.219.207-3.535-.75-2.961-1.223-4.871-4.238-5.019-4.438-.145-.195-1.203-1.602-1.203-3.055 0-1.453.762-2.168 1.031-2.461.273-.293.598-.367.797-.367.2 0 .398.004.57.012.184.012.43-.07.672.512.246.586.84 2.05.914 2.2.074.152.125.328.027.527-.098.2-.148.328-.293.5-.148.172-.313.387-.446.52-.148.148-.305.312-.133.609.172.297.77 1.266 1.652 2.051 1.137 1.012 2.094 1.328 2.391 1.477.297.148.473.125.648-.074.176-.2.75-.875.95-1.176.2-.297.402-.246.676-.148.273.098 1.734.816 2.035.965.297.148.496.223.57.348.07.125.07.727-.176 1.418z"/>
+                                </svg>
+                            </a>
+                                <a href="https://t.me/metaphorahubbot" target="_blank" rel="noopener noreferrer" class="social-chip" title="Telegram" aria-label="Telegram">
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
                                     </svg>
@@ -902,9 +914,6 @@
     }
     </script>
 
-    <!-- Application Script (Single Source of Truth) -->
-    <script src="app.js?v=27000"></script>
-
     <!-- ==========================================================================
          METABOT AI CHAT WIDGET (მეტაბოტი)
          ========================================================================== -->
@@ -982,7 +991,9 @@
                 <div class="header-brand-group">
                     <img src="logo_teal_crop.png" alt="METAPHORA" class="site-logo-brand brand-dynamic-logo">
                 </div>
-                <button class="mobile-nav-close-btn" id="mobile-nav-close-btn" aria-label="Close Navigation Menu">&times;</button>
+                <div class="mobile-drawer-header-actions">
+                    <button class="mobile-nav-close-btn" id="mobile-nav-close-btn" aria-label="Close Navigation Menu">&times;</button>
+                </div>
             </div>
             <nav class="mobile-nav-links">
                 <a href="index.html#hero" class="mobile-nav-item">🏠 მთავარი</a>
@@ -996,31 +1007,73 @@
                         </svg>
                     </button>
                     <div class="mobile-accordion-body">
-                        <a href="index.html#about" class="mobile-sub-item">📜 მანიფესტი &amp; ფილოსოფია</a>
-                        <a href="index.html#team" class="mobile-sub-item">👥 მეტაფორას გუნდი</a>
+                        <a href="index.html#about" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4.5l1.6 3.9 3.9 1.6-3.9 1.6L15 15.5l-1.6-3.9-3.9-1.6 3.9-1.6z"/><path d="M6 3l1 2.5L9.5 6.5 7 7.5 6 10l-1-2.5L2.5 6.5 5 5.5z"/><path d="M8 15.5l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>მანიფესტი &amp; ფილოსოფია</strong>
+                                <small>მესამე ადგილის კონცეფცია</small>
+                            </div>
+                        </a>
+                        <a href="index.html#team" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-team" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 8a3.5 3.5 0 1 0-7 0 3.5 3.5 0 0 0 7 0z"/><path d="M2 19.5v-1a4.5 4.5 0 0 1 9 0v1H2z"/><path d="M14.5 5.5a3 3 0 0 1 3 3c0 1.2-.7 2.2-1.7 2.7"/><path d="M18.5 19.5h3.5v-1a4.5 4.5 0 0 0-7-3.7"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>მეტაფორას გუნდი</strong>
+                                <small>გაიცანით ჩვენი წევრები</small>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Expandable Accordion: სერვისები & სივრცეები -->
+                <!-- Expandable Accordion: სერვისები -->
                 <div class="mobile-nav-accordion" id="mob-acc-services">
                     <button type="button" class="mobile-accordion-toggle" aria-expanded="false">
-                        <span>🌱 სერვისები &amp; სივრცეები</span>
+                        <span>🌱 სერვისები</span>
                         <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m6 9 6 6 6-6"/>
                         </svg>
                     </button>
                     <div class="mobile-accordion-body">
-                        <a href="index.html#services" class="mobile-sub-item">🌱 1. Personal Development</a>
-                        <a href="index.html#services" class="mobile-sub-item">💼 2. Business</a>
-                        <a href="index.html#services" class="mobile-sub-item">🧠 3. Think Tank</a>
-                        <a href="index.html#services" class="mobile-sub-item">🎨 4. Art &amp; Playback თეატრი</a>
-                        <a href="index.html#services" class="mobile-sub-item">🏛️ 5. Clubs &amp; Coworking</a>
+                        <a href="service-personal-development.html" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-plant" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7c0-5 4-8 8-8"/><path d="M12 15c2.5-5.5 8-8 8-8s-2 5.5-8 8z"/><path d="M12 15c-2.5-4-7-5-7-5s1 4 7 5z"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>1. Personal Development</strong>
+                                <small>იპოვე შენი შინაგანი ძალა</small>
+                            </div>
+                        </a>
+                        <a href="service-business.html" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-business" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5" ry="2.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 12v3"/><path d="M3 12h18"/><path d="M9 12v-1"/><path d="M15 12v-1"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>2. Business</strong>
+                                <small>გაიზარდე &amp; ითანამშრომლე</small>
+                            </div>
+                        </a>
+                        <a href="service-think-tank.html" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4a4.2 4.2 0 0 0-4.5 3.8A3.8 3.8 0 0 0 4 12a4.2 4.2 0 0 0 3.2 4.1L8 19.5h1.5V4z"/><path d="M14.5 4a4.2 4.2 0 0 1 4.5 3.8A3.8 3.8 0 0 1 20 12a4.2 4.2 0 0 1-3.2 4.1L16 19.5h-1.5V4z"/><path d="M6 10a2.2 2.2 0 0 1 3.5-1.5"/><path d="M18 10a2.2 2.2 0 0 0-3.5-1.5"/><path d="M6.5 14a2.5 2.5 0 0 0 3 0"/><path d="M17.5 14a2.5 2.5 0 0 1-3 0"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>3. Think Tank</strong>
+                                <small>სიღრმისეული სალონური დისკუსიები</small>
+                            </div>
+                        </a>
+                        <a href="service-art.html" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-art" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12c0 3.8 2.2 7 5.5 8.5 1 .5 2.2-.3 2.2-1.5 0-.7-.4-1.4-.4-2.1 0-1.2 1-2.2 2.2-2.2H13c4.4 0 8-3.6 8-8 0-4.7-4-8.7-9-8.7z"/><circle cx="7.5" cy="9.5" r="1.1" fill="currentColor"/><circle cx="11.5" cy="6.5" r="1.1" fill="currentColor"/><circle cx="16" cy="8.5" r="1.1" fill="currentColor"/><circle cx="16.5" cy="13" r="1.1" fill="currentColor"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>4. Art</strong>
+                                <small>შემოქმედებითი ენერგია &amp; ხელოვნება</small>
+                            </div>
+                        </a>
+                        <a href="service-clubs.html" class="mobile-sub-item">
+                            <span class="mobile-sub-icon"><svg class="d-svg-icon icon-clubs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7.5 12 2l10 5.5z"/><path d="M3 7.5h18v2H3z"/><line x1="5" y1="9.5" x2="5" y2="17.5"/><line x1="8.5" y1="9.5" x2="8.5" y2="17.5"/><line x1="12" y1="9.5" x2="12" y2="17.5"/><line x1="15.5" y1="9.5" x2="15.5" y2="17.5"/><line x1="19" y1="9.5" x2="19" y2="17.5"/><path d="M2 17.5h20v2H2z"/><path d="M1 19.5h22v2H1z"/></svg></span>
+                            <div class="mobile-sub-info">
+                                <strong>5. Clubs</strong>
+                                <small>შენი „მესამე სივრცე“</small>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
                 <a href="gallery.html" class="mobile-nav-item">🖼️ გალერეა</a>
                 <a href="blog.html" class="mobile-nav-item">📖 ბლოგი</a>
-                <a href="index.html#contact" class="mobile-nav-item">📞 კონტაქტი</a>
+                <a href="index.html#contact" class="mobile-nav-item">📞 დაგვიკავშირდით</a>
             </nav>
             <div class="mobile-nav-footer">
                 <button class="open-booking-modal-btn btn btn-primary" style="width: 100%;">📅 ონლაინ ჯავშანი</button>
@@ -1028,5 +1081,7 @@
         </div>
     </div>
 
+    <!-- Application Script (Single Source of Truth) -->
+    <script src="app.js?v=28000"></script>
 </body>
 </html>
