@@ -406,14 +406,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let bloomProgress = 0.0;
         let isBlooming = true;
         let isCollapsing = false;
-        let bloomStartTime = performance.now();
-        const BLOOM_DURATION = 1550; // ms
-        const COLLAPSE_DURATION = 480; // ms
+        let bloomStartTime = 0;
+        const BLOOM_DURATION = 1600; // ms
+        const COLLAPSE_DURATION = 500; // ms
 
         window.triggerPortalBloom = function() {
             isCollapsing = false;
             isBlooming = true;
-            bloomStartTime = performance.now();
+            bloomStartTime = 0;
             bloomProgress = 0.0;
         };
 
@@ -448,7 +448,10 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderDandelionLoop(timestamp) {
             if (!entrancePortal || entrancePortal.style.display !== 'none') {
                 if (isBlooming) {
-                    const elapsed = performance.now() - bloomStartTime;
+                    if (bloomStartTime === 0) {
+                        bloomStartTime = timestamp;
+                    }
+                    const elapsed = timestamp - bloomStartTime;
                     const t = Math.min(1, Math.max(0, elapsed / BLOOM_DURATION));
                     // Organic blooming ease-out back curve (smooth bloom with graceful soft overshoot)
                     const c1 = 1.15;
@@ -826,7 +829,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetEl = document.querySelector(hash);
                 if (targetEl) {
                     e.preventDefault();
-                    exitPortalAndScroll(hash);
+                    const entrancePortal = document.getElementById('entrance-portal');
+                    if (entrancePortal && entrancePortal.style.display !== 'none' && typeof window.collapseDandelionAndExit === 'function') {
+                        window.collapseDandelionAndExit(hash);
+                    } else {
+                        exitPortalAndScroll(hash);
+                    }
                 }
             }
         }
