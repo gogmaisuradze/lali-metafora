@@ -1249,7 +1249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2. Galaktion Tabidze Audio Player (Manual Play Button for poem segments)
+    // 2. Galaktion Tabidze Audio Player (Manual & Automatic Member Chrono Playback)
     let galaktionAudio = null;
     let isGalaktionPlaying = false;
 
@@ -1263,6 +1263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!galaktionAudio) {
             galaktionAudio = new Audio('galaktion.mp3');
             galaktionAudio.volume = 0.65;
+            galaktionAudio.preload = 'auto';
 
             galaktionAudio.addEventListener('timeupdate', () => {
                 if (twTime && !galaktionAudio.paused) {
@@ -1290,10 +1291,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function playGalaktionForMember(idx) {
         initGalaktionAudio();
-        const startSec = testimonials[idx].galaktionStart || 0;
-        galaktionAudio.currentTime = startSec;
-        const p = galaktionAudio.play();
-        if (p !== undefined) p.catch(() => {});
+        const startSec = (testimonials[idx] && typeof testimonials[idx].galaktionStart === 'number')
+            ? testimonials[idx].galaktionStart
+            : 0;
+
+        const applySeekAndPlay = () => {
+            try {
+                galaktionAudio.currentTime = startSec;
+            } catch (e) {}
+            const p = galaktionAudio.play();
+            if (p !== undefined) p.catch(() => {});
+        };
+
+        if (galaktionAudio.readyState >= 1) {
+            applySeekAndPlay();
+        } else {
+            galaktionAudio.addEventListener('loadedmetadata', applySeekAndPlay, { once: true });
+            galaktionAudio.addEventListener('canplay', applySeekAndPlay, { once: true });
+            try { galaktionAudio.load(); } catch(e) {}
+        }
+
         isGalaktionPlaying = true;
         if (twVisualizer) twVisualizer.classList.add('playing');
         if (twPlayIcon) twPlayIcon.textContent = '❚❚';
@@ -1352,8 +1369,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (twName) twName.textContent = current.name;
         if (twRole) twRole.textContent = current.jobtitle;
 
-        // If Galaktion audio is playing, switch to new member's section seamlessly
-        if (isGalaktionPlaying && galaktionAudio && !galaktionAudio.paused) {
+        // When switching member with playSound, play Galaktion at their exact timestamp!
+        if (playSound) {
             playGalaktionForMember(currentTwIdx);
         } else {
             if (twTime) twTime.textContent = current.time;
