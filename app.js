@@ -1207,18 +1207,53 @@ document.addEventListener('DOMContentLoaded', () => {
             chip.innerHTML = `<img src="${item.image}" alt="${item.name}" loading="lazy">`;
 
             chip.addEventListener('click', () => {
-                setTestimonial(idx);
+                setTestimonial(idx, true);
             });
 
             twRibbon.appendChild(chip);
         });
     }
 
-    function typewriteText(fullText) {
+    let twTypingAudio = null;
+
+    function startTwTypingAudio() {
+        try {
+            if (!twTypingAudio) {
+                twTypingAudio = new Audio('metafora.mp3');
+                twTypingAudio.volume = 0.15; // Low volume as requested
+                twTypingAudio.loop = true;
+            }
+            twTypingAudio.volume = 0.15;
+            twTypingAudio.currentTime = 0;
+            const p = twTypingAudio.play();
+            if (p !== undefined) p.catch(() => {});
+            if (twVisualizer) twVisualizer.classList.add('playing');
+            if (twPlayIcon) twPlayIcon.textContent = '❚❚';
+        } catch (e) {}
+    }
+
+    function stopTwTypingAudio() {
+        if (twTypingAudio) {
+            try {
+                twTypingAudio.pause();
+                twTypingAudio.currentTime = 0;
+            } catch (e) {}
+        }
+        if (twVisualizer) twVisualizer.classList.remove('playing');
+        if (twPlayIcon) twPlayIcon.textContent = '▶';
+        if (twPlayBtn) twPlayBtn.style.background = '';
+    }
+
+    function typewriteText(fullText, playSound = true) {
         clearInterval(typeTimer);
+        stopTwTypingAudio();
         if (!twText) return;
         twText.textContent = '';
         let charIndex = 0;
+
+        if (playSound) {
+            startTwTypingAudio();
+        }
 
         function typeNext() {
             if (charIndex < fullText.length) {
@@ -1226,17 +1261,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 twText.textContent += char;
                 charIndex++;
 
-                let speed = 24;
-                if (char === '.' || char === '!' || char === '?') speed = 120;
-                else if (char === ',') speed = 60;
+                let speed = 22;
+                if (char === '.' || char === '!' || char === '?') speed = 90;
+                else if (char === ',') speed = 45;
 
                 typeTimer = setTimeout(typeNext, speed);
+            } else {
+                stopTwTypingAudio();
             }
         }
         typeNext();
     }
 
-    function setTestimonial(idx) {
+    function setTestimonial(idx, playSound = true) {
         currentTwIdx = (idx + testimonials.length) % testimonials.length;
         const current = testimonials[currentTwIdx];
 
@@ -1263,7 +1300,7 @@ document.addEventListener('DOMContentLoaded', () => {
             twSocialWa.title = `${current.name} — WhatsApp`;
         }
 
-        typewriteText(current.text);
+        typewriteText(current.text, playSound);
 
         const chips = Array.from(document.querySelectorAll('.tw-member-chip'));
         chips.forEach((c, i) => {
@@ -1273,32 +1310,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (twText) {
-        setTestimonial(0);
+        setTestimonial(0, false);
     }
 
     if (twNextBtn) {
         twNextBtn.addEventListener('click', () => {
-            setTestimonial(currentTwIdx + 1);
+            setTestimonial(currentTwIdx + 1, true);
         });
     }
 
     if (twPrevBtn) {
         twPrevBtn.addEventListener('click', () => {
-            setTestimonial(currentTwIdx - 1);
+            setTestimonial(currentTwIdx - 1, true);
         });
     }
 
     if (twPlayBtn && twVisualizer && twPlayIcon) {
         twPlayBtn.addEventListener('click', () => {
-            isAudioPlaying = !isAudioPlaying;
-            if (isAudioPlaying) {
-                twVisualizer.classList.add('playing');
-                twPlayIcon.textContent = '❚❚';
-                twPlayBtn.style.background = '#014d51';
+            if (twTypingAudio && !twTypingAudio.paused) {
+                stopTwTypingAudio();
             } else {
-                twVisualizer.classList.remove('playing');
-                twPlayIcon.textContent = '▶';
-                twPlayBtn.style.background = '#016166';
+                startTwTypingAudio();
             }
         });
     }
@@ -3383,7 +3415,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Re-render active UI pieces
             if (typeof updateCenterCard === 'function') updateCenterCard();
-            if (typeof setTestimonial === 'function' && typeof currentTwIdx !== 'undefined') setTestimonial(currentTwIdx);
+            if (typeof setTestimonial === 'function' && typeof currentTwIdx !== 'undefined') setTestimonial(currentTwIdx, false);
             if (typeof renderAfishaCards === 'function') renderAfishaCards();
 
             // Update MetaBot welcome msg
