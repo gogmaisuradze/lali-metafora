@@ -1716,12 +1716,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function getServicePrice(serviceName) {
-        if (!serviceName) return "50 ₾";
+        if (!serviceName) return "";
         const lower = serviceName.toLowerCase();
         for (const [key, price] of Object.entries(SERVICE_PRICES)) {
             if (lower.includes(key)) return price;
         }
-        return "50 ₾";
+        return "";
     }
 
     // Helper: Set dynamic QR code with fallback providers
@@ -1751,11 +1751,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const botToken = "8563426842:AAEuhg8EXmAV18NXtlAaiky0ZzWGvNXkJQU";
         const chatId = "443575738";
 
+        const priceLine = payload.price ? `💰 *საფასური:* ${payload.price}\n` : '';
         const text = `🏛️ *მეტაფორა — ახალი ჯავშანი & გადახდა!* 💳\n\n` +
             `👤 *სტუმარი:* ${payload.name}\n` +
             `📞 *ტელეფონი:* ${payload.phone}\n` +
             `✨ *მიმართულება:* ${payload.service}\n` +
-            `💰 *საფასური:* ${payload.price || '50 ₾'}\n` +
+            priceLine +
             `📅 *თარიღი:* ${payload.date}\n` +
             `🕒 *დრო:* ${payload.time}\n` +
             `👥 *სტუმრები:* ${payload.guests}\n` +
@@ -1874,20 +1875,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openPaymentStep(payload) {
-        if (!payload.price) {
+        if (payload.price === undefined) {
             payload.price = getServicePrice(payload.service);
         }
         pendingBookingPayload = payload;
 
-        if (bookingPaymentAmount) {
-            bookingPaymentAmount.textContent = payload.price;
+        const amountRow = document.getElementById('booking-amount-row');
+        if (payload.price && payload.price.trim() !== '') {
+            if (bookingPaymentAmount) bookingPaymentAmount.textContent = payload.price;
+            if (amountRow) amountRow.style.display = 'flex';
+        } else {
+            if (bookingPaymentAmount) bookingPaymentAmount.textContent = '';
+            if (amountRow) amountRow.style.display = 'none';
         }
 
         if (bookingPaymentPurpose) {
             bookingPaymentPurpose.innerHTML = `მეტაფორას ჯავშანი — <strong>${payload.name} (${payload.service})</strong>`;
         }
 
-        const mobilePayUrl = `${window.location.origin}${window.location.pathname}?pay_mobile=true&name=${encodeURIComponent(payload.name)}&service=${encodeURIComponent(payload.service)}&price=${encodeURIComponent(payload.price)}&date=${encodeURIComponent(payload.date)}`;
+        const priceQuery = payload.price ? `&price=${encodeURIComponent(payload.price)}` : '';
+        const mobilePayUrl = `${window.location.origin}${window.location.pathname}?pay_mobile=true&name=${encodeURIComponent(payload.name)}&service=${encodeURIComponent(payload.service)}${priceQuery}&date=${encodeURIComponent(payload.date)}`;
         setBookingQrCodeUrl(mobilePayUrl);
 
         const headerText = document.getElementById('bank-buttons-header-text');
@@ -1909,8 +1916,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleMetaforaBankClick(bankType, btnElement) {
         const targetIban = "GE93BG0000000192399800";
-        const priceText = pendingBookingPayload?.price || "50 ₾";
-        const amountNum = parseInt(priceText, 10) || 50;
+        const priceText = (pendingBookingPayload?.price || '').trim();
+        const amountNum = priceText ? (parseInt(priceText.replace(/[^\d.]/g, ''), 10) || 0) : 0;
         const purposeStr = `მეტაფორას ჯავშანი - ${pendingBookingPayload?.name || 'სტუმარი'} (${pendingBookingPayload?.service || 'მეტაფორა'})`;
 
         // 1. Copy Clean IBAN to clipboard synchronously
@@ -1922,11 +1929,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Visual feedback on button
         const bankName = bankType === "bog" ? "საქართველოს ბანკ" : "თიბისი ბანკ";
+        const priceMsg = priceText ? ` & ${priceText}` : '';
         if (btnElement) {
             const originalHTML = btnElement.innerHTML;
             btnElement.innerHTML = `
                 <div style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:4px 0;">
-                    <span style="font-weight:800; font-size:0.82rem;">✓ IBAN & ${priceText} დაკოპირდა! გადადიხართ ${bankName}-ში...</span>
+                    <span style="font-weight:800; font-size:0.82rem;">✓ IBAN${priceMsg} დაკოპირდა! გადადიხართ ${bankName}-ში...</span>
                 </div>
             `;
             setTimeout(() => {
@@ -1943,10 +1951,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             const encodedPurpose = encodeURIComponent(purposeStr);
+            const amountParam = amountNum > 0 ? `&amount=${amountNum}` : '';
             if (bankType === "bog") {
                 const bogSchemes = [
-                    `bogmbank://transfer?iban=${targetIban}&amount=${amountNum}&desc=${encodedPurpose}`,
-                    `bogmobile://transfer?account=${targetIban}&amount=${amountNum}`,
+                    `bogmbank://transfer?iban=${targetIban}${amountParam}&desc=${encodedPurpose}`,
+                    `bogmobile://transfer?account=${targetIban}${amountParam}`,
                     "bogmbank://",
                     "bogmobile://"
                 ];
@@ -1955,8 +1964,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             } else if (bankType === "tbc") {
                 const tbcSchemes = [
-                    `tbcbank://transfer?iban=${targetIban}&amount=${amountNum}&purpose=${encodedPurpose}`,
-                    `tbc-mobile://transfer?to=${targetIban}&amount=${amountNum}`,
+                    `tbcbank://transfer?iban=${targetIban}${amountParam}&purpose=${encodedPurpose}`,
+                    `tbc-mobile://transfer?to=${targetIban}${amountParam}`,
                     "tbcbank://",
                     "tbc-mobile://",
                     "tbc://"
@@ -2025,12 +2034,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnCopyFullRequisites) {
         btnCopyFullRequisites.addEventListener('click', () => {
             const iban = metaforaIbanVal?.textContent.trim() || "GE93BG0000000192399800";
-            const price = bookingPaymentAmount?.textContent.trim() || "50 ₾";
+            const price = (pendingBookingPayload?.price || '').trim();
             const service = pendingBookingPayload?.service || "მეტაფორა";
             const name = pendingBookingPayload?.name || "სტუმარი";
             const purpose = `მეტაფორას ჯავშანი - ${name} (${service})`;
+            const priceLine = price ? `\nსაფასური: ${price}` : '';
 
-            const fullText = `მიმღები: ანი მაისურაძე\nბანკი: საქართველოს ბანკი (BOG)\nIBAN: ${iban}\nსაფასური: ${price}\nდანიშნულება: ${purpose}`;
+            const fullText = `მიმღები: ანი მაისურაძე\nბანკი: საქართველოს ბანკი (BOG)\nIBAN: ${iban}${priceLine}\nდანიშნულება: ${purpose}`;
 
             try {
                 navigator.clipboard.writeText(fullText).then(() => {
