@@ -1725,9 +1725,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const encoded = encodeURIComponent(url);
         const qrProviders = [
-            `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encoded}`,
-            `https://quickchart.io/qr?size=300&text=${encoded}`,
-            `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encoded}`
+            `https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=${encoded}&margin=10&ecc=M`,
+            `https://quickchart.io/qr?size=450&text=${encoded}&margin=2&ecLevel=M`,
+            `https://chart.googleapis.com/chart?cht=qr&chs=450x450&chld=M|2&chl=${encoded}`
         ];
 
         let providerIndex = 0;
@@ -1953,7 +1953,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const priceQuery = payload.price ? `&price=${encodeURIComponent(payload.price)}` : '';
-        const mobilePayUrl = `${window.location.origin}${window.location.pathname}?pay_mobile=true&name=${encodeURIComponent(payload.name)}&service=${encodeURIComponent(payload.service)}${priceQuery}&date=${encodeURIComponent(payload.date)}`;
+        let baseOrigin = window.location.origin;
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            baseOrigin = `http://192.168.1.3:8888`;
+        }
+        const mobilePayUrl = `${baseOrigin}${window.location.pathname}?pay_mobile=true&name=${encodeURIComponent(payload.name)}&service=${encodeURIComponent(payload.service)}${priceQuery}&date=${encodeURIComponent(payload.date)}`;
         setBookingQrCodeUrl(mobilePayUrl);
 
         const headerText = document.getElementById('bank-buttons-header-text');
