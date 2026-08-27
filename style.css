@@ -213,26 +213,18 @@ html.direct-main-mode #main-website {
     }
 }
 
-/* Collapsing / Imploding back into tiny center point with full 360deg rotation on Exit */
+/* Collapsing / Imploding straight back into center point on Exit (No rotation) */
 .dandelion-wrapper.collapse-exit {
-    animation: dandelionCollapseOut 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    animation: dandelionCollapseOut 0.34s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
 }
 
 @keyframes dandelionCollapseOut {
     0% {
-        transform: scale(1) rotate(0deg);
+        transform: scale(1);
         opacity: 1;
     }
-    30% {
-        transform: scale(0.75) rotate(120deg);
-        opacity: 0.9;
-    }
-    70% {
-        transform: scale(0.3) rotate(260deg);
-        opacity: 0.5;
-    }
     100% {
-        transform: scale(0.001) rotate(360deg);
+        transform: scale(0.001);
         opacity: 0;
     }
 }

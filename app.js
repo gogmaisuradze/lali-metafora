@@ -651,7 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             exitPortalAndScroll(targetHash || '#hero');
-        }, 380);
+        }, 340);
     }
 
     function navigateToProfile(profile) {
