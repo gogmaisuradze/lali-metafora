@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof ScrollTrigger !== 'undefined') {
                     ScrollTrigger.refresh();
                 }
-            }, 650);
+            }, 880);
         } else if (targetHash && targetHash !== '#entrance') {
             scrollToAnchor(targetHash);
         }
