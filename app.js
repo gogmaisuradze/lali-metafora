@@ -1707,13 +1707,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
     let pendingBookingPayload = null;
 
-    const SERVICE_PRICES = {
-        "personal development": "80 ₾",
-        "business": "120 ₾",
-        "think tank": "50 ₾",
-        "art": "45 ₾",
-        "clubs": "35 ₾"
-    };
+    const SERVICE_PRICES = {};
 
     function getServicePrice(serviceName) {
         if (!serviceName) return "";
