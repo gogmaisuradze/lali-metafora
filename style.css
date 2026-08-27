@@ -620,6 +620,14 @@ html.direct-main-mode #main-website {
     font-weight: 800;
     color: #1e293b;
     letter-spacing: -0.2px;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-link:hover .site-brand-name {
+    color: var(--primary-color, #014d51) !important;
+    transform: translateY(-2px);
+    text-shadow: 0 2px 10px rgba(1, 77, 81, 0.2);
 }
 
 .site-sub-name {
@@ -1214,7 +1222,16 @@ html.direct-main-mode #main-website {
 }
 
 .accent-text-light {
-    color: var(--brand-gold);
+    color: var(--brand-gold, #f59e0b);
+    display: inline-block;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.accent-text-light:hover {
+    color: #fbbf24 !important;
+    transform: translateY(-3px) scale(1.05);
+    text-shadow: 0 4px 20px rgba(251, 191, 36, 0.65);
 }
 
 .slide-desc {
@@ -1239,7 +1256,7 @@ html.direct-main-mode #main-website {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 13px 32px;
+    padding: 12px 30px;
     background: var(--primary-color, #014d51);
     color: #ffffff !important;
     text-decoration: none;
@@ -1256,7 +1273,7 @@ html.direct-main-mode #main-website {
     background: var(--brand-plum, #5c2c54) !important;
     color: #ffffff !important;
     border-color: rgba(255, 255, 255, 0.65);
-    transform: translateY(-3px) scale(1.05);
+    transform: translateY(-3px) scale(1.04);
     box-shadow: 0 12px 30px rgba(92, 44, 84, 0.55) !important;
 }
 
@@ -1268,33 +1285,32 @@ html.direct-main-mode #main-website {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 13px 32px;
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 11px 28px;
+    background: transparent !important;
     color: #ffffff !important;
     text-decoration: none;
     border-radius: 9999px;
     font-size: 0.95rem;
     font-weight: 700;
-    border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    border: 1.8px dashed rgba(255, 255, 255, 0.65) !important;
+    box-shadow: none !important;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide-actions .btn-secondary:hover {
-    background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%) !important;
-    color: #0f172a !important;
-    border-color: #f59e0b !important;
-    transform: translateY(-3px) scale(1.06);
-    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.6) !important;
+    background: transparent !important;
+    color: var(--brand-gold, #f59e0b) !important;
+    border: 1.8px dashed var(--brand-gold, #f59e0b) !important;
+    transform: translateY(-3px) scale(1.04);
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.45);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25) !important;
 }
 
 .slide-actions .btn-secondary:active {
-    background: linear-gradient(135deg, #b45309 0%, #92400e 100%) !important;
-    color: #ffffff !important;
     transform: scale(0.96);
+    color: #d97706 !important;
+    border-color: #d97706 !important;
 }
 
 .btn-video-play {
@@ -1424,18 +1440,36 @@ html.direct-main-mode #main-website {
 }
 
 .section-tag {
+    display: inline-block;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--dandelion-purple-dark);
+    color: var(--primary-color, #014d51);
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.section-tag:hover {
+    color: var(--brand-gold, #f59e0b) !important;
+    transform: translateY(-2px);
+    text-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
 }
 
 .section-title {
+    display: inline-block;
     font-size: 2.2rem;
     font-weight: 800;
     margin: 8px 0 12px 0;
     letter-spacing: -0.5px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.section-title:hover {
+    color: var(--primary-color, #014d51) !important;
+    transform: translateY(-3px);
+    text-shadow: 0 4px 15px rgba(1, 77, 81, 0.18);
 }
 
 .section-subtitle {
