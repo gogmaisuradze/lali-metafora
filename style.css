@@ -1222,22 +1222,34 @@ html.direct-main-mode #main-website {
 }
 
 .accent-text-light {
-    color: #ffffff;
+    color: var(--brand-gold, #f59e0b);
     display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: var(--brand-gold, #f59e0b);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
+    text-decoration: none;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
 }
 
 .accent-text-light:hover,
 .slide-title:hover .accent-text-light {
+    color: #fbbf24 !important;
+    transform: translateY(-3px) scale(1.05);
+    text-shadow: 0 4px 22px rgba(251, 191, 36, 0.85);
+}
+
+.metafora-glow-text {
+    display: inline-block;
+    color: var(--primary-color, #014d51);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.metafora-glow-text:hover,
+.section-title:hover .metafora-glow-text,
+.booking-cta-title:hover .metafora-glow-text {
     color: var(--brand-gold, #f59e0b) !important;
-    text-decoration-color: #ffffff;
-    transform: translateY(-4px) scale(1.06);
-    text-shadow: 0 4px 22px rgba(245, 158, 11, 0.85);
+    transform: translateY(-3px) scale(1.04);
+    text-shadow: 0 4px 20px rgba(245, 158, 11, 0.55);
 }
 
 .slide-desc {
