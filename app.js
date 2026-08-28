@@ -1470,6 +1470,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let galaktionAudio = null;
     let isGalaktionPlaying = false;
 
+    function pauseGalaktionAudio() {
+        if (galaktionAudio && !galaktionAudio.paused) {
+            try { galaktionAudio.pause(); } catch(e) {}
+        }
+        isGalaktionPlaying = false;
+        if (twVisualizer) twVisualizer.classList.remove('playing');
+        if (twPlayIcon) twPlayIcon.textContent = '▶';
+        if (twPlayBtn) twPlayBtn.style.background = '';
+        if (twTime && testimonials && testimonials[currentTwIdx]) {
+            twTime.textContent = testimonials[currentTwIdx].time || '0:00 / 1:20';
+        }
+    }
+    window.pauseGalaktionAudio = pauseGalaktionAudio;
+
     function formatAudioTime(sec) {
         const m = Math.floor(sec / 60);
         const s = Math.floor(sec % 60);
@@ -1488,16 +1502,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            galaktionAudio.addEventListener('play', () => {
+                if (typeof window.pauseManifestoAudio === 'function') {
+                    window.pauseManifestoAudio();
+                }
+                isGalaktionPlaying = true;
+                if (twVisualizer) twVisualizer.classList.add('playing');
+                if (twPlayIcon) twPlayIcon.textContent = '❚❚';
+                if (twPlayBtn) twPlayBtn.style.background = '#014d51';
+            });
+
             galaktionAudio.addEventListener('ended', () => {
                 isGalaktionPlaying = false;
                 if (twVisualizer) twVisualizer.classList.remove('playing');
                 if (twPlayIcon) twPlayIcon.textContent = '▶';
                 if (twPlayBtn) twPlayBtn.style.background = '';
-                if (twTime) twTime.textContent = testimonials[currentTwIdx].time;
+                if (twTime && testimonials && testimonials[currentTwIdx]) {
+                    twTime.textContent = testimonials[currentTwIdx].time || '0:00 / 1:20';
+                }
             });
 
             galaktionAudio.addEventListener('pause', () => {
-                if (!isGalaktionPlaying) {
+                if (!isGalaktionPlaying || galaktionAudio.paused) {
                     if (twVisualizer) twVisualizer.classList.remove('playing');
                     if (twPlayIcon) twPlayIcon.textContent = '▶';
                     if (twPlayBtn) twPlayBtn.style.background = '';
@@ -1507,6 +1533,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function playGalaktionForMember(idx) {
+        if (typeof window.pauseManifestoAudio === 'function') {
+            window.pauseManifestoAudio();
+        }
         initGalaktionAudio();
         const startSec = (testimonials[idx] && typeof testimonials[idx].galaktionStart === 'number')
             ? testimonials[idx].galaktionStart
@@ -1543,6 +1572,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (twPlayIcon) twPlayIcon.textContent = '▶';
             if (twPlayBtn) twPlayBtn.style.background = '';
         } else {
+            if (typeof window.pauseManifestoAudio === 'function') {
+                window.pauseManifestoAudio();
+            }
             playGalaktionForMember(currentTwIdx);
         }
     }
@@ -1858,6 +1890,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
+    function pauseManifestoAudio() {
+        if (manifestoAudio && !manifestoAudio.paused) {
+            try { manifestoAudio.pause(); } catch (e) {}
+        }
+        if (aboutVisualizer) aboutVisualizer.classList.remove('playing');
+        if (aboutPlayIcon) aboutPlayIcon.textContent = '▶';
+        if (aboutPlayText) aboutPlayText.textContent = 'მოსმენა';
+        if (aboutPlayBtn) aboutPlayBtn.style.background = '';
+    }
+    window.pauseManifestoAudio = pauseManifestoAudio;
+
     if (aboutPlayBtn && manifestoAudio) {
         manifestoAudio.addEventListener('loadedmetadata', () => {
             const total = formatAudioSeconds(manifestoAudio.duration);
@@ -1887,6 +1930,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         manifestoAudio.addEventListener('play', () => {
+            if (typeof window.pauseGalaktionAudio === 'function') {
+                window.pauseGalaktionAudio();
+            }
             if (aboutVisualizer) aboutVisualizer.classList.add('playing');
             if (aboutPlayIcon) aboutPlayIcon.textContent = '❚❚';
             if (aboutPlayText) aboutPlayText.textContent = 'პაუზა';
@@ -1896,6 +1942,9 @@ document.addEventListener('DOMContentLoaded', () => {
         aboutPlayBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (manifestoAudio.paused) {
+                if (typeof window.pauseGalaktionAudio === 'function') {
+                    window.pauseGalaktionAudio();
+                }
                 manifestoAudio.play().catch(err => {
                     console.log('Audio autoplay prevented or error:', err);
                 });
