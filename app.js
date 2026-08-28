@@ -820,7 +820,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             requestAnimationFrame(renderDandelionLoop);
         }
-        requestAnimationFrame(renderDandelionLoop);
+        renderDandelionLoop(performance.now());
 
         // Center Circular Hub Double-Click to Navigate
         const centerCard = document.getElementById('center-card');
