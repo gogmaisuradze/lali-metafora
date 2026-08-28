@@ -2601,6 +2601,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pickedSummary = document.getElementById('booking-picked-summary');
         const dateInput = document.getElementById('booking-date-input');
         const timeInput = document.getElementById('booking-time-input');
+        const eventBanner = document.getElementById('cal-day-event-banner');
 
         if (!calGrid || !slotsContainer) return;
 
@@ -2609,7 +2610,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let viewDate = new Date(2026, 7, 28);
         let selectedDate = new Date(2026, 7, 28);
-        let selectedTime = '19:30';
+        let selectedTime = '19:00';
+
+        const ALL_TIME_SLOTS = ['10:00', '11:30', '13:00', '14:30', '16:00', '17:30', '19:00', '20:00', '21:00', '22:00'];
+
+        const SCHEDULED_EVENTS = {
+            '2026-08-28': { titleKA: '🎭 Playback იმპროვიზაციის საღამო', titleEN: '🎭 Playback Improvisation Night', time: '19:00', badgeKA: '28 აგვ | 19:00', badgeEN: 'Aug 28 | 19:00' },
+            '2026-08-29': { titleKA: '☕ Coworking & Mastermind სესია', titleEN: '☕ Coworking & Mastermind Session', time: '14:30', badgeKA: '29 აგვ | 14:30', badgeEN: 'Aug 29 | 14:30' },
+            '2026-08-30': { titleKA: '🌿 პოზიტიური ფსიქოლოგიის ვორქშოფი', titleEN: '🌿 Positive Psychology Workshop', time: '18:30', badgeKA: '30 აგვ | 18:30', badgeEN: 'Aug 30 | 18:30' },
+            '2026-09-02': { titleKA: '🎲 Board Games Night & Cocktail Hour', titleEN: '🎲 Board Games Night & Cocktail Hour', time: '20:00', badgeKA: '02 სექ | 20:00', badgeEN: 'Sep 02 | 20:00' },
+            '2026-09-05': { titleKA: '💡 Think Tank & ფილოსოფიის საღამო', titleEN: '💡 Think Tank & Philosophy Night', time: '19:30', badgeKA: '05 სექ | 19:30', badgeEN: 'Sep 05 | 19:30' },
+            '2026-09-08': { titleKA: '🎨 არტ-თერაპია & თვითგამოხატვა', titleEN: '🎨 Art Therapy & Self-Expression', time: '18:00', badgeKA: '08 სექ | 18:00', badgeEN: 'Sep 08 | 18:00' },
+            '2026-09-12': { titleKA: '☕ Coworking & Mastermind საუზმე', titleEN: '☕ Coworking & Mastermind Breakfast', time: '10:30', badgeKA: '12 სექ | 10:30', badgeEN: 'Sep 12 | 10:30' },
+            '2026-09-15': { titleKA: '📚 წიგნის კლუბი & ღია დისკუსია', titleEN: '📚 Book Club & Open Discussion', time: '19:00', badgeKA: '15 სექ | 19:00', badgeEN: 'Sep 15 | 19:00' },
+            '2026-09-19': { titleKA: '🎭 Playback პერფორმანსი & ცოცხალი მუსიკა', titleEN: '🎭 Playback Performance & Live Music', time: '20:00', badgeKA: '19 სექ | 20:00', badgeEN: 'Sep 19 | 20:00' },
+            '2026-09-25': { titleKA: '✨ აკუსტიკური საღამო & კომუნა', titleEN: '✨ Acoustic Evening & Community', time: '19:30', badgeKA: '25 სექ | 19:30', badgeEN: 'Sep 25 | 19:30' },
+            '2026-09-26': { titleKA: '🧠 Masterclass: ლიდერობის ქოუჩინგი', titleEN: '🧠 Masterclass: Leadership Coaching', time: '16:00', badgeKA: '26 სექ | 16:00', badgeEN: 'Sep 26 | 16:00' },
+            '2026-10-02': { titleKA: '🎭 Playback თეატრის პრემიერა', titleEN: '🎭 Playback Theatre Premiere', time: '19:30', badgeKA: '02 ოქტ | 19:30', badgeEN: 'Oct 02 | 19:30' },
+            '2026-10-09': { titleKA: '🎨 არტ-თერაპიის ინტენსივი', titleEN: '🎨 Art Therapy Intensive Workshop', time: '18:00', badgeKA: '09 ოქტ | 18:00', badgeEN: 'Oct 09 | 18:00' }
+        };
 
         const MONTHS_KA = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
         const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -2623,15 +2642,64 @@ document.addEventListener('DOMContentLoaded', () => {
             return `${y}-${m}-${day}`;
         }
 
+        function updateEventBanner() {
+            if (!eventBanner || !selectedDate) return;
+            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+            const isoStr = formatISODate(selectedDate);
+            const ev = SCHEDULED_EVENTS[isoStr];
+
+            if (ev) {
+                eventBanner.className = 'cal-day-event-banner has-scheduled-event';
+                eventBanner.innerHTML = `
+                    <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
+                    <span class="event-banner-title" title="${isEn ? ev.titleEN : ev.titleKA}">${isEn ? ev.titleEN : ev.titleKA}</span>
+                `;
+            } else {
+                eventBanner.className = 'cal-day-event-banner is-free';
+                eventBanner.innerHTML = `
+                    <span class="event-banner-badge">${isEn ? '✨ Open Day' : '✨ თავისუფალი დღე'}</span>
+                    <span class="event-banner-title">${isEn ? 'Individual Bookings & Lounge' : 'ინდივიდუალური ჯავშანი & ლაუნჯი'}</span>
+                `;
+            }
+        }
+
+        function renderTimeSlots() {
+            slotsContainer.innerHTML = '';
+            ALL_TIME_SLOTS.forEach(time => {
+                const isSel = (time === selectedTime);
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `slot ${isSel ? 'sel' : ''}`;
+                btn.setAttribute('data-time', time);
+                btn.textContent = time;
+
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    selectedTime = time;
+                    renderTimeSlots();
+                    updatePickedSummary();
+                });
+
+                slotsContainer.appendChild(btn);
+            });
+        }
+
         function updatePickedSummary() {
             if (!pickedSummary) return;
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+            const isoStr = selectedDate ? formatISODate(selectedDate) : '';
+            const ev = isoStr ? SCHEDULED_EVENTS[isoStr] : null;
+
             if (selectedDate && selectedTime) {
                 const dayNum = selectedDate.getDate();
                 const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
-                pickedSummary.textContent = isEn 
+                const baseText = isEn 
                     ? `${mName} ${dayNum} · ${selectedTime}`
                     : `${dayNum} ${mName} · ${selectedTime}`;
+                
+                pickedSummary.textContent = ev 
+                    ? `${baseText} (${isEn ? 'Event Day' : 'ღონისძიება'})`
+                    : baseText;
             } else if (selectedDate) {
                 const dayNum = selectedDate.getDate();
                 const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
@@ -2642,6 +2710,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (dateInput && selectedDate) dateInput.value = formatISODate(selectedDate);
             if (timeInput && selectedTime) timeInput.value = selectedTime;
+
+            updateEventBanner();
         }
 
         function renderCalendar() {
@@ -2681,13 +2751,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cellDate = new Date(year, month, d);
                 cellDate.setHours(0, 0, 0, 0);
 
+                const isoStr = formatISODate(cellDate);
+                const hasEvent = !!SCHEDULED_EVENTS[isoStr];
                 const isSelected = selectedDate && (cellDate.toDateString() === selectedDate.toDateString());
                 const isPast = cellDate < today && (year < today.getFullYear() || (year === today.getFullYear() && month < today.getMonth()) || (year === today.getFullYear() && month === today.getMonth() && d < today.getDate()));
 
                 const dayBtn = document.createElement('button');
                 dayBtn.type = 'button';
-                dayBtn.className = `day ${isSelected ? 'sel' : ''}`;
+                dayBtn.className = `day ${isSelected ? 'sel' : ''} ${hasEvent ? 'has-event' : ''}`;
                 dayBtn.textContent = d;
+
+                if (hasEvent) {
+                    const ev = SCHEDULED_EVENTS[isoStr];
+                    dayBtn.setAttribute('title', isEn ? `${ev.titleEN} (${ev.time})` : `${ev.titleKA} (${ev.time})`);
+                }
 
                 if (isPast) {
                     dayBtn.disabled = true;
@@ -2695,6 +2772,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     dayBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         selectedDate = new Date(year, month, d);
+                        const evForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)];
+                        if (evForDate && evForDate.time) {
+                            selectedTime = evForDate.time;
+                            renderTimeSlots();
+                        }
                         updatePickedSummary();
                         renderCalendar();
                     });
@@ -2703,20 +2785,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 calGrid.appendChild(dayBtn);
             }
 
+            renderTimeSlots();
             updatePickedSummary();
         }
-
-        // Time slot selection
-        const slotButtons = slotsContainer.querySelectorAll('.slot');
-        slotButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                slotButtons.forEach(b => b.classList.remove('sel'));
-                btn.classList.add('sel');
-                selectedTime = btn.getAttribute('data-time') || btn.textContent.trim();
-                updatePickedSummary();
-            });
-        });
 
         if (prevBtn) {
             prevBtn.onclick = (e) => {

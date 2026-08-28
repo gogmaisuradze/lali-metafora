@@ -6022,6 +6022,7 @@ body.metabot-open .metabot-launcher-btn {
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     display: grid;
     place-items: center;
+    position: relative;
 }
 
 [data-theme="dark"] .day {
@@ -6043,6 +6044,25 @@ body.metabot-open .metabot-launcher-btn {
     border-color: #38bdf8;
 }
 
+.day.has-event {
+    border-color: rgba(122, 57, 99, 0.35);
+    background: rgba(122, 57, 99, 0.08);
+    font-weight: 800;
+}
+
+.day.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4.5px;
+    height: 4.5px;
+    border-radius: 50%;
+    background: var(--brand-plum, #7a3963);
+    box-shadow: 0 0 4px var(--brand-plum);
+}
+
 .day.sel {
     background: var(--brand-teal, #016166) !important;
     color: #ffffff !important;
@@ -6050,6 +6070,11 @@ body.metabot-open .metabot-launcher-btn {
     box-shadow: 0 6px 18px rgba(1, 97, 102, 0.4), 0 0 12px rgba(255, 186, 0, 0.6) !important;
     font-weight: 800;
     transform: scale(1.06);
+}
+
+.day.sel.has-event::after {
+    background: var(--brand-gold, #ffba00);
+    box-shadow: 0 0 6px var(--brand-gold);
 }
 
 .day:disabled {
@@ -6071,10 +6096,67 @@ body.metabot-open .metabot-launcher-btn {
     border-color: transparent;
 }
 
+/* Event Banner directly below the calendar grid */
+.cal-day-event-banner {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.12), rgba(1, 97, 102, 0.08));
+    border: 1px solid rgba(122, 57, 99, 0.25);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.8rem;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+[data-theme="dark"] .cal-day-event-banner {
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.3), rgba(15, 23, 42, 0.6));
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cal-day-event-banner.is-free {
+    background: rgba(1, 97, 102, 0.06);
+    border-color: rgba(1, 97, 102, 0.15);
+}
+
+.event-banner-badge {
+    background: var(--brand-plum, #7a3963);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.cal-day-event-banner.is-free .event-banner-badge {
+    background: var(--brand-teal, #016166);
+}
+
+.event-banner-title {
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+    flex: 1;
+}
+
+[data-theme="dark"] .event-banner-title {
+    color: #e2e8f0;
+}
+
 .slots-label {
     font-size: 0.78rem;
     font-weight: 800;
-    margin: 20px 0 10px 0;
+    margin: 14px 0 8px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #64748b;
@@ -6083,8 +6165,8 @@ body.metabot-open .metabot-launcher-btn {
 
 .slots {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
 }
 
 .slot {
