@@ -1340,8 +1340,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fullname: 'ლალი ბადრიძე',
             jobtitle: 'დამფუძნებელი & ფასილიტატორი',
             facebook: 'https://www.facebook.com/lali.badridze',
-            instagram: 'https://instagram.com',
-            whatsapp: 'https://wa.me/995599228228',
+            instagram: 'https://www.instagram.com/lali_badridze/',
+            whatsapp: 'https://wa.me/995598324020',
             time: '0:00 / 1:20'
         },
         {
@@ -3156,7 +3156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (q.includes('ლოკაცი') || q.includes('სად') || q.includes('მისამართ') || q.includes('კონტაქტ') || q.includes('ტელეფონ') || q.includes('ნომერ') || q.includes('location')) {
-                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, საქართველოში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>info@metafora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
+                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, საქართველოში.<br>📞 ტელეფონი: <strong>+995 598 32 40 20</strong><br>✉️ ელ.ფოსტა: <strong>info@metafora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
             }
 
             if (q.includes('გალერე') || q.includes('ფოტო') || q.includes('gallery') || q.includes('სივრცე')) {
@@ -3167,7 +3167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `<p>📖 <strong>მეტაფორას ბლოგი &amp; სტატიები:</strong></p><p>ბლოგის გვერდზე გაეცნობით საინტერესო სტატიებს „მესამე ადგილის“ ფენომენზე, Playback თეატრის თერაპიულ ეფექტზე, ემოციურ ინტელექტსა და პიროვნულ ბალანსზე. 👉 <a href="blog.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">ბლოგის გახსნა</a></p>`;
             }
 
-            return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ქვემოთ, ან დაგვიკავშირდეთ ნომერზე <strong>📞 599 22 82 28</strong>.</p>`;
+            return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ქვემოთ, ან დაგვიკავშირდეთ ნომერზე <strong>📞 598 32 40 20</strong>.</p>`;
         }
 
         function escapeHtml(text) {
