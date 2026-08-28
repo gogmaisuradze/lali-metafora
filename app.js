@@ -1145,6 +1145,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const afishaEvents = [
         {
             id: 0,
+            date: '2026-08-28',
+            time: '19:00',
+            serviceCategory: 'Art',
             title: "🎭 Playback იმპროვიზაციის საღამო",
             testimonial: "თეატრალური პერფორმანსი, სადაც მაყურებლის რეალური ისტორიები და ემოციები სცენაზე ცოცხლდება.",
             by: "28 აგვ | 19:00 • Playback დასი",
@@ -1152,6 +1155,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 1,
+            date: '2026-08-30',
+            time: '18:30',
+            serviceCategory: 'Personal Development',
             title: "🌿 პოზიტიური ფსიქოლოგიის ვორქშოფი",
             testimonial: "სტრესის მართვის, ემოციური ბალანსისა და თვითშემეცნების პრაქტიკული სემინარი ფსიქოთერაპევტთან.",
             by: "30 აგვ | 18:30 • ანა კაპანაძე",
@@ -1159,6 +1165,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 2,
+            date: '2026-09-02',
+            time: '20:00',
+            serviceCategory: 'Clubs',
             title: "🎲 Board Games Night & Cocktail Hour",
             testimonial: "სამაგიდო თამაშების ჩემპიონატი, საავტორო კოქტეილები, ახალი ნაცნობობა და მხიარული ატმოსფერო.",
             by: "02 სექ | 20:00 • მეტაფორა Bar",
@@ -1166,6 +1175,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 3,
+            date: '2026-09-05',
+            time: '19:30',
+            serviceCategory: 'Think Tank',
             title: "💡 Think Tank & ფილოსოფიის საღამო",
             testimonial: "დისკუსია თანამედროვე კულტურასა და „მესამე ადგილის“ ფენომენზე თანამოაზრეთა წრეში.",
             by: "05 სექ | 19:30 • ლევან ჯაფარიძე",
@@ -1173,6 +1185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 4,
+            date: '2026-09-08',
+            time: '18:00',
+            serviceCategory: 'Art',
             title: "🎨 არტ-თერაპია & თვითგამოხატვა",
             testimonial: "შემოქმედებითი ხატვისა და ემოციური განტვირთვის სესია მყუდრო ლაუნჯში.",
             by: "08 სექ | 18:00 • სალომე მგელაძე",
@@ -1180,6 +1195,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 5,
+            date: '2026-09-12',
+            time: '10:30',
+            serviceCategory: 'Business',
             title: "☕ Coworking & Mastermind საუზმე",
             testimonial: "დილის ყავა, პროდუქტიული ნეთვორქინგი და გამოცდილების გაზიარება სტარტაპერებთან.",
             by: "12 სექ | 10:30 • გიორგი გელოვანი",
@@ -1187,6 +1205,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 6,
+            date: '2026-09-15',
+            time: '19:00',
+            serviceCategory: 'Clubs',
             title: "📚 წიგნის კლუბი & ღია დისკუსია",
             testimonial: "თვიური წიგნის განხილვა, საინტერესო დებატები და ცხელი ჩაის საღამო.",
             by: "15 სექ | 19:00 • მეტაფორა Club",
@@ -1212,6 +1233,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'stagger-card';
             card.dataset.index = originalIndex;
+            card.dataset.eventDate = item.date;
+            card.dataset.eventTime = item.time;
+            card.dataset.service = item.serviceCategory;
+            card.dataset.eventTitle = item.title;
 
             card.innerHTML = `
                 <span class="corner-accent-line"></span>
@@ -1225,13 +1250,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <span class="stagger-card-author">${item.by.split('•')[1] || ''}</span>
-                    <button class="open-booking-modal-btn btn btn-primary" style="padding: 4px 14px; font-size: 0.78rem;">${bookBtnText}</button>
+                    <button class="open-booking-modal-btn btn btn-primary" 
+                            data-event-date="${item.date}" 
+                            data-event-time="${item.time}" 
+                            data-service="${item.serviceCategory}"
+                            data-event-title="${item.title}"
+                            style="padding: 4px 14px; font-size: 0.78rem;">${bookBtnText}</button>
                 </div>
             `;
 
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.open-booking-modal-btn')) return;
                 const currentPos = getPositionOf(originalIndex);
                 moveStagger(currentPos);
+            });
+
+            card.addEventListener('dblclick', () => {
+                openBookingModal(item.serviceCategory || item.title, item.date, item.time);
+            });
+
+            let lastAfishaTap = 0;
+            card.addEventListener('touchend', (e) => {
+                if (e.target.closest('.open-booking-modal-btn')) return;
+                const now = Date.now();
+                if (now - lastAfishaTap < 350 && now - lastAfishaTap > 0) {
+                    openBookingModal(item.serviceCategory || item.title, item.date, item.time);
+                }
+                lastAfishaTap = now;
             });
 
             staggerTrack.appendChild(card);
@@ -2175,21 +2220,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function openBookingModal(preselectedService = '') {
+    function openBookingModal(preselectedService = '', targetDate = '', targetTime = '') {
         if (bookingModalOverlay) {
             if (preselectedService) {
                 const sSelect = document.getElementById('booking-service-select');
                 if (sSelect) {
+                    const sLower = preselectedService.toLowerCase();
                     for (let opt of sSelect.options) {
-                        if (opt.value.toLowerCase().includes(preselectedService.toLowerCase()) || opt.text.toLowerCase().includes(preselectedService.toLowerCase())) {
+                        const optVal = opt.value.toLowerCase();
+                        const optTxt = opt.text.toLowerCase();
+                        if (optVal === sLower || optTxt.includes(sLower) || sLower.includes(optVal)) {
                             opt.selected = true;
                             break;
                         }
                     }
                 }
             }
+
+            if (targetDate || targetTime) {
+                if (typeof window.selectBookingDateAndTime === 'function') {
+                    window.selectBookingDateAndTime(targetDate, targetTime, preselectedService);
+                }
+            } else {
+                if (typeof window.refreshSmileBookingCalendar === 'function') {
+                    window.refreshSmileBookingCalendar();
+                }
+            }
+
             showBookingStep('form');
-            if (typeof window.refreshSmileBookingCalendar === 'function') window.refreshSmileBookingCalendar();
             bookingModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2558,14 +2616,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobOverlay.classList.remove('active');
             }
             
-            // Extract preselected service if button is on a specific service card/header
-            let sName = '';
-            const card = btn.closest('.service-deep-section, .service-card, .afisha-event-card');
+            let targetDate = btn.getAttribute('data-event-date') || '';
+            let targetTime = btn.getAttribute('data-event-time') || '';
+            let targetService = btn.getAttribute('data-service') || '';
+            let sName = btn.getAttribute('data-event-title') || '';
+
+            const card = btn.closest('.service-deep-section, .service-card, .afisha-event-card, .stagger-card');
             if (card) {
-                const titleElem = card.querySelector('.service-deep-title, .card-title, .afisha-title');
-                if (titleElem) sName = titleElem.textContent;
+                if (!targetDate && card.dataset.eventDate) targetDate = card.dataset.eventDate;
+                if (!targetTime && card.dataset.eventTime) targetTime = card.dataset.eventTime;
+                if (!targetService && card.dataset.service) targetService = card.dataset.service;
+                if (!sName) {
+                    const titleElem = card.querySelector('.service-deep-title, .card-title, .afisha-title, .stagger-card-title');
+                    if (titleElem) sName = titleElem.textContent;
+                }
             }
-            openBookingModal(sName);
+
+            openBookingModal(targetService || sName, targetDate, targetTime);
         }
     });
 
@@ -2909,6 +2976,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderCalendar();
             };
         }
+
+        window.selectBookingDateAndTime = function(dateStr, timeStr, eventTitle) {
+            if (dateStr) {
+                const parts = dateStr.split('-');
+                if (parts.length === 3) {
+                    const y = parseInt(parts[0], 10);
+                    const m = parseInt(parts[1], 10) - 1;
+                    const d = parseInt(parts[2], 10);
+                    selectedDate = new Date(y, m, d);
+                    viewDate = new Date(y, m, 1);
+                }
+            }
+            if (timeStr) {
+                selectedTime = timeStr;
+            } else if (selectedDate) {
+                const evs = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
+                if (evs.length > 0) {
+                    selectedTime = evs[0].time;
+                }
+            }
+            renderCalendar();
+            renderTimeSlots();
+            updateEventBanner();
+            updatePickedSummary();
+        };
 
         window.refreshSmileBookingCalendar = function() {
             renderCalendar();
