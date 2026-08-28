@@ -1403,7 +1403,7 @@ document.addEventListener('DOMContentLoaded', () => {
             text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.',
             name: 'თეო',
             fullname: 'თეო ფერაძე',
-            jobtitle: 'ქოუჩი, მენეჯერი & პოზიტიური ფსიქოთერაპევტი',
+            jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება',
             facebook: 'https://www.facebook.com/teo.peradze.7',
             instagram: 'https://www.instagram.com/teo_peradze16/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1421,6 +1421,19 @@ document.addEventListener('DOMContentLoaded', () => {
             instagram: 'https://www.facebook.com/keti.mirianasvili',
             whatsapp: 'https://wa.me/995599228228',
             time: '1:08 / 1:20'
+        },
+        {
+            image: 'გუნდი/8.jpg',
+            audio: 'galaktion.mp3',
+            galaktionStart: 0.0,
+            text: 'პერსონალური ქოუჩინგი და პოზიტიური ფსიქოკონსულტირება ქმნის უსაფრთხო გარემოს თვითგამორკვევისთვის, შინაგანი რესურსების გააქტიურებისა და პიროვნული ზრდისთვის.',
+            name: 'ია',
+            fullname: 'ია ქარდავა',
+            jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება',
+            facebook: 'https://www.facebook.com/ia.kardava.3',
+            instagram: 'https://www.instagram.com/metaphora.ge/',
+            whatsapp: 'https://wa.me/995599228228',
+            time: '0:00 / 1:20'
         }
     ];
 
@@ -3815,8 +3828,11 @@ document.addEventListener('DOMContentLoaded', () => {
         "მარიკა — პერსონალური & ბიზნეს განვითარების ქოუჩი": "Marika — Personal & Business Development Coach",
         "ნათია — პოზიტიური ფსიქოთერაპევტი &amp; ფსიქოკონსულტანტი": "Natia — Positive Psychotherapist &amp; Psychoconsultant",
         "ნათია — პოზიტიური ფსიქოთერაპევტი & ფსიქოკონსულტანტი": "Natia — Positive Psychotherapist & Psychoconsultant",
-        "თეო — ქოუჩი, მენეჯერი &amp; პოზიტიური ფსიქოთერაპევტი": "Teo — Coach, Manager &amp; Positive Psychotherapist",
-        "თეო — ქოუჩი, მენეჯერი & პოზიტიური ფსიქოთერაპევტი": "Teo — Coach, Manager & Positive Psychotherapist",
+        "თეო — ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Teo — Personal Coaching, Trainings &amp; Psychoconsulting",
+        "თეო — ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Teo — Personal Coaching, Trainings & Psychoconsulting",
+        "ია — ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Ia — Personal Coaching, Trainings &amp; Psychoconsulting",
+        "ია — ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Ia — Personal Coaching, Trainings & Psychoconsulting",
+        "ია ქარდავა": "Ia Kardava",
         "ქეთი — ფსიქოკონსულტანტი, ტრენერი &amp; სერტიფიცირებული ქოუჩი": "Keti — Psychoconsultant, Trainer &amp; Certified Coach",
         "ქეთი — ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი": "Keti — Psychoconsultant, Trainer & Certified Coach",
         "კონფლიქტების ტრანსფორმაცია ზრდის რესურსად": "Transforming conflict into a growth resource",
@@ -4511,8 +4527,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'ნათია', jobtitle: 'პოზიტიური ფსიქოთერაპევტი & ფსიქოკონსულტანტი', text: 'პოზიტიური და ტრანსკულტურალური ფსიქოთერაპია ეხმარება ადამიანს საკუთარი შინაგანი შესაძლებლობების აღმოჩენასა და ცხოვრებისეული გამოწვევების რესურსად გარდაქმნაში.' },
                 { name: 'მარიკა', jobtitle: 'პერსონალური & ბიზნეს განვითარების ქოუჩი', text: 'ჩვენი მიზანია ადამიანებისა და ბიზნესების გაძლიერება პერსონალური და პროფესიული განვითარების, მართვის კონსალტინგისა და პრაქტიკული ქოუჩინგის გზით.' },
                 { name: 'ია', jobtitle: 'ბიზნეს განვითარება & პარტნიორობა', text: 'მეტაფორა Business აერთიანებს მეწარმეებსა და პროფესიონალებს ნაყოფიერი თანამშრომლობის, პარტნიორობისა და ახალი შესაძლებლობების შესაქმნელად.' },
-                { name: 'თეო', jobtitle: 'ქოუჩი, მენეჯერი & პოზიტიური ფსიქოთერაპევტი', text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.' },
-                { name: 'ქეთი', jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი', text: 'ჩვენ ვეხმარებით ადამიანებს შინაგანი რესურსების გააქტიურებაში, პიროვნულ ტრანსფორმაციასა და მიზნების მიღწევაში ქოუჩინგისა და პოზიტიური ფსიქოთერაპიის მეთოდებით.' }
+                { name: 'თეო', jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება', text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.' },
+                { name: 'ქეთი', jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი', text: 'ჩვენ ვეხმარებით ადამიანებს შინაგანი რესურსების გააქტიურებაში, პიროვნულ ტრანსფორმაციასა და მიზნების მიღწევაში ქოუჩინგისა და პოზიტიური ფსიქოთერაპიის მეთოდებით.' },
+                { name: 'ია', jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება', text: 'პერსონალური ქოუჩინგი და პოზიტიური ფსიქოკონსულტირება ქმნის უსაფრთხო გარემოს თვითგამორკვევისთვის, შინაგანი რესურსების გააქტიურებისა და პიროვნული ზრდისთვის.' }
             ],
             afisha: [
                 { title: "🎭 Playback იმპროვიზაციის საღამო", testimonial: "თეატრალური პერფორმანსი, სადაც მაყურებლის რეალური ისტორიები და ემოციები სცენაზე ცოცხლდება.", by: "28 აგვ | 19:00 • Playback დასი" },
@@ -4542,8 +4559,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'Natia', jobtitle: 'Positive Psychotherapist & Psychoconsultant', text: 'Positive and transcultural psychotherapy empowers individuals to discover their inner strengths and transform life challenges into valuable growth resources.' },
                 { name: 'Marika', jobtitle: 'Personal & Business Development Coach', text: 'Our mission is empowering individuals and organizations through personal & business development coaching, management consulting, and transformative training.' },
                 { name: 'Ia', jobtitle: 'Business Development & Partnerships', text: 'Metaphora Business unites entrepreneurs and professionals for impactful collaboration, strategic partnerships, and new ventures.' },
-                { name: 'Teo', jobtitle: 'Coach, Manager & Positive Psychotherapist', text: 'Metaphora Clubs is your “Third Place” — where you always feel at home, relaxed, and surrounded by kindred spirits.' },
-                { name: 'Keti', jobtitle: 'Psychoconsultant, Trainer & Certified Coach', text: 'We empower individuals to activate their inner potential, achieve personal transformation, and reach meaningful goals through coaching and positive psychotherapy.' }
+                { name: 'Teo', jobtitle: 'Personal Coaching, Trainings & Psychoconsulting', text: 'Metaphora Clubs is your “Third Place” — where you always feel at home, relaxed, and surrounded by kindred spirits.' },
+                { name: 'Keti', jobtitle: 'Psychoconsultant, Trainer & Certified Coach', text: 'We empower individuals to activate their inner potential, achieve personal transformation, and reach meaningful goals through coaching and positive psychotherapy.' },
+                { name: 'Ia', jobtitle: 'Personal Coaching, Trainings & Psychoconsulting', text: 'Personal coaching and positive psychoconsulting create a safe environment for self-discovery, unlocking inner resources, and personal growth.' }
             ],
             afisha: [
                 { title: "🎭 Playback Improvisation Night", testimonial: "A theatrical performance where audience real stories and emotions come alive on stage.", by: "Aug 28 | 19:00 • Playback Troupe" },
