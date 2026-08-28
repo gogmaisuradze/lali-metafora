@@ -6020,9 +6020,40 @@ body.metabot-open .metabot-launcher-btn {
     color: #1e293b;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
     transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    padding: 2px 1px;
+}
+
+.day-num {
+    line-height: 1.1;
+}
+
+.day-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 2px;
+    height: 4px;
+}
+
+.day-dots .dot {
+    width: 4.5px;
+    height: 4.5px;
+    border-radius: 50%;
+    background: var(--brand-plum, #7a3963);
+    box-shadow: 0 0 3px var(--brand-plum);
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.day.sel .day-dots .dot {
+    background: var(--brand-gold, #ffba00);
+    box-shadow: 0 0 5px var(--brand-gold);
 }
 
 [data-theme="dark"] .day {
@@ -6050,19 +6081,6 @@ body.metabot-open .metabot-launcher-btn {
     font-weight: 800;
 }
 
-.day.has-event::after {
-    content: '';
-    position: absolute;
-    bottom: 3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4.5px;
-    height: 4.5px;
-    border-radius: 50%;
-    background: var(--brand-plum, #7a3963);
-    box-shadow: 0 0 4px var(--brand-plum);
-}
-
 .day.sel {
     background: var(--brand-teal, #016166) !important;
     color: #ffffff !important;
@@ -6070,11 +6088,6 @@ body.metabot-open .metabot-launcher-btn {
     box-shadow: 0 6px 18px rgba(1, 97, 102, 0.4), 0 0 12px rgba(255, 186, 0, 0.6) !important;
     font-weight: 800;
     transform: scale(1.06);
-}
-
-.day.sel.has-event::after {
-    background: var(--brand-gold, #ffba00);
-    box-shadow: 0 0 6px var(--brand-gold);
 }
 
 .day:disabled {
@@ -6099,26 +6112,63 @@ body.metabot-open .metabot-launcher-btn {
 /* Event Banner directly below the calendar grid */
 .cal-day-event-banner {
     margin-top: 10px;
-    padding: 8px 12px;
+    transition: all 0.25s ease;
+}
+
+.cal-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.cal-event-card {
+    padding: 7px 10px;
     background: linear-gradient(135deg, rgba(122, 57, 99, 0.12), rgba(1, 97, 102, 0.08));
     border: 1px solid rgba(122, 57, 99, 0.25);
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
     font-size: 0.8rem;
-    transition: all 0.25s ease;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
     box-sizing: border-box;
 }
 
-[data-theme="dark"] .cal-day-event-banner {
-    background: linear-gradient(135deg, rgba(122, 57, 99, 0.3), rgba(15, 23, 42, 0.6));
+.cal-event-card:hover {
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.22), rgba(1, 97, 102, 0.16));
+    border-color: var(--brand-gold, #ffba00);
+    transform: translateY(-1px);
+}
+
+.cal-event-card.active {
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.32), rgba(1, 97, 102, 0.24));
+    border-color: var(--brand-gold, #ffba00);
+    box-shadow: 0 3px 10px rgba(122, 57, 99, 0.25);
+}
+
+[data-theme="dark"] .cal-event-card {
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.35), rgba(15, 23, 42, 0.6));
     border-color: rgba(255, 255, 255, 0.12);
 }
 
-.cal-day-event-banner.is-free {
+[data-theme="dark"] .cal-event-card:hover,
+[data-theme="dark"] .cal-event-card.active {
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.5), rgba(1, 97, 102, 0.35));
+    border-color: var(--brand-gold, #ffba00);
+}
+
+.cal-event-card.is-free-card {
+    cursor: default;
     background: rgba(1, 97, 102, 0.06);
+    border-color: rgba(1, 97, 102, 0.15);
+}
+
+.cal-event-card.is-free-card:hover {
+    transform: none;
     border-color: rgba(1, 97, 102, 0.15);
 }
 
@@ -6134,7 +6184,7 @@ body.metabot-open .metabot-launcher-btn {
     flex-shrink: 0;
 }
 
-.cal-day-event-banner.is-free .event-banner-badge {
+.cal-event-card.is-free-card .event-banner-badge {
     background: var(--brand-teal, #016166);
 }
 
@@ -6145,12 +6195,23 @@ body.metabot-open .metabot-launcher-btn {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: right;
+    text-align: left;
     flex: 1;
 }
 
 [data-theme="dark"] .event-banner-title {
     color: #e2e8f0;
+}
+
+.event-card-pick-indicator {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--brand-gold, #ffba00);
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(122, 57, 99, 0.2);
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
 .slots-label {

@@ -2610,24 +2610,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let viewDate = new Date(2026, 7, 28);
         let selectedDate = new Date(2026, 7, 28);
-        let selectedTime = '19:00';
+        let selectedTime = '14:30';
 
         const ALL_TIME_SLOTS = ['10:00', '11:30', '13:00', '14:30', '16:00', '17:30', '19:00', '20:00', '21:00', '22:00'];
 
         const SCHEDULED_EVENTS = {
-            '2026-08-28': { titleKA: '🎭 Playback იმპროვიზაციის საღამო', titleEN: '🎭 Playback Improvisation Night', time: '19:00', badgeKA: '28 აგვ | 19:00', badgeEN: 'Aug 28 | 19:00' },
-            '2026-08-29': { titleKA: '☕ Coworking & Mastermind სესია', titleEN: '☕ Coworking & Mastermind Session', time: '14:30', badgeKA: '29 აგვ | 14:30', badgeEN: 'Aug 29 | 14:30' },
-            '2026-08-30': { titleKA: '🌿 პოზიტიური ფსიქოლოგიის ვორქშოფი', titleEN: '🌿 Positive Psychology Workshop', time: '18:30', badgeKA: '30 აგვ | 18:30', badgeEN: 'Aug 30 | 18:30' },
-            '2026-09-02': { titleKA: '🎲 Board Games Night & Cocktail Hour', titleEN: '🎲 Board Games Night & Cocktail Hour', time: '20:00', badgeKA: '02 სექ | 20:00', badgeEN: 'Sep 02 | 20:00' },
-            '2026-09-05': { titleKA: '💡 Think Tank & ფილოსოფიის საღამო', titleEN: '💡 Think Tank & Philosophy Night', time: '19:30', badgeKA: '05 სექ | 19:30', badgeEN: 'Sep 05 | 19:30' },
-            '2026-09-08': { titleKA: '🎨 არტ-თერაპია & თვითგამოხატვა', titleEN: '🎨 Art Therapy & Self-Expression', time: '18:00', badgeKA: '08 სექ | 18:00', badgeEN: 'Sep 08 | 18:00' },
-            '2026-09-12': { titleKA: '☕ Coworking & Mastermind საუზმე', titleEN: '☕ Coworking & Mastermind Breakfast', time: '10:30', badgeKA: '12 სექ | 10:30', badgeEN: 'Sep 12 | 10:30' },
-            '2026-09-15': { titleKA: '📚 წიგნის კლუბი & ღია დისკუსია', titleEN: '📚 Book Club & Open Discussion', time: '19:00', badgeKA: '15 სექ | 19:00', badgeEN: 'Sep 15 | 19:00' },
-            '2026-09-19': { titleKA: '🎭 Playback პერფორმანსი & ცოცხალი მუსიკა', titleEN: '🎭 Playback Performance & Live Music', time: '20:00', badgeKA: '19 სექ | 20:00', badgeEN: 'Sep 19 | 20:00' },
-            '2026-09-25': { titleKA: '✨ აკუსტიკური საღამო & კომუნა', titleEN: '✨ Acoustic Evening & Community', time: '19:30', badgeKA: '25 სექ | 19:30', badgeEN: 'Sep 25 | 19:30' },
-            '2026-09-26': { titleKA: '🧠 Masterclass: ლიდერობის ქოუჩინგი', titleEN: '🧠 Masterclass: Leadership Coaching', time: '16:00', badgeKA: '26 სექ | 16:00', badgeEN: 'Sep 26 | 16:00' },
-            '2026-10-02': { titleKA: '🎭 Playback თეატრის პრემიერა', titleEN: '🎭 Playback Theatre Premiere', time: '19:30', badgeKA: '02 ოქტ | 19:30', badgeEN: 'Oct 02 | 19:30' },
-            '2026-10-09': { titleKA: '🎨 არტ-თერაპიის ინტენსივი', titleEN: '🎨 Art Therapy Intensive Workshop', time: '18:00', badgeKA: '09 ოქტ | 18:00', badgeEN: 'Oct 09 | 18:00' }
+            '2026-08-28': [
+                { titleKA: '☕ Coworking & Networking ლანჩი', titleEN: '☕ Coworking & Networking Lunch', time: '14:30', badgeKA: '28 აგვ | 14:30', badgeEN: 'Aug 28 | 14:30' },
+                { titleKA: '🎭 Playback იმპროვიზაციის საღამო', titleEN: '🎭 Playback Improvisation Night', time: '19:00', badgeKA: '28 აგვ | 19:00', badgeEN: 'Aug 28 | 19:00' }
+            ],
+            '2026-08-29': [
+                { titleKA: '🧠 Masterclass: ლიდერობის ქოუჩინგი', titleEN: '🧠 Masterclass: Leadership Coaching', time: '14:30', badgeKA: '29 აგვ | 14:30', badgeEN: 'Aug 29 | 14:30' },
+                { titleKA: '🎲 Board Games Night & Bar', titleEN: '🎲 Board Games Night & Bar', time: '20:00', badgeKA: '29 აგვ | 20:00', badgeEN: 'Aug 29 | 20:00' }
+            ],
+            '2026-08-30': [
+                { titleKA: '🌿 პოზიტიური ფსიქოლოგიის ვორქშოფი', titleEN: '🌿 Positive Psychology Workshop', time: '18:30', badgeKA: '30 აგვ | 18:30', badgeEN: 'Aug 30 | 18:30' }
+            ],
+            '2026-09-02': [
+                { titleKA: '🎲 Board Games Night & Cocktail Hour', titleEN: '🎲 Board Games Night & Cocktail Hour', time: '20:00', badgeKA: '02 სექ | 20:00', badgeEN: 'Sep 02 | 20:00' }
+            ],
+            '2026-09-05': [
+                { titleKA: '🎨 არტ-თერაპია & თვითგამოხატვა', titleEN: '🎨 Art Therapy & Self-Expression', time: '14:00', badgeKA: '05 სექ | 14:00', badgeEN: 'Sep 05 | 14:00' },
+                { titleKA: '💡 Think Tank & ფილოსოფიის საღამო', titleEN: '💡 Think Tank & Philosophy Night', time: '19:30', badgeKA: '05 სექ | 19:30', badgeEN: 'Sep 05 | 19:30' }
+            ],
+            '2026-09-08': [
+                { titleKA: '🎨 არტ-თერაპია & თვითგამოხატვა', titleEN: '🎨 Art Therapy & Self-Expression', time: '18:00', badgeKA: '08 სექ | 18:00', badgeEN: 'Sep 08 | 18:00' }
+            ],
+            '2026-09-12': [
+                { titleKA: '☕ Coworking & Mastermind საუზმე', titleEN: '☕ Coworking & Mastermind Breakfast', time: '10:30', badgeKA: '12 სექ | 10:30', badgeEN: 'Sep 12 | 10:30' },
+                { titleKA: '🎭 Playback პერფორმანსი', titleEN: '🎭 Playback Performance', time: '19:00', badgeKA: '12 სექ | 19:00', badgeEN: 'Sep 12 | 19:00' }
+            ],
+            '2026-09-15': [
+                { titleKA: '📚 წიგნის კლუბი & ღია დისკუსია', titleEN: '📚 Book Club & Open Discussion', time: '19:00', badgeKA: '15 სექ | 19:00', badgeEN: 'Sep 15 | 19:00' }
+            ],
+            '2026-09-19': [
+                { titleKA: '🧠 პიროვნული განვითარების სემინარი', titleEN: '🧠 Personal Development Seminar', time: '16:00', badgeKA: '19 სექ | 16:00', badgeEN: 'Sep 19 | 16:00' },
+                { titleKA: '🎶 Playback & ცოცხალი მუსიკა', titleEN: '🎶 Playback & Live Music', time: '20:00', badgeKA: '19 სექ | 20:00', badgeEN: 'Sep 19 | 20:00' }
+            ],
+            '2026-09-25': [
+                { titleKA: '✨ აკუსტიკური საღამო & კომუნა', titleEN: '✨ Acoustic Evening & Community', time: '19:30', badgeKA: '25 სექ | 19:30', badgeEN: 'Sep 25 | 19:30' }
+            ],
+            '2026-09-26': [
+                { titleKA: '🧠 Masterclass: ლიდერობის ქოუჩინგი', titleEN: '🧠 Masterclass: Leadership Coaching', time: '16:00', badgeKA: '26 სექ | 16:00', badgeEN: 'Sep 26 | 16:00' },
+                { titleKA: '🍷 Lounge Cocktail Night', titleEN: '🍷 Lounge Cocktail Night', time: '21:00', badgeKA: '26 სექ | 21:00', badgeEN: 'Sep 26 | 21:00' }
+            ],
+            '2026-10-02': [
+                { titleKA: '🎭 Playback თეატრის პრემიერა', titleEN: '🎭 Playback Theatre Premiere', time: '19:30', badgeKA: '02 ოქტ | 19:30', badgeEN: 'Oct 02 | 19:30' }
+            ],
+            '2026-10-09': [
+                { titleKA: '☕ Creative Coworking Brunch', titleEN: '☕ Creative Coworking Brunch', time: '13:00', badgeKA: '09 ოქტ | 13:00', badgeEN: 'Oct 09 | 13:00' },
+                { titleKA: '🎨 არტ-თერაპიის ინტენსივი', titleEN: '🎨 Art Therapy Intensive Workshop', time: '18:00', badgeKA: '09 ოქტ | 18:00', badgeEN: 'Oct 09 | 18:00' }
+            ]
         };
 
         const MONTHS_KA = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
@@ -2646,19 +2679,44 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!eventBanner || !selectedDate) return;
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
             const isoStr = formatISODate(selectedDate);
-            const ev = SCHEDULED_EVENTS[isoStr];
+            const events = SCHEDULED_EVENTS[isoStr] || [];
 
-            if (ev) {
+            if (events.length > 0) {
                 eventBanner.className = 'cal-day-event-banner has-scheduled-event';
-                eventBanner.innerHTML = `
-                    <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
-                    <span class="event-banner-title" title="${isEn ? ev.titleEN : ev.titleKA}">${isEn ? ev.titleEN : ev.titleKA}</span>
-                `;
+                let cardsHtml = '<div class="cal-events-list">';
+                events.forEach(ev => {
+                    const isActive = (selectedTime === ev.time);
+                    cardsHtml += `
+                        <div class="cal-event-card ${isActive ? 'active' : ''}" data-time="${ev.time}">
+                            <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
+                            <span class="event-banner-title" title="${isEn ? ev.titleEN : ev.titleKA}">${isEn ? ev.titleEN : ev.titleKA}</span>
+                            <span class="event-card-pick-indicator">${isActive ? '✓' : (isEn ? 'Pick' : 'არჩევა')}</span>
+                        </div>
+                    `;
+                });
+                cardsHtml += '</div>';
+                eventBanner.innerHTML = cardsHtml;
+
+                // Attach click listeners to cards so clicking an event selects that exact time!
+                const cards = eventBanner.querySelectorAll('.cal-event-card');
+                cards.forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const chosenTime = card.getAttribute('data-time');
+                        if (chosenTime) {
+                            selectedTime = chosenTime;
+                            renderTimeSlots();
+                            updatePickedSummary();
+                        }
+                    });
+                });
             } else {
                 eventBanner.className = 'cal-day-event-banner is-free';
                 eventBanner.innerHTML = `
-                    <span class="event-banner-badge">${isEn ? '✨ Open Day' : '✨ თავისუფალი დღე'}</span>
-                    <span class="event-banner-title">${isEn ? 'Individual Bookings & Lounge' : 'ინდივიდუალური ჯავშანი & ლაუნჯი'}</span>
+                    <div class="cal-event-card is-free-card">
+                        <span class="event-banner-badge">${isEn ? '✨ Open Day' : '✨ თავისუფალი დღე'}</span>
+                        <span class="event-banner-title">${isEn ? 'Individual Bookings & Lounge' : 'ინდივიდუალური ჯავშანი & ლაუნჯი'}</span>
+                    </div>
                 `;
             }
         }
@@ -2688,7 +2746,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!pickedSummary) return;
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
             const isoStr = selectedDate ? formatISODate(selectedDate) : '';
-            const ev = isoStr ? SCHEDULED_EVENTS[isoStr] : null;
+            const events = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
+            const matchedEvent = events.find(e => e.time === selectedTime);
 
             if (selectedDate && selectedTime) {
                 const dayNum = selectedDate.getDate();
@@ -2697,9 +2756,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? `${mName} ${dayNum} · ${selectedTime}`
                     : `${dayNum} ${mName} · ${selectedTime}`;
                 
-                pickedSummary.textContent = ev 
-                    ? `${baseText} (${isEn ? 'Event Day' : 'ღონისძიება'})`
-                    : baseText;
+                if (matchedEvent) {
+                    const evTitle = isEn ? matchedEvent.titleEN : matchedEvent.titleKA;
+                    pickedSummary.textContent = `${baseText} (${evTitle})`;
+                } else if (events.length > 0) {
+                    pickedSummary.textContent = `${baseText} (${isEn ? 'Event Day' : 'ღონისძიების დღე'})`;
+                } else {
+                    pickedSummary.textContent = baseText;
+                }
             } else if (selectedDate) {
                 const dayNum = selectedDate.getDate();
                 const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
@@ -2752,19 +2816,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 cellDate.setHours(0, 0, 0, 0);
 
                 const isoStr = formatISODate(cellDate);
-                const hasEvent = !!SCHEDULED_EVENTS[isoStr];
+                const events = SCHEDULED_EVENTS[isoStr] || [];
+                const hasEvent = events.length > 0;
                 const isSelected = selectedDate && (cellDate.toDateString() === selectedDate.toDateString());
                 const isPast = cellDate < today && (year < today.getFullYear() || (year === today.getFullYear() && month < today.getMonth()) || (year === today.getFullYear() && month === today.getMonth() && d < today.getDate()));
 
                 const dayBtn = document.createElement('button');
                 dayBtn.type = 'button';
                 dayBtn.className = `day ${isSelected ? 'sel' : ''} ${hasEvent ? 'has-event' : ''}`;
-                dayBtn.textContent = d;
 
-                if (hasEvent) {
-                    const ev = SCHEDULED_EVENTS[isoStr];
-                    dayBtn.setAttribute('title', isEn ? `${ev.titleEN} (${ev.time})` : `${ev.titleKA} (${ev.time})`);
+                let dotsHtml = '';
+                if (events.length === 1) {
+                    dotsHtml = `<span class="day-dots"><span class="dot"></span></span>`;
+                    dayBtn.setAttribute('title', isEn ? `${events[0].titleEN} (${events[0].time})` : `${events[0].titleKA} (${events[0].time})`);
+                } else if (events.length >= 2) {
+                    dotsHtml = `<span class="day-dots"><span class="dot"></span><span class="dot"></span></span>`;
+                    const tooltip = events.map(e => isEn ? `${e.titleEN} (${e.time})` : `${e.titleKA} (${e.time})`).join(' | ');
+                    dayBtn.setAttribute('title', tooltip);
                 }
+
+                dayBtn.innerHTML = `<span class="day-num">${d}</span>${dotsHtml}`;
 
                 if (isPast) {
                     dayBtn.disabled = true;
@@ -2772,11 +2843,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     dayBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         selectedDate = new Date(year, month, d);
-                        const evForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)];
-                        if (evForDate && evForDate.time) {
-                            selectedTime = evForDate.time;
-                            renderTimeSlots();
+                        const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
+                        if (eventsForDate.length > 0) {
+                            const hasCurrentTime = eventsForDate.some(ev => ev.time === selectedTime);
+                            if (!hasCurrentTime) {
+                                selectedTime = eventsForDate[0].time;
+                            }
                         }
+                        renderTimeSlots();
                         updatePickedSummary();
                         renderCalendar();
                     });
