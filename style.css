@@ -2803,15 +2803,15 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
     margin-top: 14px;
     padding: 14px 24px;
     border-radius: 9999px;
-    background: linear-gradient(135deg, #ffd043 0%, #ffba00 50%, #e6a100 100%) !important;
-    color: #1e293b !important;
+    background: linear-gradient(135deg, #016166 0%, #08777e 100%) !important;
+    color: #ffffff !important;
     font-family: inherit;
-    font-size: 1.02rem;
+    font-size: 0.98rem;
     font-weight: 800;
-    letter-spacing: 0.2px;
-    border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(255, 186, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1.5px 1.5px #ffffff !important;
+    box-shadow: 0 6px 20px rgba(1, 97, 102, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
@@ -2822,15 +2822,15 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
 }
 
 .btn-modal-submit:hover {
-    background: linear-gradient(135deg, #ffe066 0%, #ffc72c 50%, #f59e0b 100%) !important;
+    background: linear-gradient(135deg, #02747a 0%, #015054 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(255, 186, 0, 0.6), inset 0 1.5px 1.5px #ffffff !important;
-    color: #0f172a !important;
+    box-shadow: 0 10px 28px rgba(1, 97, 102, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
 }
 
 .btn-modal-submit:active {
     transform: translateY(0);
-    box-shadow: 0 4px 14px rgba(255, 186, 0, 0.35) !important;
+    box-shadow: 0 3px 10px rgba(1, 97, 102, 0.3) !important;
 }
 
 /* Payment Step Styles (Ported from IDC & Styled for Metafora) */
@@ -6016,26 +6016,27 @@ body.metabot-open .metabot-launcher-btn {
 .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 35px;
-    gap: 5px;
-    min-height: 242px;
+    gap: 7px;
+    min-height: 250px;
     align-content: start;
+    box-sizing: border-box;
 }
 
 .cal-grid .wd {
     text-align: center;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 800;
     color: #64748b;
-    padding: 2px 0;
+    padding: 3px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .day {
-    aspect-ratio: 1;
-    border: 1px solid rgba(1, 97, 102, 0.12);
-    background: rgba(255, 255, 255, 0.75);
+    min-height: 40px;
+    height: 40px;
+    border: 1px solid rgba(1, 97, 102, 0.14);
+    background: rgba(255, 255, 255, 0.85);
     border-radius: 10px;
     cursor: pointer;
     font-family: inherit;
@@ -6049,7 +6050,9 @@ body.metabot-open .metabot-launcher-btn {
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 2px 1px;
+    padding: 2px 0;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .day-num {
@@ -6162,42 +6165,44 @@ body.metabot-open .metabot-launcher-btn {
 }
 
 .cal-event-card {
-    padding: 7px 10px;
-    background: linear-gradient(135deg, rgba(122, 57, 99, 0.12), rgba(1, 97, 102, 0.08));
-    border: 1px solid rgba(122, 57, 99, 0.25);
-    border-radius: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid rgba(1, 97, 102, 0.2);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    font-size: 0.8rem;
+    gap: 10px;
+    font-size: 0.82rem;
     cursor: pointer;
     transition: all 0.2s ease;
     user-select: none;
     box-sizing: border-box;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .cal-event-card:hover {
-    background: linear-gradient(135deg, rgba(122, 57, 99, 0.22), rgba(1, 97, 102, 0.16));
-    border-color: var(--brand-gold, #ffba00);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--brand-teal, #016166);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(1, 97, 102, 0.15);
 }
 
 .cal-event-card.active {
-    background: linear-gradient(135deg, rgba(122, 57, 99, 0.32), rgba(1, 97, 102, 0.24));
-    border-color: var(--brand-gold, #ffba00);
-    box-shadow: 0 3px 10px rgba(122, 57, 99, 0.25);
+    background: linear-gradient(135deg, rgba(122, 57, 99, 0.15), rgba(1, 97, 102, 0.12));
+    border-color: var(--brand-teal, #016166);
+    box-shadow: 0 4px 14px rgba(1, 97, 102, 0.22);
 }
 
 [data-theme="dark"] .cal-event-card {
-    background: linear-gradient(135deg, rgba(122, 57, 99, 0.35), rgba(15, 23, 42, 0.6));
+    background: rgba(30, 41, 59, 0.8);
     border-color: rgba(255, 255, 255, 0.12);
 }
 
 [data-theme="dark"] .cal-event-card:hover,
 [data-theme="dark"] .cal-event-card.active {
-    background: linear-gradient(135deg, rgba(122, 57, 99, 0.5), rgba(1, 97, 102, 0.35));
-    border-color: var(--brand-gold, #ffba00);
+    background: rgba(30, 41, 59, 0.95);
+    border-color: #38bdf8;
 }
 
 .cal-event-card.is-free-card {
@@ -6231,7 +6236,7 @@ body.metabot-open .metabot-launcher-btn {
 .event-banner-title {
     color: #1e293b;
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: 0.80rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -6244,14 +6249,24 @@ body.metabot-open .metabot-launcher-btn {
 }
 
 .event-card-pick-indicator {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 800;
-    color: var(--brand-gold, #ffba00);
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(122, 57, 99, 0.2);
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--brand-teal, #016166);
+    box-shadow: 0 2px 6px rgba(1, 97, 102, 0.3);
     margin-left: auto;
     flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.cal-event-card.active .event-card-pick-indicator {
+    background: var(--brand-plum, #7a3963);
+    color: #ffffff;
+    border: 1.5px solid var(--brand-gold, #ffba00);
+    box-shadow: 0 3px 10px rgba(122, 57, 99, 0.4), 0 0 8px rgba(255, 186, 0, 0.5);
+    font-weight: 900;
 }
 
 .slots-label {

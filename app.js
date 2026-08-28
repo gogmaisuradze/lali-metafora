@@ -2712,7 +2712,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="cal-event-card ${isActive ? 'active' : ''}" data-time="${ev.time}">
                             <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
                             <span class="event-banner-title" title="${isEn ? ev.titleEN : ev.titleKA}">${isEn ? ev.titleEN : ev.titleKA}</span>
-                            <span class="event-card-pick-indicator">${isActive ? '✓' : (isEn ? 'Pick' : 'არჩევა')}</span>
+                            <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
                         </div>
                     `;
                 });
