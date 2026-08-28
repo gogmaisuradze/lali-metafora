@@ -5430,7 +5430,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // UNIQUE VISITOR COUNTER (1 count per unique IP, 6-digit padded format)
     // ==========================================================================
     function initUniqueVisitorCounter() {
-        const counterEls = document.querySelectorAll('#metafora-unique-visitor-count, .visitor-counter-odometer');
+        const counterEls = document.querySelectorAll('#metafora-unique-visitor-count, .footer-visitor-counter, .visitor-counter-odometer');
         if (!counterEls.length) return;
 
         // Format to 6 digits (e.g. 000001, 000128) ensuring 3+ leading zeros
@@ -5473,14 +5473,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         counterEls.forEach(el => {
                             el.textContent = formatDigits(storedCount);
-                            el.classList.add('visitor-count-pulse');
-                            setTimeout(() => el.classList.remove('visitor-count-pulse'), 900);
                         });
                     }
                 }
             })
             .catch(() => {
-                // If offline or blocked, ensure session is flagged
                 if (!isCounted) {
                     localStorage.setItem('metafora_unique_v_done', 'true');
                 }
