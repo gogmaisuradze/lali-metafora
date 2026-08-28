@@ -412,56 +412,12 @@
                         </select>
                     </div>
 
-                    <!-- Custom Metaphora Interactive Booking Calendar -->
-                    <div class="form-group booking-calendar-group">
-                        <div class="calendar-header-row">
-                            <label class="form-label">📅 სასურველი თარიღის არჩევა</label>
-                            <div class="calendar-legend-bar">
-                                <span class="legend-item"><span class="legend-dot dot-avail"></span>თავისუფალი</span>
-                                <span class="legend-item"><span class="legend-dot dot-event"></span>ღონისძიება</span>
-                                <span class="legend-item"><span class="legend-dot dot-selected"></span>არჩეული</span>
-                            </div>
-                        </div>
-
-                        <div class="metafora-custom-calendar" id="metafora-custom-calendar">
-                            <div class="cal-nav-bar">
-                                <button type="button" class="cal-nav-btn" id="cal-prev-month" title="წინა თვე" aria-label="Previous Month">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
-                                </button>
-                                <div class="cal-month-year" id="cal-month-year-label">აგვისტო 2026</div>
-                                <button type="button" class="cal-nav-btn" id="cal-next-month" title="შემდეგი თვე" aria-label="Next Month">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-                                </button>
-                            </div>
-
-                            <div class="cal-weekdays-grid">
-                                <span class="cal-wd">ორშ</span>
-                                <span class="cal-wd">სამ</span>
-                                <span class="cal-wd">ოთხ</span>
-                                <span class="cal-wd">ხუთ</span>
-                                <span class="cal-wd">პარ</span>
-                                <span class="cal-wd weekend">შაბ</span>
-                                <span class="cal-wd weekend">კვი</span>
-                            </div>
-
-                            <div class="cal-days-grid" id="cal-days-grid">
-                                <!-- Populated dynamically by JS -->
-                            </div>
-
-                            <div class="cal-selected-summary" id="cal-selected-summary">
-                                <div class="cal-sum-left">
-                                    <span class="cal-sum-icon">📅</span>
-                                    <span class="cal-sum-text" id="cal-selected-text">28 აგვისტო, 2026 (პარასკევი)</span>
-                                </div>
-                                <span class="cal-sum-badge">ხელმისაწვდომია ✨</span>
-                            </div>
-                        </div>
-
-                        <input type="hidden" id="booking-date-input" name="booking_date" value="2026-08-28" required>
-                    </div>
-
-                    <!-- Time & Guests Row -->
+                    <!-- Date & Time Row -->
                     <div class="form-row-two">
+                        <div class="form-group">
+                            <label class="form-label">📅 სასურველი თარიღი</label>
+                            <input type="date" class="form-input" id="booking-date-input" required>
+                        </div>
                         <div class="form-group">
                             <label class="form-label">🕒 დროის ინტერვალი</label>
                             <select class="form-input" id="booking-time-select" required>
@@ -469,15 +425,6 @@
                                 <option>14:30 — 16:30 (Coworking სესია)</option>
                                 <option>17:00 — 19:00 (ვორქშოფი &amp; თერაპია)</option>
                                 <option selected>19:30 — 22:00 (Playback თეატრი/Bar)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">👥 სტუმრების რაოდენობა</label>
-                            <select class="form-input" id="booking-guests-select" required>
-                                <option>1 ადამიანი</option>
-                                <option selected>2 ადამიანი</option>
-                                <option>3-4 ადამიანი</option>
-                                <option>5+ ადამიანი (ჯგუფური)</option>
                             </select>
                         </div>
                     </div>

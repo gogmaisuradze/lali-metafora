@@ -2167,7 +2167,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             showBookingStep('form');
-            if (typeof window.refreshBookingCalendarLang === 'function') window.refreshBookingCalendarLang();
             bookingModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2588,193 +2587,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
     }
-
-    // ==========================================================================
-    // METAPHORA CUSTOM INTERACTIVE BOOKING CALENDAR ENGINE
-    // ==========================================================================
-    function initCustomBookingCalendar() {
-        const calContainer = document.getElementById('metafora-custom-calendar');
-        const daysGrid = document.getElementById('cal-days-grid');
-        const monthYearLabel = document.getElementById('cal-month-year-label');
-        const prevBtn = document.getElementById('cal-prev-month');
-        const nextBtn = document.getElementById('cal-next-month');
-        const selectedText = document.getElementById('cal-selected-text');
-        const dateInput = document.getElementById('booking-date-input');
-
-        if (!calContainer || !daysGrid) return;
-
-        const today = new Date();
-        // Default anchor: August 2026 / current date
-        let currentMonthDate = new Date(2026, 7, 28);
-        let selectedDate = new Date(2026, 7, 28);
-
-        const monthNamesKA = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
-        const monthNamesEN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-        const dayNamesKA = ['კვირა', 'ორშაბათი', 'სამშაბათი', 'ოთხშაბათი', 'ხუთშაბათი', 'პარასკევი', 'შაბათი'];
-        const dayNamesEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-        const weekdaysShortKA = ['ორშ', 'სამ', 'ოთხ', 'ხუთ', 'პარ', 'შაბ', 'კვი'];
-        const weekdaysShortEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
-        // Special featured and recurring event days for dynamic visual flair
-        const specialEventDates = {
-            '2026-08-28': 'Playback თეატრი & არტ-თერაპია 🎭',
-            '2026-08-29': 'Coworking & Mastermind ☕',
-            '2026-08-30': 'პოზიტიური ფსიქოლოგიის ვორქშოფი 🌿',
-            '2026-09-02': 'Board Games Social Night 🎲',
-            '2026-09-05': 'Think Tank ინტელექტუალური დისკუსია 💡',
-            '2026-09-08': 'არტ-თერაპია & თვითგამოხატვა 🎨',
-            '2026-09-12': 'Coworking საუზმე & Networking 🥐',
-            '2026-09-15': 'წიგნის კლუბი & ფილოსოფიური საუბრები 📚',
-            '2026-09-19': 'Playback პერფორმანსი & ცოცხალი მუსიკა 🎶',
-            '2026-09-25': 'აკუსტიკური საღამო & კომუნა ✨',
-            '2026-09-26': 'Masterclass & ქოუჩინგ სესია 🧠',
-            '2026-10-02': 'Playback თეატრი 🎭',
-            '2026-10-09': 'არტ-თერაპიის ინტენსივი 🎨'
-        };
-
-        function formatISODate(d) {
-            const y = d.getFullYear();
-            const m = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
-            return `${y}-${m}-${day}`;
-        }
-
-        function renderCalendar() {
-            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
-            const year = currentMonthDate.getFullYear();
-            const month = currentMonthDate.getMonth();
-
-            // Month/Year header
-            if (monthYearLabel) {
-                const mName = isEn ? monthNamesEN[month] : monthNamesKA[month];
-                monthYearLabel.textContent = `${mName} ${year}`;
-            }
-
-            // Update weekday labels
-            const wdEls = calContainer.querySelectorAll('.cal-weekdays-grid .cal-wd');
-            if (wdEls.length === 7) {
-                wdEls.forEach((el, idx) => {
-                    el.textContent = isEn ? weekdaysShortEN[idx] : weekdaysShortKA[idx];
-                });
-            }
-
-            // Clear days
-            daysGrid.innerHTML = '';
-
-            // First day of month
-            const firstDayOfMonth = new Date(year, month, 1).getDay();
-            const startingDay = (firstDayOfMonth + 6) % 7; // Monday-first (0 = Monday ... 6 = Sunday)
-
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const daysInPrevMonth = new Date(year, month, 0).getDate();
-
-            // Padding days from previous month
-            for (let i = startingDay - 1; i >= 0; i--) {
-                const padDay = daysInPrevMonth - i;
-                const padBtn = document.createElement('button');
-                padBtn.type = 'button';
-                padBtn.className = 'cal-day-cell cal-pad-day';
-                padBtn.textContent = padDay;
-                padBtn.disabled = true;
-                daysGrid.appendChild(padBtn);
-            }
-
-            // Month days
-            for (let d = 1; d <= daysInMonth; d++) {
-                const cellDate = new Date(year, month, d);
-                const isoStr = formatISODate(cellDate);
-                const isSelected = selectedDate && (formatISODate(selectedDate) === isoStr);
-                const isToday = (today.getFullYear() === year && today.getMonth() === month && today.getDate() === d);
-                const isWeekend = (cellDate.getDay() === 0 || cellDate.getDay() === 6);
-                const hasEvent = !!specialEventDates[isoStr];
-
-                const dayBtn = document.createElement('button');
-                dayBtn.type = 'button';
-                dayBtn.className = 'cal-day-cell';
-                dayBtn.setAttribute('data-date', isoStr);
-
-                if (isToday) dayBtn.classList.add('is-today');
-                if (isSelected) dayBtn.classList.add('is-selected');
-                if (isWeekend) dayBtn.classList.add('is-weekend');
-                if (hasEvent) {
-                    dayBtn.classList.add('has-event');
-                    dayBtn.setAttribute('title', specialEventDates[isoStr]);
-                }
-
-                let innerHtml = `<span class="cal-day-num">${d}</span>`;
-                if (hasEvent) {
-                    innerHtml += `<span class="cal-event-dot" aria-hidden="true"></span>`;
-                }
-                dayBtn.innerHTML = innerHtml;
-
-                dayBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    selectedDate = new Date(year, month, d);
-                    if (dateInput) {
-                        dateInput.value = isoStr;
-                    }
-                    renderCalendar();
-                });
-
-                daysGrid.appendChild(dayBtn);
-            }
-
-            updateSelectedDisplay();
-        }
-
-        function updateSelectedDisplay() {
-            if (!selectedText || !selectedDate) return;
-            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
-            const d = selectedDate.getDate();
-            const m = selectedDate.getMonth();
-            const y = selectedDate.getFullYear();
-            const dayIdx = selectedDate.getDay();
-
-            const mName = isEn ? monthNamesEN[m] : monthNamesKA[m];
-            const dayName = isEn ? dayNamesEN[dayIdx] : dayNamesKA[dayIdx];
-
-            if (isEn) {
-                selectedText.textContent = `${mName} ${d}, ${y} (${dayName})`;
-            } else {
-                selectedText.textContent = `${d} ${mName}, ${y} (${dayName})`;
-            }
-
-            if (dateInput) {
-                dateInput.value = formatISODate(selectedDate);
-            }
-
-            const badge = calContainer.querySelector('.cal-sum-badge');
-            if (badge) {
-                badge.textContent = isEn ? 'Available ✨' : 'ხელმისაწვდომია ✨';
-            }
-        }
-
-        if (prevBtn) {
-            prevBtn.onclick = (e) => {
-                e.preventDefault();
-                currentMonthDate.setMonth(currentMonthDate.getMonth() - 1);
-                renderCalendar();
-            };
-        }
-
-        if (nextBtn) {
-            nextBtn.onclick = (e) => {
-                e.preventDefault();
-                currentMonthDate.setMonth(currentMonthDate.getMonth() + 1);
-                renderCalendar();
-            };
-        }
-
-        window.refreshBookingCalendarLang = function() {
-            renderCalendar();
-        };
-
-        renderCalendar();
-    }
-
-    initCustomBookingCalendar();
 
 
 
@@ -4187,14 +3999,6 @@ document.addEventListener('DOMContentLoaded', () => {
         "უნიკალური ვიზიტორი:": "Unique Visitors:",
         "საიტის უნიკალური მნახველები": "Website Unique Visitors",
         "უნიკალური მნახველი:": "Unique Visitors:",
-        "📅 სასურველი თარიღის არჩევა": "📅 Select Preferred Date",
-        "თავისუფალი": "Available",
-        "ღონისძიება": "Event",
-        "არჩეული": "Selected",
-        "ხელმისაწვდომია ✨": "Available ✨",
-        "ხელმისაწვდომია": "Available",
-        "წინა თვე": "Previous Month",
-        "შემდეგი თვე": "Next Month",
         "სტატიები & ფიქრები": "Articles & Insights",
         "სტატიები &amp; ფიქრები": "Articles &amp; Insights",
         "მეტაფორას ბლოგი": "Metaphora Blog",
@@ -5244,7 +5048,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof renderAfishaCards === 'function') renderAfishaCards();
             if (typeof startManifestoTypewriter === 'function') startManifestoTypewriter(false);
             if (typeof window.refreshActiveArticleLanguage === 'function') window.refreshActiveArticleLanguage(lang);
-            if (typeof window.refreshBookingCalendarLang === 'function') window.refreshBookingCalendarLang();
 
             // Update MetaBot welcome msg
             const firstBotMsg = document.querySelector('.metabot-msg.bot-msg .metabot-msg-bubble');
