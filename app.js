@@ -747,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Active node elevates upwards and scales up dynamically
                     const activeLift = (isCurrentActive && !isBeingDragged) ? (35 * scaleFactor) : 0;
                     const nodeScale = isBeingDragged ? (1.38 * scaleFactor) : (isCurrentActive ? (1.30 + puffExpansion * 0.12) : (0.82 + (normalizedZ + 1) * 0.18));
-                    const nodeOpacity = (isCurrentActive || isBeingDragged) ? 1.0 : (0.42 + (normalizedZ + 1) * 0.12);
+                    const nodeOpacity = (isCurrentActive || isBeingDragged) ? 1.0 : (0.55 + (normalizedZ + 1) * 0.22);
                     const zIndex = isBeingDragged ? 150 : (isCurrentActive ? 120 : Math.round(50 + normalizedZ * 20));
 
                     node.style.transform = `translate(${projX.toFixed(1)}px, ${(projY - activeLift).toFixed(1)}px) scale(${nodeScale.toFixed(2)})`;
