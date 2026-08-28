@@ -44,17 +44,19 @@
         });
     };
 
-    // Fallback HTML5 Audio pool
+    // Fallback HTML5 Audio pool with iOS playsinline
     const audioPool = soundFiles.map(file => {
         const a = new Audio(file);
         a.preload = 'auto';
         a.volume = 0.40;
+        a.setAttribute('playsinline', '');
+        a.setAttribute('webkit-playsinline', '');
         return a;
     });
 
     const playNextClickSound = () => {
         const now = Date.now();
-        if (now - lastPlayedTime < 30) return;
+        if (now - lastPlayedTime < 45) return; // Prevent double-trigger on rapid touch+pointer+click
         lastPlayedTime = now;
 
         const soundIdx = currentSoundIndex;
@@ -75,27 +77,38 @@
             } catch (err) {}
         }
 
-        // HTML5 fallback
+        // HTML5 fallback for mobile devices
         try {
             const audio = audioPool[soundIdx];
             if (audio) {
                 const clone = audio.cloneNode();
                 clone.volume = 0.40;
-                clone.play().catch(() => {});
+                const p = clone.play();
+                if (p !== undefined) p.catch(() => {});
             }
         } catch (e) {}
     };
 
-    const unlockAndPreload = () => {
-        preloadBuffers();
+    // Force-unlock iOS WebKit Audio hardware on first touch/click
+    const unlockAudioIOS = () => {
         const ctx = getAudioContext();
-        if (ctx && ctx.state === 'suspended') {
-            ctx.resume().catch(() => {});
+        if (ctx) {
+            if (ctx.state === 'suspended') {
+                ctx.resume().catch(() => {});
+            }
+            try {
+                const buffer = ctx.createBuffer(1, 1, 22050);
+                const source = ctx.createBufferSource();
+                source.buffer = buffer;
+                source.connect(ctx.destination);
+                source.start(0);
+            } catch (e) {}
         }
+        preloadBuffers();
     };
 
-    ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'click'].forEach(evt => {
-        window.addEventListener(evt, unlockAndPreload, { once: true, capture: true, passive: true });
+    ['touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown', 'click'].forEach(evt => {
+        window.addEventListener(evt, unlockAudioIOS, { once: true, capture: true, passive: true });
     });
 
     // Check if target or ancestor is interactive
@@ -128,21 +141,29 @@
         return false;
     }
 
-    // Capture on pointerdown / mousedown for instant zero-latency feedback
+    // Touchstart event for immediate zero-lag sound response on mobile
+    document.addEventListener('touchstart', (e) => {
+        if (isInteractiveTarget(e.target)) {
+            unlockAudioIOS();
+            playNextClickSound();
+        }
+    }, { capture: true, passive: true });
+
+    // Pointerdown / mousedown event for desktop & mouse devices
     document.addEventListener('pointerdown', (e) => {
         if (isInteractiveTarget(e.target)) {
-            unlockAndPreload();
+            unlockAudioIOS();
             playNextClickSound();
         }
-    }, true);
+    }, { capture: true, passive: true });
 
-    // Also capture click for keyboard navigation or touch devices
+    // Click event fallback for keyboard or assistive navigation
     document.addEventListener('click', (e) => {
         if (isInteractiveTarget(e.target)) {
-            unlockAndPreload();
+            unlockAudioIOS();
             playNextClickSound();
         }
-    }, true);
+    }, { capture: true, passive: true });
 
     // Smooth navigation delay for cross-page navigation links so the sound completes
     document.addEventListener('click', (e) => {
