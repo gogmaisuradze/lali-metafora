@@ -2224,11 +2224,21 @@ html.direct-main-mode #main-website {
 
 @media (max-width: 768px) {
     .tw-members-ribbon {
-        gap: 18px;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 14px 14px !important;
+        max-width: 340px !important;
+        width: 100% !important;
+        margin: 25px auto 0 auto !important;
+        padding: 10px 4px !important;
+        box-sizing: border-box !important;
     }
     .tw-member-chip {
-        width: 72px;
-        height: 72px;
+        width: 60px !important;
+        height: 60px !important;
+        flex-shrink: 0 !important;
     }
 }
 
@@ -3842,13 +3852,14 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
     .tw-members-ribbon {
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-start !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 14px !important;
-        padding: 10px 6px !important;
-        margin-top: 25px !important;
-        scrollbar-width: none !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 14px 14px !important;
+        max-width: 340px !important;
+        width: 100% !important;
+        margin: 25px auto 0 auto !important;
+        padding: 10px 4px !important;
+        box-sizing: border-box !important;
     }
     .tw-members-ribbon::-webkit-scrollbar {
         display: none !important;
@@ -3857,6 +3868,17 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         width: 60px !important;
         height: 60px !important;
         flex-shrink: 0 !important;
+    }
+
+    @media (max-width: 360px) {
+        .tw-members-ribbon {
+            max-width: 280px !important;
+            gap: 10px 10px !important;
+        }
+        .tw-member-chip {
+            width: 52px !important;
+            height: 52px !important;
+        }
     }
 
     /* Main Website Header on Mobile */
