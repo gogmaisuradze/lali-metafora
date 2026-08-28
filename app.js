@@ -3996,6 +3996,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "გსურთ თქვენი ბიზნესის ახალ საფეხურზე აყვანა?": "Ready to take your business to the next level?",
         "იპოვე შენი შინაგანი ძალა & ემოციური ჰარმონია": "Find Your Inner Strength & Emotional Harmony",
         "✍️ აკრიფეთ ტექსტი აქ და მოისმინეთ დაჭერისას:": "✍️ Type text here and listen on keypress:",
+        "უნიკალური ვიზიტორი:": "Unique Visitors:",
+        "საიტის უნიკალური მნახველები": "Website Unique Visitors",
+        "უნიკალური მნახველი:": "Unique Visitors:",
         "სტატიები & ფიქრები": "Articles & Insights",
         "სტატიები &amp; ფიქრები": "Articles &amp; Insights",
         "მეტაფორას ბლოგი": "Metaphora Blog",
@@ -5084,5 +5087,67 @@ document.addEventListener('DOMContentLoaded', () => {
         window.setLanguage = setLanguage;
     }
 
+    // ==========================================================================
+    // UNIQUE VISITOR COUNTER (1 count per unique IP, 6-digit padded format)
+    // ==========================================================================
+    function initUniqueVisitorCounter() {
+        const counterEls = document.querySelectorAll('#metafora-unique-visitor-count, .visitor-counter-odometer');
+        if (!counterEls.length) return;
+
+        // Format to 6 digits (e.g. 000001, 000128) ensuring 3+ leading zeros
+        function formatDigits(count) {
+            const num = Math.max(1, parseInt(count, 10) || 1);
+            return String(num).padStart(6, '0');
+        }
+
+        // Base stored count
+        let storedCount = parseInt(localStorage.getItem('metafora_unique_v_count'), 10);
+        if (isNaN(storedCount) || storedCount < 1) {
+            storedCount = 1;
+            localStorage.setItem('metafora_unique_v_count', storedCount);
+        }
+
+        // Render current count immediately
+        counterEls.forEach(el => {
+            el.textContent = formatDigits(storedCount);
+        });
+
+        // Track IP uniqueness
+        const countedIP = localStorage.getItem('metafora_unique_v_ip');
+        const isCounted = localStorage.getItem('metafora_unique_v_done');
+
+        // Fetch visitor IP
+        fetch('https://api.ipify.org?format=json')
+            .then(res => {
+                if (!res.ok) throw new Error('IP fetch failed');
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.ip) {
+                    const currentIP = String(data.ip).trim();
+                    // If this IP has not been recorded yet on this device
+                    if (countedIP !== currentIP || !isCounted) {
+                        storedCount += 1;
+                        localStorage.setItem('metafora_unique_v_count', storedCount);
+                        localStorage.setItem('metafora_unique_v_ip', currentIP);
+                        localStorage.setItem('metafora_unique_v_done', 'true');
+
+                        counterEls.forEach(el => {
+                            el.textContent = formatDigits(storedCount);
+                            el.classList.add('visitor-count-pulse');
+                            setTimeout(() => el.classList.remove('visitor-count-pulse'), 900);
+                        });
+                    }
+                }
+            })
+            .catch(() => {
+                // If offline or blocked, ensure session is flagged
+                if (!isCounted) {
+                    localStorage.setItem('metafora_unique_v_done', 'true');
+                }
+            });
+    }
+
     initI18nLanguageSwitcher();
+    initUniqueVisitorCounter();
 });
