@@ -306,8 +306,8 @@ html.direct-main-mode #main-website {
     border: 2px solid rgba(1, 97, 102, 0.35);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     will-change: transform, opacity, filter;
-    filter: grayscale(100%) contrast(0.94) brightness(0.92);
-    opacity: 0.55;
+    filter: grayscale(0%) contrast(1.02);
+    opacity: 0.50;
     transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
     z-index: 100 !important;
     overflow: hidden;
@@ -315,7 +315,7 @@ html.direct-main-mode #main-website {
 
 .dandelion-node.dragging {
     cursor: grabbing !important;
-    filter: grayscale(0%) contrast(1.15) saturate(135%) brightness(1.02) !important;
+    filter: grayscale(0%) contrast(1.15) saturate(130%) brightness(1.02) !important;
     border-color: var(--brand-gold) !important;
     box-shadow: 0 20px 45px rgba(255, 186, 0, 0.55) !important;
     z-index: 150 !important;
@@ -332,7 +332,7 @@ html.direct-main-mode #main-website {
 }
 
 .dandelion-node:hover {
-    filter: grayscale(20%) contrast(1.08) saturate(120%) !important;
+    filter: grayscale(0%) contrast(1.08) saturate(115%) !important;
     border-color: var(--brand-plum) !important;
     box-shadow: 0 14px 34px rgba(122, 57, 99, 0.35) !important;
     z-index: 110 !important;
@@ -340,7 +340,7 @@ html.direct-main-mode #main-website {
 }
 
 .dandelion-node.active {
-    filter: grayscale(0%) contrast(1.15) saturate(135%) brightness(1.02) !important;
+    filter: grayscale(0%) contrast(1.15) saturate(130%) brightness(1.02) !important;
     border-color: var(--brand-gold) !important;
     box-shadow: 0 16px 40px rgba(1, 97, 102, 0.38), 0 0 0 4px rgba(255, 186, 0, 0.55) !important;
     z-index: 120 !important;
@@ -356,17 +356,17 @@ html.direct-main-mode #main-website {
     display: block;
     pointer-events: none;
     image-rendering: -webkit-optimize-contrast;
-    filter: grayscale(100%) contrast(0.92);
+    filter: grayscale(0%) contrast(1.02);
     transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dandelion-node:hover img {
-    filter: grayscale(20%) saturate(120%) !important;
+    filter: grayscale(0%) saturate(115%) !important;
 }
 
 .dandelion-node.active img,
 .dandelion-node.dragging img {
-    filter: grayscale(0%) saturate(130%) contrast(1.1) brightness(1.02) !important;
+    filter: grayscale(0%) saturate(125%) contrast(1.1) brightness(1.02) !important;
 }
 
 .dandelion-seed-head {
