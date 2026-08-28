@@ -2800,29 +2800,37 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
 }
 
 .btn-modal-submit {
-    margin-top: 8px;
-    padding: 14px;
+    margin-top: 14px;
+    padding: 14px 24px;
     border-radius: 9999px;
-    background: #1e293b;
-    color: #ffffff;
+    background: linear-gradient(135deg, #ffd043 0%, #ffba00 50%, #e6a100 100%) !important;
+    color: #1e293b !important;
     font-family: inherit;
-    font-size: 1rem;
-    font-weight: 700;
-    border: none;
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(30, 41, 59, 0.25);
-    transition: all 0.25s ease;
+    box-shadow: 0 8px 24px rgba(255, 186, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1.5px 1.5px #ffffff !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .btn-modal-submit:hover {
-    background: #0f172a;
+    background: linear-gradient(135deg, #ffe066 0%, #ffc72c 50%, #f59e0b 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(30, 41, 59, 0.35);
+    box-shadow: 0 12px 32px rgba(255, 186, 0, 0.6), inset 0 1.5px 1.5px #ffffff !important;
+    color: #0f172a !important;
+}
+
+.btn-modal-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 14px rgba(255, 186, 0, 0.35) !important;
 }
 
 /* Payment Step Styles (Ported from IDC & Styled for Metafora) */
@@ -5900,15 +5908,20 @@ body.metabot-open .metabot-launcher-btn {
    SMILE AGENCY STYLE NEUMORPHIC / GLASS BOOKING & CALENDAR
    ========================================================================== */
 .booking-modal-glass {
-    max-width: 840px !important;
+    width: 100% !important;
+    max-width: 860px !important;
+    min-height: 560px !important;
     padding: 24px !important;
     border-radius: 28px !important;
+    box-sizing: border-box !important;
 }
 
 .booking.smile-style-booking {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
     gap: 0;
+    width: 100%;
+    min-height: 490px;
     border-radius: 24px;
     overflow: hidden;
     border: 1.5px solid rgba(1, 97, 102, 0.2);
@@ -5917,6 +5930,8 @@ body.metabot-open .metabot-launcher-btn {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     margin-top: 10px;
+    align-items: stretch;
+    box-sizing: border-box;
 }
 
 [data-theme="dark"] .booking.smile-style-booking {
@@ -5927,8 +5942,13 @@ body.metabot-open .metabot-launcher-btn {
 
 .cal-pane {
     background: rgba(255, 255, 255, 0.45);
-    padding: 24px;
+    padding: 22px 24px;
     border-right: 1px solid rgba(1, 97, 102, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 [data-theme="dark"] .cal-pane {
@@ -5940,7 +5960,7 @@ body.metabot-open .metabot-launcher-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .cal-top .m {
@@ -5988,14 +6008,18 @@ body.metabot-open .metabot-launcher-btn {
 }
 
 .cal-nav button:disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+    grid-auto-rows: 35px;
+    gap: 5px;
+    min-height: 242px;
+    align-content: start;
 }
 
 .cal-grid .wd {
@@ -6003,7 +6027,7 @@ body.metabot-open .metabot-launcher-btn {
     font-size: 0.72rem;
     font-weight: 800;
     color: #64748b;
-    padding: 4px 0;
+    padding: 2px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -6042,8 +6066,8 @@ body.metabot-open .metabot-launcher-btn {
 }
 
 .day-dots .dot {
-    width: 4.5px;
-    height: 4.5px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: var(--brand-plum, #7a3963);
     box-shadow: 0 0 3px var(--brand-plum);
@@ -6090,16 +6114,26 @@ body.metabot-open .metabot-launcher-btn {
     transform: scale(1.06);
 }
 
+.day.past,
+.day.disabled,
 .day:disabled {
-    color: #cbd5e1;
-    box-shadow: none;
-    background: transparent;
-    border-color: transparent;
-    cursor: not-allowed;
+    opacity: 0.28 !important;
+    background: rgba(0, 0, 0, 0.03) !important;
+    color: #94a3b8 !important;
+    box-shadow: none !important;
+    border-color: rgba(0, 0, 0, 0.04) !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    filter: grayscale(100%) !important;
 }
 
+[data-theme="dark"] .day.past,
+[data-theme="dark"] .day.disabled,
 [data-theme="dark"] .day:disabled {
-    color: #475569;
+    opacity: 0.22 !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: #64748b !important;
+    border-color: transparent !important;
 }
 
 .day.empty {
@@ -6107,12 +6141,17 @@ body.metabot-open .metabot-launcher-btn {
     box-shadow: none;
     background: transparent;
     border-color: transparent;
+    pointer-events: none;
 }
 
 /* Event Banner directly below the calendar grid */
 .cal-day-event-banner {
     margin-top: 10px;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
     transition: all 0.25s ease;
+    box-sizing: border-box;
 }
 
 .cal-events-list {
@@ -6165,6 +6204,7 @@ body.metabot-open .metabot-launcher-btn {
     cursor: default;
     background: rgba(1, 97, 102, 0.06);
     border-color: rgba(1, 97, 102, 0.15);
+    width: 100%;
 }
 
 .cal-event-card.is-free-card:hover {
@@ -6217,7 +6257,7 @@ body.metabot-open .metabot-launcher-btn {
 .slots-label {
     font-size: 0.78rem;
     font-weight: 800;
-    margin: 14px 0 8px 0;
+    margin: 12px 0 8px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #64748b;
@@ -6269,9 +6309,12 @@ body.metabot-open .metabot-launcher-btn {
     background: rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    padding: 24px;
+    padding: 22px 24px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 [data-theme="dark"] .sum-pane {
@@ -6292,7 +6335,7 @@ body.metabot-open .metabot-launcher-btn {
 .sum-pane .hint {
     color: #64748b;
     font-size: 0.82rem;
-    margin: 0 0 16px 0;
+    margin: 0 0 14px 0;
 }
 
 .picked {
@@ -6300,15 +6343,19 @@ body.metabot-open .metabot-launcher-btn {
     border: 1px solid rgba(1, 97, 102, 0.2);
     border-radius: 12px;
     padding: 10px 14px;
-    margin-bottom: 16px;
-    font-size: 0.88rem;
+    margin-bottom: 14px;
+    font-size: 0.86rem;
     font-weight: 700;
     color: var(--primary-color, #016166);
-    min-height: 44px;
+    min-height: 48px;
+    max-height: 48px;
     display: flex;
     align-items: center;
     gap: 8px;
     box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 [data-theme="dark"] .picked {

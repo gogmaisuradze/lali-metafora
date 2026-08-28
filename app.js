@@ -2841,10 +2841,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const events = SCHEDULED_EVENTS[isoStr] || [];
                 const hasEvent = events.length > 0;
                 const isSelected = selectedDate && (cellDate.toDateString() === selectedDate.toDateString());
+                const isPast = (cellDate < today);
 
                 const dayBtn = document.createElement('button');
                 dayBtn.type = 'button';
-                dayBtn.className = `day ${isSelected ? 'sel' : ''} ${hasEvent ? 'has-event' : ''}`;
 
                 let dotsHtml = '';
                 if (events.length === 1) {
@@ -2858,22 +2858,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 dayBtn.innerHTML = `<span class="day-num">${d}</span>${dotsHtml}`;
 
-                dayBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    selectedDate = new Date(year, month, d);
-                    const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
-                    if (eventsForDate.length > 0) {
-                        const hasCurrentTime = eventsForDate.some(ev => ev.time === selectedTime);
-                        if (!hasCurrentTime) {
-                            selectedTime = eventsForDate[0].time;
+                if (isPast) {
+                    dayBtn.disabled = true;
+                    dayBtn.className = `day past disabled ${hasEvent ? 'has-event' : ''}`;
+                    dayBtn.setAttribute('tabindex', '-1');
+                    dayBtn.setAttribute('aria-disabled', 'true');
+                } else {
+                    dayBtn.className = `day ${isSelected ? 'sel' : ''} ${hasEvent ? 'has-event' : ''}`;
+                    dayBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        selectedDate = new Date(year, month, d);
+                        const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
+                        if (eventsForDate.length > 0) {
+                            const hasCurrentTime = eventsForDate.some(ev => ev.time === selectedTime);
+                            if (!hasCurrentTime) {
+                                selectedTime = eventsForDate[0].time;
+                            }
                         }
-                    }
-                    renderTimeSlots();
-                    updatePickedSummary();
-                    renderCalendar();
-                });
+                        renderTimeSlots();
+                        updatePickedSummary();
+                        renderCalendar();
+                    });
+                }
 
                 calGrid.appendChild(dayBtn);
+            }
+
+            if (prevBtn) {
+                const prevMonthLastDay = new Date(year, month, 0);
+                prevMonthLastDay.setHours(0, 0, 0, 0);
+                prevBtn.disabled = (prevMonthLastDay < today);
             }
 
             renderTimeSlots();
