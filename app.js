@@ -1413,12 +1413,12 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'გუნდი/7.jpg',
             audio: 'galaktion.mp3',
             galaktionStart: 68.0,
-            text: 'ჩვენ ვქმნით შთამაგონებელ გარემოს, ვორქშოფებსა და არტ-საღამოებს, რომლებიც ადამიანებს აკავშირებს და ავსებს შემოქმედებითი ენერგიით.',
-            name: 'სანდრო',
-            fullname: 'სანდრო ჯაფარიძე',
-            jobtitle: 'Creative Producer & Curator',
-            facebook: 'https://www.facebook.com/metaphora.geo',
-            instagram: 'https://instagram.com',
+            text: 'ჩვენ ვეხმარებით ადამიანებს შინაგანი რესურსების გააქტიურებაში, პიროვნულ ტრანსფორმაციასა და მიზნების მიღწევაში ქოუჩინგისა და პოზიტიური ფსიქოთერაპიის მეთოდებით.',
+            name: 'ქეთი',
+            fullname: 'ქეთი მირიანაშვილი',
+            jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & EPC ქოუჩი',
+            facebook: 'https://www.facebook.com/keti.mirianasvili',
+            instagram: 'https://www.facebook.com/keti.mirianasvili',
             whatsapp: 'https://wa.me/995599228228',
             time: '1:08 / 1:20'
         }
@@ -3814,7 +3814,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "მეტაფორა - Edutainment Hub & Third Place": "METAPHORA - Edutainment Hub & Third Place",
         "აკუსტიკური საღამოები &amp; პერფორმანსები": "Acoustic Evenings &amp; Performances",
         "იდეალური განტვირთვა დამღლელი დღის შემდეგ": "Perfect relaxation after a busy day",
-        "სანდრო — Creative Producer &amp; Curator": "Sandro — Creative Producer &amp; Curator",
+        "ქეთი — ფსიქოკონსულტანტი &amp; EPC ქოუჩი": "Keti — Psychoconsultant &amp; EPC Coach",
         "პოზიტიური ფსიქოთერაპია და თვითშემეცნება": "Positive Psychotherapy & Self-Discovery",
         "Burnout პრევენცია &amp; ენერგიის მართვა": "Burnout Prevention & Energy Management",
         "სერტიფიცირებული და გამოცდილი ექსპერტები": "Certified and Experienced Practitioners",
@@ -3863,7 +3863,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "მზად ხართ ახალი შინაგანი ეტაპისთვის?": "Ready for a new inner chapter?",
         "მცირე, თბილი ჯგუფები (6-10 ადამიანი)": "Small, intimate groups (6-10 people)",
         "პოზიტიური ფსიქოთერაპიის 5 ოქროს წესი": "5 Golden Rules of Positive Psychotherapy",
-        "სანდრო — Creative Producer & Curator": "Sandro — Creative Producer & Curator",
+        "ქეთი — ფსიქოკონსულტანტი & EPC ქოუჩი": "Keti — Psychoconsultant & EPC Coach",
         "ფილოსოფიური &amp; კულტურული ლექციები": "Philosophical &amp; Cultural Lectures",
         "წინასწარი გამოცდილება არ არის საჭირო": "No prior experience required",
         "🎨 შემოქმედებითი ენერგია &amp; თეატრი": "🎨 Creative Energy &amp; Theatre",
@@ -4313,7 +4313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "დაჯავშნე ადგილი": "Reserve a Seat",
         "დაჯავშნე ეხლავე": "Book Now",
         "ქეთი ჟვანია": "Keti Zhvania",
-        "სანდრო ჯაფარიძე": "Sandro Japaridze",
+        "ქეთი მირიანაშვილი": "Keti Mirianashvili",
         "ჩვენი ფილოსოფია": "Our Philosophy",
         "დაჯავშნე ვიზიტი": "Book a Visit",
         "აირჩიეთ სერვისი": "Select Service",
@@ -4498,7 +4498,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'მარიკა', jobtitle: 'Personal & Business Development Coach', text: 'ჩვენი მიზანია ადამიანებისა და ბიზნესების გაძლიერება პერსონალური და პროფესიული განვითარების, მართვის კონსალტინგისა და პრაქტიკული ქოუჩინგის გზით.' },
                 { name: 'ია', jobtitle: 'Business & Partnerships Lead', text: 'მეტაფორა Business აერთიანებს მეწარმეებსა და პროფესიონალებს ნაყოფიერი თანამშრომლობის, პარტნიორობისა და ახალი შესაძლებლობების შესაქმნელად.' },
                 { name: 'ელენე', jobtitle: 'Community Manager & Clubs Host', text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.' },
-                { name: 'სანდრო', jobtitle: 'Creative Producer & Curator', text: 'ჩვენ ვქმნით შთამაგონებელ გარემოს, ვორქშოფებსა და არტ-საღამოებს, რომლებიც ადამიანებს აკავშირებს და ავსებს შემოქმედებითი ენერგიით.' }
+                { name: 'ქეთი', jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & EPC ქოუჩი', text: 'ჩვენ ვეხმარებით ადამიანებს შინაგანი რესურსების გააქტიურებაში, პიროვნულ ტრანსფორმაციასა და მიზნების მიღწევაში ქოუჩინგისა და პოზიტიური ფსიქოთერაპიის მეთოდებით.' }
             ],
             afisha: [
                 { title: "🎭 Playback იმპროვიზაციის საღამო", testimonial: "თეატრალური პერფორმანსი, სადაც მაყურებლის რეალური ისტორიები და ემოციები სცენაზე ცოცხლდება.", by: "28 აგვ | 19:00 • Playback დასი" },
@@ -4529,7 +4529,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'Marika', jobtitle: 'Personal & Business Development Coach', text: 'Our mission is empowering individuals and organizations through personal & business development coaching, management consulting, and transformative training.' },
                 { name: 'Ia', jobtitle: 'Business & Partnerships Lead', text: 'Metaphora Business unites entrepreneurs and professionals for impactful collaboration, strategic partnerships, and new ventures.' },
                 { name: 'Elene', jobtitle: 'Community Manager & Clubs Host', text: 'Metaphora Clubs is your “Third Place” — where you always feel at home, relaxed, and surrounded by kindred spirits.' },
-                { name: 'Sandro', jobtitle: 'Creative Producer & Curator', text: 'We design inspiring gatherings, workshops, and art evenings that connect people and spark boundless creative energy.' }
+                { name: 'Keti', jobtitle: 'Psychoconsultant, Trainer & EPC Coach', text: 'We empower individuals to activate their inner potential, achieve personal transformation, and reach meaningful goals through coaching and positive psychotherapy.' }
             ],
             afisha: [
                 { title: "🎭 Playback Improvisation Night", testimonial: "A theatrical performance where audience real stories and emotions come alive on stage.", by: "Aug 28 | 19:00 • Playback Troupe" },
