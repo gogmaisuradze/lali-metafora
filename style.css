@@ -516,16 +516,16 @@ html.direct-main-mode #main-website {
 }
 
 .connect-btn:hover {
-    background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%) !important;
-    color: #0f172a !important;
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.55) !important;
+    background: var(--brand-gold, #ffba00) !important;
+    color: #014d51 !important;
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 25px rgba(255, 186, 0, 0.6) !important;
     transform: translateY(-2px) scale(1.08);
 }
 
 .connect-btn:active {
-    background: linear-gradient(135deg, #b45309 0%, #92400e 100%) !important;
-    color: #ffffff !important;
+    background: var(--brand-gold-dark, #d99e00) !important;
+    color: #014d51 !important;
     transform: scale(0.94);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3) !important;
 }
@@ -1275,7 +1275,7 @@ html.direct-main-mode #main-website {
 }
 
 .accent-text-light {
-    color: var(--brand-gold, #f59e0b);
+    color: var(--brand-gold, #ffba00);
     display: inline-block;
     text-decoration: none;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1284,9 +1284,9 @@ html.direct-main-mode #main-website {
 
 .accent-text-light:hover,
 .slide-title:hover .accent-text-light {
-    color: #fbbf24 !important;
+    color: var(--brand-gold, #ffba00) !important;
     transform: translateY(-3px) scale(1.05);
-    text-shadow: 0 4px 22px rgba(251, 191, 36, 0.85);
+    text-shadow: 0 4px 22px rgba(255, 186, 0, 0.85);
 }
 
 .metafora-glow-text {
@@ -1298,9 +1298,9 @@ html.direct-main-mode #main-website {
 }
 
 .metafora-glow-text:hover {
-    color: var(--brand-gold, #f59e0b) !important;
+    color: var(--brand-gold, #ffba00) !important;
     transform: translateY(-3px) scale(1.04);
-    text-shadow: 0 4px 20px rgba(245, 158, 11, 0.55);
+    text-shadow: 0 4px 20px rgba(255, 186, 0, 0.55);
 }
 
 .slide-desc {
@@ -1369,17 +1369,17 @@ html.direct-main-mode #main-website {
 
 .slide-actions .btn-secondary:hover {
     background: transparent !important;
-    color: var(--brand-gold, #f59e0b) !important;
-    border: 1.8px dashed var(--brand-gold, #f59e0b) !important;
+    color: var(--brand-gold, #ffba00) !important;
+    border: 1.8px dashed var(--brand-gold, #ffba00) !important;
     transform: translateY(-3px) scale(1.04);
-    text-shadow: 0 0 12px rgba(245, 158, 11, 0.45);
-    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25) !important;
+    text-shadow: 0 0 12px rgba(255, 186, 0, 0.45);
+    box-shadow: 0 8px 24px rgba(255, 186, 0, 0.25) !important;
 }
 
 .slide-actions .btn-secondary:active {
     transform: scale(0.96);
-    color: #d97706 !important;
-    border-color: #d97706 !important;
+    color: var(--brand-gold-dark, #d99e00) !important;
+    border-color: var(--brand-gold-dark, #d99e00) !important;
 }
 
 .btn-video-play {
@@ -2091,9 +2091,9 @@ html.direct-main-mode #main-website {
 }
 
 .tw-author-name:hover {
-    color: var(--brand-gold, #f59e0b) !important;
+    color: var(--brand-gold, #ffba00) !important;
     transform: translateY(-3px);
-    text-shadow: 0 3px 12px rgba(245, 158, 11, 0.35);
+    text-shadow: 0 3px 12px rgba(255, 186, 0, 0.45);
 }
 
 .tw-author-socials {
