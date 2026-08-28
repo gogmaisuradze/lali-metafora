@@ -1893,25 +1893,25 @@ html.direct-main-mode #main-website {
 }
 
 .typewriter-card-container {
-    max-width: 1020px;
+    max-width: 1140px;
     margin: 0 auto;
 }
 
 .typewriter-main-card {
     background: #ffffff;
-    border-radius: 36px;
+    border-radius: 32px;
     border: 1.5px solid rgba(255, 255, 255, 0.95);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05), inset 0 1.5px 1.5px #ffffff;
     display: grid;
-    grid-template-columns: 330px 1fr;
+    grid-template-columns: 290px 1fr;
     overflow: hidden;
-    min-height: 380px;
+    min-height: 320px;
     transition: all 0.4s ease;
 }
 
 .typewriter-avatar-side {
     background: linear-gradient(165deg, var(--brand-teal-light) 0%, var(--brand-plum-light) 100%);
-    padding: 38px 24px;
+    padding: 26px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1923,12 +1923,12 @@ html.direct-main-mode #main-website {
 /* Large High-Impact Main Team Photo */
 .typewriter-avatar-halo {
     position: relative;
-    width: 165px;
-    height: 165px;
+    width: 146px;
+    height: 146px;
     border-radius: 50%;
     border: 4px solid var(--brand-teal);
     box-shadow: 0 14px 35px rgba(1, 97, 102, 0.38);
-    margin-bottom: 22px;
+    margin-bottom: 14px;
 }
 
 .tw-avatar-img {
@@ -1943,8 +1943,8 @@ html.direct-main-mode #main-website {
     position: absolute;
     bottom: -2px;
     right: -2px;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: var(--brand-teal);
     color: #ffffff;
@@ -1953,7 +1953,7 @@ html.direct-main-mode #main-website {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.92rem;
     box-shadow: 0 6px 16px rgba(1, 97, 102, 0.45);
     transition: all 0.25s ease;
 }
@@ -1967,8 +1967,8 @@ html.direct-main-mode #main-website {
     display: flex;
     align-items: center;
     gap: 4px;
-    height: 24px;
-    margin-bottom: 8px;
+    height: 20px;
+    margin-bottom: 6px;
 }
 
 .eq-bar {
@@ -1999,14 +1999,14 @@ html.direct-main-mode #main-website {
 }
 
 .tw-audio-time, .about-audio-time {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-family: var(--font-mono);
     color: var(--brand-teal-dark);
     font-weight: 600;
 }
 
 .typewriter-content-side {
-    padding: 42px 40px 36px 40px;
+    padding: 28px 36px 22px 36px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -2014,10 +2014,10 @@ html.direct-main-mode #main-website {
 
 .tw-quote-mark {
     font-family: var(--font-serif);
-    font-size: 3.8rem;
+    font-size: 3.2rem;
     line-height: 1;
     color: var(--dandelion-border);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     cursor: pointer;
     display: inline-block;
     transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.28s ease, text-shadow 0.28s ease;
@@ -2036,12 +2036,12 @@ html.direct-main-mode #main-website {
 }
 
 .tw-text-box {
-    min-height: 120px;
+    min-height: 85px;
     display: inline;
-    font-size: 1.15rem;
-    line-height: 1.75;
+    font-size: 1.12rem;
+    line-height: 1.7;
     color: var(--primary-color);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .tw-text {
@@ -2065,7 +2065,7 @@ html.direct-main-mode #main-website {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 20px;
+    padding-top: 14px;
     border-top: 1px solid rgba(1, 97, 102, 0.15);
 }
 
