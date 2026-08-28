@@ -3444,160 +3444,323 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     const ARTICLES_DATABASE = {
         'article-featured': {
-            badge: '🌟 რჩეული სტატია • 5 წთ',
-            duration: '5 წთ საკითხავი',
             img: 'მთავარის ფოტოები/ჩვენს შესახებ.jpeg',
-            title: 'რა არის „მესამე ადგილი“ და რატომ სჭირდება ის თანამედროვე ადამიანს?',
-            author: 'მეტაფორას გუნდი',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>თანამედროვე ურბანულ ცხოვრებაში ადამიანების უმრავლესობის ყოველდღიურობა ორ ძირითად წერტილს შორის მოძრაობით შემოიფარგლება: <strong>სახლი</strong> (პირველი ადგილი) და <strong>სამსახური</strong> (მეორე ადგილი).</p>
-                <p>1989 წელს ცნობილმა ამერიკელმა ურბან-სოციოლოგმა <strong>რეი ოლდენბურგმა</strong> შემოიტანა რევოლუციური კონცეფცია — <em>„მესამე ადგილი“ (The Third Place)</em>. ეს არის სივრცე, სადაც ადამიანი არ არის შებოჭილი არც ოჯახური ვალდებულებებით და არც პროფესიული იერარქიით.</p>
-                <blockquote>
-                    „მესამე ადგილი არის საზოგადოების სულიერი წამყვანი. იქ, სადაც ადამიანები თანასწორად საუბრობენ, იბადება ნამდვილი კავშირები და შინაგანი თავისუფლება.“
-                </blockquote>
-                <h3>რატომ არის მეტაფორა შენი მესამე ადგილი?</h3>
-                <p>„მეტაფორა“ შეიქმნა სწორედ ამ იდეის გარშემო — გავხდეთ შენი მესამე ადგილი თბილისში. სივრცე, სადაც შეგიძლია მოხვიდე, დალიო ყავა, იკითხო წიგნი, ჩაერთო სალონურ დისკუსიაში ან უბრალოდ მოუსმინო Playback თეატრის იმპროვიზაციას.</p>
-                <div class="article-takeaway-box">
-                    <h4>✨ მესამე ადგილის 4 მთავარი ნიშანი:</h4>
-                    <ul>
-                        <li><strong>ნეიტრალური ტერიტორია:</strong> არანაირი ვალდებულება ან ფორმალური წესები;</li>
-                        <li><strong>თანასწორობა:</strong> სოციალური სტატუსი კარს მიღმა რჩება;</li>
-                        <li><strong>მთავარი აქტივობა — ცოცხალი საუბარი:</strong> გულწრფელი და შინაარსიანი დიალოგი;</li>
-                        <li><strong>შინაური გარემო:</strong> განცდა, რომ ყოველთვის გელიან.</li>
-                    </ul>
-                </div>
-                <p>გვეწვიეთ მეტაფორაში და აღმოაჩინეთ თქვენი პირადი მესამე ადგილი!</p>
-            `
+            KA: {
+                badge: '🌟 რჩეული სტატია • 5 წთ',
+                duration: '5 წთ საკითხავი',
+                title: 'რა არის „მესამე ადგილი“ და რატომ სჭირდება ის თანამედროვე ადამიანს?',
+                author: 'მეტაფორას გუნდი',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>თანამედროვე ურბანულ ცხოვრებაში ადამიანების უმრავლესობის ყოველდღიურობა ორ ძირითად წერტილს შორის მოძრაობით შემოიფარგლება: <strong>სახლი</strong> (პირველი ადგილი) და <strong>სამსახური</strong> (მეორე ადგილი).</p>
+                    <p>1989 წელს ცნობილმა ამერიკელმა ურბან-სოციოლოგმა <strong>რეი ოლდენბურგმა</strong> შემოიტანა რევოლუციური კონცეფცია — <em>„მესამე ადგილი“ (The Third Place)</em>. ეს არის სივრცე, სადაც ადამიანი არ არის შებოჭილი არც ოჯახური ვალდებულებებით და არც პროფესიული იერარქიით.</p>
+                    <blockquote>
+                        „მესამე ადგილი არის საზოგადოების სულიერი წამყვანი. იქ, სადაც ადამიანები თანასწორად საუბრობენ, იბადება ნამდვილი კავშირები და შინაგანი თავისუფლება.“
+                    </blockquote>
+                    <h3>რატომ არის მეტაფორა შენი მესამე ადგილი?</h3>
+                    <p>„მეტაფორა“ შეიქმნა სწორედ ამ იდეის გარშემო — გავხდეთ შენი მესამე ადგილი თბილისში. სივრცე, სადაც შეგიძლია მოხვიდე, დალიო ყავა, იკითხო წიგნი, ჩაერთო სალონურ დისკუსიაში ან უბრალოდ მოუსმინო Playback თეატრის იმპროვიზაციას.</p>
+                    <div class="article-takeaway-box">
+                        <h4>✨ მესამე ადგილის 4 მთავარი ნიშანი:</h4>
+                        <ul>
+                            <li><strong>ნეიტრალური ტერიტორია:</strong> არანაირი ვალდებულება ან ფორმალური წესები;</li>
+                            <li><strong>თანასწორობა:</strong> სოციალური სტატუსი კარს მიღმა რჩება;</li>
+                            <li><strong>მთავარი აქტივობა — ცოცხალი საუბარი:</strong> გულწრფელი და შინაარსიანი დიალოგი;</li>
+                            <li><strong>შინაური გარემო:</strong> განცდა, რომ ყოველთვის გელიან.</li>
+                        </ul>
+                    </div>
+                    <p>გვეწვიეთ მეტაფორაში და აღმოაჩინეთ თქვენი პირადი მესამე ადგილი!</p>
+                `
+            },
+            EN: {
+                badge: '🌟 Featured Article • 5 min',
+                duration: '5 min read',
+                title: 'What is the "Third Place" and Why Do We Need It Today?',
+                author: 'Metaphora Team',
+                date: 'August 2026',
+                html: `
+                    <p>In modern urban life, most people's daily routine oscillates between two primary anchors: <strong>Home</strong> (the First Place) and <strong>Work</strong> (the Second Place).</p>
+                    <p>In 1989, renowned American urban sociologist <strong>Ray Oldenburg</strong> introduced a revolutionary concept — <em>"The Third Place"</em>. This is a public anchor where a person is unbound by household duties or workplace hierarchies.</p>
+                    <blockquote>
+                        “The third place is the anchor of community life. Where people converse as equals, authentic connections and inner freedom flourish.”
+                    </blockquote>
+                    <h3>Why is Metaphora Your Third Place?</h3>
+                    <p>“Metaphora” was founded precisely around this vision — to be your third place in Tbilisi. A welcoming space where you can drop in, savor specialty coffee, read a book, join a salon discussion, or immerse yourself in live Playback Theatre improvisation.</p>
+                    <div class="article-takeaway-box">
+                        <h4>✨ 4 Core Pillars of a Third Place:</h4>
+                        <ul>
+                            <li><strong>Neutral Ground:</strong> No obligations or rigid social protocols;</li>
+                            <li><strong>Leveler:</strong> Social status is left outside the door;</li>
+                            <li><strong>Conversation is Key:</strong> Wholesome, stimulating, and heartfelt dialogue;</li>
+                            <li><strong>A Home Away from Home:</strong> A warm sense of belonging and community.</li>
+                        </ul>
+                    </div>
+                    <p>Visit us at Metaphora and discover your personal third place!</p>
+                `
+            }
         },
         'article-playback': {
-            badge: '🎭 Playback თეატრი • 4 წთ',
-            duration: '4 წთ საკითხავი',
             img: 'blog_playback.jpg',
-            title: 'Playback თეატრის მაგია და არტ-თერაპია',
-            author: 'არტ-ფასილიტატორი • მეტაფორა',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>წარმოიდგინეთ თეატრი, სადაც არ არსებობს წინასწარ დაწერილი სცენარი, რეპეტიციები და როლები. სცენარი იწერება აქ და ახლა — მაყურებლის მოყოლილი რეალური ისტორიებით.</p>
-                <p><strong>Playback თეატრი</strong> არის ინტერაქციული იმპროვიზაციის უნიკალური ფორმა, რომელიც 1975 წელს ჯონათან ფოქსმა და ჯო სალასმა დააფუძნეს. მაყურებელი უზიარებს დარბაზს საკუთარ განცდას, მოგონებას ან სიზმარს, ხოლო მსახიობები და მუსიკოსი მას წამიერად ცოცხალ სცენურ ეტიუდად გარდაქმნიან.</p>
-                <blockquote>
-                    „საკუთარი ისტორიის სცენიდან დანახვა ადამიანს აძლევს უნიკალურ განცდას: მე არ ვარ მარტო, ჩემი ხმა და ემოცია მნიშვნელოვანია.“
-                </blockquote>
-                <h3>როგორ მუშაობს თერაპიული ეფექტი?</h3>
-                <p>როდესაც ჩვენს ისტორიას გარედან ვუყურებთ, ხდება ე.წ. <em>ემპათიური რეფლექსია</em>. მძიმე გამოცდილება კარგავს ტოქსიკურობას, ხოლო სასიხარულო მომენტები მრავალჯერადად ძლიერდება.</p>
-                <div class="article-takeaway-box">
-                    <h4>🎭 რას მოგანიჭებთ Playback საღამო მეტაფორაში:</h4>
-                    <ul>
-                        <li>ემოციური სტრესისა და დაძაბულობისგან განტვირთვა;</li>
-                        <li>საკუთარი თავის და სხვების უკეთ გაგება;</li>
-                        <li>უსაფრთხო და მიმღები გარემო თვითგამოხატვისთვის;</li>
-                        <li>თანაშემოქმედების დაუვიწყარი ემოცია.</li>
-                    </ul>
-                </div>
-            `
+            KA: {
+                badge: '🎭 Playback თეატრი • 4 წთ',
+                duration: '4 წთ საკითხავი',
+                title: 'Playback თეატრის მაგია და არტ-თერაპია',
+                author: 'არტ-ფასილიტატორი • მეტაფორა',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>წარმოიდგინეთ თეატრი, სადაც არ არსებობს წინასწარ დაწერილი სცენარი, რეპეტიციები და როლები. სცენარი იწერება აქ და ახლა — მაყურებლის მოყოლილი რეალური ისტორიებით.</p>
+                    <p><strong>Playback თეატრი</strong> არის ინტერაქციული იმპროვიზაციის უნიკალური ფორმა, რომელიც 1975 წელს ჯონათან ფოქსმა და ჯო სალასმა დააფუძნეს. მაყურებელი უზიარებს დარბაზს საკუთარ განცდას, მოგონებას ან სიზმარს, ხოლო მსახიობები და მუსიკოსი მას წამიერად ცოცხალ სცენურ ეტიუდად გარდაქმნიან.</p>
+                    <blockquote>
+                        „საკუთარი ისტორიის სცენიდან დანახვა ადამიანს აძლევს უნიკალურ განცდას: მე არ ვარ მარტო, ჩემი ხმა და ემოცია მნიშვნელოვანია.“
+                    </blockquote>
+                    <h3>როგორ მუშაობს თერაპიული ეფექტი?</h3>
+                    <p>როდესაც ჩვენს ისტორიას გარედან ვუყურებთ, ხდება ე.წ. <em>ემპათიური რეფლექსია</em>. მძიმე გამოცდილება კარგავს ტოქსიკურობას, ხოლო სასიხარულო მომენტები მრავალჯერადად ძლიერდება.</p>
+                    <div class="article-takeaway-box">
+                        <h4>🎭 რას მოგანიჭებთ Playback საღამო მეტაფორაში:</h4>
+                        <ul>
+                            <li>ემოციური სტრესისა და დაძაბულობისგან განტვირთვა;</li>
+                            <li>საკუთარი თავის და სხვების უკეთ გაგება;</li>
+                            <li>უსაფრთხო და მიმღები გარემო თვითგამოხატვისთვის;</li>
+                            <li>თანაშემოქმედების დაუვიწყარი ემოცია.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            EN: {
+                badge: '🎭 Playback Theatre • 4 min',
+                duration: '4 min read',
+                title: 'The Magic of Playback Theatre & Art Therapy',
+                author: 'Art Facilitator • Metaphora',
+                date: 'August 2026',
+                html: `
+                    <p>Imagine a theatre without predefined scripts, rehearsals, or fixed roles. The script is written in the present moment — through real stories shared by the audience.</p>
+                    <p><strong>Playback Theatre</strong> is a unique form of interactive improvisation founded in 1975 by Jonathan Fox and Jo Salas. An audience member shares a personal memory, feeling, or dream, and actors together with a musician immediately transform it into a vivid stage enactment.</p>
+                    <blockquote>
+                        “Witnessing one’s own story reflected on stage offers a transformative realization: I am not alone; my voice and emotion truly matter.”
+                    </blockquote>
+                    <h3>How Does the Therapeutic Effect Work?</h3>
+                    <p>When we observe our story from the outside, <em>empathetic reflection</em> occurs. Heavy burdens lose their toxicity, while joyful moments are deeply amplified.</p>
+                    <div class="article-takeaway-box">
+                        <h4>🎭 What You Experience at a Playback Evening:</h4>
+                        <ul>
+                            <li>Release of emotional tension and everyday stress;</li>
+                            <li>Deeper understanding of oneself and others;</li>
+                            <li>A safe, non-judgmental space for authentic self-expression;</li>
+                            <li>The unforgettable warmth of collective co-creation.</li>
+                        </ul>
+                    </div>
+                `
+            }
         },
         'article-psychology': {
-            badge: '🧠 ფსიქოლოგია • 6 წთ',
-            duration: '6 წთ საკითხავი',
             img: 'blog_psychology.jpg',
-            title: 'პოზიტიური ფსიქოთერაპიის 5 ოქროს წესი',
-            author: 'პოზიტიური ფსიქოთერაპევტი • მეტაფორა',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>პოზიტიური ფსიქოთერაპია (დამფუძნებელი ნოსრატ პეზეშკიანი) არ ნიშნავს „ყალბ ოპტიმიზმს“ ან პრობლემების უარყოფას. პირიქით — სიტყვა <em>Positum</em> ლათინურად ნიშნავს „ფაქტობრივს“, „რეალურს“, „იმას, რაც უკვე მოცემულია“.</p>
-                <p>ეს მიმართულება ადამიანს ხედავს როგორც რესურსებით სავსე მთლიანობას, რომელსაც უკვე გააჩნია ყველა საჭირო შესაძლებლობა გამოწვევებთან გასამკლავებლად.</p>
-                <blockquote>
-                    „თუ გსურთ გქონდეთ ის, რაც არასდროს გქონიათ, უნდა გააკეთოთ ის, რაც არასდროს გაგიკეთებიათ — ოღონდ საკუთარ შინაგან რესურსებზე დაყრდნობით.“
-                </blockquote>
-                <div class="article-takeaway-box">
-                    <h4>🌿 5 ოქროს პრინციპი ყოველდღიურობისთვის:</h4>
-                    <ul>
-                        <li><strong>1. სიმპტომი არის სიგნალი:</strong> ნებისმიერი შფოთვა ან დაღლილობა ორგანიზმის მინიშნებაა, რომ რაღაც შესაცვლელია;</li>
-                        <li><strong>2. ბალანსის მოდელი:</strong> სხეული, საქმიანობა, ურთიერთობები და მომავლის ხედვა — ოთხივე სფერო თანაბარ ყურადღებას მოითხოვს;</li>
-                        <li><strong>3. კონფლიქტი როგორც ზრდის რესურსი:</strong> განსხვავებული აზრი გვაძლევს ახალ პერსპექტივას;</li>
-                        <li><strong>4. მეტაფორების ძალა:</strong> იგავები და შედარებები გვეხმარება ქვეცნობიერი ბლოკების მარტივად მოხსნაში;</li>
-                        <li><strong>5. თვითდახმარების უნარი:</strong> თერაპიის მიზანია ადამიანი გახდეს საკუთარი თავის საუკეთესო მეგზური.</li>
-                    </ul>
-                </div>
-            `
+            KA: {
+                badge: '🧠 ფსიქოლოგია • 6 წთ',
+                duration: '6 წთ საკითხავი',
+                title: 'პოზიტიური ფსიქოთერაპიის 5 ოქროს წესი',
+                author: 'პოზიტიური ფსიქოთერაპევტი • მეტაფორა',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>პოზიტიური ფსიქოთერაპია (დამფუძნებელი ნოსრატ პეზეშკიანი) არ ნიშნავს „ყალბ ოპტიმიზმს“ ან პრობლემების უარყოფას. პირიქით — სიტყვა <em>Positum</em> ლათინურად ნიშნავს „ფაქტობრივს“, „რეალურს“, „იმას, რაც უკვე მოცემულია“.</p>
+                    <p>ეს მიმართულება ადამიანს ხედავს როგორც რესურსებით სავსე მთლიანობას, რომელსაც უკვე გააჩნია ყველა საჭირო შესაძლებლობა გამოწვევებთან გასამკლავებლად.</p>
+                    <blockquote>
+                        „თუ გსურთ გქონდეთ ის, რაც არასდროს გქონიათ, უნდა გააკეთოთ ის, რაც არასდროს გაგიკეთებიათ — ოღონდ საკუთარ შინაგან რესურსებზე დაყრდნობით.“
+                    </blockquote>
+                    <div class="article-takeaway-box">
+                        <h4>🌿 5 ოქროს პრინციპი ყოველდღიურობისთვის:</h4>
+                        <ul>
+                            <li><strong>1. სიმპტომი არის სიგნალი:</strong> ნებისმიერი შფოთვა ან დაღლილობა ორგანიზმის მინიშნებაა, რომ რაღაც შესაცვლელია;</li>
+                            <li><strong>2. ბალანსის მოდელი:</strong> სხეული, საქმიანობა, ურთიერთობები და მომავლის ხედვა — ოთხივე სფერო თანაბარ ყურადღებას მოითხოვს;</li>
+                            <li><strong>3. კონფლიქტი როგორც ზრდის რესურსი:</strong> განსხვავებული აზრი გვაძლევს ახალ პერსპექტივას;</li>
+                            <li><strong>4. მეტაფორების ძალა:</strong> იგავები და შედარებები გვეხმარება ქვეცნობიერი ბლოკების მარტივად მოხსნაში;</li>
+                            <li><strong>5. თვითდახმარების უნარი:</strong> თერაპიის მიზანია ადამიანი გახდეს საკუთარი თავის საუკეთესო მეგზური.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            EN: {
+                badge: '🧠 Psychology • 6 min',
+                duration: '6 min read',
+                title: '5 Golden Rules of Positive Psychotherapy',
+                author: 'Positive Psychotherapist • Metaphora',
+                date: 'August 2026',
+                html: `
+                    <p>Positive Psychotherapy (founded by Nossrat Peseschkian) is not about "toxic positivity" or denying hardships. The Latin root <em>Positum</em> translates to "the factual, the actual, that which is already given."</p>
+                    <p>This modality views every individual as an inherently resourceful whole, already equipped with innate capacities to overcome life challenges.</p>
+                    <blockquote>
+                        “If you want something you never had, you must do something you've never done — by tapping into your intrinsic resources.”
+                    </blockquote>
+                    <div class="article-takeaway-box">
+                        <h4>🌿 5 Golden Principles for Everyday Well-being:</h4>
+                        <ul>
+                            <li><strong>1. Symptoms are Signals:</strong> Anxiety or fatigue is your organism's gentle alert that something needs realigning;</li>
+                            <li><strong>2. Balance Model:</strong> Body, Achievement, Contact, and Meaning — all four spheres require harmonious attention;</li>
+                            <li><strong>3. Conflict as a Growth Resource:</strong> Differing perspectives unlock novel horizons;</li>
+                            <li><strong>4. The Power of Metaphors:</strong> Parables and metaphors easily dissolve subconscious barriers;</li>
+                            <li><strong>5. Capacity for Self-Help:</strong> The goal is empowering every person to become their own best therapist.</li>
+                        </ul>
+                    </div>
+                `
+            }
         },
         'article-coworking': {
-            badge: '☕ პროდუქტიულობა • 3 წთ',
-            duration: '3 წთ საკითხავი',
             img: 'blog_coworking.jpg',
-            title: 'როგორ შევქმნათ Deep Work გარემო?',
-            author: 'მეტაფორას გუნდი',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>ციფრული შეტყობინებების, უსასრულო სქროლინგისა და ზედაპირული ყურადღების ეპოქაში ღრმა, კონცენტრირებული მუშაობის უნარი (Deep Work) სუპერძალად იქცა.</p>
-                <p>კვლევები ადასტურებს, რომ შეწყვეტილი ყურადღების შემდეგ თავდაპირველ ფოკუსში დასაბრუნებლად ტვინს საშუალოდ <strong>23 წუთი</strong> სჭირდება. სწორედ ამიტომ, მეტაფორას Coworking & Quiet Lounge შექმნილია მინიმალისტური, ესთეტიკური და მშვიდი აკუსტიკით.</p>
-                <div class="article-takeaway-box">
-                    <h4>💡 Deep Work-ის 3 წესი მეტაფორაში:</h4>
-                    <ul>
-                        <li><strong>90-წუთიანი ფოკუს-ბლოკები:</strong> მუშაობა შეფერხებების გარეშე;</li>
-                        <li><strong>სენსორული სიმშვიდე:</strong> ბუნებრივი განათება, ხარისხიანი მცენარეული ჩაი და ერგონომიული სივრცე;</li>
-                        <li><strong>შესვენება როგორც რიტუალი:</strong> მუშაობის შემდეგ გონების განტვირთვა მოზაიკის ზონაში ან ლაუნჯში.</li>
-                    </ul>
-                </div>
-            `
+            KA: {
+                badge: '☕ პროდუქტიულობა • 3 წთ',
+                duration: '3 წთ საკითხავი',
+                title: 'როგორ შევქმნათ Deep Work გარემო?',
+                author: 'მეტაფორას გუნდი',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>ციფრული შეტყობინებების, უსასრულო სქროლინგისა და ზედაპირული ყურადღების ეპოქაში ღრმა, კონცენტრირებული მუშაობის უნარი (Deep Work) სუპერძალად იქცა.</p>
+                    <p>კვლევები ადასტურებს, რომ შეწყვეტილი ყურადღების შემდეგ თავდაპირველ ფოკუსში დასაბრუნებლად ტვინს საშუალოდ <strong>23 წუთი</strong> სჭირდება. სწორედ ამიტომ, მეტაფორას Coworking & Quiet Lounge შექმნილია მინიმალისტური, ესთეტიკური და მშვიდი აკუსტიკით.</p>
+                    <div class="article-takeaway-box">
+                        <h4>💡 Deep Work-ის 3 წესი მეტაფორაში:</h4>
+                        <ul>
+                            <li><strong>90-წუთიანი ფოკუს-ბლოკები:</strong> მუშაობა შეფერხებების გარეშე;</li>
+                            <li><strong>სენსორული სიმშვიდე:</strong> ბუნებრივი განათება, ხარისხიანი მცენარეული ჩაი და ერგონომიული სივრცე;</li>
+                            <li><strong>შესვენება როგორც რიტუალი:</strong> მუშაობის შემდეგ გონების განტვირთვა მოზაიკის ზონაში ან ლაუნჯში.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            EN: {
+                badge: '☕ Productivity • 3 min',
+                duration: '3 min read',
+                title: 'How to Create a Deep Work Environment?',
+                author: 'Metaphora Team',
+                date: 'August 2026',
+                html: `
+                    <p>In an era of relentless digital notifications, endless feeds, and fragmented attention, the ability to engage in concentrated deep work (Deep Work) has become a genuine superpower.</p>
+                    <p>Research indicates that after an interruption, it takes the human brain an average of <strong>23 minutes</strong> to regain deep focus. That is why Metaphora's Coworking & Quiet Lounge is curated with minimalist aesthetics and serene acoustic balance.</p>
+                    <div class="article-takeaway-box">
+                        <h4>💡 3 Rules of Deep Work at Metaphora:</h4>
+                        <ul>
+                            <li><strong>90-Minute Focus Blocks:</strong> Uninterrupted creative momentum;</li>
+                            <li><strong>Sensory Serenity:</strong> Soft natural lighting, artisanal herbal teas, and ergonomic comfort;</li>
+                            <li><strong>Rest as a Sacred Ritual:</strong> Recharging your mind in our art & mosaic lounge between deep sprints.</li>
+                        </ul>
+                    </div>
+                `
+            }
         },
         'article-community': {
-            badge: '🍸 კომუნა • 4 წთ',
-            duration: '4 წთ საკითხავი',
             img: 'blog_boardgames.jpg',
-            title: 'სამაგიდო თამაშები როგორც სოციალური ხიდი',
-            author: 'Clubs Host • მეტაფორა',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>რატომ არის სამაგიდო თამაშები ერთ-ერთი ყველაზე სწრაფი და ბუნებრივი საშუალება ახალი ადამიანების გასაცნობად?</p>
-                <p>სამაგიდო თამაში ქმნის ე.წ. <em>„უსაფრთხო თამაშის ველს“</em>. როდესაც მაგიდასთან ზიხარ, არ გჭირდება ხელოვნური „Small Talk“ — თამაშის წესები და სტრატეგია თავისთავად წარმართავს დიალოგს, იუმორსა და ჯანსაღ აზარტს.</p>
-                <blockquote>
-                    „თამაშისას ადამიანი ავლენს თავის ნამდვილ ხასიათს, სტრატეგიულ აზროვნებასა და გუნდურობას გაცილებით სწრაფად, ვიდრე ჩვეულებრივი საუბრისას.“
-                </blockquote>
-                <p>მეტაფორას Themed Bar-ში გელოდებათ 50-ზე მეტი მსოფლიო სამაგიდო თამაში — სტრატეგიულიდან დაწყებული, სახალისო პარტი-თამაშებით დამთავრებული!</p>
-            `
+            KA: {
+                badge: '🍸 კომუნა • 4 წთ',
+                duration: '4 წთ საკითხავი',
+                title: 'სამაგიდო თამაშები როგორც სოციალური ხიდი',
+                author: 'Clubs Host • მეტაფორა',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>რატომ არის სამაგიდო თამაშები ერთ-ერთი ყველაზე სწრაფი და ბუნებრივი საშუალება ახალი ადამიანების გასაცნობად?</p>
+                    <p>სამაგიდო თამაში ქმნის ე.წ. <em>„უსაფრთხო თამაშის ველს“</em>. როდესაც მაგიდასთან ზიხარ, არ გჭირდება ხელოვნური „Small Talk“ — თამაშის წესები და სტრატეგია თავისთავად წარმართავს დიალოგს, იუმორსა და ჯანსაღ აზარტს.</p>
+                    <blockquote>
+                        „თამაშისას ადამიანი ავლენს თავის ნამდვილ ხასიათს, სტრატეგიულ აზროვნებასა და გუნდურობას გაცილებით სწრაფად, ვიდრე ჩვეულებრივი საუბრისას.“
+                    </blockquote>
+                    <p>მეტაფორას Themed Bar-ში გელოდებათ 50-ზე მეტი მსოფლიო სამაგიდო თამაში — სტრატეგიულიდან დაწყებული, სახალისო პარტი-თამაშებით დამთავრებული!</p>
+                `
+            },
+            EN: {
+                badge: '🍸 Community • 4 min',
+                duration: '4 min read',
+                title: 'Board Games as a Social Bridge',
+                author: 'Clubs Host • Metaphora',
+                date: 'August 2026',
+                html: `
+                    <p>Why are modern board games one of the fastest and most natural catalysts for building genuine friendships?</p>
+                    <p>Board games create a <em>"safe magic circle"</em>. When gathered around the table, awkward small talk disappears — game mechanics and playful strategy naturally spark shared laughter, wits, and collaboration.</p>
+                    <blockquote>
+                        “In gameplay, human character, strategic instincts, and empathy reveal themselves far quicker than in conventional conversation.”
+                    </blockquote>
+                    <p>At Metaphora's Themed Bar, over 50 premier world tabletop games await you — from deep strategy euro-games to lively social party favorites!</p>
+                `
+            }
         },
         'article-art-therapy': {
-            badge: '🎨 თვითგამოხატვა • 5 წთ',
-            duration: '5 წთ საკითხავი',
             img: 'blog_art_therapy.jpg',
-            title: 'არტ-თერაპია და შინაგანი ბალანსი',
-            author: 'არტ-თერაპევტი • მეტაფორა',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>„მე ხატვა არ ვიცი“ — ეს არის ყველაზე გავრცელებული ფრაზა, რომელსაც არტ-თერაპიის დაწყებამდე ვისმენთ. არტ-თერაპიის არსი კი სწორედ იმაშია, რომ აქ <strong>ესთეტიკური შეფასება არ არსებობს</strong>.</p>
-                <p>ფერები, ხაზები, მოცულობა და ტექსტურა არის ჩვენი ემოციების პირდაპირი პროექცია ქაღალდზე. როდესაც ემოციას ვერ ვხსნით სიტყვებით, ფუნჯი და ტილო ხდება ჩვენი ყველაზე გულწრფელი მთარგმნელი.</p>
-                <div class="article-takeaway-box">
-                    <h4>🎨 რას გვაძლევს რეგულარული არტ-სესიები:</h4>
-                    <ul>
-                        <li>შინაგანი დაძაბულობისა და აკვიატებული ფიქრების მოხსნა;</li>
-                        <li>კრეატიული აზროვნებისა და წარმოსახვის გააქტიურება;</li>
-                        <li>შინაგანი თავისუფლებისა და სიხარულის განცდა;</li>
-                        <li>საკუთარი ემოციების უსაფრთხო გამოხატვა.</li>
-                    </ul>
-                </div>
-            `
+            KA: {
+                badge: '🎨 თვითგამოხატვა • 5 წთ',
+                duration: '5 წთ საკითხავი',
+                title: 'არტ-თერაპია და შინაგანი ბალანსი',
+                author: 'არტ-თერაპევტი • მეტაფორა',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>„მე ხატვა არ ვიცი“ — ეს არის ყველაზე გავრცელებული ფრაზა, რომელსაც არტ-თერაპიის დაწყებამდე ვისმენთ. არტ-თერაპიის არსი კი სწორედ იმაშია, რომ აქ <strong>ესთეტიკური შეფასება არ არსებობს</strong>.</p>
+                    <p>ფერები, ხაზები, მოცულობა და ტექსტურა არის ჩვენი ემოციების პირდაპირი პროექცია ქაღალდზე. როდესაც ემოციას ვერ ვხსნით სიტყვებით, ფუნჯი და ტილო ხდება ჩვენი ყველაზე გულწრფელი მთარგმნელი.</p>
+                    <div class="article-takeaway-box">
+                        <h4>🎨 რას გვაძლევს რეგულარული არტ-სესიები:</h4>
+                        <ul>
+                            <li>შინაგანი დაძაბულობისა და აკვიატებული ფიქრების მოხსნა;</li>
+                            <li>კრეატიული აზროვნებისა და წარმოსახვის გააქტიურება;</li>
+                            <li>შინაგანი თავისუფლებისა და სიხარულის განცდა;</li>
+                            <li>საკუთარი ემოციების უსაფრთხო გამოხატვა.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            EN: {
+                badge: '🎨 Creative Expression • 5 min',
+                duration: '5 min read',
+                title: 'Art Therapy & Emotional Harmony',
+                author: 'Art Therapist • Metaphora',
+                date: 'August 2026',
+                html: `
+                    <p>“I don't know how to draw” — this is the most frequent statement heard before starting an art therapy session. Yet the essence of art therapy is that <strong>aesthetic judgment does not exist here</strong>.</p>
+                    <p>Colors, lines, textures, and brushstrokes are direct projections of our internal emotional landscape. When words fail to articulate our feelings, canvas and paints become our most honest translators.</p>
+                    <div class="article-takeaway-box">
+                        <h4>🎨 Benefits of Regular Art Therapy Sessions:</h4>
+                        <ul>
+                            <li>Release of deep somatic tension and intrusive thoughts;</li>
+                            <li>Activation of creative problem solving and imagination;</li>
+                            <li>A renewed sense of inner lightness and authentic joy;</li>
+                            <li>Safe emotional catharsis through color and texture.</li>
+                        </ul>
+                    </div>
+                `
+            }
         },
         'article-book-club': {
-            badge: '📚 წიგნის კლუბი • 4 წთ',
-            duration: '4 წთ საკითხავი',
             img: 'blog_book_club.jpg',
-            title: 'რას ვკითხულობთ ამ თვეში მეტაფორაში?',
-            author: 'წიგნის კლუბის მოდერატორი • მეტაფორა',
-            date: '2026 წლის აგვისტო',
-            html: `
-                <p>მეტაფორას წიგნების კლუბი ყოველთვიურად არჩევს ერთ განსაკუთრებულ ნაწარმოებს, რომელიც ეხმიანება ადამიანურ ურთიერთობებს, ფილოსოფიასა და ცნობიერების ევოლუციას.</p>
-                <p>თვის ბოლოს, მყუდრო სალონურ გარემოში, ჩაისა და სასიამოვნო მუსიკის თანხლებით ვიკრიბებით და ვმსჯელობთ ავტორის იდეებზე, პერსონაჟთა არჩევანზე და იმაზე, თუ როგორ პასუხობს ეს წიგნი ჩვენს რეალურ ცხოვრებას.</p>
-                <div class="article-takeaway-box">
-                    <h4>📖 მიმდინარე თვის რეკომენდაციები:</h4>
-                    <ul>
-                        <li><strong>რეი ოლდენბურგი:</strong> <em>„The Great Good Place“</em> — მესამე ადგილების ფილოსოფია;</li>
-                        <li><strong>ვიქტორ ფრანკლი:</strong> <em>„ადამიანის მიერ აზრის ძიება“</em> — ლოგოთერაპია და შინაგანი ძალა;</li>
-                        <li><strong>მიჰაი ჩიქსენტმიჰაი:</strong> <em>„დინება (Flow)“</em> — ოპტიმალური გამოცდილების ფსიქოლოგია.</li>
-                    </ul>
-                </div>
-                <p>შემოგვიერთდით ჩვენს უახლოეს შეხვედრაზე!</p>
-            `
+            KA: {
+                badge: '📚 წიგნის კლუბი • 4 წთ',
+                duration: '4 წთ საკითხავი',
+                title: 'რას ვკითხულობთ ამ თვეში მეტაფორაში?',
+                author: 'წიგნის კლუბის მოდერატორი • მეტაფორა',
+                date: '2026 წლის აგვისტო',
+                html: `
+                    <p>მეტაფორას წიგნების კლუბი ყოველთვიურად არჩევს ერთ განსაკუთრებულ ნაწარმოებს, რომელიც ეხმიანება ადამიანურ ურთიერთობებს, ფილოსოფიასა და ცნობიერების ევოლუციას.</p>
+                    <p>თვის ბოლოს, მყუდრო სალონურ გარემოში, ჩაისა და სასიამოვნო მუსიკის თანხლებით ვიკრიბებით და ვმსჯელობთ ავტორის იდეებზე, პერსონაჟთა არჩევანზე და იმაზე, თუ როგორ პასუხობს ეს წიგნი ჩვენს რეალურ ცხოვრებას.</p>
+                    <div class="article-takeaway-box">
+                        <h4>📖 მიმდინარე თვის რეკომენდაციები:</h4>
+                        <ul>
+                            <li><strong>რეი ოლდენბურგი:</strong> <em>„The Great Good Place“</em> — მესამე ადგილების ფილოსოფია;</li>
+                            <li><strong>ვიქტორ ფრანკლი:</strong> <em>„ადამიანის მიერ აზრის ძიება“</em> — ლოგოთერაპია და შინაგანი ძალა;</li>
+                            <li><strong>მიჰაი ჩიქსენტმიჰაი:</strong> <em>„დინება (Flow)“</em> — ოპტიმალური გამოცდილების ფსიქოლოგია.</li>
+                        </ul>
+                    </div>
+                    <p>შემოგვიერთდით ჩვენს უახლოეს შეხვედრაზე!</p>
+                `
+            },
+            EN: {
+                badge: '📚 Book Club • 4 min',
+                duration: '4 min read',
+                title: 'What Are We Reading This Month at Metaphora?',
+                author: 'Book Club Moderator • Metaphora',
+                date: 'August 2026',
+                html: `
+                    <p>Metaphora Book Club selects one standout book every month that explores human connection, philosophical depth, and personal transformation.</p>
+                    <p>At month's end, we gather in our cozy salon over warm tea and ambient acoustic melodies to discuss key insights, character arcs, and practical takeaways for our everyday lives.</p>
+                    <div class="article-takeaway-box">
+                        <h4>📖 Current Month Reading Highlights:</h4>
+                        <ul>
+                            <li><strong>Ray Oldenburg:</strong> <em>“The Great Good Place”</em> — The sociology of third places;</li>
+                            <li><strong>Viktor Frankl:</strong> <em>“Man’s Search for Meaning”</em> — Logotherapy and inner resilience;</li>
+                            <li><strong>Mihaly Csikszentmihalyi:</strong> <em>“Flow”</em> — The psychology of optimal experience.</li>
+                        </ul>
+                    </div>
+                    <p>Join us at our upcoming gathering and share your perspective!</p>
+                `
+            }
         }
     };
 
@@ -3614,23 +3777,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!overlay) return;
 
-        function openArticle(id) {
-            const article = ARTICLES_DATABASE[id] || ARTICLES_DATABASE['article-featured'];
-            if (!article) return;
+        let currentOpenArticleId = null;
 
-            if (topicBadge) topicBadge.textContent = article.badge;
-            if (durationEl) durationEl.textContent = article.duration;
+        function openArticle(id, targetLang) {
+            const lang = targetLang || (localStorage.getItem('metafora_lang') || 'KA');
+            const rawArticle = ARTICLES_DATABASE[id] || ARTICLES_DATABASE['article-featured'];
+            if (!rawArticle) return;
+
+            currentOpenArticleId = id;
+            const articleData = rawArticle[lang] || rawArticle['KA'] || rawArticle;
+
+            if (topicBadge) topicBadge.textContent = articleData.badge;
+            if (durationEl) durationEl.textContent = articleData.duration;
             if (heroImg) {
-                heroImg.src = article.img;
-                heroImg.alt = article.title;
+                heroImg.src = rawArticle.img || articleData.img;
+                heroImg.alt = articleData.title;
             }
-            if (titleEl) titleEl.textContent = article.title;
-            if (authorEl) authorEl.textContent = article.author;
-            if (dateEl) dateEl.textContent = article.date;
-            if (contentEl) contentEl.innerHTML = article.html;
+            if (titleEl) titleEl.textContent = articleData.title;
+            if (authorEl) authorEl.textContent = articleData.author;
+            if (dateEl) dateEl.textContent = articleData.date;
+            if (contentEl) contentEl.innerHTML = articleData.html;
 
-            if (typeof currentLang !== 'undefined' && currentLang === 'EN' && typeof translateDOMNodes === 'function') {
-                translateDOMNodes(overlay, 'EN');
+            // Translate static elements inside drawer footer CTA
+            if (typeof translateDOMNodes === 'function') {
+                const footerCta = overlay.querySelector('.article-reader-footer-cta');
+                if (footerCta) translateDOMNodes(footerCta, lang);
             }
 
             overlay.classList.add('active');
@@ -3639,17 +3810,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function closeArticle() {
+            currentOpenArticleId = null;
             overlay.classList.remove('active');
             overlay.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
         }
+
+        window.refreshActiveArticleLanguage = function(newLang) {
+            if (currentOpenArticleId && overlay && overlay.classList.contains('active')) {
+                openArticle(currentOpenArticleId, newLang);
+            }
+        };
 
         document.addEventListener('click', (e) => {
             const card = e.target.closest('.blog-post-card[data-article-id]');
             if (card && !e.target.closest('.open-booking-modal-btn')) {
                 e.preventDefault();
                 const articleId = card.getAttribute('data-article-id');
-                openArticle(articleId);
+                const curLang = localStorage.getItem('metafora_lang') || 'KA';
+                openArticle(articleId, curLang);
             }
         });
 
@@ -3817,7 +3996,60 @@ document.addEventListener('DOMContentLoaded', () => {
         "გსურთ თქვენი ბიზნესის ახალ საფეხურზე აყვანა?": "Ready to take your business to the next level?",
         "იპოვე შენი შინაგანი ძალა & ემოციური ჰარმონია": "Find Your Inner Strength & Emotional Harmony",
         "✍️ აკრიფეთ ტექსტი აქ და მოისმინეთ დაჭერისას:": "✍️ Type text here and listen on keypress:",
-        "&copy; 2026 მეტაფორა. ყველა უფლება დაცულია.": "© 2026 METAPHORA. All rights reserved.",
+        "სტატიები & ფიქრები": "Articles & Insights",
+        "სტატიები &amp; ფიქრები": "Articles &amp; Insights",
+        "მეტაფორას ბლოგი": "Metaphora Blog",
+        "🌟 რჩეული სტატია • 5 წთ საკითხავი": "🌟 Featured Article • 5 min read",
+        "ავტორი: მეტაფორას გუნდი": "Author: Metaphora Team",
+        "სტატიის წაკითხვა 📖": "Read Article 📖",
+        "სტატიის წაკითხვა": "Read Article",
+        "🎭 Playback თეატრი": "🎭 Playback Theatre",
+        "🎭 Playback თეატრი • 4 წთ": "🎭 Playback Theatre • 4 min",
+        "Playback თეატრის მაგია და არტ-თერაპია": "The Magic of Playback Theatre & Art Therapy",
+        "როგორ ეხმარება იმპროვიზაციული თეატრი საკუთარი ისტორიების გარედან დანახვას, ემოციების გაცნობიერებასა და სტრესის განმუხტვას.": "How improvisational theatre helps reflect personal stories, process emotions, and relieve stress.",
+        "სრულად წაკითხვა →": "Read Full Article →",
+        "სრულად წაკითხვა": "Read Full Article",
+        "🧠 ფსიქოლოგია": "🧠 Psychology",
+        "🧠 ფსიქოლოგია • 6 წთ": "🧠 Psychology • 6 min",
+        "პოზიტიური ფსიქოთერაპიის 5 ოქროს წესი": "5 Golden Rules of Positive Psychotherapy",
+        "როგორ შევხედოთ პრობლემებს არა როგორც დაბრკოლებას, არამედ როგორც ზრდისა და განვითარების რესურსს.": "How to view challenges not as obstacles, but as essential resources for growth.",
+        "☕ პროდუქტიულობა": "☕ Productivity",
+        "☕ პროდუქტიულობა • 3 წთ": "☕ Productivity • 3 min",
+        "როგორ შევქმნათ Deep Work გარემო?": "How to Create a Deep Work Environment?",
+        "რატომ არის მნიშვნელოვანი მყუდრო Coworking სივრცე ყოველდღიური კონცენტრაციისა და ახალი იდეების დაბადებისთვის.": "Why a cozy coworking space is vital for daily focus and sparking new ideas.",
+        "🍸 კომუნა": "🍸 Community",
+        "🍸 კომუნა • 4 წთ": "🍸 Community • 4 min",
+        "სამაგიდო თამაშები როგორც სოციალური ხიდი": "Board Games as a Social Bridge",
+        "რატომ გვაახლოებს ინტელექტუალური თამაშები და როგორ ქმნის ის უსაფრთხო გარემოს ახალი ნაცნობობისთვის.": "Why tabletop games bring people closer and create a safe environment for new connections.",
+        "🎨 თვითგამოხატვა": "🎨 Creative Expression",
+        "🎨 თვითგამოხატვა • 5 წთ": "🎨 Creative Expression • 5 min",
+        "არტ-თერაპია და შინაგანი ბალანსი": "Art Therapy & Emotional Balance",
+        "ფერებითა და ფორმებით თვითგამოხატვა მათთვისაც, ვისაც ჰგონია, რომ ხატვა არ ეხერხება.": "Self-expression through colors and shapes even for those who believe they cannot draw.",
+        "📚 წიგნის კლუბი": "📚 Book Club",
+        "📚 წიგნის კლუბი • 4 წთ": "📚 Book Club • 4 min",
+        "📚 წიგნების კლუბი": "📚 Book Club",
+        "რას ვკითხულობთ ამ თვეში მეტაფორაში?": "What Are We Reading This Month at Metaphora?",
+        "თვიური რეკომენდაციები, საკითხავი სიები და დისკუსიების ანონსი ჩვენი წიგნის კლუბიდან.": "Monthly recommendations, reading lists, and discussion announcements from our book club.",
+        "← მთავარ გვერდზე დაბრუნება": "← Return to Home Page",
+        "მოგეწონათ სტატია?": "Did you enjoy this article?",
+        "გვეწვიეთ მეტაფორაში და გახდით ჩვენი შემოქმედებითი კომუნის წევრი.": "Visit Metaphora and become part of our creative community.",
+        "სტატიის სათაური": "Article Title",
+        "სტატიის დახურვა": "Close Article",
+        "4 წთ საკითხავი": "4 min read",
+        "5 წთ საკითხავი": "5 min read",
+        "6 წთ საკითხავი": "6 min read",
+        "3 წთ საკითხავი": "3 min read",
+        "4 წთ": "4 min",
+        "5 წთ": "5 min",
+        "6 წთ": "6 min",
+        "3 წთ": "3 min",
+        "2026 წლის აგვისტო": "August 2026",
+        "არტ-ფასილიტატორი • მეტაფორა": "Art Facilitator • Metaphora",
+        "პოზიტიური ფსიქოთერაპევტი • მეტაფორა": "Positive Psychotherapist • Metaphora",
+        "მეტაფორას გუნდი": "Metaphora Team",
+        "Clubs Host • მეტაფორა": "Clubs Host • Metaphora",
+        "არტ-თერაპევტი • მეტაფორა": "Art Therapist • Metaphora",
+        "წიგნის კლუბის მოდერატორი • მეტაფორა": "Book Club Moderator • Metaphora",
         "შემოუერთდით მეტაფორას ინტელექტუალურ კომუნას": "Join Metaphora's Intellectual Community",
         "ელენე — Community Manager &amp; Clubs Host": "Elene — Community Manager &amp; Clubs Host",
         "კორპორატიული რიტრიტები &amp; Team Building": "Corporate Retreats &amp; Team Building",
@@ -4812,6 +5044,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof setTestimonial === 'function' && typeof currentTwIdx !== 'undefined') setTestimonial(currentTwIdx, false);
             if (typeof renderAfishaCards === 'function') renderAfishaCards();
             if (typeof startManifestoTypewriter === 'function') startManifestoTypewriter(false);
+            if (typeof window.refreshActiveArticleLanguage === 'function') window.refreshActiveArticleLanguage(lang);
 
             // Update MetaBot welcome msg
             const firstBotMsg = document.querySelector('.metabot-msg.bot-msg .metabot-msg-bubble');
