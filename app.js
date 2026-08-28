@@ -126,7 +126,7 @@
         }
 
         // Cards, buttons, chips, modals, players
-        if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card, .btn, .clickable')) {
+        if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card, .blog-post-card, .blog-read-more-btn, .article-reader-close-btn, .btn, .clickable')) {
             return true;
         }
 
@@ -3629,12 +3629,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dateEl) dateEl.textContent = article.date;
             if (contentEl) contentEl.innerHTML = article.html;
 
+            if (typeof currentLang !== 'undefined' && currentLang === 'EN' && typeof translateDOMNodes === 'function') {
+                translateDOMNodes(overlay, 'EN');
+            }
+
             overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
         }
 
         function closeArticle() {
             overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
         }
 
