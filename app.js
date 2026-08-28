@@ -1405,7 +1405,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fullname: 'ელენე ჩხეიძე',
             jobtitle: 'Community Manager & Clubs Host',
             facebook: 'https://www.facebook.com/metaphora.geo',
-            instagram: 'https://instagram.com',
+            instagram: 'https://www.instagram.com/metaphora.ge/',
             whatsapp: 'https://wa.me/995599228228',
             time: '0:57 / 1:20'
         },
@@ -1657,7 +1657,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const twSocialInsta = document.getElementById('tw-social-insta');
         if (twSocialInsta) {
-            twSocialInsta.href = current.instagram || 'https://instagram.com';
+            twSocialInsta.href = current.instagram || 'https://www.instagram.com/metaphora.ge/';
             twSocialInsta.title = `${current.name} — Instagram`;
         }
 
