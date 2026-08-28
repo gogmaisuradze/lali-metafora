@@ -1338,7 +1338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             text: '„მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარებისა და შთაგონებისთვის.',
             name: 'ლალი',
             fullname: 'ლალი ბადრიძე',
-            jobtitle: 'დამფუძნებელი & ფასილიტატორი',
+            jobtitle: 'ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი',
             facebook: 'https://www.facebook.com/lali.badridze',
             instagram: 'https://www.instagram.com/lali_badridze/',
             whatsapp: 'https://wa.me/995599228228',
@@ -3835,7 +3835,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Playback თეატრის ელემენტები გუნდისთვის": "Playback Theatre Elements for Teams",
         "ელენე — Community Manager & Clubs Host": "Elene — Community Manager & Clubs Host",
         "კორპორატიული რიტრიტები & Team Building": "Corporate Retreats & Team Building",
-        "ლალი — დამფუძნებელი &amp; ფასილიტატორი": "Lali — Founder &amp; Facilitator",
+        "ლალი — დამფუძნებელი &amp; ფასილიტატორი": "Lali — Psychotherapist, Trainer &amp; Association President",
+        "ლალი — ფსიქოთერაპევტი, ტრენერი &amp; ასოციაციის პრეზიდენტი": "Lali — Psychotherapist, Trainer &amp; Association President",
         "მეტაფორას საღამო &amp; არტ-პერფორმანსი": "Metaphora Evening &amp; Art Performance",
         "პროფესიონალი მოდერატორის მეთვალყურეობა": "Facilitation by experienced moderators",
         "🎨 4. მეტაფორა Art (Playback & თერაპია)": "🎨 4. Metaphora Art (Playback & Therapy)",
@@ -3907,7 +3908,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Themed Bar &amp; სამაგიდო თამაშები": "Themed Bar &amp; Board Games",
         "კითხვა-პასუხის ინტერაქტიული რეჟიმი": "Interactive Q&A Session",
         "კომუნის შეხვედრა &amp; ნეთვორქინგი": "Community Mixer &amp; Networking",
-        "ლალი — დამფუძნებელი & ფასილიტატორი": "Lali — Founder & Facilitator",
+        "ლალი — დამფუძნებელი & ფასილიტატორი": "Lali — Psychotherapist, Trainer & Association President",
+        "ლალი — ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი": "Lali — Psychotherapist, Trainer & Association President",
         "მაღალი ხარისხის აუდიო-ვიდეო ჩაწერა": "High-quality audio/video recording",
         "მეტაფორას საღამო & არტ-პერფორმანსი": "Metaphora Evening & Art Performance",
         "პირადი საზღვრების დაცვის ტექნიკები": "Techniques for establishing healthy personal boundaries",
@@ -4493,7 +4495,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { id: 7, name: 'ბლოგი', role: 'სიახლეები, სტატიები & იდეები' }
             ],
             testimonials: [
-                { name: 'ლალი', jobtitle: 'დამფუძნებელი & ფასილიტატორი', text: '„მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარებისა და შთაგონებისთვის.' },
+                { name: 'ლალი', jobtitle: 'ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი', text: '„მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარებისა და შთაგონებისთვის.' },
                 { name: 'ქეთი', jobtitle: 'პოზიტიური ფსიქოთერაპევტი', text: 'Personal Development მიმართულება ეხმარება ადამიანებს შინაგანი ძალის, ბალანსისა და ემოციური ჰარმონიის პოვნაში პროფესიული მხარდაჭერით.' },
                 { name: 'ნათია', jobtitle: 'PTT მასტერის კანდიდატი & WAPP ფსიქო-კონსულტანტი', text: 'პოზიტიური და ტრანსკულტურალური ფსიქოთერაპია ეხმარება ადამიანს საკუთარი შინაგანი შესაძლებლობების აღმოჩენასა და ცხოვრებისეული გამოწვევების რესურსად გარდაქმნაში.' },
                 { name: 'მარიკა', jobtitle: 'Personal & Business Development Coach', text: 'ჩვენი მიზანია ადამიანებისა და ბიზნესების გაძლიერება პერსონალური და პროფესიული განვითარების, მართვის კონსალტინგისა და პრაქტიკული ქოუჩინგის გზით.' },
@@ -4524,7 +4526,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { id: 7, name: 'Blog', role: 'Insights, articles & inspiring ideas' }
             ],
             testimonials: [
-                { name: 'Lali', jobtitle: 'Founder & Facilitator', text: '“Metaphora” is an environment where ideas come to life and people connect with new possibilities. Everything here is crafted for your growth and inspiration.' },
+                { name: 'Lali', jobtitle: 'Psychotherapist, Trainer & Association President', text: '“Metaphora” is an environment where ideas come to life and people connect with new possibilities. Everything here is crafted for your growth and inspiration.' },
                 { name: 'Keti', jobtitle: 'Positive Psychotherapist', text: 'Personal Development helps individuals find inner resilience, balance, and emotional harmony with dedicated professional support.' },
                 { name: 'Natia', jobtitle: 'PTT Master Candidate & WAPP Psychoconsultant', text: 'Positive and transcultural psychotherapy empowers individuals to discover their inner strengths and transform life challenges into valuable growth resources.' },
                 { name: 'Marika', jobtitle: 'Personal & Business Development Coach', text: 'Our mission is empowering individuals and organizations through personal & business development coaching, management consulting, and transformative training.' },
