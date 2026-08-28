@@ -2222,6 +2222,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openBookingModal(preselectedService = '', targetDate = '', targetTime = '') {
         if (bookingModalOverlay) {
+            // If opened from within an article reader, close the article reader drawer
+            const articleOverlay = document.getElementById('article-reader-overlay');
+            if (articleOverlay && articleOverlay.classList.contains('active')) {
+                articleOverlay.classList.remove('active');
+                articleOverlay.setAttribute('aria-hidden', 'true');
+            }
+
             if (preselectedService) {
                 const sSelect = document.getElementById('booking-service-select');
                 if (sSelect) {

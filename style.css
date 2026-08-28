@@ -2619,7 +2619,7 @@ html.direct-main-mode #main-website {
     background: rgba(20, 16, 28, 0.48);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    z-index: 9999;
+    z-index: 2000000 !important;
     display: flex;
     align-items: center;
     justify-content: center;
