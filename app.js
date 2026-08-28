@@ -3,6 +3,9 @@
 // ==========================================================================
 // TOP-LEVEL PERSISTENT UI CLICK SOUND ENGINE (მონაცვლეობითი ხმები: კნ1, კნ2, კნ3)
 // ==========================================================================
+// ==========================================================================
+// TOP-LEVEL PERSISTENT UI CLICK SOUND ENGINE (მონაცვლეობითი ხმები: კნ1, კნ2, კნ3)
+// ==========================================================================
 (function initGlobalInteractiveClickSounds() {
     const soundFiles = ['kn1.mp3', 'kn2.mp3', 'kn3.mp3'];
     let currentSoundIndex = parseInt(sessionStorage.getItem('metafora_sound_idx') || '0', 10) % 3;
@@ -13,7 +16,7 @@
     const audioBuffers = [null, null, null];
     let isPreloading = false;
 
-    const getAudioContext = () => {
+    function getAudioContext() {
         if (!audioCtx) {
             const AudioContextClass = window.AudioContext || window.webkitAudioContext;
             if (AudioContextClass) {
@@ -24,10 +27,10 @@
             audioCtx.resume().catch(() => {});
         }
         return audioCtx;
-    };
+    }
 
     // Preload and decode audio buffers for zero latency
-    const preloadBuffers = () => {
+    function preloadBuffers() {
         if (isPreloading) return;
         isPreloading = true;
         const ctx = getAudioContext();
@@ -35,28 +38,70 @@
 
         soundFiles.forEach((file, index) => {
             fetch(file)
-                .then(r => r.arrayBuffer())
+                .then(r => {
+                    if (!r.ok) throw new Error('Fetch failed');
+                    return r.arrayBuffer();
+                })
                 .then(buf => ctx.decodeAudioData(buf))
                 .then(decoded => {
                     audioBuffers[index] = decoded;
                 })
                 .catch(() => {});
         });
-    };
+    }
 
-    // Fallback HTML5 Audio pool with iOS playsinline
-    const audioPool = soundFiles.map(file => {
-        const a = new Audio(file);
-        a.preload = 'auto';
-        a.volume = 0.40;
-        a.setAttribute('playsinline', '');
-        a.setAttribute('webkit-playsinline', '');
-        return a;
-    });
+    // High-fidelity instant synthesized mechanical typewriter click (works 100% on iOS & Android with 0 lag)
+    function playSyntheticClick(ctx, soundIdx) {
+        try {
+            const t = ctx.currentTime;
+            
+            // 1. High-frequency click noise burst
+            const sampleRate = ctx.sampleRate || 44100;
+            const bufferSize = Math.floor(sampleRate * 0.009); // 9ms
+            const noiseBuffer = ctx.createBuffer(1, bufferSize, sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.22));
+            }
+            const noiseSource = ctx.createBufferSource();
+            noiseSource.buffer = noiseBuffer;
+
+            const bandpass = ctx.createBiquadFilter();
+            bandpass.type = 'bandpass';
+            const clickFreqs = [2400, 2900, 3500];
+            bandpass.frequency.setValueAtTime(clickFreqs[soundIdx % 3], t);
+            bandpass.Q.setValueAtTime(4.0, t);
+
+            const noiseGain = ctx.createGain();
+            noiseGain.gain.setValueAtTime(0.42, t);
+            noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.009);
+
+            noiseSource.connect(bandpass);
+            bandpass.connect(noiseGain);
+            noiseGain.connect(ctx.destination);
+            noiseSource.start(t);
+
+            // 2. Mechanical body snap
+            const osc = ctx.createOscillator();
+            const oscGain = ctx.createGain();
+            const lowFreqs = [240, 290, 340];
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(lowFreqs[soundIdx % 3], t);
+            osc.frequency.exponentialRampToValueAtTime(70, t + 0.014);
+
+            oscGain.gain.setValueAtTime(0.32, t);
+            oscGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.014);
+
+            osc.connect(oscGain);
+            oscGain.connect(ctx.destination);
+            osc.start(t);
+            osc.stop(t + 0.015);
+        } catch(e) {}
+    }
 
     const playNextClickSound = () => {
         const now = Date.now();
-        if (now - lastPlayedTime < 45) return; // Prevent double-trigger on rapid touch+pointer+click
+        if (now - lastPlayedTime < 35) return;
         lastPlayedTime = now;
 
         const soundIdx = currentSoundIndex;
@@ -64,12 +109,19 @@
         try { sessionStorage.setItem('metafora_sound_idx', currentSoundIndex); } catch(e) {}
 
         const ctx = getAudioContext();
-        if (ctx && audioBuffers[soundIdx]) {
+        if (!ctx) return;
+
+        if (ctx.state === 'suspended') {
+            ctx.resume().catch(() => {});
+        }
+
+        // If recorded buffer is ready, play it; otherwise play crisp synthetic click
+        if (audioBuffers[soundIdx]) {
             try {
                 const source = ctx.createBufferSource();
                 source.buffer = audioBuffers[soundIdx];
                 const gainNode = ctx.createGain();
-                gainNode.gain.value = 0.40;
+                gainNode.gain.value = 0.45;
                 source.connect(gainNode);
                 gainNode.connect(ctx.destination);
                 source.start(0);
@@ -77,95 +129,67 @@
             } catch (err) {}
         }
 
-        // HTML5 fallback for mobile devices
-        try {
-            const audio = audioPool[soundIdx];
-            if (audio) {
-                const clone = audio.cloneNode();
-                clone.volume = 0.40;
-                const p = clone.play();
-                if (p !== undefined) p.catch(() => {});
-            }
-        } catch (e) {}
+        playSyntheticClick(ctx, soundIdx);
     };
 
-    // Force-unlock iOS WebKit Audio hardware on first touch/click
-    const unlockAudioIOS = () => {
+    // Unlock audio hardware on first touch/click
+    const unlockAudio = () => {
         const ctx = getAudioContext();
-        if (ctx) {
-            if (ctx.state === 'suspended') {
-                ctx.resume().catch(() => {});
-            }
-            try {
-                const buffer = ctx.createBuffer(1, 1, 22050);
-                const source = ctx.createBufferSource();
-                source.buffer = buffer;
-                source.connect(ctx.destination);
-                source.start(0);
-            } catch (e) {}
+        if (ctx && ctx.state === 'suspended') {
+            ctx.resume().catch(() => {});
         }
         preloadBuffers();
     };
 
     ['touchstart', 'touchend', 'pointerdown', 'mousedown', 'keydown', 'click'].forEach(evt => {
-        window.addEventListener(evt, unlockAudioIOS, { once: true, capture: true, passive: true });
+        window.addEventListener(evt, unlockAudio, { once: true, capture: true, passive: true });
     });
 
-    // Check if target or ancestor is interactive
     function isInteractiveTarget(target) {
         if (!target || target === document.body || target === document.documentElement) return false;
-
-        // Tags & interactive roles
-        if (target.closest('a, button, select, input, textarea, summary, details, label, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="radio"]')) {
-            return true;
-        }
-
-        // Navigation and menu items
-        if (target.closest('.nav-item, .dropdown-link, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, .brand-wrapper')) {
-            return true;
-        }
-
-        // Cards, buttons, chips, modals, players
-        if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card, .blog-post-card, .blog-read-more-btn, .article-reader-close-btn, .btn, .clickable')) {
-            return true;
-        }
-
-        if (target.closest('[onclick], [data-action], [data-filter], [data-index]')) {
-            return true;
-        }
-
+        if (target.closest('a, button, select, input, textarea, summary, details, label, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="radio"]')) return true;
+        if (target.closest('.day, .slot, .cal-event-card, .nav-item, .dropdown-link, .mobile-nav-item, .mobile-accordion-toggle, .mobile-dropdown-link, .mobile-nav-close, .mobile-menu-toggle-btn, .mobile-brand-logo, .brand-logo, .brand-wrapper')) return true;
+        if (target.closest('.open-booking-modal-btn, .modal-close-btn, .btn-modal-submit, .bank-app-btn, .lang-single-btn, .theme-toggle-btn, .search-toggle-btn, .search-close-btn, .metabot-launcher-btn, .metabot-close-btn, .metabot-send-btn, .metabot-chip, .filter-btn, .audio-badge-play-btn, .tw-audio-play-btn, .tw-nav-btn, .tw-member-chip, .stagger-nav-btn, .stagger-card, .afisha-card, .card-explore-btn, .read-more-btn, .portal-btn, .portal-contact-btn, .dandelion-node, .center-circular-hub, .dot, .faq-item, .accordion-header, .gallery-item, .service-card, .blog-card, .blog-post-card, .blog-read-more-btn, .article-reader-close-btn, .btn, .clickable')) return true;
+        if (target.closest('[onclick], [data-action], [data-filter], [data-index], [data-time]')) return true;
         try {
             if (window.getComputedStyle(target).cursor === 'pointer') return true;
         } catch(e) {}
-
         return false;
     }
 
-    // Touchstart event for immediate zero-lag sound response on mobile
+    // Touchstart event on mobile
     document.addEventListener('touchstart', (e) => {
+        unlockAudio();
         if (isInteractiveTarget(e.target)) {
-            unlockAudioIOS();
             playNextClickSound();
         }
     }, { capture: true, passive: true });
 
-    // Pointerdown / mousedown event for desktop & mouse devices
+    // Pointerdown event
     document.addEventListener('pointerdown', (e) => {
+        unlockAudio();
         if (isInteractiveTarget(e.target)) {
-            unlockAudioIOS();
             playNextClickSound();
         }
     }, { capture: true, passive: true });
 
-    // Click event fallback for keyboard or assistive navigation
+    // Click event
     document.addEventListener('click', (e) => {
+        unlockAudio();
         if (isInteractiveTarget(e.target)) {
-            unlockAudioIOS();
             playNextClickSound();
         }
     }, { capture: true, passive: true });
 
-    // Smooth navigation delay for cross-page navigation links so the sound completes
+    // Typing sound on virtual mobile keyboard and physical keyboard
+    document.addEventListener('input', (e) => {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+            unlockAudio();
+            playNextClickSound();
+        }
+    }, { capture: true, passive: true });
+
+    // Navigation links transition
     document.addEventListener('click', (e) => {
         const link = e.target.closest('a[href]');
         if (!link) return;
@@ -173,8 +197,6 @@
         if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('tel:') || href.startsWith('mailto:') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) {
             return;
         }
-
-        // It is an internal page transition (e.g. blog.html, gallery.html, services.html, service-*.html)
         e.preventDefault();
         playNextClickSound();
         setTimeout(() => {
@@ -2608,7 +2630,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        let viewDate = new Date(2026, 7, 28);
+        let viewDate = new Date(2026, 7, 1); // August 1, 2026
         let selectedDate = new Date(2026, 7, 28);
         let selectedTime = '14:30';
 
@@ -2819,7 +2841,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const events = SCHEDULED_EVENTS[isoStr] || [];
                 const hasEvent = events.length > 0;
                 const isSelected = selectedDate && (cellDate.toDateString() === selectedDate.toDateString());
-                const isPast = cellDate < today && (year < today.getFullYear() || (year === today.getFullYear() && month < today.getMonth()) || (year === today.getFullYear() && month === today.getMonth() && d < today.getDate()));
 
                 const dayBtn = document.createElement('button');
                 dayBtn.type = 'button';
@@ -2837,24 +2858,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 dayBtn.innerHTML = `<span class="day-num">${d}</span>${dotsHtml}`;
 
-                if (isPast) {
-                    dayBtn.disabled = true;
-                } else {
-                    dayBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        selectedDate = new Date(year, month, d);
-                        const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
-                        if (eventsForDate.length > 0) {
-                            const hasCurrentTime = eventsForDate.some(ev => ev.time === selectedTime);
-                            if (!hasCurrentTime) {
-                                selectedTime = eventsForDate[0].time;
-                            }
+                dayBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    selectedDate = new Date(year, month, d);
+                    const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
+                    if (eventsForDate.length > 0) {
+                        const hasCurrentTime = eventsForDate.some(ev => ev.time === selectedTime);
+                        if (!hasCurrentTime) {
+                            selectedTime = eventsForDate[0].time;
                         }
-                        renderTimeSlots();
-                        updatePickedSummary();
-                        renderCalendar();
-                    });
-                }
+                    }
+                    renderTimeSlots();
+                    updatePickedSummary();
+                    renderCalendar();
+                });
 
                 calGrid.appendChild(dayBtn);
             }
@@ -2866,7 +2883,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevBtn) {
             prevBtn.onclick = (e) => {
                 e.preventDefault();
-                viewDate.setMonth(viewDate.getMonth() - 1);
+                viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
                 renderCalendar();
             };
         }
@@ -2874,7 +2891,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nextBtn) {
             nextBtn.onclick = (e) => {
                 e.preventDefault();
-                viewDate.setMonth(viewDate.getMonth() + 1);
+                viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
                 renderCalendar();
             };
         }

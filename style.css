@@ -6392,18 +6392,92 @@ body.metabot-open .metabot-launcher-btn {
 
 @media (max-width: 768px) {
     .booking-modal-glass {
-        padding: 24px 16px !important;
+        padding: 24px 14px 20px 14px !important;
+        max-height: calc(100dvh - 16px) !important;
+        border-radius: 20px !important;
     }
     .booking.smile-style-booking {
         grid-template-columns: 1fr;
+        border-radius: 18px;
     }
     .cal-pane {
         border-right: none;
         border-bottom: 1px solid rgba(1, 97, 102, 0.15);
-        padding: 18px 14px;
+        padding: 16px 12px;
+    }
+    .cal-top {
+        margin-bottom: 12px;
+    }
+    .cal-top .m {
+        font-size: 1.05rem;
+    }
+    .cal-grid {
+        gap: 4px;
+    }
+    .day {
+        min-height: 38px;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .day-dots {
+        margin-top: 1px;
+        height: 3px;
+        gap: 2px;
+    }
+    .day-dots .dot {
+        width: 3.5px;
+        height: 3.5px;
+    }
+    .cal-event-card {
+        padding: 6px 8px;
+        font-size: 0.74rem;
+        border-radius: 8px;
+    }
+    .event-banner-badge {
+        font-size: 0.68rem;
+        padding: 2px 6px;
+    }
+    .event-banner-title {
+        font-size: 0.74rem;
+    }
+    .slots-label {
+        margin: 12px 0 6px 0;
+        font-size: 0.74rem;
+    }
+    .slots {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+    }
+    .slot {
+        padding: 7px 0;
+        font-size: 0.78rem;
+        border-radius: 8px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
     .sum-pane {
-        padding: 18px 14px;
+        padding: 16px 12px;
+    }
+    .sum-pane h3 {
+        font-size: 1.1rem;
+    }
+    .sum-pane .hint {
+        font-size: 0.78rem;
+        margin-bottom: 12px;
+    }
+    .picked {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+        min-height: 38px;
+    }
+}
+
+@media (max-width: 380px) {
+    .slots {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
