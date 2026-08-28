@@ -4635,8 +4635,21 @@ body.metabot-open .metabot-launcher-btn {
 }
 
 .mobile-nav-footer {
-    padding: 18px 20px;
+    margin-top: 16px;
+    padding: 24px 18px 28px 18px;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav-footer .open-booking-modal-btn {
+    margin-top: 4px;
+    padding: 12px 18px;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .mobile-nav-footer {
+    border-top-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================
