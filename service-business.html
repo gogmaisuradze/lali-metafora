@@ -372,74 +372,110 @@
         <div class="booking-modal-glass" id="booking-modal-glass-card">
             <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
             
-            <!-- STEP 1: BOOKING DETAILS FORM -->
+            <!-- STEP 1: BOOKING DETAILS FORM (SMILE AGENCY STYLE) -->
             <div id="booking-step-form" class="booking-step-content active">
-                <div class="modal-header">
-                    <span class="modal-badge">✨ ონლაინ ჯავშანი</span>
-                    <h3 class="modal-title">ადგილის დაჯავშნა მეტაფორაში</h3>
-                    <p class="modal-desc">აირჩიეთ სასურველი მიმართულება და დრო რეგისტრაციისთვის.</p>
+                <div class="modal-header" style="margin-bottom: 12px;">
+                    <span class="modal-badge">✨ ონლაინ დაჯავშნა</span>
+                    <h3 class="modal-title">აირჩიე დღე და დრო</h3>
+                    <p class="modal-desc">დაჯავშნე ვიზიტი კალენდარში — დაგიდასტურებთ ტელეფონით.</p>
                 </div>
 
-                <form class="modal-booking-form" id="metafora-booking-form" novalidate>
-                    
-                    <!-- Service Selection Chips -->
-                    <div class="form-group">
-                        <label class="form-label">აირჩიეთ მიმართულება / სერვისი</label>
-                        <select class="form-input" id="booking-service-select" required>
-                            <option value="Personal Development">🌱 1. მეტაფორა Personal Development</option>
-                            <option value="Business">💼 2. მეტაფორა Business</option>
-                            <option value="Think Tank">🧠 3. მეტაფორა Think Tank</option>
-                            <option value="Art">🎨 4. მეტაფორა Art (Playback &amp; თერაპია)</option>
-                            <option value="Clubs" selected>🏛️ 5. მეტაფორა Clubs (მესამე სივრცე)</option>
-                        </select>
-                    </div>
+                <div class="booking smile-style-booking">
+                    <!-- Left: Calendar & Time Slots Pane -->
+                    <div class="cal-pane">
+                        <div class="cal-top">
+                            <div class="m" id="cal-month-title">აგვისტო 2026</div>
+                            <div class="cal-nav">
+                                <button type="button" id="cal-prev-btn" aria-label="Previous month">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="m15 18-6-6 6-6"/>
+                                    </svg>
+                                </button>
+                                <button type="button" id="cal-next-btn" aria-label="Next month">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="m9 18 6-6-6-6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
 
-                    <!-- Date & Time Row -->
-                    <div class="form-row-two">
-                        <div class="form-group">
-                            <label class="form-label">📅 სასურველი თარიღი</label>
-                            <input type="date" class="form-input" id="booking-date-input" required>
+                        <div class="cal-grid" id="cal-grid-container">
+                            <div class="wd">ორშ</div>
+                            <div class="wd">სამ</div>
+                            <div class="wd">ოთხ</div>
+                            <div class="wd">ხუთ</div>
+                            <div class="wd">პარ</div>
+                            <div class="wd">შაბ</div>
+                            <div class="wd">კვი</div>
+                            <!-- Days populated dynamically by JS -->
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">🕒 დროის ინტერვალი</label>
-                            <select class="form-input" id="booking-time-select" required>
-                                <option>12:00 — 14:00 (დღის ლანჩი/ლაუნჯი)</option>
-                                <option>14:30 — 16:30 (Coworking სესია)</option>
-                                <option>17:00 — 19:00 (ვორქშოფი &amp; თერაპია)</option>
-                                <option selected>19:30 — 22:00 (Playback თეატრი/Bar)</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <!-- Guests Count & Name Row -->
-                    <div class="form-row-two">
-                        <div class="form-group">
-                            <label class="form-label">👤 თქვენი სახელი და გვარი</label>
-                            <input type="text" class="form-input" id="booking-name-input" placeholder="მაგ: გიორგი მაისურაძე" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">👥 სტუმრების რაოდენობა</label>
-                            <select class="form-input" id="booking-guests-select" required>
-                                <option>1 ადამიანი</option>
-                                <option selected>2 ადამიანი</option>
-                                <option>3-4 ადამიანი</option>
-                                <option>5+ ადამიანი (ჯგუფური)</option>
-                            </select>
+                        <div class="slots-label">აირჩიე დრო</div>
+                        <div class="slots" id="cal-slots-container">
+                            <button type="button" class="slot" data-time="12:00">12:00</button>
+                            <button type="button" class="slot" data-time="14:30">14:30</button>
+                            <button type="button" class="slot" data-time="17:00">17:00</button>
+                            <button type="button" class="slot sel" data-time="19:30">19:30</button>
+                            <button type="button" class="slot" data-time="20:30">20:30</button>
+                            <button type="button" class="slot" data-time="21:30">21:30</button>
                         </div>
                     </div>
 
-                    <!-- Contact Phone Row -->
-                    <div class="form-group">
-                        <label class="form-label">📞 საკონტაქტო ტელეფონის ნომერი</label>
-                        <input type="tel" class="form-input" id="booking-phone-input" placeholder="599 22 82 28" required>
+                    <!-- Right: Summary & Details Form Pane -->
+                    <div class="sum-pane">
+                        <h3>ვიზიტის დეტალები</h3>
+                        <p class="hint">შეავსე ველები და გადადი გადახდაზე.</p>
+
+                        <div class="picked">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/>
+                            </svg>
+                            <span id="booking-picked-summary">28 აგვისტო · 19:30</span>
+                        </div>
+
+                        <form class="modal-booking-form" id="metafora-booking-form" novalidate>
+                            <input type="hidden" id="booking-date-input" name="booking_date" value="2026-08-28" required>
+                            <input type="hidden" id="booking-time-input" name="booking_time" value="19:30" required>
+
+                            <div class="field">
+                                <label class="form-label">მიმართულება / სერვისი</label>
+                                <select class="form-input" id="booking-service-select" required>
+                                    <option value="Personal Development">🌱 1. მეტაფორა Personal Development</option>
+                                    <option value="Business" selected>💼 2. მეტაფორა Business</option>
+                                    <option value="Think Tank">🧠 3. მეტაფორა Think Tank</option>
+                                    <option value="Art">🎨 4. მეტაფორა Art (Playback &amp; თერაპია)</option>
+                                    <option value="Clubs">🏛️ 5. მეტაფორა Clubs (მესამე სივრცე)</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label class="form-label">თქვენი სახელი და გვარი</label>
+                                <input type="text" class="form-input" id="booking-name-input" placeholder="მაგ: გიორგი მაისურაძე" required>
+                            </div>
+
+                            <div class="field">
+                                <label class="form-label">სტუმრების რაოდენობა</label>
+                                <select class="form-input" id="booking-guests-select" required>
+                                    <option>1 ადამიანი</option>
+                                    <option selected>2 ადამიანი</option>
+                                    <option>3-4 ადამიანი</option>
+                                    <option>5+ ადამიანი (ჯგუფური)</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label class="form-label">საკონტაქტო ტელეფონის ნომერი</label>
+                                <input type="tel" class="form-input" id="booking-phone-input" placeholder="599 22 82 28" required>
+                            </div>
+
+                            <div id="booking-form-status" class="booking-status-box hidden"></div>
+
+                            <button type="submit" class="btn-modal-submit" id="btn-proceed-to-payment" style="margin-top: 6px;">
+                                <span>გადახდაზე გადასვლა 💳</span>
+                            </button>
+                        </form>
                     </div>
-
-                    <div id="booking-form-status" class="booking-status-box hidden"></div>
-
-                    <button type="submit" class="btn-modal-submit" id="btn-proceed-to-payment">
-                        <span>გადახდაზე გადასვლა 💳</span>
-                    </button>
-                </form>
+                </div>
             </div>
 
             <!-- STEP 2: PAYMENT BY BANK TRANSFER -->

@@ -2167,6 +2167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             showBookingStep('form');
+            if (typeof window.refreshSmileBookingCalendar === 'function') window.refreshSmileBookingCalendar();
             bookingModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2203,14 +2204,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameInput = document.getElementById('booking-name-input');
         const phoneInput = document.getElementById('booking-phone-input');
         const dateInput = document.getElementById('booking-date-input');
-        const timeSelect = document.getElementById('booking-time-select');
+        const timeInput = document.getElementById('booking-time-input') || document.getElementById('booking-time-select');
         const guestsSelect = document.getElementById('booking-guests-select');
         const serviceSelect = document.getElementById('booking-service-select');
 
         const name = (nameInput?.value || '').trim();
         const phone = (phoneInput?.value || '').trim().replace(/\s+/g, '');
         const date = (dateInput?.value || '').trim();
-        const time = (timeSelect?.value || '').trim();
+        const time = (timeInput?.value || '').trim() || '19:30';
         const guests = (guestsSelect?.value || '').trim();
         const service = (serviceSelect?.value || '').trim();
 
@@ -2587,6 +2588,160 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
     }
+
+    // ==========================================================================
+    // SMILE AGENCY STYLE INTERACTIVE BOOKING CALENDAR & SLOTS ENGINE
+    // ==========================================================================
+    function initSmileBookingCalendar() {
+        const calGrid = document.getElementById('cal-grid-container');
+        const monthTitle = document.getElementById('cal-month-title');
+        const prevBtn = document.getElementById('cal-prev-btn');
+        const nextBtn = document.getElementById('cal-next-btn');
+        const slotsContainer = document.getElementById('cal-slots-container');
+        const pickedSummary = document.getElementById('booking-picked-summary');
+        const dateInput = document.getElementById('booking-date-input');
+        const timeInput = document.getElementById('booking-time-input');
+
+        if (!calGrid || !slotsContainer) return;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let viewDate = new Date(2026, 7, 28);
+        let selectedDate = new Date(2026, 7, 28);
+        let selectedTime = '19:30';
+
+        const MONTHS_KA = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
+        const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const WDS_KA = ['ორშ', 'სამ', 'ოთხ', 'ხუთ', 'პარ', 'შაბ', 'კვი'];
+        const WDS_EN = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
+        function formatISODate(d) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
+
+        function updatePickedSummary() {
+            if (!pickedSummary) return;
+            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+            if (selectedDate && selectedTime) {
+                const dayNum = selectedDate.getDate();
+                const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
+                pickedSummary.textContent = isEn 
+                    ? `${mName} ${dayNum} · ${selectedTime}`
+                    : `${dayNum} ${mName} · ${selectedTime}`;
+            } else if (selectedDate) {
+                const dayNum = selectedDate.getDate();
+                const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
+                pickedSummary.textContent = isEn ? `${mName} ${dayNum}` : `${dayNum} ${mName}`;
+            } else {
+                pickedSummary.textContent = isEn ? 'Select date & time first' : 'ჯერ აირჩიე დღე და დრო';
+            }
+
+            if (dateInput && selectedDate) dateInput.value = formatISODate(selectedDate);
+            if (timeInput && selectedTime) timeInput.value = selectedTime;
+        }
+
+        function renderCalendar() {
+            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+            const year = viewDate.getFullYear();
+            const month = viewDate.getMonth();
+
+            if (monthTitle) {
+                const mName = isEn ? MONTHS_EN[month] : MONTHS_KA[month];
+                monthTitle.textContent = `${mName} ${year}`;
+            }
+
+            // Render Weekdays
+            calGrid.innerHTML = '';
+            const wds = isEn ? WDS_EN : WDS_KA;
+            wds.forEach(w => {
+                const wdEl = document.createElement('div');
+                wdEl.className = 'wd';
+                wdEl.textContent = w;
+                calGrid.appendChild(wdEl);
+            });
+
+            // Calculate days
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const startingDay = (firstDayOfMonth + 6) % 7; // Monday-first
+            const totalDays = new Date(year, month + 1, 0).getDate();
+
+            // Empty prefix slots
+            for (let i = 0; i < startingDay; i++) {
+                const emptyEl = document.createElement('div');
+                emptyEl.className = 'day empty';
+                calGrid.appendChild(emptyEl);
+            }
+
+            // Days
+            for (let d = 1; d <= totalDays; d++) {
+                const cellDate = new Date(year, month, d);
+                cellDate.setHours(0, 0, 0, 0);
+
+                const isSelected = selectedDate && (cellDate.toDateString() === selectedDate.toDateString());
+                const isPast = cellDate < today && (year < today.getFullYear() || (year === today.getFullYear() && month < today.getMonth()) || (year === today.getFullYear() && month === today.getMonth() && d < today.getDate()));
+
+                const dayBtn = document.createElement('button');
+                dayBtn.type = 'button';
+                dayBtn.className = `day ${isSelected ? 'sel' : ''}`;
+                dayBtn.textContent = d;
+
+                if (isPast) {
+                    dayBtn.disabled = true;
+                } else {
+                    dayBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        selectedDate = new Date(year, month, d);
+                        updatePickedSummary();
+                        renderCalendar();
+                    });
+                }
+
+                calGrid.appendChild(dayBtn);
+            }
+
+            updatePickedSummary();
+        }
+
+        // Time slot selection
+        const slotButtons = slotsContainer.querySelectorAll('.slot');
+        slotButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                slotButtons.forEach(b => b.classList.remove('sel'));
+                btn.classList.add('sel');
+                selectedTime = btn.getAttribute('data-time') || btn.textContent.trim();
+                updatePickedSummary();
+            });
+        });
+
+        if (prevBtn) {
+            prevBtn.onclick = (e) => {
+                e.preventDefault();
+                viewDate.setMonth(viewDate.getMonth() - 1);
+                renderCalendar();
+            };
+        }
+
+        if (nextBtn) {
+            nextBtn.onclick = (e) => {
+                e.preventDefault();
+                viewDate.setMonth(viewDate.getMonth() + 1);
+                renderCalendar();
+            };
+        }
+
+        window.refreshSmileBookingCalendar = function() {
+            renderCalendar();
+        };
+
+        renderCalendar();
+    }
+
+    initSmileBookingCalendar();
 
 
 
@@ -3999,6 +4154,13 @@ document.addEventListener('DOMContentLoaded', () => {
         "უნიკალური ვიზიტორი:": "Unique Visitors:",
         "საიტის უნიკალური მნახველები": "Website Unique Visitors",
         "უნიკალური მნახველი:": "Unique Visitors:",
+        "✨ ონლაინ დაჯავშნა": "✨ Online Booking",
+        "აირჩიე დღე და დრო": "Choose Date & Time",
+        "დაჯავშნე ვიზიტი კალენდარში — დაგიდასტურებთ ტელეფონით.": "Book your visit in the calendar — we will confirm by phone.",
+        "აირჩიე დრო": "Select Time",
+        "ვიზიტის დეტალები": "Visit Details",
+        "შეავსე ველები და გადადი გადახდაზე.": "Fill fields and proceed to payment.",
+        "ჯერ აირჩიე დღე და დრო": "Select date & time first",
         "სტატიები & ფიქრები": "Articles & Insights",
         "სტატიები &amp; ფიქრები": "Articles &amp; Insights",
         "მეტაფორას ბლოგი": "Metaphora Blog",
@@ -5048,6 +5210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof renderAfishaCards === 'function') renderAfishaCards();
             if (typeof startManifestoTypewriter === 'function') startManifestoTypewriter(false);
             if (typeof window.refreshActiveArticleLanguage === 'function') window.refreshActiveArticleLanguage(lang);
+            if (typeof window.refreshSmileBookingCalendar === 'function') window.refreshSmileBookingCalendar();
 
             // Update MetaBot welcome msg
             const firstBotMsg = document.querySelector('.metabot-msg.bot-msg .metabot-msg-bubble');
