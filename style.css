@@ -5896,5 +5896,276 @@ body.metabot-open .metabot-launcher-btn {
     100% { transform: scale(1); }
 }
 
+/* ==========================================================================
+   METAPHORA CUSTOM INTERACTIVE BOOKING CALENDAR
+   ========================================================================== */
+.booking-calendar-group {
+    width: 100%;
+}
+
+.calendar-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.calendar-legend-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.76rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot.dot-avail {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.legend-dot.dot-event {
+    background: var(--brand-plum, #7a3963);
+    box-shadow: 0 0 6px rgba(122, 57, 99, 0.6);
+}
+
+.legend-dot.dot-selected {
+    background: var(--brand-gold, #ffba00);
+    box-shadow: 0 0 6px rgba(255, 186, 0, 0.8);
+}
+
+.metafora-custom-calendar {
+    background: rgba(248, 250, 252, 0.88);
+    border: 1.5px solid rgba(1, 97, 102, 0.22);
+    border-radius: 22px;
+    padding: 14px;
+    box-shadow: 0 10px 30px rgba(1, 97, 102, 0.08), inset 0 1px 1px #ffffff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .metafora-custom-calendar {
+    background: rgba(15, 23, 42, 0.75);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.cal-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 0 4px;
+}
+
+.cal-month-year {
+    font-family: var(--font-title, 'Inter');
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary-color, #016166);
+    letter-spacing: 0.2px;
+}
+
+[data-theme="dark"] .cal-month-year {
+    color: #f1f5f9;
+}
+
+.cal-nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(1, 97, 102, 0.2);
+    color: var(--primary-color, #016166);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .cal-nav-btn {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #f1f5f9;
+}
+
+.cal-nav-btn:hover {
+    background: var(--brand-teal, #016166);
+    color: #ffffff;
+    border-color: var(--brand-teal, #016166);
+    transform: scale(1.12);
+    box-shadow: 0 4px 14px rgba(1, 97, 102, 0.35);
+}
+
+.cal-weekdays-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.cal-wd {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 0;
+}
+
+.cal-wd.weekend {
+    color: var(--brand-plum, #7a3963);
+}
+
+.cal-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.cal-day-cell {
+    position: relative;
+    aspect-ratio: 1;
+    min-height: 34px;
+    border-radius: 10px;
+    border: 1px solid rgba(1, 97, 102, 0.1);
+    background: rgba(255, 255, 255, 0.85);
+    color: #1e293b;
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2px;
+    user-select: none;
+}
+
+[data-theme="dark"] .cal-day-cell {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+}
+
+.cal-day-cell.cal-pad-day {
+    opacity: 0.25;
+    background: transparent;
+    border-color: transparent;
+    cursor: default;
+}
+
+.cal-day-cell:hover:not(.cal-pad-day) {
+    background: rgba(1, 97, 102, 0.12);
+    border-color: var(--brand-teal, #016166);
+    color: var(--brand-teal, #016166);
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 6px 16px rgba(1, 97, 102, 0.2);
+    z-index: 2;
+}
+
+[data-theme="dark"] .cal-day-cell:hover:not(.cal-pad-day) {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+
+/* Today indicator */
+.cal-day-cell.is-today {
+    border: 1.5px dashed var(--brand-teal, #016166);
+    font-weight: 800;
+}
+
+/* Has Special Event */
+.cal-day-cell.has-event {
+    background: rgba(122, 57, 99, 0.09);
+    border-color: rgba(122, 57, 99, 0.3);
+}
+
+.cal-event-dot {
+    position: absolute;
+    bottom: 3px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--brand-plum, #7a3963);
+    box-shadow: 0 0 6px rgba(122, 57, 99, 0.7);
+}
+
+.cal-day-cell.is-selected .cal-event-dot {
+    background: var(--brand-gold, #ffba00);
+    box-shadow: 0 0 6px rgba(255, 186, 0, 0.9);
+}
+
+/* Selected state: Brand Teal, Plum & Gold Glowing Gradient */
+.cal-day-cell.is-selected {
+    background: linear-gradient(135deg, var(--brand-teal, #016166) 0%, var(--brand-plum, #7a3963) 100%) !important;
+    color: #ffffff !important;
+    border: 2px solid var(--brand-gold, #ffba00) !important;
+    box-shadow: 0 6px 20px rgba(1, 97, 102, 0.45), 0 0 14px rgba(255, 186, 0, 0.6) !important;
+    transform: translateY(-2px) scale(1.1);
+    z-index: 5;
+}
+
+.cal-selected-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 7px 12px;
+    background: rgba(1, 97, 102, 0.08);
+    border: 1px solid rgba(1, 97, 102, 0.2);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color, #016166);
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+[data-theme="dark"] .cal-selected-summary {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f1f5f9;
+}
+
+.cal-sum-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cal-sum-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background: #10b981;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+}
+
+
 
 
