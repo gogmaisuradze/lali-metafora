@@ -1367,7 +1367,7 @@ document.addEventListener('DOMContentLoaded', () => {
             jobtitle: 'Think Tank მოდერატორი',
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598324020',
             time: '0:23 / 1:20'
         },
         {
@@ -1393,7 +1393,7 @@ document.addEventListener('DOMContentLoaded', () => {
             jobtitle: 'Business & Partnerships Lead',
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598324020',
             time: '0:46 / 1:20'
         },
         {
@@ -1406,7 +1406,7 @@ document.addEventListener('DOMContentLoaded', () => {
             jobtitle: 'Community Manager & Clubs Host',
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598324020',
             time: '0:57 / 1:20'
         },
         {
@@ -1419,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
             jobtitle: 'Creative Producer & Curator',
             facebook: 'https://www.facebook.com/metaphora.geo',
             instagram: 'https://instagram.com',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598324020',
             time: '1:08 / 1:20'
         }
     ];
@@ -1663,7 +1663,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const twSocialWa = document.getElementById('tw-social-wa');
         if (twSocialWa) {
-            twSocialWa.href = current.whatsapp || 'https://wa.me/995599228228';
+            twSocialWa.href = current.whatsapp || 'https://wa.me/995598324020';
             twSocialWa.title = `${current.name} — WhatsApp`;
         }
 
