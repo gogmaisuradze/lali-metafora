@@ -3523,7 +3523,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show Typing indicator
             showTyping(true);
 
-            // Timeout controller (2.5s) to guarantee instant fallback
+            // Timeout controller (20s) — AI-აგენტს (Gemini + Google Doc) ~4-6წმ სჭირდება
             let answered = false;
             const controller = new AbortController();
             const timeoutId = setTimeout(() => {
@@ -3533,7 +3533,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showTyping(false);
                     appendMessage('bot', generateBotResponse(query));
                 }
-            }, 2500);
+            }, 20000);
 
             fetch(METAFORA_CHAT_WEBHOOK, {
                 method: 'POST',
