@@ -2169,32 +2169,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper: Telegram bot notifications
     async function sendTelegramBookingNotification(payload) {
-        const botToken = "8563426842:AAEuhg8EXmAV18NXtlAaiky0ZzWGvNXkJQU";
-        const chatId = "443575738";
-
-        const priceLine = payload.price ? `💰 *საფასური:* ${payload.price}\n` : '';
-        const text = `🏛️ *მეტაფორა — ახალი ჯავშანი & გადახდა!* 💳\n\n` +
-            `👤 *სტუმარი:* ${payload.name}\n` +
-            `📞 *ტელეფონი:* ${payload.phone}\n` +
-            `✨ *მიმართულება:* ${payload.service}\n` +
-            priceLine +
-            `📅 *თარიღი:* ${payload.date}\n` +
-            `🕒 *დრო:* ${payload.time}\n` +
-            `👥 *სტუმრები:* ${payload.guests}\n` +
-            `✅ *სტატუსი:* ${payload.payment_status || 'გადახდილია (დადასტურებული)'}`;
-
+        // დაცული n8n webhook → მეტაფორას Telegram ჯგუფი. ბოტის ტოკენი კოდში აღარ ინახება.
+        const serviceLine = (payload.service || '') +
+            ' · ' + (payload.payment_status || 'გადახდილი (დადასტურებული)') +
+            (payload.price ? ' · 💰 ' + payload.price : '');
         try {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            await fetch('https://meticulous-oyster.pikapod.net/webhook/metafora-booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-booking-secret': 'aeYMKQvGD2j-Sh_j-5aOJvTg6Kg' },
                 body: JSON.stringify({
-                    chat_id: chatId,
-                    text: text,
-                    parse_mode: "Markdown"
+                    service: serviceLine,
+                    date: payload.date,
+                    time: payload.time,
+                    name: payload.name,
+                    guests: payload.guests,
+                    phone: payload.phone
                 })
             });
         } catch (e) {
-            console.error("Telegram notification error:", e);
+            console.error("Booking notification error:", e);
         }
     }
 
