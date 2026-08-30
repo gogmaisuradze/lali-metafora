@@ -3592,7 +3592,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (q.includes('ლოკაცი') || q.includes('სად') || q.includes('მისამართ') || q.includes('კონტაქტ') || q.includes('ტელეფონ') || q.includes('ნომერ') || q.includes('location')) {
-                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, საქართველოში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>info@metafora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
+                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, საქართველოში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>club@metaphora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
             }
 
             if (q.includes('გალერე') || q.includes('ფოტო') || q.includes('gallery') || q.includes('სივრცე')) {
