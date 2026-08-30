@@ -3506,7 +3506,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function formatBotHtml(text) {
-            const esc = escapeHtml(String(text || ''));
+            let esc = escapeHtml(String(text || ''));
+            esc = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            esc = esc.replace(/(^|\n)\s*[\*\-]\s+/g, '$1• ');
+            esc = esc.replace(/(^|\n)#{1,6}\s*/g, '$1');
             return esc.split(/\n\s*\n/).map(p => '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
         }
 
