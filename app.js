@@ -4510,7 +4510,12 @@ document.addEventListener('DOMContentLoaded', () => {
         "ქეთი — ფსიქოკონსულტანტი, ტრენერი &amp; სერტიფიცირებული ქოუჩი": "Keti — Psychoconsultant, Trainer &amp; Certified Coach",
         "ქეთი — ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი": "Keti — Psychoconsultant, Trainer & Certified Coach",
         "კონფლიქტების ტრანსფორმაცია ზრდის რესურსად": "Transforming conflict into a growth resource",
+        "მეტაფორა - საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი": "METAPHORA - Edutainment Hub & Third Place",
         "მეტაფორა - Edutainment Hub & Third Place": "METAPHORA - Edutainment Hub & Third Place",
+        "✨ საგანმანათლებლო-შემეცნებითი ჰაბი &amp; მესამე ადგილი": "✨ Edutainment Hub &amp; Third Place",
+        "✨ საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი": "✨ Edutainment Hub & Third Place",
+        "საგანმანათლებლო-შემეცნებითი ჰაბი &amp; მესამე ადგილი": "Edutainment Hub &amp; Third Place",
+        "საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი": "Edutainment Hub & Third Place",
         "აკუსტიკური საღამოები &amp; პერფორმანსები": "Acoustic Evenings &amp; Performances",
         "იდეალური განტვირთვა დამღლელი დღის შემდეგ": "Perfect relaxation after a busy day",
         "ქეთი — ფსიქოკონსულტანტი &amp; EPC ქოუჩი": "Keti — Psychoconsultant &amp; Certified Coach",
@@ -5392,6 +5397,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const targetLangTitleMap = {
         EN: {
+            "მეტაფორა - საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი": "METAPHORA - Edutainment Hub & Third Place",
             "მეტაფორა - Edutainment Hub & Third Place": "METAPHORA - Edutainment Hub & Third Place",
             "გალერეა - მეტაფორა": "Gallery - METAPHORA",
             "ბლოგი - მეტაფორა": "Blog - METAPHORA",
@@ -5403,7 +5409,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "5. Clubs - მეტაფორა": "5. Clubs - METAPHORA"
         },
         KA: {
-            "METAPHORA - Edutainment Hub & Third Place": "მეტაფორა - Edutainment Hub & Third Place",
+            "METAPHORA - Edutainment Hub & Third Place": "მეტაფორა - საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი",
             "Gallery - METAPHORA": "გალერეა - მეტაფორა",
             "Blog - METAPHORA": "ბლოგი - მეტაფორა",
             "Services - METAPHORA": "სერვისები - მეტაფორა",
