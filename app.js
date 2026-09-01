@@ -73,7 +73,7 @@
             bandpass.Q.setValueAtTime(4.0, t);
 
             const noiseGain = ctx.createGain();
-            noiseGain.gain.setValueAtTime(0.42, t);
+            noiseGain.gain.setValueAtTime(0.08, t);
             noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.009);
 
             noiseSource.connect(bandpass);
@@ -89,7 +89,7 @@
             osc.frequency.setValueAtTime(lowFreqs[soundIdx % 3], t);
             osc.frequency.exponentialRampToValueAtTime(70, t + 0.014);
 
-            oscGain.gain.setValueAtTime(0.32, t);
+            oscGain.gain.setValueAtTime(0.06, t);
             oscGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.014);
 
             osc.connect(oscGain);
@@ -121,7 +121,7 @@
                 const source = ctx.createBufferSource();
                 source.buffer = audioBuffers[soundIdx];
                 const gainNode = ctx.createGain();
-                gainNode.gain.value = 0.45;
+                gainNode.gain.value = 0.09;
                 source.connect(gainNode);
                 gainNode.connect(ctx.destination);
                 source.start(0);
@@ -297,8 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let puffExpansion = 0;
     let autoTimer = null;
-    const stiffness = 0.024;
-    const damping = 0.88;
+    const stiffness = 0.018;
+    const damping = 0.90;
 
     const canvas = document.getElementById('dandelion-globe-canvas');
     const ctx = canvas ? canvas.getContext('2d') : null;
@@ -626,7 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderDandelionLoop(timestamp) {
             if (!entrancePortal || entrancePortal.style.display !== 'none') {
                 if (!isDraggingStage) {
-                    targetYaw += 0.0032; // Continuous smooth, elegant 3D ambient rotation that never freezes
+                    targetYaw += 0.0011; // Calm, gentle, slow, and elegant 3D ambient rotation
                 }
 
                 const forceYaw = (targetYaw - currentYaw) * stiffness;
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 puffExpansion *= 0.94;
 
-                const time = timestamp * 0.0012;
+                const time = timestamp * 0.0006;
                 const isMobile = window.innerWidth <= 768;
                 const scaleFactor = isMobile ? 0.78 : 1.0;
                 const svgCenter = 480;
