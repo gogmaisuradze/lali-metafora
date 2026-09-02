@@ -73,7 +73,7 @@
             bandpass.Q.setValueAtTime(4.0, t);
 
             const noiseGain = ctx.createGain();
-            noiseGain.gain.setValueAtTime(0.08, t);
+            noiseGain.gain.setValueAtTime(0.03, t);
             noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.009);
 
             noiseSource.connect(bandpass);
@@ -89,7 +89,7 @@
             osc.frequency.setValueAtTime(lowFreqs[soundIdx % 3], t);
             osc.frequency.exponentialRampToValueAtTime(70, t + 0.014);
 
-            oscGain.gain.setValueAtTime(0.06, t);
+            oscGain.gain.setValueAtTime(0.02, t);
             oscGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.014);
 
             osc.connect(oscGain);
@@ -121,7 +121,7 @@
                 const source = ctx.createBufferSource();
                 source.buffer = audioBuffers[soundIdx];
                 const gainNode = ctx.createGain();
-                gainNode.gain.value = 0.09;
+                gainNode.gain.value = 0.035;
                 source.connect(gainNode);
                 gainNode.connect(ctx.destination);
                 source.start(0);
