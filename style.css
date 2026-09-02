@@ -5691,6 +5691,12 @@ body.metabot-open .metabot-launcher-btn {
     gap: 28px;
 }
 
+.single-service-grid-three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
 .service-feature-box {
     background: #ffffff;
     border: 1.5px solid rgba(1, 97, 102, 0.14);
@@ -5823,7 +5829,8 @@ body.metabot-open .metabot-launcher-btn {
         gap: 32px;
         padding: 36px 28px;
     }
-    .single-service-grid-four {
+    .single-service-grid-four,
+    .single-service-grid-three {
         grid-template-columns: 1fr;
         gap: 24px;
     }
@@ -5873,7 +5880,8 @@ body.metabot-open .metabot-launcher-btn {
     .single-service-video-frame {
         max-height: 240px;
     }
-    .single-service-grid-four {
+    .single-service-grid-four,
+    .single-service-grid-three {
         grid-template-columns: 1fr !important;
         gap: 18px !important;
     }
