@@ -1977,7 +1977,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let manifestoAudio = null;
     try {
         if (typeof Audio !== 'undefined') {
-            manifestoAudio = new Audio('metafora.mp3');
+            manifestoAudio = new Audio('metafora_hub.mp3?v=20260902_v2');
             manifestoAudio.preload = 'metadata';
         }
     } catch (e) {
