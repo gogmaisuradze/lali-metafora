@@ -1488,19 +1488,6 @@ document.addEventListener('DOMContentLoaded', () => {
             instagram: 'https://www.facebook.com/keti.mirianasvili',
             whatsapp: 'https://wa.me/995599228228',
             time: '1:08 / 1:20'
-        },
-        {
-            image: 'გუნდი/8.jpg',
-            audio: 'galaktion.mp3',
-            galaktionStart: 0.0,
-            text: 'პერსონალური ქოუჩინგი და პოზიტიური ფსიქოკონსულტირება ქმნის უსაფრთხო გარემოს თვითგამორკვევისთვის, შინაგანი რესურსების გააქტიურებისა და პიროვნული ზრდისთვის.',
-            name: 'ია',
-            fullname: 'ია ქარდავა',
-            jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება',
-            facebook: 'https://www.facebook.com/ia.kardava.3',
-            instagram: 'https://www.instagram.com/metaphora.ge/',
-            whatsapp: 'https://wa.me/995599228228',
-            time: '0:00 / 1:20'
         }
     ];
 
