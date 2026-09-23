@@ -15,3 +15,4 @@ test_*.jpg
 test_*.png
 test_*.webp
 video servisebi/
+node_modules/

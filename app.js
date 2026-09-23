@@ -1001,7 +1001,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('initial-lock');
         document.documentElement.classList.remove('direct-main-mode');
 
-        if (window.location.hash !== '#hero') {
+        if (window.location.hash.toLowerCase().includes('register')) {
+            setTimeout(() => {
+                if (typeof window.openQuickRegisterModal === 'function') {
+                    window.openQuickRegisterModal();
+                }
+            }, 60);
+        } else if (window.location.hash !== '#hero') {
             setTimeout(() => {
                 scrollToAnchor(window.location.hash);
             }, 60);
