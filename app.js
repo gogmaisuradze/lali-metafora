@@ -2758,58 +2758,54 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        let viewDate = new Date(2026, 7, 1); // August 1, 2026
-        let selectedDate = new Date(2026, 7, 28);
-        let selectedTime = '14:30';
+        let viewDate = new Date(2026, 9, 1); // August 1, 2026
+        let selectedDate = new Date(2026, 9, 12);
+        let selectedTime = '18:30';
 
         const ALL_TIME_SLOTS = ['10:00', '11:30', '13:00', '14:30', '16:00', '17:30', '19:00', '20:00', '21:00', '22:00'];
 
         const SCHEDULED_EVENTS = {
-            '2026-08-28': [
-                { titleKA: '☕ Coworking & Networking ლანჩი', titleEN: '☕ Coworking & Networking Lunch', time: '14:30', badgeKA: '28 აგვ | 14:30', badgeEN: 'Aug 28 | 14:30' },
-                { titleKA: '🎭 Playback იმპროვიზაციის საღამო', titleEN: '🎭 Playback Improvisation Night', time: '19:00', badgeKA: '28 აგვ | 19:00', badgeEN: 'Aug 28 | 19:00' }
+            '2026-10-12': [
+                { titleKA: '🎮 თამაშის არქიტექტორი - საბაზისო კურსი', titleEN: '🎮 Game Architect - Basic Course', time: '18:30', badgeKA: '12 ოქტ | 18:30', badgeEN: 'Oct 12 | 18:30' }
             ],
-            '2026-08-29': [
-                { titleKA: '🧠 Masterclass: ლიდერობის ქოუჩინგი', titleEN: '🧠 Masterclass: Leadership Coaching', time: '14:30', badgeKA: '29 აგვ | 14:30', badgeEN: 'Aug 29 | 14:30' },
-                { titleKA: '🎲 Board Games Night & Bar', titleEN: '🎲 Board Games Night & Bar', time: '20:00', badgeKA: '29 აგვ | 20:00', badgeEN: 'Aug 29 | 20:00' }
+            '2026-10-15': [
+                { titleKA: '🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი', titleEN: '🕹️ Game Architect - Advanced Course', time: '19:00', badgeKA: '15 ოქტ | 19:00', badgeEN: 'Oct 15 | 19:00' }
             ],
-            '2026-08-30': [
-                { titleKA: '🌿 პოზიტიური ფსიქოლოგიის ვორქშოფი', titleEN: '🌿 Positive Psychology Workshop', time: '18:30', badgeKA: '30 აგვ | 18:30', badgeEN: 'Aug 30 | 18:30' }
+            '2026-10-18': [
+                { titleKA: '🌿 პროგრამა არიტე - პიროვნული განვითარება', titleEN: '🌿 Program Arete - Personal Development', time: '18:00', badgeKA: '18 ოქტ | 18:00', badgeEN: 'Oct 18 | 18:00' }
             ],
-            '2026-09-02': [
-                { titleKA: '🎲 Board Games Night & Cocktail Hour', titleEN: '🎲 Board Games Night & Cocktail Hour', time: '20:00', badgeKA: '02 სექ | 20:00', badgeEN: 'Sep 02 | 20:00' }
+            '2026-10-20': [
+                { titleKA: '❤️ სიყვარულის ხელოვნება & 5 ენა', titleEN: '❤️ Art of Loving & 5 Languages', time: '19:30', badgeKA: '20 ოქტ | 19:30', badgeEN: 'Oct 20 | 19:30' }
             ],
-            '2026-09-05': [
-                { titleKA: '🎨 არტ-თერაპია & თვითგამოხატვა', titleEN: '🎨 Art Therapy & Self-Expression', time: '14:00', badgeKA: '05 სექ | 14:00', badgeEN: 'Sep 05 | 14:00' },
-                { titleKA: '💡 Think Tank & ფილოსოფიის საღამო', titleEN: '💡 Think Tank & Philosophy Night', time: '19:30', badgeKA: '05 სექ | 19:30', badgeEN: 'Sep 05 | 19:30' }
+            '2026-10-22': [
+                { titleKA: '🎓 ტრენერობის ხელოვნება - ტრენერის გზა', titleEN: "🎓 Art of Training - Trainer's Path", time: '18:30', badgeKA: '22 ოქტ | 18:30', badgeEN: 'Oct 22 | 18:30' }
             ],
-            '2026-09-08': [
-                { titleKA: '🎨 არტ-თერაპია & თვითგამოხატვა', titleEN: '🎨 Art Therapy & Self-Expression', time: '18:00', badgeKA: '08 სექ | 18:00', badgeEN: 'Sep 08 | 18:00' }
+            '2026-10-24': [
+                { titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', badgeKA: '24 ოქტ | 19:00', badgeEN: 'Oct 24 | 19:00' }
             ],
-            '2026-09-12': [
-                { titleKA: '☕ Coworking & Mastermind საუზმე', titleEN: '☕ Coworking & Mastermind Breakfast', time: '10:30', badgeKA: '12 სექ | 10:30', badgeEN: 'Sep 12 | 10:30' },
-                { titleKA: '🎭 Playback პერფორმანსი', titleEN: '🎭 Playback Performance', time: '19:00', badgeKA: '12 სექ | 19:00', badgeEN: 'Sep 12 | 19:00' }
+            '2026-10-26': [
+                { titleKA: '👥 ქოუჩინგი HR-ებისთვის', titleEN: '👥 Coaching for HR Leaders', time: '18:30', badgeKA: '26 ოქტ | 18:30', badgeEN: 'Oct 26 | 18:30' }
             ],
-            '2026-09-15': [
-                { titleKA: '📚 წიგნის კლუბი & ღია დისკუსია', titleEN: '📚 Book Club & Open Discussion', time: '19:00', badgeKA: '15 სექ | 19:00', badgeEN: 'Sep 15 | 19:00' }
+            '2026-10-28': [
+                { titleKA: '💔 რატომ გვტკივა სიყვარული', titleEN: '💔 Why Love Hurts', time: '19:30', badgeKA: '28 ოქტ | 19:30', badgeEN: 'Oct 28 | 19:30' }
             ],
-            '2026-09-19': [
-                { titleKA: '🧠 პიროვნული განვითარების სემინარი', titleEN: '🧠 Personal Development Seminar', time: '16:00', badgeKA: '19 სექ | 16:00', badgeEN: 'Sep 19 | 16:00' },
-                { titleKA: '🎶 Playback & ცოცხალი მუსიკა', titleEN: '🎶 Playback & Live Music', time: '20:00', badgeKA: '19 სექ | 20:00', badgeEN: 'Sep 19 | 20:00' }
+            '2026-10-30': [
+                { titleKA: '📦 რა შევუკვეთე და რა ჩამომივიდა', titleEN: '📦 What I Ordered vs Arrived', time: '19:00', badgeKA: '30 ოქტ | 19:00', badgeEN: 'Oct 30 | 19:00' }
             ],
-            '2026-09-25': [
-                { titleKA: '✨ აკუსტიკური საღამო & კომუნა', titleEN: '✨ Acoustic Evening & Community', time: '19:30', badgeKA: '25 სექ | 19:30', badgeEN: 'Sep 25 | 19:30' }
+            '2026-11-02': [
+                { titleKA: '🌌 სისტემური განლაგება', titleEN: '🌌 Systemic Constellations', time: '18:00', badgeKA: '02 ნოე | 18:00', badgeEN: 'Nov 02 | 18:00' }
             ],
-            '2026-09-26': [
-                { titleKA: '🧠 Masterclass: ლიდერობის ქოუჩინგი', titleEN: '🧠 Masterclass: Leadership Coaching', time: '16:00', badgeKA: '26 სექ | 16:00', badgeEN: 'Sep 26 | 16:00' },
-                { titleKA: '🍷 Lounge Cocktail Night', titleEN: '🍷 Lounge Cocktail Night', time: '21:00', badgeKA: '26 სექ | 21:00', badgeEN: 'Sep 26 | 21:00' }
+            '2026-11-04': [
+                { titleKA: '💰 ფული, თუ პასუხისმგებლობა', titleEN: '💰 Money or Responsibility', time: '19:00', badgeKA: '04 ნოე | 19:00', badgeEN: 'Nov 04 | 19:00' }
             ],
-            '2026-10-02': [
-                { titleKA: '🎭 Playback თეატრის პრემიერა', titleEN: '🎭 Playback Theatre Premiere', time: '19:30', badgeKA: '02 ოქტ | 19:30', badgeEN: 'Oct 02 | 19:30' }
+            '2026-11-06': [
+                { titleKA: '🌙 შეხვედრა შეჰერეზადასთან', titleEN: '🌙 Meeting with Scheherazade', time: '19:30', badgeKA: '06 ნოე | 19:30', badgeEN: 'Nov 06 | 19:30' }
             ],
-            '2026-10-09': [
-                { titleKA: '☕ Creative Coworking Brunch', titleEN: '☕ Creative Coworking Brunch', time: '13:00', badgeKA: '09 ოქტ | 13:00', badgeEN: 'Oct 09 | 13:00' },
-                { titleKA: '🎨 არტ-თერაპიის ინტენსივი', titleEN: '🎨 Art Therapy Intensive Workshop', time: '18:00', badgeKA: '09 ოქტ | 18:00', badgeEN: 'Oct 09 | 18:00' }
+            '2026-11-08': [
+                { titleKA: '💬 მოდი ვილაპარაკოთ', titleEN: "💬 Let's Talk Dialogue", time: '19:00', badgeKA: '08 ნოე | 19:00', badgeEN: 'Nov 08 | 19:00' }
+            ],
+            '2026-11-10': [
+                { titleKA: '🧠 ადამიანის ფსიქოლოგია ლიდერობაში', titleEN: '🧠 Human Psychology in Leadership', time: '18:30', badgeKA: '10 ნოე | 18:30', badgeEN: 'Nov 10 | 18:30' }
             ]
         };
 
@@ -5279,13 +5275,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'ია', jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება', text: 'პერსონალური ქოუჩინგი და პოზიტიური ფსიქოკონსულტირება ქმნის უსაფრთხო გარემოს თვითგამორკვევისთვის, შინაგანი რესურსების გააქტიურებისა და პიროვნული ზრდისთვის.' }
             ],
             afisha: [
-                { title: "🎭 Playback იმპროვიზაციის საღამო", testimonial: "თეატრალური პერფორმანსი, სადაც მაყურებლის რეალური ისტორიები და ემოციები სცენაზე ცოცხლდება.", by: "28 აგვ | 19:00 • Playback დასი" },
-                { title: "🌿 პოზიტიური ფსიქოლოგიის ვორქშოფი", testimonial: "სტრესის მართვის, ემოციური ბალანსისა და თვითშემეცნების პრაქტიკული სემინარი ფსიქოთერაპევტთან.", by: "30 აგვ | 18:30 • ანა კაპანაძე" },
-                { title: "🎲 Board Games Night & Cocktail Hour", testimonial: "სამაგიდო თამაშების ჩემპიონატი, საავტორო კოქტეილები, ახალი ნაცნობობა და მხიარული ატმოსფერო.", by: "02 სექ | 20:00 • მეტაფორა Bar" },
-                { title: "💡 Think Tank & ფილოსოფიის საღამო", testimonial: "დისკუსია თანამედროვე კულტურასა და „მესამე ადგილის“ ფენომენზე თანამოაზრეთა წრეში.", by: "05 სექ | 19:30 • ლევან ჯაფარიძე" },
-                { title: "🎨 არტ-თერაპია & თვითგამოხატვა", testimonial: "შემოქმედებითი ხატვისა და ემოციური განტვირთვის სესია მყუდრო ლაუნჯში.", by: "08 სექ | 18:00 • სალომე მგელაძე" },
-                { title: "☕ Coworking & Mastermind საუზმე", testimonial: "დილის ყავა, პროდუქტიული ნეთვორქინგი და გამოცდილების გაზიარება სტარტაპერებთან.", by: "12 სექ | 10:30 • გიორგი გელოვანი" },
-                { title: "📚 წიგნის კლუბი & ღია დისკუსია", testimonial: "თვიური წიგნის განხილვა, საინტერესო დებატები და ცხელი ჩაის საღამო.", by: "15 სექ | 19:00 • მეტაფორა Club" }
+                { title: "🎮 თამაშის არქიტექტორი - საბაზისო კურსი", testimonial: "ტრანსფორმაციული და ბიზნეს თამაშების შექმნის, დიზაინისა და მექანიკის პრაქტიკული კურსი.", by: "12 ოქტ | 18:30 • ქეთი ჟვანია-ტაისონი" },
+                { title: "🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი", testimonial: "სიღრმისეული ფასილიტაცია, ფსიქოლოგიური დინამიკები და საავტორო თამაშის გაშვება.", by: "15 ოქტ | 19:00 • ქეთი ჟვანია-ტაისონი" },
+                { title: "🌿 პროგრამა არიტე - პიროვნული განვითარება", testimonial: "4 მოდული: ემოციების სამყარო, წარმატებული ადამიანი, მე და სხვები, ძნელი თამაშები.", by: "18 ოქტ | 18:00 • ქეთი ჟვანია-ტაისონი" },
+                { title: "❤️ სიყვარულის ხელოვნება & სიყვარულის 5 ენა", testimonial: "ურთიერთობების ფსიქოლოგია, გარი ჩაპმანის მოდელი და ემოციური სიახლოვის ხელოვნება.", by: "20 ოქტ | 19:30 • ქეთი ჟვანია-ტაისონი" },
+                { title: "🎓 ტრენერობის ხელოვნება - ტრენერის გზა", testimonial: "ტრენერებისა და ფასილიტატორების პროფესიული განვითარების მოდულური ეკოსისტემა.", by: "22 ოქტ | 18:30 • ქეთი ჟვანია-ტაისონი" },
+                { title: "💼 ქოუჩინგი არაქოუჩებისთვის", testimonial: "ქოუჩინგური აზროვნება და ინსტრუმენტები ყოველდღიური მართვისა და კომუნიკაციისთვის.", by: "24 ოქტ | 19:00 • მარიკა ხალიანი" },
+                { title: "👥 ქოუჩინგი HR-ებისთვის & ლიდერებისთვის", testimonial: "ტალანტების განვითარება, მოტივაცია და გუნდური ეფექტურობის ქოუჩინგური მიდგომები.", by: "26 ოქტ | 18:30 • მარიკა ხალიანი" },
+                { title: "💔 რატომ გვტკივა სიყვარული & პარტნიორები", testimonial: "მიჯაჭვულობის სტილები, ბავშვობის ტრავმები და ურთიერთობების ფარული დინამიკა.", by: "28 ოქტ | 19:30 • მარიკა ხალიანი" },
+                { title: "📦 რა შევუკვეთე და რა ჩამომივიდა", testimonial: "მოლოდინები, იმედგაცრუება, ემოციური ტრიგერები და რეალობასთან შეხვედრა.", by: "30 ოქტ | 19:00 • მარიკა ხალიანი" },
+                { title: "🌌 სისტემური განლაგება - ვორქშოფი", testimonial: "ფარული ოჯახური დინამიკების, კარიერული და პირადი ბლოკების სიღრმისეული ხედვა.", by: "02 ნოე | 18:00 • მარიკა ხალიანი" },
+                { title: "💰 ფული, თუ პასუხისმგებლობა", testimonial: "ფინანსური ბლოკები, შინაგანი წინააღმდეგობა და ფულთან ჯანსაღი ურთიერთობა.", by: "04 ნოე | 19:00 • მარიკა ხალიანი" },
+                { title: "🌙 შეხვედრა შეჰერეზადასთან", testimonial: "იგავების 15 თერაპიული საიდუმლო, აღმოსავლური ჩაის რიტუალი და ფსიქოთერაპიული მოგზაურობა.", by: "06 ნოე | 19:30 • ლალი ბადრიძე" },
+                { title: "💬 მოდი ვილაპარაკოთ - ექსპერიმენტული დიალოგი", testimonial: "უნიკალური სალონური ფორმატი შინაგანი პასუხებისა და გულწრფელი საუბრებისთვის.", by: "08 ნოე | 19:00 • ლალი ბადრიძე" },
+                { title: "🧠 ადამიანის ფსიქოლოგია ლიდერობაში", testimonial: "გუნდის მართვა, არაცნობიერი დინამიკები და ფსიქოლოგიური ინსტრუმენტები.", by: "10 ნოე | 18:30 • ლალი ბადრიძე" }
             ],
             botWelcome: "<p>გამარჯობა! მე ვარ <strong>მეტაბოტი</strong> ✨ - „მეტაფორას“ ვირტუალური გიდი.</p><p>რით შემიძლია დაგეხმაროთ? მკითხეთ ჩვენს <strong>სერვისებზე</strong>, <strong>სივრცეებზე</strong>, <strong>ღონისძიებებზე</strong> ან <strong>ჯავშანზე</strong>!</p>"
         },
@@ -5311,13 +5314,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'Ia', jobtitle: 'Personal Coaching, Trainings & Psychoconsulting', text: 'Personal coaching and positive psychoconsulting create a safe environment for self-discovery, unlocking inner resources, and personal growth.' }
             ],
             afisha: [
-                { title: "🎭 Playback Improvisation Night", testimonial: "A theatrical performance where audience real stories and emotions come alive on stage.", by: "Aug 28 | 19:00 • Playback Troupe" },
-                { title: "🌿 Positive Psychology Workshop", testimonial: "A practical seminar on stress management, emotional balance and self-discovery.", by: "Aug 30 | 18:30 • Ana Kapanadze" },
-                { title: "🎲 Board Games Night & Cocktail Hour", testimonial: "Board game tournament, signature cocktails & mocktails, and inspiring new connections.", by: "Sep 02 | 20:00 • Metaphora Bar" },
-                { title: "💡 Think Tank & Philosophy Salon", testimonial: "Engaging discussions on modern culture and the 'Third Place' phenomenon with peers.", by: "Sep 05 | 19:30 • Levan Japaridze" },
-                { title: "🎨 Art Therapy & Creative Expression", testimonial: "A soothing session of creative painting and emotional decompression in a cozy lounge.", by: "Sep 08 | 18:00 • Salome Mgeladze" },
-                { title: "☕ Coworking & Mastermind Breakfast", testimonial: "Morning coffee, productive networking, and experience sharing with creators and founders.", by: "Sep 12 | 10:30 • Giorgi Gelovani" },
-                { title: "📚 Book Club & Open Dialogue", testimonial: "Monthly book discussion, lively debates, and a warm tea evening in good company.", by: "Sep 15 | 19:00 • Metaphora Club" }
+                { title: "🎮 Game Architect - Basic Course", testimonial: "Practical course on design and mechanics of transformative & business games.", by: "Oct 12 | 18:30 • Keti Zhvania-Tyson" },
+                { title: "🕹️ Game Architect - Advanced Course", testimonial: "Advanced facilitation, deep psychological dynamics, and launching your own game.", by: "Oct 15 | 19:00 • Keti Zhvania-Tyson" },
+                { title: "🌿 Program Arete - Personal Development", testimonial: "4 modules: World of Emotions, Successful Individual, Me & Others, Difficult Games.", by: "Oct 18 | 18:00 • Keti Zhvania-Tyson" },
+                { title: "❤️ Art of Loving & 5 Love Languages", testimonial: "Relationship psychology, Gary Chapman’s model, and emotional closeness.", by: "Oct 20 | 19:30 • Keti Zhvania-Tyson" },
+                { title: "🎓 The Art of Training - Trainer's Path", testimonial: "Modular ecosystem for professional development of trainers and facilitators.", by: "Oct 22 | 18:30 • Keti Zhvania-Tyson" },
+                { title: "💼 Coaching for Non-Coaches", testimonial: "Coaching mindset and practical tools for day-to-day management and communication.", by: "Oct 24 | 19:00 • Marika Khaliani" },
+                { title: "👥 Coaching for HR & Business Leaders", testimonial: "Talent development, team motivation, and coaching leadership approaches.", by: "Oct 26 | 18:30 • Marika Khaliani" },
+                { title: "💔 Why Love Hurts & Repeating Patterns", testimonial: "Attachment styles, childhood blueprints, and hidden relationship dynamics.", by: "Oct 28 | 19:30 • Marika Khaliani" },
+                { title: "📦 What I Ordered vs What Arrived", testimonial: "Expectations, disappointment, emotional triggers, and meeting reality.", by: "Oct 30 | 19:00 • Marika Khaliani" },
+                { title: "🌌 Systemic Constellations - Workshop", testimonial: "Deep insights into hidden family, career, and personal dynamics.", by: "Nov 02 | 18:00 • Marika Khaliani" },
+                { title: "💰 Money or Responsibility", testimonial: "Financial blocks, unconscious resistance, and a healthy relationship with money.", by: "Nov 04 | 19:00 • Marika Khaliani" },
+                { title: "🌙 Meeting with Scheherazade", testimonial: "15 therapeutic secrets of parables, oriental tea ritual & psychotherapeutic journey.", by: "Nov 06 | 19:30 • Lali Badridze" },
+                { title: "💬 Let’s Talk - Experimental Dialogue", testimonial: "Unique salon dialogue format for authentic answers and meaningful conversations.", by: "Nov 08 | 19:00 • Lali Badridze" },
+                { title: "🧠 Human Psychology in Leadership", testimonial: "Team management, unconscious dynamics, and psychological leadership tools.", by: "Nov 10 | 18:30 • Lali Badridze" }
             ],
             botWelcome: "<p>Hello! I am <strong>MetaBot</strong> ✨ - Metaphora’s virtual AI guide.</p><p>How can I help you today? Ask me about our <strong>services</strong>, <strong>spaces</strong>, <strong>events</strong>, or <strong>booking</strong>!</p>"
         }
