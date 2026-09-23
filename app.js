@@ -1467,7 +1467,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'გუნდი/6.jpg',
             audio: 'galaktion.mp3',
             galaktionStart: 57.5,
-            text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.',
+            text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ - ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.',
             name: 'თეო',
             fullname: 'თეო ფერაძე',
             jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება',
@@ -1719,19 +1719,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const twSocialFb = document.getElementById('tw-social-fb');
         if (twSocialFb) {
             twSocialFb.href = current.facebook || 'https://www.facebook.com/metaphora.geo';
-            twSocialFb.title = `${current.name} — Facebook`;
+            twSocialFb.title = `${current.name} - Facebook`;
         }
 
         const twSocialInsta = document.getElementById('tw-social-insta');
         if (twSocialInsta) {
             twSocialInsta.href = current.instagram || 'https://www.instagram.com/metaphora.ge/';
-            twSocialInsta.title = `${current.name} — Instagram`;
+            twSocialInsta.title = `${current.name} - Instagram`;
         }
 
         const twSocialWa = document.getElementById('tw-social-wa');
         if (twSocialWa) {
             twSocialWa.href = current.whatsapp || 'https://wa.me/995599228228';
-            twSocialWa.title = `${current.name} — WhatsApp`;
+            twSocialWa.title = `${current.name} - WhatsApp`;
         }
 
         // On team member switch: typewriter typing sound plays during typing!
@@ -1888,8 +1888,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // About Us Manifesto Live Typewriter Logic
     const manifestoTexts = {
-        KA: "მეტაფორა – შინაგანი სამყაროსა და შესაძლებლობების შეხვედრის ადგილი. „მეტაფორას“ არსი მის მრავალფუნქციურობასა და სინერგიაშია. ეს არის შეხვედრის, გარდაქმნისა და პოტენციალის გაცნობიერების ცოცხალი ტერიტორია – კავშირი ცნობიერებასა და არაცნობიერს, იდეასა და ქმედებას, პიროვნებასა და სამყაროს შორის. შენი განვითარების, ახალი კონტაქტებისა და შთაგონებისთვის აქ ხუთი ძირითადი მიმართულება ერთიანდება: Personal Development, Business, Think Tank, Art და Clubs.",
-        EN: "Metaphora — Where the inner world meets boundless potential. The essence of “Metaphora” lies in its multifunctionality and synergy. It is a vibrant territory for connection, transformation, and self-realization — bridging conscious and subconscious, idea and action, the individual and the world. For your personal growth, meaningful connections, and inspiration, five core pillars unite here: Personal Development, Business, Think Tank, Art, and Clubs."
+        KA: "მეტაფორა - შინაგანი სამყაროსა და შესაძლებლობების შეხვედრის ადგილი. „მეტაფორას“ არსი მის მრავალფუნქციურობასა და სინერგიაშია. ეს არის შეხვედრის, გარდაქმნისა და პოტენციალის გაცნობიერების ცოცხალი ტერიტორია - კავშირი ცნობიერებასა და არაცნობიერს, იდეასა და ქმედებას, პიროვნებასა და სამყაროს შორის. შენი განვითარების, ახალი კონტაქტებისა და შთაგონებისთვის აქ ხუთი ძირითადი მიმართულება ერთიანდება: Personal Development, Business, Think Tank, Art და Clubs.",
+        EN: "Metaphora - Where the inner world meets boundless potential. The essence of “Metaphora” lies in its multifunctionality and synergy. It is a vibrant territory for connection, transformation, and self-realization - bridging conscious and subconscious, idea and action, the individual and the world. For your personal growth, meaningful connections, and inspiration, five core pillars unite here: Personal Development, Business, Think Tank, Art, and Clubs."
     };
 
     function getManifestoFullText() {
@@ -1930,7 +1930,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prevChar = currentFullText.charAt(charIndex - 1);
                 let speed = 20;
                 if (prevChar === '.' || prevChar === '!' || prevChar === '?') speed = 120;
-                else if (prevChar === '—' || prevChar === ',') speed = 55;
+                else if (prevChar === '-' || prevChar === ',') speed = 55;
 
                 manifestoTypeTimer = setTimeout(typeNextChar, speed);
             } else {
@@ -2381,7 +2381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (bookingPaymentPurpose) {
-            bookingPaymentPurpose.innerHTML = `მეტაფორას ჯავშანი — <strong>${payload.name} (${payload.service})</strong>`;
+            bookingPaymentPurpose.innerHTML = `მეტაფორას ჯავშანი - <strong>${payload.name} (${payload.service})</strong>`;
         }
 
         const priceQuery = payload.price ? `&price=${encodeURIComponent(payload.price)}` : '';
@@ -2657,7 +2657,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: name,
             phone: 'N/A (Mobile QR Scan)',
             date: date,
-            time: '19:30 — 22:00',
+            time: '19:30 - 22:00',
             guests: '2 ადამიანი',
             service: service,
             price: price
@@ -3510,7 +3510,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show Typing indicator
             showTyping(true);
 
-            // Timeout controller (20s) — AI-აგენტს (Gemini + Google Doc) ~4-6წმ სჭირდება
+            // Timeout controller (20s) - AI-აგენტს (Gemini + Google Doc) ~4-6წმ სჭირდება
             let answered = false;
             const controller = new AbortController();
             const timeoutId = setTimeout(() => {
@@ -3558,17 +3558,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const q = input.toLowerCase();
 
             if (q.includes('რა არის') || q.includes('მეტაფორა') || q.includes('იდეა') || q.includes('კონცეფცია') || q.includes('about') || q.includes('მესამე ადგილი') || q.includes('third place')) {
-                return `<p>✨ <strong>მეტაფორა</strong> არის <em>Edutainment Hub &amp; Third Place</em> — მესამე ადგილი სახლსა და სამსახურს მიღმა!</p><p>ეს არის უნიკალური სივრცე თბილისში, რომელიც აერთიანებს პიროვნულ განვითარებას, ბიზნეს-ნეთვორქინგს, სალონურ დისკუსიებს (Think Tank), Playback თეატრსა და თემატურ კლუბებს.</p>`;
+                return `<p>✨ <strong>მეტაფორა</strong> არის <em>Edutainment Hub &amp; Third Place</em> - მესამე ადგილი სახლსა და სამსახურს მიღმა!</p><p>ეს არის უნიკალური სივრცე თბილისში, რომელიც აერთიანებს პიროვნულ განვითარებას, ბიზნეს-ნეთვორქინგს, სალონურ დისკუსიებს (Think Tank), Playback თეატრსა და თემატურ კლუბებს.</p>`;
             }
 
             if (q.includes('სერვის') || q.includes('მიმართულებ') || q.includes('რას გვთავაზობთ') || q.includes('service') || q.includes('ფასი') || q.includes('რა გაქვთ')) {
                 return `<p>🌱 <strong>მეტაფორას 5 ინდივიდუალური მიმართულება:</strong></p>
                 <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px;">
-                    <li><a href="service-personal-development.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🌱 1. Personal Development</a> — ფსიქოთერაპია &amp; ბალანსი</li>
-                    <li><a href="service-business.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">💼 2. Business</a> — B2B &amp; Mastermind შეხვედრები</li>
-                    <li><a href="service-think-tank.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🧠 3. Think Tank</a> — სალონური დისკუსიები</li>
-                    <li><a href="service-art.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🎨 4. Art</a> — Playback თეატრი &amp; არტ-თერაპია</li>
-                    <li><a href="service-clubs.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🏛️ 5. Clubs</a> — მესამე სივრცე &amp; სამაგიდო თამაშები</li>
+                    <li><a href="service-personal-development.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🌱 1. Personal Development</a> - ფსიქოთერაპია &amp; ბალანსი</li>
+                    <li><a href="service-business.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">💼 2. Business</a> - B2B &amp; Mastermind შეხვედრები</li>
+                    <li><a href="service-think-tank.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🧠 3. Think Tank</a> - სალონური დისკუსიები</li>
+                    <li><a href="service-art.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🎨 4. Art</a> - Playback თეატრი &amp; არტ-თერაპია</li>
+                    <li><a href="service-clubs.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🏛️ 5. Clubs</a> - მესამე სივრცე &amp; სამაგიდო თამაშები</li>
                 </ul>
                 <p style="margin-top: 8px;">👉 დააჭირეთ სასურველ სერვისს მის ინდივიდუალურ გვერდზე გადასასვლელად!</p>`;
             }
@@ -3870,18 +3870,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: '2026 წლის აგვისტო',
                 html: `
                     <p>თანამედროვე ურბანულ ცხოვრებაში ადამიანების უმრავლესობის ყოველდღიურობა ორ ძირითად წერტილს შორის მოძრაობით შემოიფარგლება: <strong>სახლი</strong> (პირველი ადგილი) და <strong>სამსახური</strong> (მეორე ადგილი).</p>
-                    <p>1989 წელს ცნობილმა ამერიკელმა ურბან-სოციოლოგმა <strong>რეი ოლდენბურგმა</strong> შემოიტანა რევოლუციური კონცეფცია — <em>„მესამე ადგილი“ (The Third Place)</em>. ეს არის სივრცე, სადაც ადამიანი არ არის შებოჭილი არც ოჯახური ვალდებულებებით და არც პროფესიული იერარქიით.</p>
+                    <p>1989 წელს ცნობილმა ამერიკელმა ურბან-სოციოლოგმა <strong>რეი ოლდენბურგმა</strong> შემოიტანა რევოლუციური კონცეფცია - <em>„მესამე ადგილი“ (The Third Place)</em>. ეს არის სივრცე, სადაც ადამიანი არ არის შებოჭილი არც ოჯახური ვალდებულებებით და არც პროფესიული იერარქიით.</p>
                     <blockquote>
                         „მესამე ადგილი არის საზოგადოების სულიერი წამყვანი. იქ, სადაც ადამიანები თანასწორად საუბრობენ, იბადება ნამდვილი კავშირები და შინაგანი თავისუფლება.“
                     </blockquote>
                     <h3>რატომ არის მეტაფორა შენი მესამე ადგილი?</h3>
-                    <p>„მეტაფორა“ შეიქმნა სწორედ ამ იდეის გარშემო — გავხდეთ შენი მესამე ადგილი თბილისში. სივრცე, სადაც შეგიძლია მოხვიდე, დალიო ყავა, იკითხო წიგნი, ჩაერთო სალონურ დისკუსიაში ან უბრალოდ მოუსმინო Playback თეატრის იმპროვიზაციას.</p>
+                    <p>„მეტაფორა“ შეიქმნა სწორედ ამ იდეის გარშემო - გავხდეთ შენი მესამე ადგილი თბილისში. სივრცე, სადაც შეგიძლია მოხვიდე, დალიო ყავა, იკითხო წიგნი, ჩაერთო სალონურ დისკუსიაში ან უბრალოდ მოუსმინო Playback თეატრის იმპროვიზაციას.</p>
                     <div class="article-takeaway-box">
                         <h4>✨ მესამე ადგილის 4 მთავარი ნიშანი:</h4>
                         <ul>
                             <li><strong>ნეიტრალური ტერიტორია:</strong> არანაირი ვალდებულება ან ფორმალური წესები;</li>
                             <li><strong>თანასწორობა:</strong> სოციალური სტატუსი კარს მიღმა რჩება;</li>
-                            <li><strong>მთავარი აქტივობა — ცოცხალი საუბარი:</strong> გულწრფელი და შინაარსიანი დიალოგი;</li>
+                            <li><strong>მთავარი აქტივობა - ცოცხალი საუბარი:</strong> გულწრფელი და შინაარსიანი დიალოგი;</li>
                             <li><strong>შინაური გარემო:</strong> განცდა, რომ ყოველთვის გელიან.</li>
                         </ul>
                     </div>
@@ -3896,12 +3896,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: 'August 2026',
                 html: `
                     <p>In modern urban life, most people's daily routine oscillates between two primary anchors: <strong>Home</strong> (the First Place) and <strong>Work</strong> (the Second Place).</p>
-                    <p>In 1989, renowned American urban sociologist <strong>Ray Oldenburg</strong> introduced a revolutionary concept — <em>"The Third Place"</em>. This is a public anchor where a person is unbound by household duties or workplace hierarchies.</p>
+                    <p>In 1989, renowned American urban sociologist <strong>Ray Oldenburg</strong> introduced a revolutionary concept - <em>"The Third Place"</em>. This is a public anchor where a person is unbound by household duties or workplace hierarchies.</p>
                     <blockquote>
                         “The third place is the anchor of community life. Where people converse as equals, authentic connections and inner freedom flourish.”
                     </blockquote>
                     <h3>Why is Metaphora Your Third Place?</h3>
-                    <p>“Metaphora” was founded precisely around this vision — to be your third place in Tbilisi. A welcoming space where you can drop in, savor specialty coffee, read a book, join a salon discussion, or immerse yourself in live Playback Theatre improvisation.</p>
+                    <p>“Metaphora” was founded precisely around this vision - to be your third place in Tbilisi. A welcoming space where you can drop in, savor specialty coffee, read a book, join a salon discussion, or immerse yourself in live Playback Theatre improvisation.</p>
                     <div class="article-takeaway-box">
                         <h4>✨ 4 Core Pillars of a Third Place:</h4>
                         <ul>
@@ -3924,7 +3924,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 author: 'არტ-ფასილიტატორი • მეტაფორა',
                 date: '2026 წლის აგვისტო',
                 html: `
-                    <p>წარმოიდგინეთ თეატრი, სადაც არ არსებობს წინასწარ დაწერილი სცენარი, რეპეტიციები და როლები. სცენარი იწერება აქ და ახლა — მაყურებლის მოყოლილი რეალური ისტორიებით.</p>
+                    <p>წარმოიდგინეთ თეატრი, სადაც არ არსებობს წინასწარ დაწერილი სცენარი, რეპეტიციები და როლები. სცენარი იწერება აქ და ახლა - მაყურებლის მოყოლილი რეალური ისტორიებით.</p>
                     <p><strong>Playback თეატრი</strong> არის ინტერაქციული იმპროვიზაციის უნიკალური ფორმა, რომელიც 1975 წელს ჯონათან ფოქსმა და ჯო სალასმა დააფუძნეს. მაყურებელი უზიარებს დარბაზს საკუთარ განცდას, მოგონებას ან სიზმარს, ხოლო მსახიობები და მუსიკოსი მას წამიერად ცოცხალ სცენურ ეტიუდად გარდაქმნიან.</p>
                     <blockquote>
                         „საკუთარი ისტორიის სცენიდან დანახვა ადამიანს აძლევს უნიკალურ განცდას: მე არ ვარ მარტო, ჩემი ხმა და ემოცია მნიშვნელოვანია.“
@@ -3949,7 +3949,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 author: 'Art Facilitator • Metaphora',
                 date: 'August 2026',
                 html: `
-                    <p>Imagine a theatre without predefined scripts, rehearsals, or fixed roles. The script is written in the present moment — through real stories shared by the audience.</p>
+                    <p>Imagine a theatre without predefined scripts, rehearsals, or fixed roles. The script is written in the present moment - through real stories shared by the audience.</p>
                     <p><strong>Playback Theatre</strong> is a unique form of interactive improvisation founded in 1975 by Jonathan Fox and Jo Salas. An audience member shares a personal memory, feeling, or dream, and actors together with a musician immediately transform it into a vivid stage enactment.</p>
                     <blockquote>
                         “Witnessing one’s own story reflected on stage offers a transformative realization: I am not alone; my voice and emotion truly matter.”
@@ -3977,16 +3977,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 author: 'პოზიტიური ფსიქოთერაპევტი • მეტაფორა',
                 date: '2026 წლის აგვისტო',
                 html: `
-                    <p>პოზიტიური ფსიქოთერაპია (დამფუძნებელი ნოსრატ პეზეშკიანი) არ ნიშნავს „ყალბ ოპტიმიზმს“ ან პრობლემების უარყოფას. პირიქით — სიტყვა <em>Positum</em> ლათინურად ნიშნავს „ფაქტობრივს“, „რეალურს“, „იმას, რაც უკვე მოცემულია“.</p>
+                    <p>პოზიტიური ფსიქოთერაპია (დამფუძნებელი ნოსრატ პეზეშკიანი) არ ნიშნავს „ყალბ ოპტიმიზმს“ ან პრობლემების უარყოფას. პირიქით - სიტყვა <em>Positum</em> ლათინურად ნიშნავს „ფაქტობრივს“, „რეალურს“, „იმას, რაც უკვე მოცემულია“.</p>
                     <p>ეს მიმართულება ადამიანს ხედავს როგორც რესურსებით სავსე მთლიანობას, რომელსაც უკვე გააჩნია ყველა საჭირო შესაძლებლობა გამოწვევებთან გასამკლავებლად.</p>
                     <blockquote>
-                        „თუ გსურთ გქონდეთ ის, რაც არასდროს გქონიათ, უნდა გააკეთოთ ის, რაც არასდროს გაგიკეთებიათ — ოღონდ საკუთარ შინაგან რესურსებზე დაყრდნობით.“
+                        „თუ გსურთ გქონდეთ ის, რაც არასდროს გქონიათ, უნდა გააკეთოთ ის, რაც არასდროს გაგიკეთებიათ - ოღონდ საკუთარ შინაგან რესურსებზე დაყრდნობით.“
                     </blockquote>
                     <div class="article-takeaway-box">
                         <h4>🌿 5 ოქროს პრინციპი ყოველდღიურობისთვის:</h4>
                         <ul>
                             <li><strong>1. სიმპტომი არის სიგნალი:</strong> ნებისმიერი შფოთვა ან დაღლილობა ორგანიზმის მინიშნებაა, რომ რაღაც შესაცვლელია;</li>
-                            <li><strong>2. ბალანსის მოდელი:</strong> სხეული, საქმიანობა, ურთიერთობები და მომავლის ხედვა — ოთხივე სფერო თანაბარ ყურადღებას მოითხოვს;</li>
+                            <li><strong>2. ბალანსის მოდელი:</strong> სხეული, საქმიანობა, ურთიერთობები და მომავლის ხედვა - ოთხივე სფერო თანაბარ ყურადღებას მოითხოვს;</li>
                             <li><strong>3. კონფლიქტი როგორც ზრდის რესურსი:</strong> განსხვავებული აზრი გვაძლევს ახალ პერსპექტივას;</li>
                             <li><strong>4. მეტაფორების ძალა:</strong> იგავები და შედარებები გვეხმარება ქვეცნობიერი ბლოკების მარტივად მოხსნაში;</li>
                             <li><strong>5. თვითდახმარების უნარი:</strong> თერაპიის მიზანია ადამიანი გახდეს საკუთარი თავის საუკეთესო მეგზური.</li>
@@ -4004,13 +4004,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Positive Psychotherapy (founded by Nossrat Peseschkian) is not about "toxic positivity" or denying hardships. The Latin root <em>Positum</em> translates to "the factual, the actual, that which is already given."</p>
                     <p>This modality views every individual as an inherently resourceful whole, already equipped with innate capacities to overcome life challenges.</p>
                     <blockquote>
-                        “If you want something you never had, you must do something you've never done — by tapping into your intrinsic resources.”
+                        “If you want something you never had, you must do something you've never done - by tapping into your intrinsic resources.”
                     </blockquote>
                     <div class="article-takeaway-box">
                         <h4>🌿 5 Golden Principles for Everyday Well-being:</h4>
                         <ul>
                             <li><strong>1. Symptoms are Signals:</strong> Anxiety or fatigue is your organism's gentle alert that something needs realigning;</li>
-                            <li><strong>2. Balance Model:</strong> Body, Achievement, Contact, and Meaning — all four spheres require harmonious attention;</li>
+                            <li><strong>2. Balance Model:</strong> Body, Achievement, Contact, and Meaning - all four spheres require harmonious attention;</li>
                             <li><strong>3. Conflict as a Growth Resource:</strong> Differing perspectives unlock novel horizons;</li>
                             <li><strong>4. The Power of Metaphors:</strong> Parables and metaphors easily dissolve subconscious barriers;</li>
                             <li><strong>5. Capacity for Self-Help:</strong> The goal is empowering every person to become their own best therapist.</li>
@@ -4070,11 +4070,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: '2026 წლის აგვისტო',
                 html: `
                     <p>რატომ არის სამაგიდო თამაშები ერთ-ერთი ყველაზე სწრაფი და ბუნებრივი საშუალება ახალი ადამიანების გასაცნობად?</p>
-                    <p>სამაგიდო თამაში ქმნის ე.წ. <em>„უსაფრთხო თამაშის ველს“</em>. როდესაც მაგიდასთან ზიხარ, არ გჭირდება ხელოვნური „Small Talk“ — თამაშის წესები და სტრატეგია თავისთავად წარმართავს დიალოგს, იუმორსა და ჯანსაღ აზარტს.</p>
+                    <p>სამაგიდო თამაში ქმნის ე.წ. <em>„უსაფრთხო თამაშის ველს“</em>. როდესაც მაგიდასთან ზიხარ, არ გჭირდება ხელოვნური „Small Talk“ - თამაშის წესები და სტრატეგია თავისთავად წარმართავს დიალოგს, იუმორსა და ჯანსაღ აზარტს.</p>
                     <blockquote>
                         „თამაშისას ადამიანი ავლენს თავის ნამდვილ ხასიათს, სტრატეგიულ აზროვნებასა და გუნდურობას გაცილებით სწრაფად, ვიდრე ჩვეულებრივი საუბრისას.“
                     </blockquote>
-                    <p>მეტაფორას Themed Bar-ში გელოდებათ 50-ზე მეტი მსოფლიო სამაგიდო თამაში — სტრატეგიულიდან დაწყებული, სახალისო პარტი-თამაშებით დამთავრებული!</p>
+                    <p>მეტაფორას Themed Bar-ში გელოდებათ 50-ზე მეტი მსოფლიო სამაგიდო თამაში - სტრატეგიულიდან დაწყებული, სახალისო პარტი-თამაშებით დამთავრებული!</p>
                 `
             },
             EN: {
@@ -4085,11 +4085,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: 'August 2026',
                 html: `
                     <p>Why are modern board games one of the fastest and most natural catalysts for building genuine friendships?</p>
-                    <p>Board games create a <em>"safe magic circle"</em>. When gathered around the table, awkward small talk disappears — game mechanics and playful strategy naturally spark shared laughter, wits, and collaboration.</p>
+                    <p>Board games create a <em>"safe magic circle"</em>. When gathered around the table, awkward small talk disappears - game mechanics and playful strategy naturally spark shared laughter, wits, and collaboration.</p>
                     <blockquote>
                         “In gameplay, human character, strategic instincts, and empathy reveal themselves far quicker than in conventional conversation.”
                     </blockquote>
-                    <p>At Metaphora's Themed Bar, over 50 premier world tabletop games await you — from deep strategy euro-games to lively social party favorites!</p>
+                    <p>At Metaphora's Themed Bar, over 50 premier world tabletop games await you - from deep strategy euro-games to lively social party favorites!</p>
                 `
             }
         },
@@ -4102,7 +4102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 author: 'არტ-თერაპევტი • მეტაფორა',
                 date: '2026 წლის აგვისტო',
                 html: `
-                    <p>„მე ხატვა არ ვიცი“ — ეს არის ყველაზე გავრცელებული ფრაზა, რომელსაც არტ-თერაპიის დაწყებამდე ვისმენთ. არტ-თერაპიის არსი კი სწორედ იმაშია, რომ აქ <strong>ესთეტიკური შეფასება არ არსებობს</strong>.</p>
+                    <p>„მე ხატვა არ ვიცი“ - ეს არის ყველაზე გავრცელებული ფრაზა, რომელსაც არტ-თერაპიის დაწყებამდე ვისმენთ. არტ-თერაპიის არსი კი სწორედ იმაშია, რომ აქ <strong>ესთეტიკური შეფასება არ არსებობს</strong>.</p>
                     <p>ფერები, ხაზები, მოცულობა და ტექსტურა არის ჩვენი ემოციების პირდაპირი პროექცია ქაღალდზე. როდესაც ემოციას ვერ ვხსნით სიტყვებით, ფუნჯი და ტილო ხდება ჩვენი ყველაზე გულწრფელი მთარგმნელი.</p>
                     <div class="article-takeaway-box">
                         <h4>🎨 რას გვაძლევს რეგულარული არტ-სესიები:</h4>
@@ -4122,7 +4122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 author: 'Art Therapist • Metaphora',
                 date: 'August 2026',
                 html: `
-                    <p>“I don't know how to draw” — this is the most frequent statement heard before starting an art therapy session. Yet the essence of art therapy is that <strong>aesthetic judgment does not exist here</strong>.</p>
+                    <p>“I don't know how to draw” - this is the most frequent statement heard before starting an art therapy session. Yet the essence of art therapy is that <strong>aesthetic judgment does not exist here</strong>.</p>
                     <p>Colors, lines, textures, and brushstrokes are direct projections of our internal emotional landscape. When words fail to articulate our feelings, canvas and paints become our most honest translators.</p>
                     <div class="article-takeaway-box">
                         <h4>🎨 Benefits of Regular Art Therapy Sessions:</h4>
@@ -4150,9 +4150,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="article-takeaway-box">
                         <h4>📖 მიმდინარე თვის რეკომენდაციები:</h4>
                         <ul>
-                            <li><strong>რეი ოლდენბურგი:</strong> <em>„The Great Good Place“</em> — მესამე ადგილების ფილოსოფია;</li>
-                            <li><strong>ვიქტორ ფრანკლი:</strong> <em>„ადამიანის მიერ აზრის ძიება“</em> — ლოგოთერაპია და შინაგანი ძალა;</li>
-                            <li><strong>მიჰაი ჩიქსენტმიჰაი:</strong> <em>„დინება (Flow)“</em> — ოპტიმალური გამოცდილების ფსიქოლოგია.</li>
+                            <li><strong>რეი ოლდენბურგი:</strong> <em>„The Great Good Place“</em> - მესამე ადგილების ფილოსოფია;</li>
+                            <li><strong>ვიქტორ ფრანკლი:</strong> <em>„ადამიანის მიერ აზრის ძიება“</em> - ლოგოთერაპია და შინაგანი ძალა;</li>
+                            <li><strong>მიჰაი ჩიქსენტმიჰაი:</strong> <em>„დინება (Flow)“</em> - ოპტიმალური გამოცდილების ფსიქოლოგია.</li>
                         </ul>
                     </div>
                     <p>შემოგვიერთდით ჩვენს უახლოეს შეხვედრაზე!</p>
@@ -4170,9 +4170,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="article-takeaway-box">
                         <h4>📖 Current Month Reading Highlights:</h4>
                         <ul>
-                            <li><strong>Ray Oldenburg:</strong> <em>“The Great Good Place”</em> — The sociology of third places;</li>
-                            <li><strong>Viktor Frankl:</strong> <em>“Man’s Search for Meaning”</em> — Logotherapy and inner resilience;</li>
-                            <li><strong>Mihaly Csikszentmihalyi:</strong> <em>“Flow”</em> — The psychology of optimal experience.</li>
+                            <li><strong>Ray Oldenburg:</strong> <em>“The Great Good Place”</em> - The sociology of third places;</li>
+                            <li><strong>Viktor Frankl:</strong> <em>“Man’s Search for Meaning”</em> - Logotherapy and inner resilience;</li>
+                            <li><strong>Mihaly Csikszentmihalyi:</strong> <em>“Flow”</em> - The psychology of optimal experience.</li>
                         </ul>
                     </div>
                     <p>Join us at our upcoming gathering and share your perspective!</p>
@@ -4282,31 +4282,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // 18. ROBUST BILINGUAL I18N ENGINE (KA ⇄ EN)
     // ==========================================================================
     const I18N_DICTIONARY = {
-        "„მესამე ადგილი“ არის სოციალური თავშესაფარი სახლსა და სამსახურს მიღმა. მეტაფორა Clubs გთავაზობთ მყუდრო Coworking ზონას დღისით, ხოლო საღამოს — თემატურ სამაგიდო თამაშებს, წიგნის კლუბსა და საავტორო სასმელების Themed Bar-ს.": "The 'Third Place' is a social sanctuary beyond home and work. Metaphora Clubs offers daytime coworking, followed by evening board games, book clubs, and an artisanal themed bar.",
+        "„მესამე ადგილი“ არის სოციალური თავშესაფარი სახლსა და სამსახურს მიღმა. მეტაფორა Clubs გთავაზობთ მყუდრო Coworking ზონას დღისით, ხოლო საღამოს - თემატურ სამაგიდო თამაშებს, წიგნის კლუბსა და საავტორო სასმელების Themed Bar-ს.": "The 'Third Place' is a social sanctuary beyond home and work. Metaphora Clubs offers daytime coworking, followed by evening board games, book clubs, and an artisanal themed bar.",
         "თანამედროვე სამყაროში იშვიათია ადგილი, სადაც აჩქარების გარეშე, არგუმენტირებულად და სიღრმისეულად მსჯელობენ კულტურაზე, ფილოსოფიაზე, სოციალურ ტენდენციებსა და მომავლის ხედვებზე. მეტაფორას სალონი სწორედ ამისთვის შეიქმნა.": "In a fast-paced world, places for unhurried, nuanced discussions on culture, philosophy, and future trends are rare. Metaphora Salon was crafted for this purpose.",
         "„მეტაფორას“ პიროვნული განვითარების მიმართულება შექმნილია მათთვის, ვისაც სურს საკუთარი პოტენციალის აღმოჩენა, სტრესის დაძლევა და შინაგანი რესურსების გააქტიურება. ჩვენ გთავაზობთ პროფესიულ, ეთიკურ და მზრუნველ გარემოს.": "Metaphora Personal Development is designed for those seeking to discover their potential, overcome stress, and activate inner resilience in a caring setting.",
         "გაიზარდე, ითანამშრომლე და შექმენი ახალი შესაძლებლობები. მეტაფორა Business აერთიანებს მეწარმეებს, სტარტაპებსა და კორპორატიულ პროფესიონალებს ნდობასა და საერთო ღირებულებებზე დაფუძნებულ ეკოსისტემაში.": "Grow, collaborate, and create new opportunities. Metaphora Business unites entrepreneurs and corporate innovators into a values-driven ecosystem.",
         "ბიზნესი არის ურთიერთობები და ნდობა. მეტაფორა Business აერთიანებს სტარტაპერებს, მეწარმეებს, კორპორატიულ ლიდერებსა და ინოვატორებს საერთო ეკოსისტემაში ახალი პარტნიორობებისა და იდეების დასაბადებლად.": "Business is built on relationships and trust. Metaphora Business unites founders, entrepreneurs, and leaders into a shared ecosystem to foster strategic partnerships.",
-        "სოციოლოგი რეი ოლდენბურგის თეორიით, ადამიანის ბედნიერებისთვის აუცილებელია მესამე სივრცე — ადგილი სახლსა და სამსახურს მიღმა, სადაც არ არის იერარქია, სადაც ურთიერთობა არის მარტივი და შთამაგონებელი.": "According to sociologist Ray Oldenburg, human happiness thrives on having a Third Place — a sanctuary beyond home and work without hierarchies, where socializing is effortless and inspiring.",
-        "მეტაფორა Think Tank აცოცხლებს კლასიკურ სალონურ კულტურას თანამედროვე ფორმატით. ეს არის ადგილი თავისუფალი აზროვნებისთვის, ფილოსოფიური დიალოგებისთვის და აქტუალური თემების სიღრმისეული ანალიზისთვის.": "Metaphora Think Tank revives classic salon culture in a modern setting — a sanctuary for free thought, philosophical dialogue, and critical analysis of key cultural and scientific ideas.",
-        "ხელოვნება მეტაფორაში არ არის მხოლოდ საყურებელი — ის არის თანამონაწილეობისა და ემოციური გარდაქმნის პროცესი. Playback თეატრისა და არტ-თერაპიის მეშვეობით მაყურებელი ხდება სპექტაკლის თანაავტორი.": "Art at Metaphora is an interactive journey of emotional transformation. Through Playback theatre and art therapy, audiences become co-creators.",
+        "სოციოლოგი რეი ოლდენბურგის თეორიით, ადამიანის ბედნიერებისთვის აუცილებელია მესამე სივრცე - ადგილი სახლსა და სამსახურს მიღმა, სადაც არ არის იერარქია, სადაც ურთიერთობა არის მარტივი და შთამაგონებელი.": "According to sociologist Ray Oldenburg, human happiness thrives on having a Third Place - a sanctuary beyond home and work without hierarchies, where socializing is effortless and inspiring.",
+        "მეტაფორა Think Tank აცოცხლებს კლასიკურ სალონურ კულტურას თანამედროვე ფორმატით. ეს არის ადგილი თავისუფალი აზროვნებისთვის, ფილოსოფიური დიალოგებისთვის და აქტუალური თემების სიღრმისეული ანალიზისთვის.": "Metaphora Think Tank revives classic salon culture in a modern setting - a sanctuary for free thought, philosophical dialogue, and critical analysis of key cultural and scientific ideas.",
+        "ხელოვნება მეტაფორაში არ არის მხოლოდ საყურებელი - ის არის თანამონაწილეობისა და ემოციური გარდაქმნის პროცესი. Playback თეატრისა და არტ-თერაპიის მეშვეობით მაყურებელი ხდება სპექტაკლის თანაავტორი.": "Art at Metaphora is an interactive journey of emotional transformation. Through Playback theatre and art therapy, audiences become co-creators.",
         "იპოვე შენი შინაგანი ძალა და ემოციური ბალანსი. მეტაფორას პიროვნული განვითარების მიმართულება აერთიანებს პოზიტიურ ფსიქოთერაპიას, თვითშემეცნების პრაქტიკებსა და სტრესის მართვის ავტორულ სესიებს.": "Find your inner strength and emotional balance. Metaphora Personal Development brings together positive psychotherapy, mindfulness practices, and stress resilience sessions.",
         "მეტაფორა Business აერთიანებს მეწარმეებს, სტარტაპერებსა და დარგის წამყვან პროფესიონალებს. ჩვენ ვქმნით პლატფორმას იდეების რეალიზაციისთვის, სტრატეგიული პარტნიორობისა და მასტერმაინდისთვის.": "Metaphora Business brings together entrepreneurs, innovators, and industry leaders to foster strategic collaborations, mastermind circles, and business growth.",
         "ხელოვნება მეტაფორაში არის თვითგამოხატვისა და ემოციური ტრანსფორმაციის მთავარი ინსტრუმენტი. Playback თეატრი, არტ-თერაპია და შემოქმედებითი პერფორმანსები ქმნის დაუვიწყარ გამოცდილებას.": "Art at Metaphora is the primary catalyst for self-expression and emotional transformation. Playback theatre, art therapy, and performances create unforgettable communal experiences.",
         "ჩაერთე სიღრმისეულ სალონურ დისკუსიებში. მეტაფორა Think Tank არის ინტელექტუალური სივრცე ფილოსოფიური, სოციალური, კულტურული და ტექნოლოგიური თემების კრიტიკული და ღრმა გააზრებისთვის.": "Join deep salon discussions. Metaphora Think Tank is an intellectual forum for critical reflection on philosophy, culture, and future frontiers.",
-        "შენი „მესამე სივრცე“ — ადგილი სახლსა და სამსახურს შორის, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები, სამაგიდო თამაშები, Deep Work Coworking და მეგობრული კომუნა.": "Your 'Third Place' — between home and work where you always belong. Enjoy themed clubs, board games, deep work coworking, and friendly camaraderie.",
+        "შენი „მესამე სივრცე“ - ადგილი სახლსა და სამსახურს შორის, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები, სამაგიდო თამაშები, Deep Work Coworking და მეგობრული კომუნა.": "Your 'Third Place' - between home and work where you always belong. Enjoy themed clubs, board games, deep work coworking, and friendly camaraderie.",
         "მეტაფორა Clubs არის ადგილი სახლსა და სამსახურს შორის, სადაც ყოველთვის გელიან. თემატური კლუბები, ინტელექტუალური თამაშები და მეგობრული კომუნა ქმნის ნამდვილ შინაურ გარემოს.": "Metaphora Clubs is the sanctuary between home and work where you always belong. Enjoy themed clubs, board game salons, and warm social camaraderie.",
-        "პიროვნული განვითარება მეტაფორაში არის მოგზაურობა საკუთარ თავში — პროფესიული ფსიქოლოგიური მხარდაჭერა, ემოციური ინტელექტის გაძლიერება და შინაგანი რესურსების გააქტიურება.": "Personal development at Metaphora is a journey within — professional psychological support, emotional intelligence empowerment, and tapping into your inner resources.",
+        "პიროვნული განვითარება მეტაფორაში არის მოგზაურობა საკუთარ თავში - პროფესიული ფსიქოლოგიური მხარდაჭერა, ემოციური ინტელექტის გაძლიერება და შინაგანი რესურსების გააქტიურება.": "Personal development at Metaphora is a journey within - professional psychological support, emotional intelligence empowerment, and tapping into your inner resources.",
         "დაიმუხტე შემოქმედებითი ენერგიითა და ხელოვნებით. მეტაფორა Art აერთიანებს Playback იმპროვიზაციულ თეატრს, არტ-თერაპიას, ცოცხალ მუსიკას, გამოფენებსა და პერფორმანსებს.": "Ignite your creative energy through the arts. Metaphora Art combines Playback improvisational theatre, expressive therapy, live music, and exhibitions.",
-        "მეტაფორა არის თანამედროვე მესამე ადგილი — სივრცე თვითგანვითარებისთვის, შემოქმედებისთვის, საქმიანი თანამშრომლობისა და ინტელექტუალური დისკუსიებისთვის.": "Metaphora is a modern Third Place — a sanctuary for personal growth, creativity, business collaboration, and intellectual discussions.",
+        "მეტაფორა არის თანამედროვე მესამე ადგილი - სივრცე თვითგანვითარებისთვის, შემოქმედებისთვის, საქმიანი თანამშრომლობისა და ინტელექტუალური დისკუსიებისთვის.": "Metaphora is a modern Third Place - a sanctuary for personal growth, creativity, business collaboration, and intellectual discussions.",
         "თერაპიული ხატვის, თიხის, კოლაჟისა და ფერწერის ვორქშოფები, რომლებიც გეხმარებათ ემოციებისგან განტვირთვასა და შემოქმედებითი ენერგიის გაღვიძებაში.": "Workshops in intuitive painting, clay sculpture, and collage designed to awaken creative flow and emotional healing.",
         "ინდივიდუალური და ჯგუფური სესიები სერტიფიცირებულ ფსიქოთერაპევტებთან, რომელიც ორიენტირებულია ადამიანის შინაგან რესურსებზე და ბალანსის მოდელზე.": "Individual and group sessions with certified psychotherapists, focusing on inner resources and the positive balance model.",
         "უსაფრთხო, მყუდრო და კონფიდენციალური გარემო, სადაც შეგიძლიათ გულწრფელად გაუზიაროთ გამოცდილება თანამოაზრეებს და მიიღოთ ემპათიური მხარდაჭერა.": "A safe, confidential, and empathetic space to share real experiences with peers and receive compassionate support.",
         "ეფექტური სტრატეგიები პროფესიული და პირადი გადაწვის (Burnout) დასაძლევად, ენერგიის აღსადგენად და მყარი მენტალური იმუნიტეტის შესაქმნელად.": "Proven strategies to overcome professional burnout, recharge personal vitality, and build mental stamina.",
         "მოწვეული მკვლევრების, მეცნიერებისა და მოაზროვნეების საავტორო ლექციები ისტორიაზე, ხელოვნებაზე, ფსიქოლოგიასა და მომავლის ტენდენციებზე.": "Keynotes and master lectures by renowned scholars, authors, psychologists, and cultural luminaries.",
         "უნიკალური თეატრალური ფორმატი, სადაც მსახიობები და მუსიკოსები მაყურებლის მიერ მოყოლილ რეალურ ისტორიებს მყისიერად აცოცხლებენ სცენაზე.": "An improvisational theatrical form where actors and musicians instantly replay audience members' personal stories on stage.",
-        "ეს არ არის უბრალოდ სივრცე — „მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ.": "More than just a space — Metaphora is a sanctuary where ideas come alive and people discover new horizons.",
-        "გაეცანით ჩვენს 5 მთავარ მიმართულებას — პიროვნული განვითარებიდან დაწყებული, სალონური დისკუსიებითა და თემატური კლუბებით დასრულებული.": "Explore our 5 core pillars — from personal growth and salon discussions to creative arts and themed clubs.",
+        "ეს არ არის უბრალოდ სივრცე - „მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ.": "More than just a space - Metaphora is a sanctuary where ideas come alive and people discover new horizons.",
+        "გაეცანით ჩვენს 5 მთავარ მიმართულებას - პიროვნული განვითარებიდან დაწყებული, სალონური დისკუსიებითა და თემატური კლუბებით დასრულებული.": "Explore our 5 core pillars - from personal growth and salon discussions to creative arts and themed clubs.",
         "მცირე ჯგუფური სესიები მეწარმეებისთვის, სადაც ერთობლივად ხდება ბიზნეს-ამოცანების გადაჭრა, გამოცდილების გაცვლა და მიზნების დაგეგმვა.": "Peer-to-peer mastermind sessions for founders to solve strategic challenges, share best practices, and accelerate goals.",
         "პრაქტიკული ვორქშოფები და მედიტაციური ტექნიკები ყურადღების კონცენტრაციისთვის, შფოთვის დაძლევისა და ემოციების გაცნობიერებისთვის.": "Practical workshops and mindfulness techniques for deep focus, stress resilience, and emotional awareness.",
         "კომფორტული, ერგონომიული და მშვიდი სამუშაო ზონები მაღალსიჩქარიანი ინტერნეტით, სადაც ფოკუსირება და პროდუქტიულობა გარანტირებულია.": "Comfortable, serene workspaces equipped with high-speed fiber internet, private meeting rooms, and focus zones.",
@@ -4329,17 +4329,17 @@ document.addEventListener('DOMContentLoaded', () => {
         "მიზნობრივი შეხვედრები, სადაც შეგიძლიათ იპოვოთ მომავალი პარტნიორები, ინვესტორები, კლიენტები და თანამოაზრეები.": "Targeted matchmaking mixers to connect with investors, co-founders, clients, and industry pioneers.",
         "რატომ არის მნიშვნელოვანი მყუდრო Coworking სივრცე ყოველდღიური კონცენტრაციისა და ახალი იდეების დაბადებისთვის.": "Why a peaceful coworking space is essential for deep focus and fresh ideas.",
         "მეტაფორას პოდკასტ-სივრცეში გამართული ღია დისკუსიები და ინტერვიუები გამორჩეულ მოაზროვნეებთან და ლიდერებთან.": "Open podcasts and recorded interviews with notable thinkers and visionaries.",
-        "არც სახლი, არც სამსახური — „მეტაფორა“ შენი მესამე სივრცე": "Neither home nor work — 'Metaphora' your Third Place",
-        "არც სახლი, არც სამსახური — მეტაფორა შენი მესამე სივრცე": "Neither home nor work — Metaphora your Third Place",
+        "არც სახლი, არც სამსახური - „მეტაფორა“ შენი მესამე სივრცე": "Neither home nor work - 'Metaphora' your Third Place",
+        "არც სახლი, არც სამსახური - მეტაფორა შენი მესამე სივრცე": "Neither home nor work - Metaphora your Third Place",
         "ადგილი ორ სამყაროს შორის, სადაც ისვენებ სულითა და გონებით, პოულობ საკუთარ რესურსებსა და თანამოაზრეებს.": "A space between two worlds where you rest body and mind, discovering your inner resources and like-minded peers.",
         "✨ შენი მესამე სივრცე": "✨ Your Third Place",
-        "მეტაფორა — „იდეალური გარემო პროდუქტიული მუშაობისა და განვითარებისათვის“": "Metaphora — 'An ideal environment for productive work and growth'",
+        "მეტაფორა - „იდეალური გარემო პროდუქტიული მუშაობისა და განვითარებისათვის“": "Metaphora - 'An ideal environment for productive work and growth'",
         "სივრცე, სადაც იდეები რეალურ შედეგებად გარდაიქმნება. ადგილი, რომელიც შექმნილია შენი ბიზნესისა და პროფესიული ზრდის ახალ ეტაპზე გადასაყვანად.": "A space where ideas turn into real results. Designed to elevate your business and professional growth to the next level.",
-        "„მეტაფორა“ — სივრცე, სადაც ყოველთვის გელიან": "'Metaphora' — A space where you are always welcomed",
+        "„მეტაფორა“ - სივრცე, სადაც ყოველთვის გელიან": "'Metaphora' - A space where you are always welcomed",
         "ადგილი, სადაც შინაგანი კომფორტი, სიმშვიდე და მაღალი ესთეტიკა ერთიანდება. გარემო, სადაც ყოველი დეტალი შენს განწყობასა და ჰარმონიაზეა მორგებული.": "A place uniting inner comfort, tranquility, and refined aesthetics. An atmosphere where every detail aligns with your mood and harmony.",
         "სივრცე, სადაც პოზიტიური ფსიქოთერაპია, ინტელექტუალური თამაშები და თანამოაზრეთა კომუნა ქმნის ჰარმონიას.": "A sanctuary where positive psychotherapy, social gaming, and community thrive.",
         "პრაქტიკული სემინარები მენეჯმენტზე, მარკეტინგზე, ლიდერობასა და გაყიდვებზე წამყვანი პრაქტიკოსებისგან.": "Hands-on masterclasses in leadership, marketing, fundraising, and scale-up execution from seasoned founders.",
-        "შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები და კომუნა.": "Your 'Third Place' — where you always feel at home. Themed clubs, board games, and community.",
+        "შენი „მესამე სივრცე“ - ადგილი, სადაც თავს ყოველთვის შინაურად იგრძნობ. თემატური კლუბები და კომუნა.": "Your 'Third Place' - where you always feel at home. Themed clubs, board games, and community.",
         "რატომ გვაახლოებს ინტელექტუალური თამაშები და როგორ ქმნის ის უსაფრთხო გარემოს ახალი ნაცნობობისთვის.": "Why tabletop games bring people together and spark authentic connections.",
         "ჩაერთე სიღრმისეულ სალონურ დისკუსიებში. ინტელექტუალური დებატები, იდეების გაზიარება და ანალიტიკა.": "Engage in deep salon discussions. Intellectual debates, idea sharing, and analytics.",
         "როგორ შევხედოთ პრობლემებს არა როგორც დაბრკოლებას, არამედ როგორც ზრდისა და განვითარების რესურსს.": "How to view life challenges not as obstacles, but as rich resources for self-growth.",
@@ -4355,6 +4355,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "ემოციური განტვირთვა ფერებითა და ფორმებით პროფესიონალი არტ-თერაპევტის მეთვალყურეობით.": "Emotional decompression through colors and shapes guided by certified therapists.",
         "აკუსტიკური კონცერტები, პოეზიის საღამოები და ჯემ-სესიები მყუდრო, შინაურ ატმოსფეროში.": "Acoustic performances, spoken word nights, and live improvisational music jams.",
         "ადგილი მათთვის, ვინც აფასებს ღრმა აზრს, თავისუფალ აზროვნებასა და ცოდნის გაზიარებას.": "A sanctuary for those who value deep thought, open minds, and knowledge sharing.",
+        "შემოგვიერთდით ვორქშოპებზე, ტრენინგებსა და Think Tank შეხვედრებზე.": "Join our workshops, trainings, and Think Tank discussions.",
         "აირჩიეთ სასურველი სივრცე, შემოგვიერთდით ვორქშოფებსა და Playback თეატრის საღამოებზე.": "Choose your preferred space, join our workshops and Playback theatre evenings.",
         "თვიური რეკომენდაციები, საკითხავი სიები და დისკუსიების ანონსი ჩვენი წიგნის კლუბიდან.": "Monthly book recommendations, reading lists, and discussion announcements.",
         "პიროვნული ზრდა, ბიზნეს შესაძლებლობები, Think Tank დისკუსიები, ხელოვნება და კლუბები.": "Personal growth, business opportunities, Think Tank salons, arts, and clubs.",
@@ -4393,7 +4394,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "შეავსეთ ფორმა სასურველ სერვისზე ან ღონისძიებაზე დასაჯავშნად.": "Fill out the form to reserve your preferred service or event.",
         "დააჭირეთ „ნახვა“-ს ან ცენტრალურ ბარათს საიტზე გადასასვლელად": "Click 'Explore' or the center card to enter the website",
         "მედიტაციური და სხეულზე ორიენტირებული რელაქსაციის ტექნიკები.": "Mindfulness and somatic relaxation techniques.",
-        "შენი „მესამე სივრცე“ — ადგილი, სადაც ყოველთვის შინაურად ხარ": "Your 'Third Place' — where you always belong",
+        "შენი „მესამე სივრცე“ - ადგილი, სადაც ყოველთვის შინაურად ხარ": "Your 'Third Place' - where you always belong",
         "იდეალური გარემო პროდუქტიული მუშაობისა და განვითარებისთვის": "An ideal environment for deep focus and personal growth",
         "აირჩიეთ სასურველი მიმართულება და დრო რეგისტრაციისთვის.": "Select your preferred direction and time for registration.",
         "ჯავშანი წარმატებით გაიგზავნა! მალე დაგიკავშირდებით. ✨": "Booking sent successfully! We will contact you shortly. ✨",
@@ -4401,7 +4402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "სიღრმისეული ინტელექტუალური დებატები &amp; ანალიტიკა": "In-Depth Intellectual Debates &amp; Analytics",
         "შემოქმედებითი ენერგია, Playback თეატრი & ხელოვნება": "Creative Energy, Playback Theatre & Fine Arts",
         "საგანმანათლებლო-გასართობი ჰაბი და „მესამე ადგილი“": "Educational-Entertainment Hub & 'Third Place'",
-        "შენი „მესამე სივრცე“ — კლუბები, კომუნა & თამაშები": "Your 'Third Place' — Themed Clubs, Community & Board Games",
+        "შენი „მესამე სივრცე“ - კლუბები, კომუნა & თამაშები": "Your 'Third Place' - Themed Clubs, Community & Board Games",
         "შემოქმედებითი ენერგია, იმპროვიზაცია & პერფორმანსი": "Creative Energy, Improvisation & Performance",
         "რა გამოარჩევს მეტაფორას გამოცდილებას და გარემოს.": "What makes the Metaphora experience and environment unique.",
         "ღრმა და შინაარსიანი დიალოგი ზედაპირულობის გარეშე": "Deep, Substantive Dialogue Beyond Superficiality",
@@ -4424,7 +4425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "უნიკალური მნახველი:": "Unique Visitors:",
         "✨ ონლაინ დაჯავშნა": "✨ Online Booking",
         "აირჩიე დღე და დრო": "Choose Date & Time",
-        "დაჯავშნე ვიზიტი კალენდარში — დაგიდასტურებთ ტელეფონით.": "Book your visit in the calendar — we will confirm by phone.",
+        "დაჯავშნე ვიზიტი კალენდარში - დაგიდასტურებთ ტელეფონით.": "Book your visit in the calendar - we will confirm by phone.",
         "აირჩიე დრო": "Select Time",
         "ვიზიტის დეტალები": "Visit Details",
         "შეავსე ველები და გადადი გადახდაზე.": "Fill fields and proceed to payment.",
@@ -4484,7 +4485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "არტ-თერაპევტი • მეტაფორა": "Art Therapist • Metaphora",
         "წიგნის კლუბის მოდერატორი • მეტაფორა": "Book Club Moderator • Metaphora",
         "შემოუერთდით მეტაფორას ინტელექტუალურ კომუნას": "Join Metaphora's Intellectual Community",
-        "ელენე — Community Manager &amp; Clubs Host": "Elene — Community Manager &amp; Clubs Host",
+        "ელენე - Community Manager &amp; Clubs Host": "Elene - Community Manager &amp; Clubs Host",
         "კორპორატიული რიტრიტები &amp; Team Building": "Corporate Retreats &amp; Team Building",
         "პროფესიონალი არტ-თერაპევტის ხელმძღვანელობა": "Guidance by certified art therapists",
         "საკუთარი შესაძლებლობების ხელახალი აღმოჩენა": "Rediscovering your personal strengths",
@@ -4493,19 +4494,19 @@ document.addEventListener('DOMContentLoaded', () => {
         "ბარი გემრიელი ყავით, ჩაითა და კოქტეილებით": "Artisanal Coffee, Rare Teas & Signature Cocktails",
         "ჯავშნის დასასრულებლად გადაიხადეთ საფასური": "Please complete the bank transfer to confirm your booking",
         "აირჩიეთ ბანკი ან გადადით ინტერნეტ ბანკში:": "Choose your bank or open Web Banking:",
-        "ია — ბიზნეს განვითარება &amp; პარტნიორობა": "Ia — Business Development &amp; Partnerships",
-        "ია — ბიზნეს განვითარება & პარტნიორობა": "Ia — Business Development & Partnerships",
-        "მარიკა — პერსონალური &amp; ბიზნეს განვითარების ქოუჩი": "Marika — Personal &amp; Business Development Coach",
-        "მარიკა — პერსონალური & ბიზნეს განვითარების ქოუჩი": "Marika — Personal & Business Development Coach",
-        "ნათია — პოზიტიური ფსიქოთერაპევტი &amp; ფსიქოკონსულტანტი": "Natia — Positive Psychotherapist &amp; Psychoconsultant",
-        "ნათია — პოზიტიური ფსიქოთერაპევტი & ფსიქოკონსულტანტი": "Natia — Positive Psychotherapist & Psychoconsultant",
-        "თეო — ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Teo — Personal Coaching, Trainings &amp; Psychoconsulting",
-        "თეო — ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Teo — Personal Coaching, Trainings & Psychoconsulting",
-        "ია — ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Ia — Personal Coaching, Trainings &amp; Psychoconsulting",
-        "ია — ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Ia — Personal Coaching, Trainings & Psychoconsulting",
+        "ია - ბიზნეს განვითარება &amp; პარტნიორობა": "Ia - Business Development &amp; Partnerships",
+        "ია - ბიზნეს განვითარება & პარტნიორობა": "Ia - Business Development & Partnerships",
+        "მარიკა - პერსონალური &amp; ბიზნეს განვითარების ქოუჩი": "Marika - Personal &amp; Business Development Coach",
+        "მარიკა - პერსონალური & ბიზნეს განვითარების ქოუჩი": "Marika - Personal & Business Development Coach",
+        "ნათია - პოზიტიური ფსიქოთერაპევტი &amp; ფსიქოკონსულტანტი": "Natia - Positive Psychotherapist &amp; Psychoconsultant",
+        "ნათია - პოზიტიური ფსიქოთერაპევტი & ფსიქოკონსულტანტი": "Natia - Positive Psychotherapist & Psychoconsultant",
+        "თეო - ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Teo - Personal Coaching, Trainings &amp; Psychoconsulting",
+        "თეო - ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Teo - Personal Coaching, Trainings & Psychoconsulting",
+        "ია - ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Ia - Personal Coaching, Trainings &amp; Psychoconsulting",
+        "ია - ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Ia - Personal Coaching, Trainings & Psychoconsulting",
         "ია ქარდავა": "Ia Kardava",
-        "ქეთი — ფსიქოკონსულტანტი, ტრენერი &amp; სერტიფიცირებული ქოუჩი": "Keti — Psychoconsultant, Trainer &amp; Certified Coach",
-        "ქეთი — ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი": "Keti — Psychoconsultant, Trainer & Certified Coach",
+        "ქეთი - ფსიქოკონსულტანტი, ტრენერი &amp; სერტიფიცირებული ქოუჩი": "Keti - Psychoconsultant, Trainer &amp; Certified Coach",
+        "ქეთი - ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი": "Keti - Psychoconsultant, Trainer & Certified Coach",
         "კონფლიქტების ტრანსფორმაცია ზრდის რესურსად": "Transforming conflict into a growth resource",
         "მეტაფორა - საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი": "METAPHORA - Edutainment Hub & Third Place",
         "მეტაფორა - Edutainment Hub & Third Place": "METAPHORA - Edutainment Hub & Third Place",
@@ -4515,7 +4516,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "საგანმანათლებლო-შემეცნებითი ჰაბი & მესამე ადგილი": "Edutainment Hub & Third Place",
         "აკუსტიკური საღამოები &amp; პერფორმანსები": "Acoustic Evenings &amp; Performances",
         "იდეალური განტვირთვა დამღლელი დღის შემდეგ": "Perfect relaxation after a busy day",
-        "ქეთი — ფსიქოკონსულტანტი &amp; EPC ქოუჩი": "Keti — Psychoconsultant &amp; Certified Coach",
+        "ქეთი - ფსიქოკონსულტანტი &amp; EPC ქოუჩი": "Keti - Psychoconsultant &amp; Certified Coach",
         "პოზიტიური ფსიქოთერაპია და თვითშემეცნება": "Positive Psychotherapy & Self-Discovery",
         "Burnout პრევენცია &amp; ენერგიის მართვა": "Burnout Prevention & Energy Management",
         "სერტიფიცირებული და გამოცდილი ექსპერტები": "Certified and Experienced Practitioners",
@@ -4530,14 +4531,14 @@ document.addEventListener('DOMContentLoaded', () => {
         "მყუდრო სალონური გარემო ღვინითა და ჩაით": "Cozy Salon Atmosphere with Wine, Coffee & Tea",
         "წიგნის კლუბი &amp; ლიტერატურული სალონი": "Book Club & Literary Salon",
         "რით შემიძლია დაგეხმაროთ? მკითხეთ ჩვენს": "How can I help you? Ask me about our",
-        "17:00 — 19:00 (ვორქშოფი &amp; თერაპია)": "17:00 — 19:00 (Workshop &amp; Therapy)",
+        "17:00 - 19:00 (ვორქშოფი &amp; თერაპია)": "17:00 - 19:00 (Workshop &amp; Therapy)",
         "50-ზე მეტი თანამედროვე სამაგიდო თამაში": "Over 50 modern board games",
         "Mastermind საუზმეები &amp; ნეთვორქინგი": "Mastermind Breakfasts &amp; Networking",
         "Playback თეატრის ელემენტები გუნდისთვის": "Playback Theatre Elements for Teams",
-        "ელენე — Community Manager & Clubs Host": "Elene — Community Manager & Clubs Host",
+        "ელენე - Community Manager & Clubs Host": "Elene - Community Manager & Clubs Host",
         "კორპორატიული რიტრიტები & Team Building": "Corporate Retreats & Team Building",
-        "ლალი — დამფუძნებელი &amp; ფასილიტატორი": "Lali — Psychotherapist, Trainer &amp; Association President",
-        "ლალი — ფსიქოთერაპევტი, ტრენერი &amp; ასოციაციის პრეზიდენტი": "Lali — Psychotherapist, Trainer &amp; Association President",
+        "ლალი - დამფუძნებელი &amp; ფასილიტატორი": "Lali - Psychotherapist, Trainer &amp; Association President",
+        "ლალი - ფსიქოთერაპევტი, ტრენერი &amp; ასოციაციის პრეზიდენტი": "Lali - Psychotherapist, Trainer &amp; Association President",
         "მეტაფორას საღამო &amp; არტ-პერფორმანსი": "Metaphora Evening &amp; Art Performance",
         "პროფესიონალი მოდერატორის მეთვალყურეობა": "Facilitation by experienced moderators",
         "🎨 4. მეტაფორა Art (Playback & თერაპია)": "🎨 4. Metaphora Art (Playback & Therapy)",
@@ -4547,9 +4548,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "Playback თეატრის მაგია და არტ-თერაპია": "The Magic of Playback Theatre & Art Therapy",
         "გამოკვეთილი, სუფთა მექანიკური დარტყმა": "Distinct, crisp mechanical keystroke",
         "გამოფენები &amp; აკუსტიკური საღამოები": "Exhibitions &amp; Acoustic Evenings",
-        "ია — Business & Partnerships Lead": "Ia — Business & Partnerships Lead",
+        "ია - Business & Partnerships Lead": "Ia - Business & Partnerships Lead",
         "კორპორატიული Retreat &amp; ვორქშოფები": "Corporate Retreat &amp; Workshops",
-        "მეტაფორა — კლავიშის საუნდების ტესტერი": "METAPHORA — Keystroke Sound Tester",
+        "მეტაფორა - კლავიშის საუნდების ტესტერი": "METAPHORA - Keystroke Sound Tester",
         "💡 ორჯერ დააწკაპუნეთ წრეზე ან დააჭირეთ": "💡 Double click on a node or press",
         "🧠 სალონური დისკუსიები &amp; ანალიტიკა": "🧠 Salon Discussions &amp; Analytics",
         "2026 მეტაფორა. ყველა უფლება დაცულია.": "2026 METAPHORA. All rights reserved.",
@@ -4565,7 +4566,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "მზად ხართ ახალი შინაგანი ეტაპისთვის?": "Ready for a new inner chapter?",
         "მცირე, თბილი ჯგუფები (6-10 ადამიანი)": "Small, intimate groups (6-10 people)",
         "პოზიტიური ფსიქოთერაპიის 5 ოქროს წესი": "5 Golden Rules of Positive Psychotherapy",
-        "ქეთი — ფსიქოკონსულტანტი & EPC ქოუჩი": "Keti — Psychoconsultant & EPC Coach",
+        "ქეთი - ფსიქოკონსულტანტი & EPC ქოუჩი": "Keti - Psychoconsultant & EPC Coach",
         "ფილოსოფიური &amp; კულტურული ლექციები": "Philosophical &amp; Cultural Lectures",
         "წინასწარი გამოცდილება არ არის საჭირო": "No prior experience required",
         "🎨 შემოქმედებითი ენერგია &amp; თეატრი": "🎨 Creative Energy &amp; Theatre",
@@ -4579,12 +4580,12 @@ document.addEventListener('DOMContentLoaded', () => {
         "Boutique Coworking & Meeting Spaces": "Boutique Coworking & Meeting Spaces",
         "ნამდვილი „მესამე ადგილის“ ატმოსფერო": "The Authentic Feeling of a True 'Third Place'",
         "საქართველოს ბანკი (Bank of Georgia)": "Bank of Georgia (BOG)",
-        "19:30 — 22:00 (Playback თეატრი/Bar)": "19:30 — 22:00 (Playback Theatre / Bar)",
+        "19:30 - 22:00 (Playback თეატრი/Bar)": "19:30 - 22:00 (Playback Theatre / Bar)",
         "ბიზნეს-მასტერკლასები &amp; ქოუჩინგი": "Business Masterclasses &amp; Coaching",
         "გუნდის მართვის თანამედროვე მეთოდები": "Modern Team Management Frameworks",
-        "ქეთი — ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Keti — Personal Coaching, Trainings &amp; Psychoconsulting",
-        "ქეთი — ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Keti — Personal Coaching, Trainings & Psychoconsulting",
-        "ქეთი — პოზიტიური ფსიქოთერაპევტი": "Keti — Personal Coaching, Trainings & Psychoconsulting",
+        "ქეთი - ქოუჩინგი, ტრენინგები &amp; ფსიქოკონსულტირება": "Keti - Personal Coaching, Trainings &amp; Psychoconsulting",
+        "ქეთი - ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება": "Keti - Personal Coaching, Trainings & Psychoconsulting",
+        "ქეთი - პოზიტიური ფსიქოთერაპევტი": "Keti - Personal Coaching, Trainings & Psychoconsulting",
         "ინტელექტუალური დისკუსია &amp; კლუბი": "Intellectual Discussion &amp; Club",
         "მოდერირებული ინტელექტუალური დიალოგი": "Moderated intellectual dialogue",
         "პრობლემის გადაჭრის ინოვაციური გზები": "Innovative problem-solving strategies",
@@ -4606,13 +4607,13 @@ document.addEventListener('DOMContentLoaded', () => {
         "ავთენტური Playback თეატრალური დასი": "Authentic Professional Playback Ensemble",
         "წიგნის კლუბი & ლიტერატურული სალონი": "Book Club & Literary Salon",
         "თბილი, მიმღები და მეგობრული კომუნა": "Warm, Inclusive, and Welcoming Community",
-        "17:00 — 19:00 (ვორქშოფი & თერაპია)": "17:00 — 19:00 (Workshop & Therapy)",
+        "17:00 - 19:00 (ვორქშოფი & თერაპია)": "17:00 - 19:00 (Workshop & Therapy)",
         "Mastermind საუზმეები & ნეთვორქინგი": "Mastermind Breakfasts & Networking",
         "Themed Bar &amp; სამაგიდო თამაშები": "Themed Bar &amp; Board Games",
         "კითხვა-პასუხის ინტერაქტიული რეჟიმი": "Interactive Q&A Session",
         "კომუნის შეხვედრა &amp; ნეთვორქინგი": "Community Mixer &amp; Networking",
-        "ლალი — დამფუძნებელი & ფასილიტატორი": "Lali — Psychotherapist, Trainer & Association President",
-        "ლალი — ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი": "Lali — Psychotherapist, Trainer & Association President",
+        "ლალი - დამფუძნებელი & ფასილიტატორი": "Lali - Psychotherapist, Trainer & Association President",
+        "ლალი - ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი": "Lali - Psychotherapist, Trainer & Association President",
         "მაღალი ხარისხის აუდიო-ვიდეო ჩაწერა": "High-quality audio/video recording",
         "მეტაფორას საღამო & არტ-პერფორმანსი": "Metaphora Evening & Art Performance",
         "პირადი საზღვრების დაცვის ტექნიკები": "Techniques for establishing healthy personal boundaries",
@@ -4630,7 +4631,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Lifestyle &amp; ინტერესთა კლუბები": "Lifestyle & Special Interest Clubs",
         "მეტაფორას AI ასისტენტი • 🟢 ონლაინ": "Metaphora AI Assistant • 🟢 Online",
         "✅ გადახდა დავასრულე - დადასტურება": "✅ Payment Completed - Confirm",
-        "12:00 — 14:00 (დღის ლანჩი/ლაუნჯი)": "12:00 — 14:00 (Day Lunch / Lounge)",
+        "12:00 - 14:00 (დღის ლანჩი/ლაუნჯი)": "12:00 - 14:00 (Day Lunch / Lounge)",
         "Think Tank-ის ფორმატები და თემები": "Think Tank Formats & Themes",
         "ახალი ჰობებისა და უნარების შეძენა": "Acquiring New Hobbies and Skills",
         "გამოფენები & აკუსტიკური საღამოები": "Exhibitions & Acoustic Evenings",
@@ -4648,7 +4649,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "ემოციური ინტელექტი & Mindfulness": "Emotional Intelligence & Mindfulness",
         "კრიტიკული აზროვნების განვითარება": "Cultivation of Independent Critical Thinking",
         "ემოციური კათარზისი და ინსპირაცია": "Emotional Catharsis and Deep Inspiration",
-        "✨ — „მეტაფორას“ ვირტუალური გიდი.": "✨ — Metaphora’s virtual guide.",
+        "✨ - „მეტაფორას“ ვირტუალური გიდი.": "✨ - Metaphora’s virtual guide.",
         "Art & Playback თეატრი - მეტაფორა": "Art & Playback Theatre - METAPHORA",
         "B2B პარტნიორობა &amp; მენტორინგი": "B2B Partnership &amp; Mentoring",
         "Clubs & მესამე სივრცე - მეტაფორა": "Clubs & Third Place - METAPHORA",
@@ -4675,7 +4676,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "კინო-ჩვენებები &amp; დისკუსიები": "Cinema Screenings & Cine-Club",
         "📸 დაასკანერეთ ტელეფონის კამერით": "📸 Scan with your phone camera",
         "გადახდა დავასრულე - დადასტურება": "Payment Completed - Confirm",
-        "14:30 — 16:30 (Coworking სესია)": "14:30 — 16:30 (Coworking Session)",
+        "14:30 - 16:30 (Coworking სესია)": "14:30 - 16:30 (Coworking Session)",
         "2. Soft Vintage (რბილი ვინტაჟი)": "2. Soft Vintage",
         "არტ-თერაპია და შინაგანი ბალანსი": "Art Therapy and Inner Balance",
         "ახალგაზრდა ხელოვანთა მხარდაჭერა": "Supporting Emerging Artists",
@@ -4686,7 +4687,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "ინდივიდუალური ბიზნეს-მენტორინგი": "One-on-One Business Mentoring",
         "ინტელექტუალური დისკუსია & კლუბი": "Intellectual Discussion & Club",
         "მოდერირებული ცოცხალი განხილვები": "Moderated live discussions",
-        "მარიკა — Personal & Business Coach": "Marika — Personal & Business Coach",
+        "მარიკა - Personal & Business Coach": "Marika - Personal & Business Coach",
         "პოდკასტები &amp; ღია ჩანაწერები": "Podcasts &amp; Live Recordings",
         "რას სთავაზობს მეტაფორა ბიზნესს?": "What does Metaphora offer for Business?",
         "ყავის და ჩაის შეუზღუდავი წვდომა": "Unlimited artisanal coffee & tea access",
@@ -4704,8 +4705,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "ჯავშანი და გადახდა დადასტურდა!": "Booking & Payment Confirmed!",
         "Playback იმპროვიზაციული თეატრი": "Playback Improvisational Theatre",
         "Themed Bar & სამაგიდო თამაშები": "Themed Bar & Board Games",
-        "ნათია — PTT მასტერის კანდიდატი &amp; WAPP ფსიქო-კონსულტანტი": "Natia — PTT Master Candidate &amp; WAPP Psychoconsultant",
-        "ნათია — PTT მასტერის კანდიდატი & WAPP ფსიქო-კონსულტანტი": "Natia — PTT Master Candidate & WAPP Psychoconsultant",
+        "ნათია - PTT მასტერის კანდიდატი &amp; WAPP ფსიქო-კონსულტანტი": "Natia - PTT Master Candidate &amp; WAPP Psychoconsultant",
+        "ნათია - PTT მასტერის კანდიდატი & WAPP ფსიქო-კონსულტანტი": "Natia - PTT Master Candidate & WAPP Psychoconsultant",
         "გულწრფელი და ღრმა ურთიერთობები": "Genuine and meaningful connections",
         "თვითშემეცნების სალონური წრეები": "Self-Discovery Salon Circles",
         "იდეების ლაბორატორია (Idea Lab)": "Idea Lab",
@@ -4839,7 +4840,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "განრიგი &amp; პოსტერები": "Schedule & Posters",
         "გუნდის ხმა & შეფასებები": "Team Voice & Stories",
         "შეტყობინება / კომენტარი": "Message / Comment",
-        "ყოველდღე: 10:00 — 23:00": "Every day: 10:00 — 23:00",
+        "ყოველდღე: 10:00 - 23:00": "Every day: 10:00 - 23:00",
         "🌱 პიროვნული განვითარება": "🌱 Personal Development",
         "💼 ბიზნესი & პარტნიორობა": "💼 Business & Partnerships",
         "თვითშემეცნება & ბალანსი": "Self-Discovery & Balance",
@@ -4851,7 +4852,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "ავტორი: მეტაფორას გუნდი": "Author: Metaphora Team",
         "არტ-თერაპია & მხატვრობა": "Art Therapy & Painting",
         "გამცნობი გეიმ-მასტერები": "Friendly Game Masters",
-        "მეტაბოტი — AI ასისტენტი": "MetaBot — AI Assistant",
+        "მეტაბოტი - AI ასისტენტი": "MetaBot - AI Assistant",
         "ღრმა ემოციური კათარზისი": "Deep emotional catharsis",
         "🎭 ღონისძიებები & თეატრი": "🎭 Events & Theatre",
         "💼 B2B &amp; ნეთვორქინგი": "💼 B2B &amp; Networking",
@@ -4911,7 +4912,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "აღმოაჩინე „მეტაფორა“": "Discover Metaphora",
         "თემატური მიმართულება": "Themed Pillars",
         "2. მეტაფორა Business": "2. Metaphora Business",
-        "— შენი მესამე ადგილი": "— Your Third Place",
+        "- შენი მესამე ადგილი": "- Your Third Place",
         "🏛️ 5. მეტაფორა Clubs": "🏛️ 5. Metaphora Clubs",
         "კონსულტაციის ჯავშანი": "Consultation Booking",
         "📍 ლოკაცია & კონტაქტი": "📍 Location & Contact",
@@ -5203,7 +5204,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'ნათია', jobtitle: 'პოზიტიური ფსიქოთერაპევტი & ფსიქოკონსულტანტი', text: 'პოზიტიური და ტრანსკულტურალური ფსიქოთერაპია ეხმარება ადამიანს საკუთარი შინაგანი შესაძლებლობების აღმოჩენასა და ცხოვრებისეული გამოწვევების რესურსად გარდაქმნაში.' },
                 { name: 'მარიკა', jobtitle: 'პერსონალური & ბიზნეს განვითარების ქოუჩი', text: 'ჩვენი მიზანია ადამიანებისა და ბიზნესების გაძლიერება პერსონალური და პროფესიული განვითარების, მართვის კონსალტინგისა და პრაქტიკული ქოუჩინგის გზით.' },
                 { name: 'ია', jobtitle: 'ბიზნეს განვითარება & პარტნიორობა', text: 'მეტაფორა Business აერთიანებს მეწარმეებსა და პროფესიონალებს ნაყოფიერი თანამშრომლობის, პარტნიორობისა და ახალი შესაძლებლობების შესაქმნელად.' },
-                { name: 'თეო', jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება', text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ — ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.' },
+                { name: 'თეო', jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება', text: 'მეტაფორა Clubs არის შენი „მესამე სივრცე“ - ადგილი, სადაც თავს ყოველთვის შინაურად, მყუდროდ და თავისუფლად იგრძნობ თანამოაზრეებთან ერთად.' },
                 { name: 'ქეთი', jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი', text: 'ჩვენ ვეხმარებით ადამიანებს შინაგანი რესურსების გააქტიურებაში, პიროვნულ ტრანსფორმაციასა და მიზნების მიღწევაში ქოუჩინგისა და პოზიტიური ფსიქოთერაპიის მეთოდებით.' },
                 { name: 'ია', jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება', text: 'პერსონალური ქოუჩინგი და პოზიტიური ფსიქოკონსულტირება ქმნის უსაფრთხო გარემოს თვითგამორკვევისთვის, შინაგანი რესურსების გააქტიურებისა და პიროვნული ზრდისთვის.' }
             ],
@@ -5216,7 +5217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "☕ Coworking & Mastermind საუზმე", testimonial: "დილის ყავა, პროდუქტიული ნეთვორქინგი და გამოცდილების გაზიარება სტარტაპერებთან.", by: "12 სექ | 10:30 • გიორგი გელოვანი" },
                 { title: "📚 წიგნის კლუბი & ღია დისკუსია", testimonial: "თვიური წიგნის განხილვა, საინტერესო დებატები და ცხელი ჩაის საღამო.", by: "15 სექ | 19:00 • მეტაფორა Club" }
             ],
-            botWelcome: "<p>გამარჯობა! მე ვარ <strong>მეტაბოტი</strong> ✨ — „მეტაფორას“ ვირტუალური გიდი.</p><p>რით შემიძლია დაგეხმაროთ? მკითხეთ ჩვენს <strong>სერვისებზე</strong>, <strong>სივრცეებზე</strong>, <strong>ღონისძიებებზე</strong> ან <strong>ჯავშანზე</strong>!</p>"
+            botWelcome: "<p>გამარჯობა! მე ვარ <strong>მეტაბოტი</strong> ✨ - „მეტაფორას“ ვირტუალური გიდი.</p><p>რით შემიძლია დაგეხმაროთ? მკითხეთ ჩვენს <strong>სერვისებზე</strong>, <strong>სივრცეებზე</strong>, <strong>ღონისძიებებზე</strong> ან <strong>ჯავშანზე</strong>!</p>"
         },
         EN: {
             profiles: [
@@ -5235,7 +5236,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'Natia', jobtitle: 'Positive Psychotherapist & Psychoconsultant', text: 'Positive and transcultural psychotherapy empowers individuals to discover their inner strengths and transform life challenges into valuable growth resources.' },
                 { name: 'Marika', jobtitle: 'Personal & Business Development Coach', text: 'Our mission is empowering individuals and organizations through personal & business development coaching, management consulting, and transformative training.' },
                 { name: 'Ia', jobtitle: 'Business Development & Partnerships', text: 'Metaphora Business unites entrepreneurs and professionals for impactful collaboration, strategic partnerships, and new ventures.' },
-                { name: 'Teo', jobtitle: 'Personal Coaching, Trainings & Psychoconsulting', text: 'Metaphora Clubs is your “Third Place” — where you always feel at home, relaxed, and surrounded by kindred spirits.' },
+                { name: 'Teo', jobtitle: 'Personal Coaching, Trainings & Psychoconsulting', text: 'Metaphora Clubs is your “Third Place” - where you always feel at home, relaxed, and surrounded by kindred spirits.' },
                 { name: 'Keti', jobtitle: 'Psychoconsultant, Trainer & Certified Coach', text: 'We empower individuals to activate their inner potential, achieve personal transformation, and reach meaningful goals through coaching and positive psychotherapy.' },
                 { name: 'Ia', jobtitle: 'Personal Coaching, Trainings & Psychoconsulting', text: 'Personal coaching and positive psychoconsulting create a safe environment for self-discovery, unlocking inner resources, and personal growth.' }
             ],
@@ -5248,7 +5249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "☕ Coworking & Mastermind Breakfast", testimonial: "Morning coffee, productive networking, and experience sharing with creators and founders.", by: "Sep 12 | 10:30 • Giorgi Gelovani" },
                 { title: "📚 Book Club & Open Dialogue", testimonial: "Monthly book discussion, lively debates, and a warm tea evening in good company.", by: "Sep 15 | 19:00 • Metaphora Club" }
             ],
-            botWelcome: "<p>Hello! I am <strong>MetaBot</strong> ✨ — Metaphora’s virtual AI guide.</p><p>How can I help you today? Ask me about our <strong>services</strong>, <strong>spaces</strong>, <strong>events</strong>, or <strong>booking</strong>!</p>"
+            botWelcome: "<p>Hello! I am <strong>MetaBot</strong> ✨ - Metaphora’s virtual AI guide.</p><p>How can I help you today? Ask me about our <strong>services</strong>, <strong>spaces</strong>, <strong>events</strong>, or <strong>booking</strong>!</p>"
         }
     };
 
