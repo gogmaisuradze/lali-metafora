@@ -3902,12 +3902,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function generateBotResponse(input) {
             const q = input.toLowerCase();
+            const lang = localStorage.getItem('metafora_lang') || 'KA';
+            const isEn = lang === 'EN';
+
+            if (q.includes('აფიშ') || q.includes('ღონისძიებ') || q.includes('განრიგ') || q.includes('პოსტერ') || q.includes('afisha') || q.includes('event') || q.includes('schedule') || q.includes('poster')) {
+                if (isEn) {
+                    return `<p>✨ <strong>Metaphora Afisha &amp; Upcoming Events:</strong></p>
+                    <p>Explore upcoming workshops, transformational programs, and salon dialogues at Metaphora:</p>
+                    <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 6px;">
+                        <li>🎮 <strong>Game Architect</strong> (Keti Zhvania-Tyson)</li>
+                        <li>🌿 <strong>Program Arete</strong> (Keti Zhvania-Tyson)</li>
+                        <li>❤️ <strong>Art of Loving &amp; 5 Love Languages</strong> (Lali Badridze)</li>
+                        <li>💼 <strong>Coaching for Non-Coaches</strong> (Marika Khaliani)</li>
+                        <li>🌙 <strong>Meeting with Scheherazade</strong> (Lali Badridze)</li>
+                        <li>🧠 <strong>Human Psychology in Leadership</strong> (Lali Badridze)</li>
+                    </ul>
+                    <p style="margin-top: 8px;">👉 <a href="index.html#events" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Open Afisha &amp; Posters</a> or reserve your seat online!</p>`;
+                }
+                return `<p>✨ <strong>მეტაფორას აფიშა &amp; უახლოესი განრიგი:</strong></p>
+                <p>უახლოესი ვორქშოფები, საავტორო პროგრამები და სალონური შეხვედრები მეტაფორაში:</p>
+                <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 6px;">
+                    <li>🎮 <strong>თამაშის არქიტექტორი</strong> (ქეთი ჟვანია-ტაისონი)</li>
+                    <li>🌿 <strong>პროგრამა არიტე</strong> (ქეთი ჟვანია-ტაისონი)</li>
+                    <li>❤️ <strong>სიყვარულის ხელოვნება &amp; 5 ენა</strong> (ლალი ბადრიძე)</li>
+                    <li>💼 <strong>ქოუჩინგი არაქოუჩებისთვის</strong> (მარიკა ხალიანი)</li>
+                    <li>🌙 <strong>შეხვედრა შეჰერეზადასთან</strong> (ლალი ბადრიძე)</li>
+                    <li>🧠 <strong>ადამიანის ფსიქოლოგია ლიდერობაში</strong> (ლალი ბადრიძე)</li>
+                </ul>
+                <p style="margin-top: 8px;">👉 <a href="index.html#events" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">აფიშის სრული განრიგის ნახვა</a> ან დაჯავშნეთ ადგილი ღილაკით <strong>„ჯავშანი“</strong>!</p>`;
+            }
 
             if (q.includes('რა არის') || q.includes('მეტაფორა') || q.includes('იდეა') || q.includes('კონცეფცია') || q.includes('about') || q.includes('მესამე ადგილი') || q.includes('third place')) {
+                if (isEn) {
+                    return `<p>✨ <strong>Metaphora</strong> is an <em>Edutainment Hub &amp; Third Place</em> - a sanctuary beyond home and workplace!</p><p>It is a premier lifestyle hub in Tbilisi integrating personal development, business mastermind networking, intellectual salon dialogues (Think Tank), Playback Theatre, and boutique community clubs.</p>`;
+                }
                 return `<p>✨ <strong>მეტაფორა</strong> არის <em>Edutainment Hub &amp; Third Place</em> - მესამე ადგილი სახლსა და სამსახურს მიღმა!</p><p>ეს არის უნიკალური სივრცე თბილისში, რომელიც აერთიანებს პიროვნულ განვითარებას, ბიზნეს-ნეთვორქინგს, სალონურ დისკუსიებს (Think Tank), Playback თეატრსა და თემატურ კლუბებს.</p>`;
             }
 
             if (q.includes('სერვის') || q.includes('მიმართულებ') || q.includes('რას გვთავაზობთ') || q.includes('service') || q.includes('ფასი') || q.includes('რა გაქვთ')) {
+                if (isEn) {
+                    return `<p>🌱 <strong>Metaphora's 5 Signature Directions:</strong></p>
+                    <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px;">
+                        <li><a href="service-personal-development.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🌱 1. Personal Development</a> - Psychotherapy &amp; Life Balance</li>
+                        <li><a href="service-business.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">💼 2. Business</a> - B2B &amp; Mastermind Sessions</li>
+                        <li><a href="service-think-tank.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🧠 3. Think Tank</a> - Intellectual Salon Dialogues</li>
+                        <li><a href="service-art.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🎨 4. Art</a> - Playback Theatre &amp; Creative Workshops</li>
+                        <li><a href="service-clubs.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🏛️ 5. Clubs</a> - Third Place Community &amp; Game Nights</li>
+                    </ul>
+                    <p style="margin-top: 8px;">👉 Click on any service to explore its dedicated page!</p>`;
+                }
                 return `<p>🌱 <strong>მეტაფორას 5 ინდივიდუალური მიმართულება:</strong></p>
                 <ul style="margin-left: 18px; margin-top: 6px; display: flex; flex-direction: column; gap: 8px;">
                     <li><a href="service-personal-development.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">🌱 1. Personal Development</a> - ფსიქოთერაპია &amp; ბალანსი</li>
@@ -3920,29 +3963,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (q.includes('თეატრ') || q.includes('playback') || q.includes('პლეიბექ') || q.includes('art') || q.includes('ხელოვნებ') || q.includes('სპექტაკლ')) {
+                if (isEn) {
+                    return `<p>🎭 <strong>Playback Theatre &amp; Fine Art:</strong></p><p>Playback Theatre is an improvisational art form where true audience stories and feelings are instantaneously enacted on stage. It is an extraordinary experience for emotional catharsis and connection!</p><p>Join us and become a co-creator of the live show ✨</p>`;
+                }
                 return `<p>🎭 <strong>Playback თეატრი &amp; Art:</strong></p><p>Playback თეატრი არის ინტერაქციული იმპროვიზაციული ხელოვნება, სადაც მაყურებლების მიერ მოყოლილი ისტორიები და ემოციები სცენაზე ცოცხლდება. ეს არის საუკეთესო გზა ემოციური განტვირთვისა და თვითშემეცნებისთვის!</p><p>გვესტუმრეთ და გახდით სპექტაკლის თანაავტორი ✨</p>`;
             }
 
             if (q.includes('ჯავშან') || q.includes('დაჯავშნ') || q.includes('ადგილ') || q.includes('რეგისტრაცი') || q.includes('book') || q.includes('ვიზიტი')) {
+                if (isEn) {
+                    return `<p>📅 <strong>Online Booking:</strong></p><p>You can reserve your seat by clicking the <strong>“Book Now”</strong> button in the top menu or on any event card. Our team will contact you shortly to confirm your booking! ✨</p>`;
+                }
                 return `<p>📅 <strong>ადგილის დაჯავშნა:</strong></p><p>ადგილის დასაჯავშნად შეგიძლიათ დააჭიროთ ღილაკს <strong>„ჯავშანი“</strong> ზედა მენიუში, ან გადახვიდეთ კონტაქტის ფორმაზე. ჩვენი გუნდი უმოკლეს დროში დაგიკავშირდებათ დეტალების შესათანხმებლად! ✨</p>`;
             }
 
             if (q.includes('გუნდ') || q.includes('ვინ ხართ') || q.includes('წევრ') || q.includes('team') || q.includes('დამფუძნებელ')) {
+                if (isEn) {
+                    return `<p>👥 <strong>Metaphora Team:</strong></p><p>Our interdisciplinary team includes certified positive psychotherapists, executive business mentors, Playback Theatre actors, and community moderators. Meet our mentors in the Team section!</p>`;
+                }
                 return `<p>👥 <strong>მეტაფორას გუნდი:</strong></p><p>ჩვენს გუნდში არიან სერტიფიცირებული პოზიტიური ფსიქოთერაპევტები, ბიზნეს-მენტორები, Playback თეატრის მსახიობები და საზოგადოებრივი მოდერატორები. გაიცანით ჩვენი გუნდის სრული წრე მთავარი გვერდის გუნდის სექციაში!</p>`;
             }
 
             if (q.includes('ლოკაცი') || q.includes('სად') || q.includes('მისამართ') || q.includes('კონტაქტ') || q.includes('ტელეფონ') || q.includes('ნომერ') || q.includes('location')) {
-                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, საქართველოში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>club@metaphora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
+                if (isEn) {
+                    return `<p>📍 <strong>Contact &amp; Location:</strong></p><p>Metaphora is located at 63a Aghmashenebeli Ave, Tbilisi, Georgia.<br>📞 Phone: <strong>+995 599 22 82 28</strong><br>✉️ Email: <strong>club@metaphora.ge</strong><br>⏰ Working Hours: Daily 10:00 - 23:00.</p>`;
+                }
+                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, აღმაშენებლის 63ა-ში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>club@metaphora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
             }
 
             if (q.includes('გალერე') || q.includes('ფოტო') || q.includes('gallery') || q.includes('სივრცე')) {
+                if (isEn) {
+                    return `<p>🖼️ <strong>Photo Gallery:</strong></p><p>Explore our bespoke spaces (Mosaic Lounge, Themed Bar, Club Room) and community moments on our gallery page! 👉 <a href="gallery.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">View Gallery</a></p>`;
+                }
                 return `<p>🖼️ <strong>ფოტოგალერეა:</strong></p><p>გალერეის გვერდზე შეგიძლიათ იხილოთ მეტაფორას უნიკალური სივრცეები (შესასვლელი, მოზაიკა, Themed Bar, კლუბების ოთახი) და ჩვენი გუნდის ფოტოები! 👉 <a href="gallery.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">გალერეის ნახვა</a></p>`;
             }
 
             if (q.includes('ბლოგ') || q.includes('სტატი') || q.includes('ნაშრომ') || q.includes('blog')) {
+                if (isEn) {
+                    return `<p>📖 <strong>Metaphora Blog &amp; Articles:</strong></p><p>Read our latest essays on Third Places, the psychology of Playback Theatre, emotional intelligence, and mindfulness. 👉 <a href="blog.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Open Blog</a></p>`;
+                }
                 return `<p>📖 <strong>მეტაფორას ბლოგი &amp; სტატიები:</strong></p><p>ბლოგის გვერდზე გაეცნობით საინტერესო სტატიებს „მესამე ადგილის“ ფენომენზე, Playback თეატრის თერაპიულ ეფექტზე, ემოციურ ინტელექტსა და პიროვნულ ბალანსზე. 👉 <a href="blog.html" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">ბლოგის გახსნა</a></p>`;
             }
 
+            if (isEn) {
+                return `<p>Thank you for reaching out! ✨</p><p>For further information about Metaphora, select any quick prompt below or call us directly at <strong>📞 +995 599 22 82 28</strong>.</p>`;
+            }
             return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ქვემოთ, ან დაგვიკავშირდეთ ნომერზე <strong>📞 599 22 82 28</strong>.</p>`;
         }
 
@@ -6605,6 +6669,11 @@ document.addEventListener('DOMContentLoaded', () => {
         "გახდი პარტნიორი 💼": "Become a Partner 💼",
         "სოციალური ქსელები": "Social Media",
         "🎭 Playback თეატრი": "🎭 Playback Theatre",
+        "✨ აფიშა & განრიგი": "✨ Afisha & Schedule",
+        "✨ აფიშა &amp; განრიგი": "✨ Afisha &amp; Schedule",
+        "აფიშა & განრიგი": "Afisha & Schedule",
+        "აფიშა &amp; განრიგი": "Afisha &amp; Schedule",
+        "✨ აფიშა": "✨ Afisha",
         "დებატები & იდეები": "Debates & Ideas",
         "🎬 ვიდეო მიმოხილვა": "🎬 Video Overview",
         "სრულად წაკითხვა →": "Read Full Story →",
