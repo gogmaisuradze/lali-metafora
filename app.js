@@ -1578,7 +1578,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ლალი',
             fullname: 'ლალი ბადრიძე',
             jobtitle: 'ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი',
-            serviceKeys: ['think-tank', 'business', 'personal-development'],
+            serviceKeys: ['think-tank', 'business'],
             facebook: 'https://www.facebook.com/lali.badridze',
             instagram: 'https://www.instagram.com/lali_badridze/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1634,7 +1634,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ია',
             fullname: 'ია ხიდირბეგიშვილი',
             jobtitle: 'ბიზნეს განვითარება & პარტნიორობა',
-            serviceKeys: ['business'],
+            serviceKeys: ['business', 'art'],
             facebook: 'https://www.facebook.com/ia.khidirbegishvili',
             instagram: 'https://www.instagram.com/istudioatelia/',
             whatsapp: 'https://wa.me/995599228228',
@@ -4414,39 +4414,231 @@ document.addEventListener('DOMContentLoaded', () => {
         function openEventDetails(eventId, targetLang) {
             const lang = targetLang || (localStorage.getItem('metafora_lang') || 'KA');
             const numericId = String(eventId).replace('event-', '');
-            const event = EVENTS_DETAILS_DATABASE[numericId];
+            const isServicePage = !!document.querySelector('.service-page-main');
+
+            const SERVICE_PROGRAMS_MAP = {
+                'art-playback': {
+                    categoryKA: '🎨 მეტაფორა Art',
+                    categoryEN: '🎨 Metaphora Art',
+                    authorKA: 'ია ხიდირბეგიშვილი',
+                    authorEN: 'Ia Khidirbegishvili',
+                    mentorImg: 'გუნდი/5.jpg',
+                    KA: {
+                        title: '🎭 Playback იმპროვიზაციული თეატრი',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„Playback თეატრი — სივრცე, სადაც თქვენი პირადი ამბავი ხელოვნებად გარდაიქმნება.“</div>
+                            <p>Playback თეატრი არის ინტერაქციული და იმპროვიზაციული ხელოვნების უნიკალური ფორმა. მაყურებელი ჰყვება საკუთარ რეალურ ისტორიას, გრძნობას ან განცდას, ხოლო მსახიობები და მუსიკოსი მყისიერად, წინასწარი მომზადების გარეშე, სცენაზე აცოცხლებენ მას.</p>
+                            <div class="word-card-box teal-tint">
+                                <h4>🌟 რას იძლევა Playback თეატრი:</h4>
+                                <ul class="word-list">
+                                    <li>საკუთარი თავის გარედან დანახვა და ახლებური გააზრება;</li>
+                                    <li>ემპათიის, თანაგანცდისა და საერთო ადამიანური კავშირის განცდა;</li>
+                                    <li>ემოციური განტვირთვა და კათარზისი უსაფრთხო, მიმღებ გარემოში.</li>
+                                </ul>
+                            </div>
+                        </div>`
+                    },
+                    EN: {
+                        title: '🎭 Playback Improvisational Theatre',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">“Playback Theatre — where real human stories turn into spontaneous art.”</div>
+                            <p>An interactive theatrical format where audience experiences and emotions are transformed into live stage scenes.</p>
+                        </div>`
+                    }
+                },
+                'art-therapy': {
+                    categoryKA: '🎨 მეტაფორა Art',
+                    categoryEN: '🎨 Metaphora Art',
+                    authorKA: 'მეტაფორა Art',
+                    authorEN: 'Metaphora Art',
+                    mentorImg: 'გუნდი/5.jpg',
+                    KA: {
+                        title: '🎨 არტ-თერაპია & თვითგამოხატვა',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„ხელოვნება ხსნის გზას იმ არაცნობიერ ემოციებთან, რომელთა სიტყვებით გამოხატვა ხშირად რთულია.“</div>
+                            <p>არტ-თერაპიული სესიები შექმნილია ემოციური განტვირთვის, შინაგანი კონფლიქტების გადალახვისა და თვითშემეცნებისთვის. ვიზუალური ხელოვნების საშუალებით მონაწილეები სწავლობენ საკუთარი ემოციების უსაფრთხო გამოხატვას.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '🎨 Art Therapy & Self-Expression',
+                        html: `<div class="word-doc-container">
+                            <p>Creative art therapy workshops focusing on emotional balance, self-reflection, and inner harmony.</p>
+                        </div>`
+                    }
+                },
+                'art-ceramic': {
+                    categoryKA: '🎨 მეტაფორა Art',
+                    categoryEN: '🎨 Metaphora Art',
+                    authorKA: 'მეტაფორა Art',
+                    authorEN: 'Metaphora Art',
+                    mentorImg: 'გუნდი/5.jpg',
+                    KA: {
+                        title: '🏺 ფერწერა & კერამიკის მასტერკლასები',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„ხელით შექმნის სიხარული და მედიტაციური სიმშვიდე თიხასა და ფერებში.“</div>
+                            <p>პრაქტიკული ვორქშოფები, სადაც ნებისმიერ მსურველს შეუძლია შექმნას საკუთარი ხელნაკეთი კერამიკული ნივთი ან დახატოს ტილოზე პროფესიონალი ოსტატის ხელმძღვანელობით.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '🏺 Painting & Ceramic Masterclasses',
+                        html: `<div class="word-doc-container">
+                            <p>Practical workshops for ceramic sculpting and painting in a relaxed studio atmosphere.</p>
+                        </div>`
+                    }
+                },
+                'art-performance': {
+                    categoryKA: '🎨 მეტაფორა Art',
+                    categoryEN: '🎨 Metaphora Art',
+                    authorKA: 'მეტაფორა Art',
+                    authorEN: 'Metaphora Art',
+                    mentorImg: 'გუნდი/5.jpg',
+                    KA: {
+                        title: '🎶 პერფორმანსები & კულტურული საღამოები',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„ესთეტიკური სიამოვნება, ცოცხალი მუსიკა და ინსპირაციული შეხვედრები.“</div>
+                            <p>მეტაფორა რეგულარულად მასპინძლობს კამერულ აკუსტიკურ კონცერტებს, პოეზიის საღამოებს, თანამედროვე მხატვრების გამოფენებსა და პერფორმანსებს.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '🎶 Performances & Cultural Evenings',
+                        html: `<div class="word-doc-container">
+                            <p>Intimate acoustic concerts, poetry readings, art exhibitions, and cultural evenings.</p>
+                        </div>`
+                    }
+                },
+                'club-third-place': {
+                    categoryKA: '🏛️ მეტაფორა Clubs',
+                    categoryEN: '🏛️ Metaphora Clubs',
+                    authorKA: 'თეო ფერაძე',
+                    authorEN: 'Teo Peradze',
+                    mentorImg: 'გუნდი/6.jpg',
+                    KA: {
+                        title: '🏛️ მესამე სივრცე & კომუნა',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„მესამე ადგილი — სახლსა და სამსახურს მიღმა, სადაც თავს ნამდვილად შინაურად გრძნობთ.“</div>
+                            <p>მეტაფორას საკლუბო სივრცე აერთიანებს ადამიანებს, რომელთაც სურთ შინაარსიანი ურთიერთობები, ახალი ნაცნობობა და კომფორტული გარემო იდეების გასაზიარებლად.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '🏛️ Third Place & Community',
+                        html: `<div class="word-doc-container">
+                            <p>The Third Place beyond home and work — a thriving hub for shared thinking, dialogue, and community.</p>
+                        </div>`
+                    }
+                },
+                'club-books': {
+                    categoryKA: '🏛️ მეტაფორა Clubs',
+                    categoryEN: '🏛️ Metaphora Clubs',
+                    authorKA: 'მეტაფორა Clubs',
+                    authorEN: 'Metaphora Clubs',
+                    mentorImg: 'blog_book_club.jpg',
+                    KA: {
+                        title: '📖 სამკითხველო & კინოკლუბი',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„წიგნები და ფილმები, რომლებიც გვაფიქრებს ცხოვრების არსზე.“</div>
+                            <p>მოდერირებული განხილვები, სადაც ვიკრიბებით საინტერესო ლიტერატურისა და საკულტო კინემატოგრაფიის გარშემო. თბილი ჩაი, ინტელექტუალური დისკუსია და შთაგონება.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '📖 Reading & Cinema Club',
+                        html: `<div class="word-doc-container">
+                            <p>Moderated book and cinema discussions exploring psychology, culture, and human connections.</p>
+                        </div>`
+                    }
+                },
+                'club-board-games': {
+                    categoryKA: '🏛️ მეტაფორა Clubs',
+                    categoryEN: '🏛️ Metaphora Clubs',
+                    authorKA: 'მეტაფორა Clubs',
+                    authorEN: 'Metaphora Clubs',
+                    mentorImg: 'გუნდი/6.jpg',
+                    KA: {
+                        title: '🎲 სამაგიდო & ფსიქოლოგიური თამაშები',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„თამაში — საუკეთესო გზა კომუნიკაციის, განტვირთვისა და სტრატეგიული აზროვნებისთვის.“</div>
+                            <p>50-ზე მეტი თანამედროვე სამაგიდო და ფსიქოლოგიური თამაში გამოცდილ გეიმ-მასტერებთან ერთად: Mafia, Catan, Dixit, Codenames, საავტორო ფსიქოლოგიური ქვესტები.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '🎲 Board & Psychological Games',
+                        html: `<div class="word-doc-container">
+                            <p>Strategic and psychological board game nights guided by skilled game masters.</p>
+                        </div>`
+                    }
+                },
+                'club-mastermind': {
+                    categoryKA: '🏛️ მეტაფორა Clubs',
+                    categoryEN: '🏛️ Metaphora Clubs',
+                    authorKA: 'მეტაფორა Clubs',
+                    authorEN: 'Metaphora Clubs',
+                    mentorImg: 'გუნდი/6.jpg',
+                    KA: {
+                        title: '💻 Mastermind & Coworking Lounge',
+                        html: `<div class="word-doc-container">
+                            <div class="word-quote-box">„ფოკუსირებული სამუშაო გარემო და იდეების გენერირების სივრცე.“</div>
+                            <p>ერგონომიული სამუშაო ზონები, სწრაფი ინტერნეტი, შეხვედრების ოთახები და Mastermind ფორმატი ბიზნეს იდეების დასახვეწად.</p>
+                        </div>`
+                    },
+                    EN: {
+                        title: '💻 Mastermind & Coworking Lounge',
+                        html: `<div class="word-doc-container">
+                            <p>Quiet, ergonomic boutique coworking lounge and collaborative mastermind sessions.</p>
+                        </div>`
+                    }
+                }
+            };
+
+            const event = EVENTS_DETAILS_DATABASE[numericId] || SERVICE_PROGRAMS_MAP[numericId] || SERVICE_PROGRAMS_MAP[eventId];
             if (!event) return;
 
             currentOpenArticleId = numericId;
             currentOpenType = 'event';
 
-            if (topicBadge) topicBadge.textContent = (lang === 'EN' ? event.categoryEN : event.categoryKA);
-            if (durationEl) durationEl.textContent = (lang === 'EN' ? event.dateEN : event.dateKA);
+            if (topicBadge) topicBadge.textContent = (lang === 'EN' ? (event.categoryEN || event.category) : (event.categoryKA || event.category));
+            if (durationEl) {
+                if (isServicePage) {
+                    durationEl.textContent = (lang === 'EN' ? 'Metaphora Hub' : 'მეტაფორა ჰაბი');
+                } else {
+                    durationEl.textContent = (lang === 'EN' ? event.dateEN : event.dateKA);
+                }
+            }
             if (heroImg) {
                 heroImg.src = event.mentorImg || 'გუნდი/1.jpg';
-                heroImg.alt = event[lang].title;
+                heroImg.alt = (event[lang] ? event[lang].title : '');
             }
-            if (titleEl) titleEl.textContent = event[lang].title;
-            if (authorEl) authorEl.textContent = (lang === 'EN' ? event.authorEN : event.authorKA);
+            if (titleEl) titleEl.textContent = (event[lang] ? event[lang].title : (event.titleKA || ''));
+            if (authorEl) authorEl.textContent = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
             if (authorImgEl) {
                 authorImgEl.src = event.mentorImg || 'გუნდი/1.jpg';
-                authorImgEl.alt = (lang === 'EN' ? event.authorEN : event.authorKA);
+                authorImgEl.alt = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
             }
             if (dateEl) {
-                dateEl.textContent = lang === 'EN' ? `Metaphora • 63a Aghmashenebeli • ${event.dateEN}` : `მეტაფორა • აღმაშენებლის 63ა • ${event.dateKA}`;
+                if (isServicePage) {
+                    dateEl.textContent = lang === 'EN' ? 'Metaphora • 63a Aghmashenebeli' : 'მეტაფორა • აღმაშენებლის 63ა';
+                } else {
+                    dateEl.textContent = lang === 'EN' ? `Metaphora • 63a Aghmashenebeli • ${event.dateEN || ''}` : `მეტაფორა • აღმაშენებლის 63ა • ${event.dateKA || ''}`;
+                }
             }
-            if (contentEl) contentEl.innerHTML = event[lang].html;
+            if (contentEl) {
+                contentEl.innerHTML = (event[lang] ? event[lang].html : (event.KA ? event.KA.html : ''));
+            }
 
             if (bookBtn) {
-                bookBtn.setAttribute('data-event-date', event.date);
-                bookBtn.setAttribute('data-event-time', event.time);
-                bookBtn.setAttribute('data-service', event.category);
-                bookBtn.setAttribute('data-event-title', event[lang].title);
+                bookBtn.setAttribute('data-event-date', event.date || '');
+                bookBtn.setAttribute('data-event-time', event.time || '');
+                bookBtn.setAttribute('data-service', event.category || '');
+                bookBtn.setAttribute('data-event-title', (event[lang] ? event[lang].title : ''));
                 bookBtn.textContent = (lang === 'EN' ? 'Book Now' : 'ადგილის დაჯავშნა');
             }
 
-            if (ctaTitle) ctaTitle.textContent = (lang === 'EN' ? 'Want to attend this event?' : 'გსურთ ამ ღონისძიებაზე დასწრება?');
-            if (ctaSub) ctaSub.textContent = (lang === 'EN' ? 'Reserve your seat online in just a few clicks.' : 'დაჯავშნეთ თქვენი ადგილი ღონისძიებაზე ონლაინ.');
+            if (ctaTitle) ctaTitle.textContent = (lang === 'EN' ? 'Want to attend this program?' : 'გსურთ ამ პროგრამაში მონაწილეობა?');
+            if (ctaSub) ctaSub.textContent = (lang === 'EN' ? 'Reserve your seat online in just a few clicks.' : 'დაჯავშნეთ თქვენი ადგილი პროგრამაზე ონლაინ.');
+
+            if (isServicePage) {
+                overlay.classList.add('service-mode');
+            } else {
+                overlay.classList.remove('service-mode');
+            }
 
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');

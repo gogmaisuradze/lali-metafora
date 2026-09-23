@@ -5900,6 +5900,13 @@ body.metabot-open .metabot-launcher-btn {
     background: #f8fafc;
 }
 
+/* Service Mode: Clean drawer without price/calendar tables */
+.article-reader-overlay.service-mode .word-meta-table,
+.article-reader-overlay.service-mode .word-section-title:has(+ .word-meta-table),
+body:has(.service-page-main) .word-meta-table {
+    display: none !important;
+}
+
 @media (max-width: 600px) {
     .article-reader-drawer {
         width: 100vw;
@@ -6169,40 +6176,30 @@ body.metabot-open .metabot-launcher-btn {
     margin: 0;
 }
 
-.service-checklist {
-    list-style: none;
-    padding: 0;
-    margin: 4px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.service-checklist li {
-    font-size: 0.88rem;
-    color: #334155;
+.service-feat-actions {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.service-checklist li::before {
-    content: "✓";
+.service-feat-trainer-badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: rgba(1, 97, 102, 0.1);
-    color: var(--primary-color);
-    font-size: 0.72rem;
-    font-weight: 800;
-    flex-shrink: 0;
+    gap: 4px;
+    padding: 3px 10px;
+    background: var(--brand-teal-light, #f0fdfa);
+    color: var(--primary-color, #016166);
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 700;
 }
 
-[data-theme="plum"] .service-checklist li::before {
-    background: rgba(122, 57, 99, 0.1);
+[data-theme="plum"] .service-feat-trainer-badge {
+    background: var(--brand-plum-light);
     color: var(--brand-plum);
 }
 
