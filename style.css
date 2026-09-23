@@ -7031,6 +7031,263 @@ body:has(.service-page-main) .word-meta-table {
     }
 }
 
+/* ==========================================================================
+   QUICK REGISTRATION POPUP MODAL (BLUR BACKGROUND)
+   ========================================================================== */
+.quick-reg-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.48);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    z-index: 2100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.32s;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.quick-reg-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.quick-reg-modal-glass {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    border-radius: 28px;
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22), inset 0 1.5px 1.5px #ffffff;
+    padding: 34px 30px;
+    transform: scale(0.93) translateY(18px);
+    transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.quick-reg-modal-overlay.active .quick-reg-modal-glass {
+    transform: scale(1) translateY(0);
+}
+
+.quick-reg-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #475569;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    z-index: 10;
+}
+
+.quick-reg-close-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+    transform: scale(1.08);
+}
+
+.quick-reg-modal-header {
+    margin-bottom: 22px;
+}
+
+.quick-reg-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: rgba(1, 97, 102, 0.08);
+    color: var(--primary-color, #016166);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(1, 97, 102, 0.15);
+}
+
+.quick-reg-title {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color, #016166);
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+}
+
+.quick-reg-desc {
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+}
+
+.quick-reg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.quick-reg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.quick-reg-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #334155;
+}
+
+.quick-reg-label .req-star {
+    color: #e11d48;
+    font-weight: 700;
+}
+
+.quick-reg-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.quick-reg-input-icon {
+    position: absolute;
+    left: 14px;
+    font-size: 0.95rem;
+    pointer-events: none;
+    color: #94a3b8;
+}
+
+.quick-reg-input {
+    width: 100%;
+    padding: 11px 14px 11px 40px;
+    font-size: 0.92rem;
+    font-family: inherit;
+    color: #0f172a;
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    box-sizing: border-box;
+}
+
+.quick-reg-input:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--primary-color, #016166);
+    box-shadow: 0 0 0 3.5px rgba(1, 97, 102, 0.15);
+}
+
+.quick-reg-status-box {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    transition: opacity 0.2s;
+}
+
+.quick-reg-status-box.error {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+}
+
+.quick-reg-status-box.success {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.btn-quick-reg-submit {
+    width: 100%;
+    padding: 13px 20px;
+    background: var(--primary-color, #016166);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.96rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(1, 97, 102, 0.28);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.btn-quick-reg-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(1, 97, 102, 0.38);
+    background: var(--primary-hover, #024b4f);
+}
+
+.btn-quick-reg-submit:active {
+    transform: translateY(0);
+}
+
+.quick-reg-success-screen {
+    text-align: center;
+    padding: 15px 0 10px 0;
+}
+
+.quick-reg-success-icon {
+    font-size: 3.2rem;
+    margin-bottom: 12px;
+    animation: quickRegBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes quickRegBounce {
+    0% { transform: scale(0.3); opacity: 0; }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.quick-reg-success-title {
+    font-family: var(--font-title);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--primary-color, #016166);
+    margin: 0 0 8px 0;
+}
+
+.quick-reg-success-desc {
+    font-size: 0.92rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+    .quick-reg-modal-glass {
+        padding: 24px 20px;
+        border-radius: 22px;
+    }
+    .quick-reg-title {
+        font-size: 1.3rem;
+    }
+}
+
+
 
 
 

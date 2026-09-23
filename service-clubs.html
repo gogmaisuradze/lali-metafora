@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="logo_o_teal.png">
     <link rel="shortcut icon" href="logo_o_teal.png">
     <link rel="apple-touch-icon" href="logo_o_teal.png">
-    <link rel="stylesheet" href="style.css?v=20260923_v18">
+    <link rel="stylesheet" href="style.css?v=20260923_v19">
 </head>
 <body>
 
@@ -862,8 +862,81 @@
             </div>
         </div>
     </div>
+    <!-- ==========================================================================
+         QUICK REGISTRATION POPUP MODAL (BLUR BACKGROUND)
+         ========================================================================== -->
+    <div class="quick-reg-modal-overlay" id="quick-reg-modal-overlay" aria-hidden="true">
+        <div class="quick-reg-modal-glass" id="quick-reg-modal-glass-card" role="dialog" aria-modal="true">
+            <button class="quick-reg-close-btn" id="quick-reg-close-btn" aria-label="დახურვა">&times;</button>
+            
+            <div id="quick-reg-form-view">
+                <div class="quick-reg-modal-header">
+                    <span class="quick-reg-badge" id="quick-reg-badge">✨ სწრაფი რეგისტრაცია</span>
+                    <h3 class="quick-reg-title" id="quick-reg-title">პროგრამაზე რეგისტრაცია</h3>
+                    <p class="quick-reg-desc" id="quick-reg-desc">შეავსეთ მარტივი ფორმა და ჩვენი გუნდი მალე დაგიკავშირდებათ.</p>
+                </div>
+
+                <form class="quick-reg-form" id="quick-reg-form" novalidate>
+                    <div class="quick-reg-field" id="quick-reg-program-field" style="display: none;">
+                        <label class="quick-reg-label" id="quick-reg-lbl-program">პროგრამა / მიმართულება</label>
+                        <input type="text" class="quick-reg-input" id="quick-reg-program-input" readonly>
+                    </div>
+
+                    <div class="quick-reg-field">
+                        <label class="quick-reg-label" for="quick-reg-name" id="quick-reg-lbl-name">სახელი, გვარი <span class="req-star">*</span></label>
+                        <div class="quick-reg-input-wrapper">
+                            <span class="quick-reg-input-icon">👤</span>
+                            <input type="text" class="quick-reg-input" id="quick-reg-name" name="fullname" placeholder="მაგ: გიორგი მაისურაძე" required>
+                        </div>
+                    </div>
+
+                    <div class="quick-reg-field">
+                        <label class="quick-reg-label" for="quick-reg-phone" id="quick-reg-lbl-phone">ტელ. ნომერი <span class="req-star">*</span></label>
+                        <div class="quick-reg-input-wrapper">
+                            <span class="quick-reg-input-icon">📞</span>
+                            <input type="tel" class="quick-reg-input" id="quick-reg-phone" name="phone" placeholder="მაგ: 599 00 00 00" required>
+                        </div>
+                    </div>
+
+                    <div class="quick-reg-field">
+                        <label class="quick-reg-label" for="quick-reg-email" id="quick-reg-lbl-email">მეილი <span class="req-star">*</span></label>
+                        <div class="quick-reg-input-wrapper">
+                            <span class="quick-reg-input-icon">✉️</span>
+                            <input type="email" class="quick-reg-input" id="quick-reg-email" name="email" placeholder="მაგ: example@mail.com" required>
+                        </div>
+                    </div>
+
+                    <div class="quick-reg-field">
+                        <label class="quick-reg-label" for="quick-reg-company" id="quick-reg-lbl-company">კომპანია, რომელსაც წარმოადგენთ</label>
+                        <div class="quick-reg-input-wrapper">
+                            <span class="quick-reg-input-icon">🏢</span>
+                            <input type="text" class="quick-reg-input" id="quick-reg-company" name="company" placeholder="მაგ: კომპანიის ან ორგანიზაციის სახელი">
+                        </div>
+                    </div>
+
+                    <div id="quick-reg-status" class="quick-reg-status-box hidden"></div>
+
+                    <button type="submit" class="btn-quick-reg-submit" id="btn-quick-reg-submit">
+                        <span id="quick-reg-submit-text">რეგისტრაციის გაგზავნა ✨</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success screen -->
+            <div class="quick-reg-success-screen hidden" id="quick-reg-success-screen">
+                <div class="quick-reg-success-icon">🎉</div>
+                <h3 class="quick-reg-success-title" id="quick-reg-success-title">რეგისტრაცია წარმატებით გაიგზავნა!</h3>
+                <p class="quick-reg-success-desc" id="quick-reg-success-desc">მადლობა დაინტერესებისთვის. ჩვენი წარმომადგენელი უახლოეს დროში დაგიკავშირდებათ მითითებულ ნომერზე.</p>
+                <button type="button" class="btn-quick-reg-submit" id="btn-quick-reg-close-success" style="margin-top: 18px;">
+                    <span id="quick-reg-close-text">დახურვა</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Application Script (Single Source of Truth) -->
-    <script src="app.js?v=20260923_v18"></script>
+    <script src="app.js?v=20260923_v19"></script>
 </body>
 </html>

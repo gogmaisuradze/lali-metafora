@@ -4800,6 +4800,202 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==========================================================================
+    // 17.8. QUICK REGISTRATION POPUP MODAL CONTROLLER (BLUR BACKGROUND)
+    // ==========================================================================
+    function initQuickRegistrationModal() {
+        const overlay = document.getElementById('quick-reg-modal-overlay');
+        const glassCard = document.getElementById('quick-reg-modal-glass-card');
+        const closeBtn = document.getElementById('quick-reg-close-btn');
+        const formView = document.getElementById('quick-reg-form-view');
+        const successScreen = document.getElementById('quick-reg-success-screen');
+        const closeSuccessBtn = document.getElementById('btn-quick-reg-close-success');
+        const form = document.getElementById('quick-reg-form');
+        const statusBox = document.getElementById('quick-reg-status');
+        const submitBtn = document.getElementById('btn-quick-reg-submit');
+        const programField = document.getElementById('quick-reg-program-field');
+        const programInput = document.getElementById('quick-reg-program-input');
+
+        if (!overlay) return;
+
+        function openModal(programTitle, category) {
+            const curLang = localStorage.getItem('metafora_lang') || 'KA';
+            const isEn = curLang === 'EN';
+
+            if (formView) formView.classList.remove('hidden');
+            if (successScreen) successScreen.classList.add('hidden');
+            if (statusBox) {
+                statusBox.className = 'quick-reg-status-box hidden';
+                statusBox.textContent = '';
+            }
+            if (form) form.reset();
+
+            if (programTitle && programField && programInput) {
+                programField.style.display = 'block';
+                programInput.value = programTitle;
+            } else if (programField) {
+                programField.style.display = 'none';
+            }
+
+            // Translation strings
+            const t = {
+                badge: isEn ? '✨ Quick Registration' : '✨ სწრაფი რეგისტრაცია',
+                title: isEn ? 'Program Registration' : 'პროგრამაზე რეგისტრაცია',
+                desc: isEn ? 'Fill out this simple form and our team will get in touch shortly.' : 'შეავსეთ მარტივი ფორმა და ჩვენი გუნდი მალე დაგიკავშირდებათ.',
+                lblProgram: isEn ? 'Selected Program' : 'არჩეული პროგრამა',
+                lblName: isEn ? 'Full Name *' : 'სახელი, გვარი *',
+                namePlaceholder: isEn ? 'e.g. John Doe' : 'მაგ: გიორგი მაისურაძე',
+                lblPhone: isEn ? 'Phone Number *' : 'ტელ. ნომერი *',
+                phonePlaceholder: isEn ? 'e.g. +995 599 00 00 00' : 'მაგ: 599 00 00 00',
+                lblEmail: isEn ? 'Email *' : 'მეილი (ელ-ფოსტა) *',
+                emailPlaceholder: isEn ? 'e.g. info@example.com' : 'მაგ: example@mail.com',
+                lblCompany: isEn ? 'Company / Organization' : 'კომპანია, რომელსაც წარმოადგენთ',
+                compPlaceholder: isEn ? 'e.g. Company Name' : 'მაგ: კომპანიის ან ორგანიზაციის სახელი',
+                submit: isEn ? 'Submit Registration ✨' : 'რეგისტრაციის გაგზავნა ✨',
+                succTitle: isEn ? 'Registration Submitted!' : 'რეგისტრაცია წარმატებით გაიგზავნა!',
+                succDesc: isEn ? 'Thank you! Our representative will contact you shortly.' : 'მადლობა დაინტერესებისთვის. ჩვენი წარმომადგენელი უახლოეს დროში დაგიკავშირდებათ.',
+                close: isEn ? 'Close' : 'დახურვა'
+            };
+
+            const badgeEl = document.getElementById('quick-reg-badge');
+            const titleEl = document.getElementById('quick-reg-title');
+            const descEl = document.getElementById('quick-reg-desc');
+            const lblProg = document.getElementById('quick-reg-lbl-program');
+            const lblName = document.getElementById('quick-reg-lbl-name');
+            const nameInput = document.getElementById('quick-reg-name');
+            const lblPhone = document.getElementById('quick-reg-lbl-phone');
+            const phoneInput = document.getElementById('quick-reg-phone');
+            const lblEmail = document.getElementById('quick-reg-lbl-email');
+            const emailInput = document.getElementById('quick-reg-email');
+            const lblComp = document.getElementById('quick-reg-lbl-company');
+            const compInput = document.getElementById('quick-reg-company');
+            const submitText = document.getElementById('quick-reg-submit-text');
+            const succTitle = document.getElementById('quick-reg-success-title');
+            const succDesc = document.getElementById('quick-reg-success-desc');
+            const closeText = document.getElementById('quick-reg-close-text');
+
+            if (badgeEl) badgeEl.textContent = t.badge;
+            if (titleEl) titleEl.textContent = t.title;
+            if (descEl) descEl.textContent = t.desc;
+            if (lblProg) lblProg.textContent = t.lblProgram;
+            if (lblName) lblName.innerHTML = `${t.lblName}`;
+            if (nameInput) nameInput.placeholder = t.namePlaceholder;
+            if (lblPhone) lblPhone.innerHTML = `${t.lblPhone}`;
+            if (phoneInput) phoneInput.placeholder = t.phonePlaceholder;
+            if (lblEmail) lblEmail.innerHTML = `${t.lblEmail}`;
+            if (emailInput) emailInput.placeholder = t.emailPlaceholder;
+            if (lblComp) lblComp.textContent = t.lblCompany;
+            if (compInput) compInput.placeholder = t.compPlaceholder;
+            if (submitText) submitText.textContent = t.submit;
+            if (succTitle) succTitle.textContent = t.succTitle;
+            if (succDesc) succDesc.textContent = t.succDesc;
+            if (closeText) closeText.textContent = t.close;
+
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            if (nameInput) setTimeout(() => nameInput.focus(), 250);
+        }
+
+        function closeModal() {
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        window.openQuickRegisterModal = openModal;
+        window.closeQuickRegisterModal = closeModal;
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closeModal);
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Delegate triggers for any quick registration buttons
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.open-quick-reg-btn, .open-register-modal-btn');
+            if (btn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const title = btn.getAttribute('data-event-title') || btn.getAttribute('data-program-title') || '';
+                const category = btn.getAttribute('data-service') || '';
+                openModal(title, category);
+            }
+        });
+
+        // Handle Form Submit
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const curLang = localStorage.getItem('metafora_lang') || 'KA';
+                const isEn = curLang === 'EN';
+
+                const nameVal = (document.getElementById('quick-reg-name') ? document.getElementById('quick-reg-name').value : '').trim();
+                const phoneVal = (document.getElementById('quick-reg-phone') ? document.getElementById('quick-reg-phone').value : '').trim();
+                const emailVal = (document.getElementById('quick-reg-email') ? document.getElementById('quick-reg-email').value : '').trim();
+                const companyVal = (document.getElementById('quick-reg-company') ? document.getElementById('quick-reg-company').value : '').trim();
+                const programVal = (programInput ? programInput.value : '').trim();
+
+                if (!nameVal || !phoneVal || !emailVal) {
+                    if (statusBox) {
+                        statusBox.className = 'quick-reg-status-box error';
+                        statusBox.textContent = isEn ? 'Please fill in all required fields (*).' : 'გთხოვთ შეავსოთ ყველა სავალდებულო ველი (*).';
+                        statusBox.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                // Email validation
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                    if (statusBox) {
+                        statusBox.className = 'quick-reg-status-box error';
+                        statusBox.textContent = isEn ? 'Please enter a valid email address.' : 'გთხოვთ შეიყვანოთ სწორი ელ-ფოსტის მისამართი.';
+                        statusBox.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.7';
+                    const origHtml = submitBtn.innerHTML;
+                    submitBtn.innerHTML = `<span>⏳ ${isEn ? 'Sending...' : 'იგზავნება...'}</span>`;
+
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.innerHTML = origHtml;
+
+                        // Save lead locally
+                        try {
+                            const leads = JSON.parse(localStorage.getItem('metafora_registrations') || '[]');
+                            leads.push({
+                                name: nameVal,
+                                phone: phoneVal,
+                                email: emailVal,
+                                company: companyVal,
+                                program: programVal,
+                                date: new Date().toISOString()
+                            });
+                            localStorage.setItem('metafora_registrations', JSON.stringify(leads));
+                        } catch (err) {}
+
+                        if (formView) formView.classList.add('hidden');
+                        if (successScreen) successScreen.classList.remove('hidden');
+                    }, 650);
+                }
+            });
+        }
+    }
+
     initBUFigure();
     initManifestoSpinningFigure();
     initThemeSwitcher();
@@ -4808,6 +5004,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollSpyAndActiveNav();
     initServiceVideoInteractions();
     initArticleReader();
+    initQuickRegistrationModal();
 
     // ==========================================================================
     // 18. ROBUST BILINGUAL I18N ENGINE (KA ⇄ EN)
