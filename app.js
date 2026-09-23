@@ -4845,7 +4845,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Translation strings
             const t = {
-                badge: isEn ? '✨ Registration' : '✨ რეგისტრაცია',
+                badge: isEn ? '✨ Quick' : '✨ სწრაფი',
                 title: isEn ? 'Registration' : 'რეგისტრაცია',
                 desc: isEn ? 'Fill out this simple form and our team will get in touch shortly.' : 'შეავსეთ მარტივი ფორმა და ჩვენი გუნდი მალე დაგიკავშირდებათ.',
                 lblProgram: isEn ? 'Selected Program' : 'არჩეული პროგრამა',
