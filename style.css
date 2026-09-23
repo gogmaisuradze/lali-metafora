@@ -6609,20 +6609,35 @@ body:has(.service-page-main) .word-meta-table {
 }
 
 .cal-event-card {
-    padding: 8px 12px;
+    padding: 10px 12px;
     background: rgba(255, 255, 255, 0.85);
     border: 1.5px solid rgba(1, 97, 102, 0.2);
     border-radius: 12px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    flex-direction: column;
+    gap: 6px;
     font-size: 0.82rem;
     cursor: pointer;
     transition: all 0.2s ease;
     user-select: none;
     box-sizing: border-box;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    text-align: left;
+}
+
+.cal-event-card-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+
+.cal-event-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
 }
 
 .cal-event-card:hover {
@@ -6664,9 +6679,9 @@ body:has(.service-page-main) .word-meta-table {
 .event-banner-badge {
     background: var(--brand-plum, #7a3963);
     color: #ffffff;
-    padding: 3px 8px;
+    padding: 4px 9px;
     border-radius: 6px;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 800;
     letter-spacing: 0.2px;
     white-space: nowrap;
@@ -6680,12 +6695,12 @@ body:has(.service-page-main) .word-meta-table {
 .event-banner-title {
     color: #1e293b;
     font-weight: 700;
-    font-size: 0.80rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    white-space: normal;
+    word-break: break-word;
     text-align: left;
-    flex: 1;
+    width: 100%;
 }
 
 [data-theme="dark"] .event-banner-title {
@@ -6807,14 +6822,12 @@ body:has(.service-page-main) .word-meta-table {
     font-weight: 700;
     color: var(--primary-color, #016166);
     min-height: 48px;
-    max-height: 48px;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 10px;
     box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.4;
+    word-break: break-word;
 }
 
 [data-theme="dark"] .picked {
@@ -6825,7 +6838,38 @@ body:has(.service-page-main) .word-meta-table {
 
 .picked svg {
     flex-shrink: 0;
+    margin-top: 2px;
     color: var(--brand-gold, #ffba00);
+}
+
+.picked-summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+    width: 100%;
+}
+
+.picked-datetime {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--primary-color, #016166);
+}
+
+[data-theme="dark"] .picked-datetime {
+    color: #38bdf8;
+}
+
+.picked-event-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--brand-plum, #7a3963);
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+[data-theme="dark"] .picked-event-title {
+    color: #f472b6;
 }
 
 .field {

@@ -2972,12 +2972,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const isActive = (selectedTime === ev.time);
                     cardsHtml += `
                         <div class="cal-event-card ${isActive ? 'active' : ''}" data-time="${ev.time}">
-                            <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
-                            <span class="event-banner-title" title="${isEn ? ev.titleEN : ev.titleKA}">${isEn ? ev.titleEN : ev.titleKA}</span>
-                            <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
-                                ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
-                                <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
+                            <div class="cal-event-card-top-row">
+                                <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
+                                <div class="cal-event-card-actions">
+                                    ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
+                                    <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
+                                </div>
                             </div>
+                            <div class="event-banner-title">${isEn ? ev.titleEN : ev.titleKA}</div>
                         </div>
                     `;
                 });
@@ -3001,8 +3003,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventBanner.className = 'cal-day-event-banner is-free';
                 eventBanner.innerHTML = `
                     <div class="cal-event-card is-free-card">
-                        <span class="event-banner-badge">${isEn ? '✨ Open Day' : '✨ თავისუფალი დღე'}</span>
-                        <span class="event-banner-title">${isEn ? 'Individual Bookings & Lounge' : 'ინდივიდუალური ჯავშანი & ლაუნჯი'}</span>
+                        <div class="cal-event-card-top-row">
+                            <span class="event-banner-badge">${isEn ? '✨ Open Day' : '✨ თავისუფალი დღე'}</span>
+                        </div>
+                        <div class="event-banner-title" style="margin-top: 4px;">${isEn ? 'Individual Bookings & Lounge' : 'ინდივიდუალური ჯავშანი & ლაუნჯი'}</div>
                     </div>
                 `;
             }
@@ -3045,16 +3049,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (matchedEvent) {
                     const evTitle = isEn ? matchedEvent.titleEN : matchedEvent.titleKA;
-                    pickedSummary.textContent = `${baseText} (${evTitle})`;
+                    pickedSummary.innerHTML = `
+                        <div class="picked-summary-content">
+                            <span class="picked-datetime">📅 ${baseText}</span>
+                            <span class="picked-event-title">${evTitle}</span>
+                        </div>
+                    `;
                 } else if (events.length > 0) {
-                    pickedSummary.textContent = `${baseText} (${isEn ? 'Event Day' : 'ღონისძიების დღე'})`;
+                    pickedSummary.innerHTML = `
+                        <div class="picked-summary-content">
+                            <span class="picked-datetime">📅 ${baseText}</span>
+                            <span class="picked-event-title">${isEn ? 'Event Day' : 'ღონისძიების დღე'}</span>
+                        </div>
+                    `;
                 } else {
-                    pickedSummary.textContent = baseText;
+                    pickedSummary.innerHTML = `
+                        <div class="picked-summary-content">
+                            <span class="picked-datetime">📅 ${baseText}</span>
+                            <span class="picked-event-title" style="font-weight: 500; opacity: 0.85;">${isEn ? 'Individual Visit' : 'ინდივიდუალური ვიზიტი'}</span>
+                        </div>
+                    `;
                 }
             } else if (selectedDate) {
                 const dayNum = selectedDate.getDate();
                 const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
-                pickedSummary.textContent = isEn ? `${mName} ${dayNum}` : `${dayNum} ${mName}`;
+                pickedSummary.innerHTML = `
+                    <div class="picked-summary-content">
+                        <span class="picked-datetime">📅 ${isEn ? `${mName} ${dayNum}` : `${dayNum} ${mName}`}</span>
+                        <span class="picked-event-title" style="font-weight: 500; opacity: 0.8;">${isEn ? 'Select time slot below' : 'აირჩიეთ დრო'}</span>
+                    </div>
+                `;
             } else {
                 pickedSummary.textContent = isEn ? 'Select date & time first' : 'ჯერ აირჩიე დღე და დრო';
             }
