@@ -1880,6 +1880,91 @@ html.direct-main-mode #main-website {
     color: var(--primary-color);
 }
 
+.stagger-card-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 6px;
+    position: relative;
+    z-index: 10;
+}
+
+.stagger-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.afisha-learn-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f0fdfa;
+    color: var(--primary-color, #016166);
+    border: 1.5px solid rgba(1, 97, 102, 0.35);
+    border-radius: 9999px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    text-decoration: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.afisha-learn-more-btn svg {
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.afisha-learn-more-btn:hover {
+    background: var(--primary-color, #016166);
+    color: #ffffff;
+    border-color: var(--primary-color, #016166);
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 12px rgba(1, 97, 102, 0.25);
+}
+
+.afisha-learn-more-btn:hover svg {
+    transform: scale(1.15);
+}
+
+.afisha-learn-more-btn:active {
+    transform: translateY(0);
+}
+
+/* Specific contrast for Center active card in Afisha */
+.stagger-card.center .afisha-learn-more-btn {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stagger-card.center .afisha-learn-more-btn:hover {
+    background: #ffffff;
+    color: var(--primary-color, #016166);
+    border-color: #ffffff;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Calendar Day Banner Learn More */
+.cal-day-event-banner .afisha-learn-more-btn {
+    padding: 3px 9px;
+    font-size: 0.72rem;
+    gap: 4px;
+    border-radius: 9999px;
+}
+
 .stagger-nav-controls {
     position: absolute;
     bottom: 20px;
@@ -2200,46 +2285,7 @@ html.direct-main-mode #main-website {
     transform: scale(1.08);
 }
 
-.tw-author-services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
 
-.tw-service-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    background: #f0fdfa;
-    color: var(--primary-color, #016166);
-    border: 1px solid rgba(1, 97, 102, 0.25);
-    border-radius: 9999px;
-    font-family: inherit;
-    font-size: 0.78rem;
-    font-weight: 600;
-    line-height: 1.35;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    text-decoration: none;
-    outline: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-}
-
-.tw-service-tag:hover {
-    background: var(--primary-color, #016166);
-    color: #ffffff;
-    border-color: var(--primary-color, #016166);
-    transform: translateY(-1.5px);
-    box-shadow: 0 4px 12px rgba(1, 97, 102, 0.28);
-}
-
-.tw-service-tag:active {
-    transform: translateY(0);
-}
 
 /* Large Member Chips Ribbon */
 .tw-members-ribbon {

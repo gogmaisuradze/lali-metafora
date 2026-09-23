@@ -1320,18 +1320,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3 class="stagger-card-title">${item.title}</h3>
                     <p class="stagger-card-desc">„${item.testimonial}“</p>
                 </div>
-                <div class="stagger-card-footer" style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding-top: 4px;">
+                <div class="stagger-card-footer">
                     <span class="stagger-card-author">${authorText ? '👤 ' + authorText : ''}</span>
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                        <button class="afisha-learn-more-btn btn btn-outline" 
-                                data-event-id="${originalIndex}"
-                                style="padding: 5px 12px; font-size: 0.78rem; border-radius: 9999px; border: 1px solid rgba(1,97,102,0.4); color: var(--primary-color); background: rgba(255,255,255,0.85); cursor: pointer; transition: all 0.2s ease; font-weight: 600;">${learnMoreBtnText}</button>
+                    <div class="stagger-card-actions">
+                        <button class="afisha-learn-more-btn" data-event-id="${originalIndex}" aria-label="${learnMoreBtnText}">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                            <span>${learnMoreBtnText}</span>
+                        </button>
                         <button class="open-booking-modal-btn btn btn-primary" 
                                 data-event-date="${item.date}" 
                                 data-event-time="${item.time}" 
                                 data-service="${item.serviceCategory}"
                                 data-event-title="${item.title}"
-                                style="padding: 5px 14px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
+                                style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
                     </div>
                 </div>
             `;
@@ -1486,14 +1490,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/lali.badridze',
             instagram: 'https://www.instagram.com/lali_badridze/',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:00 / 1:20',
-            services: [
-                { titleKA: '🧠 ადამიანის ფსიქოლოგია ლიდერობაში (არაცნობიერი მენეჯმენტი)', titleEN: '🧠 Human Psychology in Leadership', eventId: 13 },
-                { titleKA: '🌙 შეხვედრა შეჰერეზადასთან (აღმოსავლური თერაპია)', titleEN: '🌙 Meeting with Scheherazade (Storytelling Therapy)', eventId: 11 },
-                { titleKA: '💬 მოდი ვილაპარაკოთ (ექსპერიმენტული დიალოგი)', titleEN: '💬 Let’s Talk (Experimental Dialogue)', eventId: 12 },
-                { titleKA: '🛋️ პოზიტიური & ინდივიდუალური ფსიქოთერაპია', titleEN: '🛋️ Positive & Individual Psychotherapy' },
-                { titleKA: '✨ ჯგუფური ფსიქოთერაპია & სუპერვიზია', titleEN: '✨ Group Psychotherapy & Supervision' }
-            ]
+            time: '0:00 / 1:20'
         },
         {
             image: 'გუნდი/2.jpg',
@@ -1506,15 +1503,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/profile.php?id=100054981263056',
             instagram: 'https://www.instagram.com/kety_zhvania_tyson/',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:11 / 1:20',
-            services: [
-                { titleKA: '🎲 თამაშის არქიტექტორი (საბაზისო კურსი)', titleEN: '🎲 Game Architect (Basic Course)', eventId: 0 },
-                { titleKA: '🏗️ თამაშის არქიტექტორი (ჩაღრმავებული კურსი)', titleEN: '🏗️ Game Architect (Advanced Course)', eventId: 1 },
-                { titleKA: '🌿 პროგრამა არიტე (პიროვნული განვითარების 4 მოდული)', titleEN: '🌿 Program Arete (4 Personal Growth Modules)', eventId: 2 },
-                { titleKA: '❤️ სიყვარულის ხელოვნება & სიყვარულის 5 ენა', titleEN: '❤️ Art of Loving & 5 Love Languages', eventId: 3 },
-                { titleKA: '🎓 ტრენერობის ხელოვნება (ტრენერის გზა)', titleEN: '🎓 Art of Training (Trainer’s Path)', eventId: 4 },
-                { titleKA: '✨ პერსონალური ქოუჩინგი & ფასილიტაცია', titleEN: '✨ Personal Coaching & Facilitation' }
-            ]
+            time: '0:11 / 1:20'
         },
         {
             image: 'გუნდი/3.jpg',
@@ -1527,14 +1516,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/natia.kodua.1',
             instagram: 'https://www.instagram.com/kodua.natia/',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:23 / 1:20',
-            services: [
-                { titleKA: '🌿 პოზიტიური & ტრანსკულტურალური ფსიქოთერაპია', titleEN: '🌿 Positive & Transcultural Psychotherapy' },
-                { titleKA: '🧘 ემოციური ბალანსი & სტრეს-მენეჯმენტი', titleEN: '🧘 Emotional Balance & Stress Management' },
-                { titleKA: '💬 პერსონალური ფსიქოკონსულტირება', titleEN: '💬 Personal Psycho-Consultation' },
-                { titleKA: '🌱 თვითშემეცნების & შინაგანი რესურსების გააქტიურება', titleEN: '🌱 Self-Discovery & Inner Resource Activation' },
-                { titleKA: '🧩 პიროვნული ზრდის ინდივიდუალური სესიები', titleEN: '🧩 Personal Growth 1-on-1 Sessions' }
-            ]
+            time: '0:23 / 1:20'
         },
         {
             image: 'გუნდი/4.jpg',
@@ -1547,16 +1529,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/marika.khaliani',
             instagram: 'https://www.instagram.com/marikakhaliani',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:34 / 1:20',
-            services: [
-                { titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', eventId: 5 },
-                { titleKA: '👥 ქოუჩინგი HR-ებისთვის & ლიდერებისთვის', titleEN: '👥 Coaching for HR & Leaders', eventId: 6 },
-                { titleKA: '❤️ რატომ გვტკივა სიყვარული', titleEN: '❤️ Why Love Hurts', eventId: 7 },
-                { titleKA: '📦 რა შევუკვეთე და რა ჩამომივიდა', titleEN: '📦 What I Ordered vs What Arrived', eventId: 8 },
-                { titleKA: '🌌 სისტემური განლაგება (სიღრმისეული ვორქშოფი)', titleEN: '🌌 Systemic Constellations Workshop', eventId: 9 },
-                { titleKA: '💰 ფული, თუ პასუხისმგებლობა', titleEN: '💰 Money or Responsibility', eventId: 10 },
-                { titleKA: '🎯 ბიზნეს & პერსონალური განვითარების ქოუჩინგი', titleEN: '🎯 Business & Personal Coaching' }
-            ]
+            time: '0:34 / 1:20'
         },
         {
             image: 'გუნდი/5.jpg',
@@ -1569,13 +1542,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/ia.khidirbegishvili',
             instagram: 'https://www.instagram.com/istudioatelia/',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:46 / 1:20',
-            services: [
-                { titleKA: '🏢 Metaphora Business - ორგანიზაციული განვითარება', titleEN: '🏢 Metaphora Business - Org Development' },
-                { titleKA: '🤝 სტრატეგიული პარტნიორობა & B2B კოლაბორაციები', titleEN: '🤝 Strategic Partnerships & B2B' },
-                { titleKA: '📈 ბიზნეს კონსალტინგი & მეწარმეთა მხარდაჭერა', titleEN: '📈 Business Consulting & Entrepreneur Support' },
-                { titleKA: '🌐 ნეთვორქინგ & Mastermind შეხვედრების მართვა', titleEN: '🌐 Networking & Mastermind Facilitation' }
-            ]
+            time: '0:46 / 1:20'
         },
         {
             image: 'გუნდი/6.jpg',
@@ -1588,13 +1555,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: 'https://www.facebook.com/teo.peradze.7',
             instagram: 'https://www.instagram.com/teo_peradze16/',
             whatsapp: 'https://wa.me/995599228228',
-            time: '0:57 / 1:20',
-            services: [
-                { titleKA: '☕ Metaphora Clubs - „მესამე სივრცის“ სალონური კლუბები', titleEN: '☕ Metaphora Clubs - 3rd Space Salons' },
-                { titleKA: '🎭 შემოქმედებითი & სათემო აქტივობების ფასილიტაცია', titleEN: '🎭 Creative & Community Facilitation' },
-                { titleKA: '🌱 პიროვნული განვითარების ტრენინგები', titleEN: '🌱 Personal Development Trainings' },
-                { titleKA: '💬 პოზიტიური ფსიქოკონსულტირება & ქოუჩინგი', titleEN: '💬 Positive Psycho-Consultation & Coaching' }
-            ]
+            time: '0:57 / 1:20'
         },
         {
             image: 'გუნდი/7.jpg',
@@ -1605,15 +1566,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fullname: 'ქეთი მირიანაშვილი',
             jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი',
             facebook: 'https://www.facebook.com/keti.mirianasvili',
-            instagram: 'https://www.facebook.com/keti.mirianasvili',
+            instagram: 'https://www.instagram.com/keti.mirianasvili',
             whatsapp: 'https://wa.me/995599228228',
-            time: '1:08 / 1:20',
-            services: [
-                { titleKA: '🎯 სერტიფიცირებული ქოუჩინგი & პიროვნული ტრანსფორმაცია', titleEN: '🎯 Certified Coaching & Transformation' },
-                { titleKA: '🌿 პოზიტიური ფსიქოთერაპია & ფსიქოკონსულტირება', titleEN: '🌿 Positive Psychotherapy & Consultation' },
-                { titleKA: '💡 მიზნების მიღწევა & შინაგანი რესურსების მობილიზება', titleEN: '💡 Goal Achievement & Inner Resource Mobilization' },
-                { titleKA: '🧩 ტრენინგები & პრაქტიკული ვორქშოფები', titleEN: '🧩 Trainings & Practical Workshops' }
-            ]
+            time: '1:08 / 1:20'
         }
     ];
 
@@ -1862,51 +1817,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // On team member switch: typewriter typing sound plays during typing!
         typewriteText(current.text, playSound);
-
-        // Render Team Member's Services
-        const twServices = document.getElementById('tw-services');
-        if (twServices) {
-            twServices.innerHTML = '';
-            if (Array.isArray(current.services) && current.services.length > 0) {
-                const curLang = localStorage.getItem('metafora_lang') || 'KA';
-                const isEn = curLang.toUpperCase() === 'EN';
-                current.services.forEach(srv => {
-                    const tag = document.createElement('button');
-                    tag.type = 'button';
-                    tag.className = 'tw-service-tag';
-                    const title = (isEn && srv.titleEN) ? srv.titleEN : srv.titleKA;
-
-                    if (srv.eventId !== undefined) {
-                        tag.setAttribute('data-event-id', srv.eventId);
-                        tag.setAttribute('title', isEn ? 'Click to view full program details 📖' : 'დააჭირეთ სრული პროგრამის გასაცნობად 📖');
-                        tag.innerHTML = `<span>${title}</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:middle; margin-left:3px; opacity:0.85;"><path d="m9 18 6-6-6-6"/></svg>`;
-                        tag.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (typeof window.openEventDetails === 'function') {
-                                window.openEventDetails(srv.eventId, curLang);
-                            }
-                        });
-                    } else {
-                        tag.innerHTML = `<span>${title}</span>`;
-                        tag.setAttribute('title', isEn ? 'Click to book consultation / inquiry ✨' : 'დააჭირეთ კონსულტაციის დასაჯავშნად ✨');
-                        tag.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (typeof openBookingModal === 'function') {
-                                openBookingModal(srv.titleKA || current.fullname);
-                            } else if (typeof window.openBookingModal === 'function') {
-                                window.openBookingModal(srv.titleKA || current.fullname);
-                            }
-                        });
-                    }
-                    twServices.appendChild(tag);
-                });
-                twServices.style.display = 'flex';
-            } else {
-                twServices.style.display = 'none';
-            }
-        }
 
         const chips = Array.from(document.querySelectorAll('.tw-member-chip'));
         chips.forEach((c, i) => {
@@ -2946,7 +2856,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
                             <span class="event-banner-title" title="${isEn ? ev.titleEN : ev.titleKA}">${isEn ? ev.titleEN : ev.titleKA}</span>
                             <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
-                                ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}" style="background: none; border: none; color: var(--primary-color); font-size: 0.74rem; text-decoration: underline; cursor: pointer; font-weight: 600; padding: 2px 4px;">${isEn ? 'Details ↗' : 'გაიგე მეტი ↗'}</button>` : ''}
+                                ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
                                 <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
                             </div>
                         </div>
