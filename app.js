@@ -1832,14 +1832,18 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
         }
 
-        const isMobile = window.innerWidth < 768;
-        const revealWidth = isMobile ? 110 : 280;
+        function getRevealWidth() {
+            if (window.innerWidth < 480) return 60;
+            if (window.innerWidth < 768) return 90;
+            if (window.innerWidth < 1200) return 130;
+            return 160;
+        }
 
         allRevealLines.forEach((line) => {
             const imgSpan = line.querySelector('.img-reveal-span');
             if (imgSpan) {
                 gsap.to(imgSpan, {
-                    width: revealWidth,
+                    width: () => getRevealWidth(),
                     ease: 'none',
                     scrollTrigger: {
                         trigger: line,
@@ -1884,8 +1888,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // About Us Manifesto Live Typewriter Logic
     const manifestoTexts = {
-        KA: "ეს არ არის უბრალოდ სივრცე — „მეტაფორა“ არის გარემო, სადაც იდეები ცოცხლდებიან, ხოლო ადამიანები და შესაძლებლობები ერთმანეთს პოულობენ. აქ ყველაფერია შენი განვითარების, ახალი კონტაქტებისა და შთაგონებისთვის: Personal Development, Business, Think Tank, Art და Clubs.",
-        EN: "This is more than just a space — “Metaphora” is an environment where ideas come to life, and people and opportunities find each other. Everything here is crafted for your growth, meaningful connections, and inspiration: Personal Development, Business, Think Tank, Art, and Clubs."
+        KA: "მეტაფორა – შინაგანი სამყაროსა და შესაძლებლობების შეხვედრის ადგილი. „მეტაფორას“ არსი მის მრავალფუნქციურობასა და სინერგიაშია. ეს არის შეხვედრის, გარდაქმნისა და პოტენციალის გაცნობიერების ცოცხალი ტერიტორია – კავშირი ცნობიერებასა და არაცნობიერს, იდეასა და ქმედებას, პიროვნებასა და სამყაროს შორის. შენი განვითარების, ახალი კონტაქტებისა და შთაგონებისთვის აქ ხუთი ძირითადი მიმართულება ერთიანდება: Personal Development, Business, Think Tank, Art და Clubs.",
+        EN: "Metaphora — Where the inner world meets boundless potential. The essence of “Metaphora” lies in its multifunctionality and synergy. It is a vibrant territory for connection, transformation, and self-realization — bridging conscious and subconscious, idea and action, the individual and the world. For your personal growth, meaningful connections, and inspiration, five core pillars unite here: Personal Development, Business, Think Tank, Art, and Clubs."
     };
 
     function getManifestoFullText() {

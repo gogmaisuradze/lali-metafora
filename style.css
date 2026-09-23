@@ -2313,16 +2313,20 @@ html.direct-main-mode #main-website {
 /* Text Lines Container */
 .reveal-text-lines-container {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
     .reveal-text-lines-container {
-        gap: 28px;
+        gap: 20px;
     }
 }
 
@@ -2331,22 +2335,22 @@ html.direct-main-mode #main-website {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    max-width: 100%;
     will-change: transform;
 }
 
 @media (min-width: 768px) {
     .reveal-line {
-        gap: 22px;
-        flex-wrap: nowrap;
+        gap: 16px;
     }
 }
 
 .reveal-text {
-    font-size: clamp(2rem, 5.2vw, 5.2rem);
+    font-size: clamp(1.35rem, 3.2vw, 3.2rem);
     font-weight: 900;
-    letter-spacing: -1.5px;
-    line-height: 1;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
     white-space: nowrap;
     color: var(--primary-color);
     text-transform: uppercase;
@@ -2356,7 +2360,7 @@ html.direct-main-mode #main-website {
 /* Inline Expanding Image Pill */
 .img-reveal-span {
     display: inline-block;
-    height: 48px;
+    height: 36px;
     width: 0px;
     border-radius: 9999px;
     overflow: hidden;
@@ -2367,11 +2371,12 @@ html.direct-main-mode #main-website {
     flex-shrink: 0;
     will-change: width;
     transition: opacity 0.3s;
+    vertical-align: middle;
 }
 
 @media (min-width: 768px) {
     .img-reveal-span {
-        height: 88px;
+        height: 56px;
         border-radius: 9999px;
     }
 }
