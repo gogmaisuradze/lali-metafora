@@ -1397,7 +1397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="stagger-card-footer">
-                    <div class="stagger-card-meta-line">
+                    <span class="stagger-card-author-wrapper">
                         ${mentorIdx >= 0 ? `
                             <button class="stagger-card-author-btn" data-mentor-idx="${mentorIdx}" title="${isEn ? 'View Team Member' : 'გადასვლა გუნდის წევრზე'}">
                                 <span>👤</span> <span>${authorText}</span>
@@ -1405,10 +1405,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ` : `
                             <span class="stagger-card-author">${authorText ? '👤 ' + authorText : ''}</span>
                         `}
-                        <a href="${srvInfo.url}" class="stagger-card-service-link" title="${srvName}">
-                            <span>${srvInfo.icon}</span> <span>${srvName}</span>
-                        </a>
-                    </div>
+                    </span>
                     <button class="open-booking-modal-btn btn btn-primary" 
                             data-event-date="${item.date}" 
                             data-event-time="${item.time}" 
@@ -1435,7 +1432,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     return;
                 }
-                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-service-link')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn')) return;
                 const currentPos = getPositionOf(originalIndex);
                 moveStagger(currentPos);
             });
@@ -1446,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let lastAfishaTap = 0;
             card.addEventListener('touchend', (e) => {
-                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-author-btn, .stagger-card-service-link')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-author-btn')) return;
                 const now = Date.now();
                 if (now - lastAfishaTap < 350 && now - lastAfishaTap > 0) {
                     openBookingModal(item.serviceCategory || item.title, item.date, item.time);
