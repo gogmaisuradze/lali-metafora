@@ -7277,6 +7277,42 @@ body:has(.service-page-main) .word-meta-table {
     line-height: 1.55;
 }
 
+.quick-reg-success-actions {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-quick-reg-secondary {
+    width: 100%;
+    padding: 12px 20px;
+    background: rgba(1, 97, 102, 0.08);
+    color: var(--primary-color, #016166);
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border: 1px solid rgba(1, 97, 102, 0.22);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-quick-reg-secondary:hover {
+    background: rgba(1, 97, 102, 0.16);
+    border-color: var(--primary-color, #016166);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(1, 97, 102, 0.15);
+}
+
+.btn-quick-reg-secondary:active {
+    transform: translateY(0);
+}
+
 @media (max-width: 600px) {
     .quick-reg-modal-glass {
         padding: 24px 20px;

@@ -4883,7 +4883,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 submit: isEn ? 'Submit Registration ✨' : 'რეგისტრაციის გაგზავნა ✨',
                 succTitle: isEn ? 'Registration Submitted!' : 'რეგისტრაცია წარმატებით გაიგზავნა!',
                 succDesc: isEn ? 'Thank you! Our representative will contact you shortly.' : 'მადლობა დაინტერესებისთვის. ჩვენი წარმომადგენელი უახლოეს დროში დაგიკავშირდებათ.',
-                close: isEn ? 'Close' : 'დახურვა'
+                close: isEn ? 'Close' : 'დახურვა',
+                newReg: isEn ? '✨ Fill New Registration' : '✨ ახალი რეგისტრაციის შევსება'
             };
 
             const badgeEl = document.getElementById('quick-reg-badge');
@@ -4902,6 +4903,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const succTitle = document.getElementById('quick-reg-success-title');
             const succDesc = document.getElementById('quick-reg-success-desc');
             const closeText = document.getElementById('quick-reg-close-text');
+            const newRegText = document.getElementById('quick-reg-new-text');
 
             if (badgeEl) badgeEl.textContent = t.badge;
             if (titleEl) titleEl.textContent = t.title;
@@ -4919,6 +4921,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (succTitle) succTitle.textContent = t.succTitle;
             if (succDesc) succDesc.textContent = t.succDesc;
             if (closeText) closeText.textContent = t.close;
+            if (newRegText) newRegText.textContent = t.newReg;
+
+            if (formView) formView.classList.remove('hidden');
+            if (successScreen) successScreen.classList.add('hidden');
+            if (statusBox) statusBox.classList.add('hidden');
 
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
@@ -4937,6 +4944,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
         if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closeModal);
+
+        const newRegBtn = document.getElementById('btn-quick-reg-new');
+        if (newRegBtn) {
+            newRegBtn.addEventListener('click', () => {
+                const nameInput = document.getElementById('quick-reg-name');
+                const phoneInput = document.getElementById('quick-reg-phone');
+                const emailInput = document.getElementById('quick-reg-email');
+                const compInput = document.getElementById('quick-reg-company');
+                if (nameInput) nameInput.value = '';
+                if (phoneInput) phoneInput.value = '';
+                if (emailInput) emailInput.value = '';
+                if (compInput) compInput.value = '';
+                if (statusBox) {
+                    statusBox.classList.add('hidden');
+                    statusBox.textContent = '';
+                }
+                if (successScreen) successScreen.classList.add('hidden');
+                if (formView) formView.classList.remove('hidden');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.transform = '';
+                }
+                if (nameInput) setTimeout(() => nameInput.focus(), 150);
+            });
+        }
 
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) closeModal();
@@ -4994,7 +5027,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (submitBtn) {
                     submitBtn.disabled = true;
-                    submitBtn.style.opacity = '0.7';
+                    submitBtn.style.opacity = '0.75';
+                    submitBtn.style.transform = 'scale(0.97)';
                     const origHtml = submitBtn.innerHTML;
                     submitBtn.innerHTML = `<span>⏳ ${isEn ? 'Sending...' : 'იგზავნება...'}</span>`;
 
@@ -5022,6 +5056,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         submitBtn.disabled = false;
                         submitBtn.style.opacity = '1';
+                        submitBtn.style.transform = '';
                         submitBtn.innerHTML = origHtml;
 
                         // Save lead locally
@@ -5687,6 +5722,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "სერვისი / მიმართულება": "Service / Pillar",
         "სერვისის ფასი": "Service Price",
         "მაგ: 50 ₾ (ან ცარიელი)": "e.g. 50 ₾ (or blank)",
+        "✨ ახალი რეგისტრაციის შევსება": "✨ Fill New Registration",
         "👥 სტუმრების რაოდენობა": "👥 Number of Guests",
         "ჯავშნის დადასტურება ✨": "Confirm Booking ✨",
         "Google Maps-ში გახსნა": "Open Map",
