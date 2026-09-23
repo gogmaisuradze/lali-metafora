@@ -20,52 +20,67 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-    let reqUrl = decodeURIComponent(req.url.split('?')[0]);
-    if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
-    
-    const filePath = path.join(__dirname, reqUrl);
-    
-    fs.stat(filePath, (statErr, stats) => {
-        if (statErr || !stats.isFile()) {
-            res.writeHead(404, {'Content-Type': 'text/plain; charset=utf-8'});
-            res.end('404 Not Found');
-            return;
+    try {
+        let reqUrl = '/index.html';
+        try {
+            reqUrl = decodeURIComponent(req.url.split('?')[0]);
+        } catch (e) {
+            reqUrl = req.url.split('?')[0];
         }
+        if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
+        
+        const filePath = path.join(__dirname, reqUrl);
+        
+        fs.stat(filePath, (statErr, stats) => {
+            if (statErr || !stats || !stats.isFile()) {
+                res.writeHead(404, {'Content-Type': 'text/plain; charset=utf-8'});
+                res.end('404 Not Found');
+                return;
+            }
 
-        const ext = path.extname(filePath).toLowerCase();
-        const mime = MIME_TYPES[ext] || 'application/octet-stream';
+            const ext = path.extname(filePath).toLowerCase();
+            const mime = MIME_TYPES[ext] || 'application/octet-stream';
 
-        const range = req.headers.range;
-        const total = stats.size;
+            const range = req.headers.range;
+            const total = stats.size;
 
-        if (range && (ext === '.mp4' || ext === '.mp3' || ext === '.wav')) {
-            const parts = range.replace(/bytes=/, '').split('-');
-            const partialstart = parts[0];
-            const partialend = parts[1];
+            if (range && (ext === '.mp4' || ext === '.mp3' || ext === '.wav')) {
+                const parts = range.replace(/bytes=/, '').split('-');
+                const partialstart = parts[0];
+                const partialend = parts[1];
 
-            const start = parseInt(partialstart, 10);
-            const end = partialend ? parseInt(partialend, 10) : total - 1;
-            const chunksize = (end - start) + 1;
+                const start = parseInt(partialstart, 10);
+                const end = partialend ? parseInt(partialend, 10) : total - 1;
+                const chunksize = (end - start) + 1;
 
-            const file = fs.createReadStream(filePath, {start: start, end: end});
-            res.writeHead(206, {
-                'Content-Range': 'bytes ' + start + '-' + end + '/' + total,
-                'Accept-Ranges': 'bytes',
-                'Content-Length': chunksize,
-                'Content-Type': mime,
-                'Access-Control-Allow-Origin': '*'
-            });
-            file.pipe(res);
-        } else {
-            res.writeHead(200, {
-                'Content-Length': total,
-                'Content-Type': mime,
-                'Access-Control-Allow-Origin': '*',
-                'Cache-Control': 'no-cache'
-            });
-            fs.createReadStream(filePath).pipe(res);
+                const file = fs.createReadStream(filePath, {start: start, end: end});
+                file.on('error', () => { if (!res.headersSent) res.writeHead(500); res.end(); });
+                res.writeHead(206, {
+                    'Content-Range': 'bytes ' + start + '-' + end + '/' + total,
+                    'Accept-Ranges': 'bytes',
+                    'Content-Length': chunksize,
+                    'Content-Type': mime,
+                    'Access-Control-Allow-Origin': '*'
+                });
+                file.pipe(res);
+            } else {
+                res.writeHead(200, {
+                    'Content-Length': total,
+                    'Content-Type': mime,
+                    'Access-Control-Allow-Origin': '*',
+                    'Cache-Control': 'no-cache'
+                });
+                const file = fs.createReadStream(filePath);
+                file.on('error', () => { if (!res.headersSent) res.writeHead(500); res.end(); });
+                file.pipe(res);
+            }
+        });
+    } catch (err) {
+        if (!res.headersSent) {
+            res.writeHead(500, {'Content-Type': 'text/plain; charset=utf-8'});
         }
-    });
+        res.end('500 Server Error');
+    }
 });
 
 server.listen(PORT, '0.0.0.0', () => {
