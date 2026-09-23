@@ -4915,6 +4915,106 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // iPhone SMS / Mail Sent Swoosh Sound Synthesizer (Web Audio API)
+    function playIphoneSentSound() {
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            if (ctx.state === 'suspended') {
+                ctx.resume();
+            }
+            const now = ctx.currentTime;
+
+            // 1. Noise whoosh (ascending airy swoosh)
+            const bufferSize = Math.floor(ctx.sampleRate * 0.32);
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const output = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = (Math.random() * 2 - 1) * (1 - (i / bufferSize) * 0.35);
+            }
+
+            const whiteNoise = ctx.createBufferSource();
+            whiteNoise.buffer = buffer;
+
+            const bandpass = ctx.createBiquadFilter();
+            bandpass.type = 'bandpass';
+            bandpass.frequency.setValueAtTime(380, now);
+            bandpass.frequency.exponentialRampToValueAtTime(3800, now + 0.22);
+            bandpass.Q.setValueAtTime(2.2, now);
+
+            const noiseGain = ctx.createGain();
+            noiseGain.gain.setValueAtTime(0.001, now);
+            noiseGain.gain.linearRampToValueAtTime(0.38, now + 0.07);
+            noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.30);
+
+            whiteNoise.connect(bandpass);
+            bandpass.connect(noiseGain);
+            noiseGain.connect(ctx.destination);
+
+            whiteNoise.start(now);
+            whiteNoise.stop(now + 0.32);
+
+            // 2. Rising harmonic sine glide (the subtle tone of iOS swoosh)
+            const osc = ctx.createOscillator();
+            const oscGain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(500, now);
+            osc.frequency.exponentialRampToValueAtTime(1950, now + 0.23);
+
+            oscGain.gain.setValueAtTime(0.001, now);
+            oscGain.gain.linearRampToValueAtTime(0.15, now + 0.06);
+            oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.26);
+
+            osc.connect(oscGain);
+            oscGain.connect(ctx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.28);
+        } catch (e) {
+            console.log('Audio notification error:', e);
+        }
+    }
+
+    function showFloatingNotification(msg, isSuccess = true) {
+        let toast = document.getElementById('metafora-floating-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'metafora-floating-toast';
+            toast.style.cssText = `
+                position: fixed;
+                top: 24px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-30px);
+                background: linear-gradient(135deg, #016166 0%, #00474b 100%);
+                color: #ffffff;
+                padding: 14px 26px;
+                border-radius: 9999px;
+                box-shadow: 0 14px 38px rgba(1, 97, 102, 0.42), 0 4px 14px rgba(0,0,0,0.14);
+                font-size: 0.96rem;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 9999999;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                border: 1.5px solid rgba(255, 255, 255, 0.35);
+            `;
+            document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        requestAnimationFrame(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        });
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(-20px)';
+        }, 3600);
+    }
+
     // ==========================================================================
     // 17.8. QUICK REGISTRATION POPUP MODAL CONTROLLER (BLUR BACKGROUND)
     // ==========================================================================
@@ -5022,7 +5122,12 @@ document.addEventListener('DOMContentLoaded', () => {
         function closeModal() {
             overlay.classList.remove('active');
             overlay.setAttribute('aria-hidden', 'true');
+            overlay.style.opacity = '';
+            overlay.style.visibility = '';
             document.body.style.overflow = '';
+            if (window.location.pathname.includes('register')) {
+                window.location.href = 'index.html';
+            }
         }
 
         window.openQuickRegisterModal = openModal;
@@ -5052,6 +5157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitBtn.disabled = false;
                     submitBtn.style.opacity = '1';
                     submitBtn.style.transform = '';
+                    submitBtn.style.background = '';
                 }
                 if (nameInput) setTimeout(() => nameInput.focus(), 150);
             });
@@ -5112,11 +5218,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (submitBtn) {
+                    // 🔊 Play iPhone SMS sent sound immediately
+                    playIphoneSentSound();
+
                     submitBtn.disabled = true;
-                    submitBtn.style.opacity = '0.75';
+                    submitBtn.style.opacity = '0.95';
                     submitBtn.style.transform = 'scale(0.97)';
+                    submitBtn.style.background = '#059669';
                     const origHtml = submitBtn.innerHTML;
-                    submitBtn.innerHTML = `<span>⏳ ${isEn ? 'Sending...' : 'იგზავნება...'}</span>`;
+                    submitBtn.innerHTML = `<span>✓ ${isEn ? 'Sent!' : 'გაიგზავნა!'}</span>`;
 
                     // Send Telegram Notification
                     const regPayload = {
@@ -5139,29 +5249,48 @@ document.addEventListener('DOMContentLoaded', () => {
                         }).catch(e => console.log('Telegram reg send error:', e));
                     } catch (err) {}
 
+                    // Save lead locally
+                    try {
+                        const leads = JSON.parse(localStorage.getItem('metafora_registrations') || '[]');
+                        leads.push({
+                            name: nameVal,
+                            phone: phoneVal,
+                            email: emailVal,
+                            company: companyVal,
+                            program: programVal,
+                            date: new Date().toISOString()
+                        });
+                        localStorage.setItem('metafora_registrations', JSON.stringify(leads));
+                    } catch (err) {}
+
                     setTimeout(() => {
                         submitBtn.disabled = false;
                         submitBtn.style.opacity = '1';
                         submitBtn.style.transform = '';
+                        submitBtn.style.background = '';
                         submitBtn.innerHTML = origHtml;
 
-                        // Save lead locally
-                        try {
-                            const leads = JSON.parse(localStorage.getItem('metafora_registrations') || '[]');
-                            leads.push({
-                                name: nameVal,
-                                phone: phoneVal,
-                                email: emailVal,
-                                company: companyVal,
-                                program: programVal,
-                                date: new Date().toISOString()
-                            });
-                            localStorage.setItem('metafora_registrations', JSON.stringify(leads));
-                        } catch (err) {}
+                        // Clear inputs
+                        const nameInput = document.getElementById('quick-reg-name');
+                        const phoneInput = document.getElementById('quick-reg-phone');
+                        const emailInput = document.getElementById('quick-reg-email');
+                        const compInput = document.getElementById('quick-reg-company');
+                        if (nameInput) nameInput.value = '';
+                        if (phoneInput) phoneInput.value = '';
+                        if (emailInput) emailInput.value = '';
+                        if (compInput) compInput.value = '';
 
-                        if (formView) formView.classList.add('hidden');
-                        if (successScreen) successScreen.classList.remove('hidden');
-                    }, 650);
+                        // Close modal immediately and show toast
+                        closeModal();
+                        showFloatingNotification(isEn ? '✨ Registration submitted successfully!' : '✨ რეგისტრაცია წარმატებით გაიგზავნა!');
+
+                        // If on register.html, navigate to main index page
+                        if (window.location.pathname.includes('register')) {
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 450);
+                        }
+                    }, 400);
                 }
             });
         }
