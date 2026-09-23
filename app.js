@@ -4594,6 +4594,15 @@ document.addEventListener('DOMContentLoaded', () => {
             currentOpenArticleId = numericId;
             currentOpenType = 'event';
 
+            const isArtOrClubs = (
+                (event.category && (event.category === 'Art' || event.category === 'Clubs')) ||
+                (event.categoryKA && (event.categoryKA.includes('Art') || event.categoryKA.includes('Clubs') || event.categoryKA.includes('არტ') || event.categoryKA.includes('კლუბ'))) ||
+                String(numericId).startsWith('art') ||
+                String(numericId).startsWith('club') ||
+                window.location.pathname.includes('service-art') ||
+                window.location.pathname.includes('service-clubs')
+            );
+
             if (topicBadge) topicBadge.textContent = (lang === 'EN' ? (event.categoryEN || event.category) : (event.categoryKA || event.category));
             if (durationEl) {
                 if (isServicePage) {
@@ -4602,16 +4611,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     durationEl.textContent = (lang === 'EN' ? event.dateEN : event.dateKA);
                 }
             }
-            if (heroImg) {
-                heroImg.src = event.mentorImg || 'გუნდი/1.jpg';
-                heroImg.alt = (event[lang] ? event[lang].title : '');
+
+            const heroWrap = overlay.querySelector('.article-reader-hero-wrap');
+            if (heroWrap) {
+                if (isArtOrClubs || isServicePage) {
+                    heroWrap.style.display = 'none';
+                } else {
+                    heroWrap.style.display = '';
+                }
             }
+
+            if (heroImg) {
+                if (isArtOrClubs || isServicePage) {
+                    heroImg.style.display = 'none';
+                } else {
+                    heroImg.style.display = '';
+                    heroImg.src = event.mentorImg || 'გუნდი/1.jpg';
+                    heroImg.alt = (event[lang] ? event[lang].title : '');
+                }
+            }
+
             if (titleEl) titleEl.textContent = (event[lang] ? event[lang].title : (event.titleKA || ''));
             if (authorEl) authorEl.textContent = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
+            
             if (authorImgEl) {
-                authorImgEl.src = event.mentorImg || 'გუნდი/1.jpg';
-                authorImgEl.alt = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
+                if (isArtOrClubs || !event.mentorImg || (event.authorKA && (event.authorKA.includes('მეტაფორა') || event.authorKA.includes('Metaphora')))) {
+                    authorImgEl.style.display = 'none';
+                } else {
+                    authorImgEl.style.display = '';
+                    authorImgEl.src = event.mentorImg || 'გუნდი/1.jpg';
+                    authorImgEl.alt = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
+                }
             }
+
             if (dateEl) {
                 if (isServicePage) {
                     dateEl.textContent = lang === 'EN' ? 'Metaphora • 63a Aghmashenebeli' : 'მეტაფორა • აღმაშენებლის 63ა';
@@ -4619,8 +4651,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     dateEl.textContent = lang === 'EN' ? `Metaphora • 63a Aghmashenebeli • ${event.dateEN || ''}` : `მეტაფორა • აღმაშენებლის 63ა • ${event.dateKA || ''}`;
                 }
             }
+
+            // Clean ALL prices, fee tables, financial details on service pages and general event views
+            let rawContentHtml = (event[lang] ? event[lang].html : (event.KA ? event.KA.html : ''));
+            let cleanContentHtml = rawContentHtml
+                .replace(/<table[\s\S]*?<\/table>/gi, '')
+                .replace(/<div class="word-section-title"[^>]*>[\s\S]*?(?:ფინანსური|ორგანიზაციული|ღირებულება|საფასური|Financial|Fee|Price|Schedule)[\s\S]*?<\/div>/gi, '')
+                .replace(/<p[^>]*>[\s\S]*?(?:ღირებულება|სრული საფასური|თანხის გადახდა|50%|2 500|₾|ლარი|Fee|Price|Cost|Payment)[\s\S]*?<\/p>/gi, '')
+                .replace(/<div class="word-divider">━ ❖ ━<\/div>\s*$/gi, '');
+
             if (contentEl) {
-                contentEl.innerHTML = (event[lang] ? event[lang].html : (event.KA ? event.KA.html : ''));
+                contentEl.innerHTML = cleanContentHtml;
             }
 
             if (bookBtn) {
@@ -4656,12 +4697,17 @@ document.addEventListener('DOMContentLoaded', () => {
             currentOpenArticleId = id;
             const articleData = rawArticle[lang] || rawArticle['KA'] || rawArticle;
 
-            if (topicBadge) topicBadge.textContent = articleData.badge;
-            if (durationEl) durationEl.textContent = articleData.duration;
+            const heroWrap = overlay.querySelector('.article-reader-hero-wrap');
+            if (heroWrap) heroWrap.style.display = '';
             if (heroImg) {
+                heroImg.style.display = '';
                 heroImg.src = rawArticle.img || articleData.img;
                 heroImg.alt = articleData.title;
             }
+            if (authorImgEl) authorImgEl.style.display = '';
+
+            if (topicBadge) topicBadge.textContent = articleData.badge;
+            if (durationEl) durationEl.textContent = articleData.duration;
             if (titleEl) titleEl.textContent = articleData.title;
             if (authorEl) authorEl.textContent = articleData.author;
             if (dateEl) dateEl.textContent = articleData.date;
