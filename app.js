@@ -1444,7 +1444,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             card.addEventListener('dblclick', () => {
-                openBookingModal(item.serviceCategory || item.title, item.date, item.time);
+                openBookingModal(item.serviceCategory || item.title, item.date, item.time, item.price || '');
             });
 
             let lastAfishaTap = 0;
@@ -1452,7 +1452,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-author-btn')) return;
                 const now = Date.now();
                 if (now - lastAfishaTap < 350 && now - lastAfishaTap > 0) {
-                    openBookingModal(item.serviceCategory || item.title, item.date, item.time);
+                    openBookingModal(item.serviceCategory || item.title, item.date, item.time, item.price || '');
                 }
                 lastAfishaTap = now;
             });
@@ -2416,7 +2416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function openBookingModal(preselectedService = '', targetDate = '', targetTime = '') {
+    function openBookingModal(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '') {
         if (bookingModalOverlay) {
             // If opened from within an article reader, close the article reader drawer
             const articleOverlay = document.getElementById('article-reader-overlay');
@@ -2425,8 +2425,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 articleOverlay.setAttribute('aria-hidden', 'true');
             }
 
+            const sSelect = document.getElementById('booking-service-select');
+            const priceInput = document.getElementById('booking-price-input');
+
             if (preselectedService) {
-                const sSelect = document.getElementById('booking-service-select');
                 if (sSelect) {
                     const sLower = preselectedService.toLowerCase();
                     for (let opt of sSelect.options) {
@@ -2437,6 +2439,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             break;
                         }
                     }
+                }
+            }
+
+            if (priceInput) {
+                if (targetPrice !== undefined && targetPrice !== null && targetPrice !== '') {
+                    priceInput.value = targetPrice;
+                } else {
+                    const autoPrice = getServicePrice(preselectedService || (sSelect ? sSelect.value : ''));
+                    priceInput.value = autoPrice || '';
                 }
             }
 
@@ -2490,14 +2501,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const phoneInput = document.getElementById('booking-phone-input');
         const dateInput = document.getElementById('booking-date-input');
         const timeInput = document.getElementById('booking-time-input') || document.getElementById('booking-time-select');
-        const guestsSelect = document.getElementById('booking-guests-select');
+        const priceInput = document.getElementById('booking-price-input');
         const serviceSelect = document.getElementById('booking-service-select');
 
         const name = (nameInput?.value || '').trim();
         const phone = (phoneInput?.value || '').trim().replace(/\s+/g, '');
         const date = (dateInput?.value || '').trim();
         const time = (timeInput?.value || '').trim() || '19:30';
-        const guests = (guestsSelect?.value || '').trim();
+        const price = (priceInput?.value || '').trim();
         const service = (serviceSelect?.value || '').trim();
 
         if (!name) {
@@ -2543,16 +2554,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return null;
         }
 
-        const price = getServicePrice(service);
-
         return {
             name: name,
             phone: "+995 " + normalizedPhone,
             date: date,
             time: time,
-            guests: guests || '1 ადამიანი',
-            service: service,
-            price: price
+            price: price,
+            service: service
         };
     }
 
@@ -2576,12 +2584,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.setCustomValidity(isEn ? 'Please fill out this field.' : 'გთხოვთ შეავსოთ ეს ველი.');
             });
         });
+
+        const sSelect = document.getElementById('booking-service-select');
+        if (sSelect) {
+            sSelect.addEventListener('change', () => {
+                const pInput = document.getElementById('booking-price-input');
+                if (pInput) {
+                    const price = getServicePrice(sSelect.value);
+                    if (price) {
+                        pInput.value = price;
+                    }
+                }
+            });
+        }
     }
     initBookingInputListeners();
 
     function openPaymentStep(payload) {
         if (payload.price === undefined) {
-            payload.price = getServicePrice(payload.service);
+            payload.price = (document.getElementById('booking-price-input')?.value || '').trim() || getServicePrice(payload.service);
         }
         pendingBookingPayload = payload;
 
@@ -2824,6 +2845,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let targetDate = btn.getAttribute('data-event-date') || '';
             let targetTime = btn.getAttribute('data-event-time') || '';
             let targetService = btn.getAttribute('data-service') || '';
+            let targetPrice = btn.getAttribute('data-price') || '';
             let sName = btn.getAttribute('data-event-title') || '';
 
             const card = btn.closest('.service-deep-section, .service-card, .afisha-event-card, .stagger-card');
@@ -2831,13 +2853,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!targetDate && card.dataset.eventDate) targetDate = card.dataset.eventDate;
                 if (!targetTime && card.dataset.eventTime) targetTime = card.dataset.eventTime;
                 if (!targetService && card.dataset.service) targetService = card.dataset.service;
+                if (!targetPrice && card.dataset.price) targetPrice = card.dataset.price;
                 if (!sName) {
                     const titleElem = card.querySelector('.service-deep-title, .card-title, .afisha-title, .stagger-card-title');
                     if (titleElem) sName = titleElem.textContent;
                 }
             }
 
-            openBookingModal(targetService || sName, targetDate, targetTime);
+            openBookingModal(targetService || sName, targetDate, targetTime, targetPrice);
         }
     });
 
@@ -5662,6 +5685,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Think Tank მოდერატორი": "Think Tank Moderator",
         "Clubs Host • მეტაფორა": "Clubs Host • Metaphora",
         "სერვისი / მიმართულება": "Service / Pillar",
+        "სერვისის ფასი": "Service Price",
+        "მაგ: 50 ₾ (ან ცარიელი)": "e.g. 50 ₾ (or blank)",
         "👥 სტუმრების რაოდენობა": "👥 Number of Guests",
         "ჯავშნის დადასტურება ✨": "Confirm Booking ✨",
         "Google Maps-ში გახსნა": "Open Map",
