@@ -4473,8 +4473,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'art-therapy': {
                     categoryKA: '🎨 მეტაფორა Art',
                     categoryEN: '🎨 Metaphora Art',
-                    authorKA: 'მეტაფორა Art',
-                    authorEN: 'Metaphora Art',
+                    authorKA: 'ია ხიდირბეგიშვილი',
+                    authorEN: 'Ia Khidirbegishvili',
                     mentorImg: 'გუნდი/5.jpg',
                     KA: {
                         title: '🎨 არტ-თერაპია & თვითგამოხატვა',
@@ -4493,8 +4493,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'art-ceramic': {
                     categoryKA: '🎨 მეტაფორა Art',
                     categoryEN: '🎨 Metaphora Art',
-                    authorKA: 'მეტაფორა Art',
-                    authorEN: 'Metaphora Art',
+                    authorKA: 'ია ხიდირბეგიშვილი',
+                    authorEN: 'Ia Khidirbegishvili',
                     mentorImg: 'გუნდი/5.jpg',
                     KA: {
                         title: '🏺 ფერწერა & კერამიკის მასტერკლასები',
@@ -4513,8 +4513,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'art-performance': {
                     categoryKA: '🎨 მეტაფორა Art',
                     categoryEN: '🎨 Metaphora Art',
-                    authorKA: 'მეტაფორა Art',
-                    authorEN: 'Metaphora Art',
+                    authorKA: 'ია ხიდირბეგიშვილი',
+                    authorEN: 'Ia Khidirbegishvili',
                     mentorImg: 'გუნდი/5.jpg',
                     KA: {
                         title: '🎶 პერფორმანსები & კულტურული საღამოები',
@@ -4553,9 +4553,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 'club-books': {
                     categoryKA: '🏛️ მეტაფორა Clubs',
                     categoryEN: '🏛️ Metaphora Clubs',
-                    authorKA: 'მეტაფორა Clubs',
-                    authorEN: 'Metaphora Clubs',
-                    mentorImg: 'blog_book_club.jpg',
+                    authorKA: 'თეო ფერაძე',
+                    authorEN: 'Teo Peradze',
+                    mentorImg: 'გუნდი/6.jpg',
                     KA: {
                         title: '📖 სამკითხველო & კინოკლუბი',
                         html: `<div class="word-doc-container">
@@ -4573,8 +4573,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'club-board-games': {
                     categoryKA: '🏛️ მეტაფორა Clubs',
                     categoryEN: '🏛️ Metaphora Clubs',
-                    authorKA: 'მეტაფორა Clubs',
-                    authorEN: 'Metaphora Clubs',
+                    authorKA: 'თეო ფერაძე',
+                    authorEN: 'Teo Peradze',
                     mentorImg: 'გუნდი/6.jpg',
                     KA: {
                         title: '🎲 სამაგიდო & ფსიქოლოგიური თამაშები',
@@ -4593,8 +4593,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'club-mastermind': {
                     categoryKA: '🏛️ მეტაფორა Clubs',
                     categoryEN: '🏛️ Metaphora Clubs',
-                    authorKA: 'მეტაფორა Clubs',
-                    authorEN: 'Metaphora Clubs',
+                    authorKA: 'თეო ფერაძე',
+                    authorEN: 'Teo Peradze',
                     mentorImg: 'გუნდი/6.jpg',
                     KA: {
                         title: '💻 Mastermind & Coworking Lounge',
@@ -4618,15 +4618,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentOpenArticleId = numericId;
             currentOpenType = 'event';
 
-            const isArtOrClubs = (
-                (event.category && (event.category === 'Art' || event.category === 'Clubs')) ||
-                (event.categoryKA && (event.categoryKA.includes('Art') || event.categoryKA.includes('Clubs') || event.categoryKA.includes('არტ') || event.categoryKA.includes('კლუბ'))) ||
-                String(numericId).startsWith('art') ||
-                String(numericId).startsWith('club') ||
-                window.location.pathname.includes('service-art') ||
-                window.location.pathname.includes('service-clubs')
-            );
-
             if (topicBadge) topicBadge.textContent = (lang === 'EN' ? (event.categoryEN || event.category) : (event.categoryKA || event.category));
             if (durationEl) {
                 if (isServicePage) {
@@ -4636,35 +4627,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Keep top hero banner hidden for all event/program drawers — show small profile avatar instead
             const heroWrap = overlay.querySelector('.article-reader-hero-wrap');
             if (heroWrap) {
-                if (isArtOrClubs || isServicePage) {
-                    heroWrap.style.display = 'none';
-                } else {
-                    heroWrap.style.display = '';
-                }
+                heroWrap.style.display = 'none';
             }
-
             if (heroImg) {
-                if (isArtOrClubs || isServicePage) {
-                    heroImg.style.display = 'none';
-                } else {
-                    heroImg.style.display = '';
-                    heroImg.src = event.mentorImg || 'გუნდი/1.jpg';
-                    heroImg.alt = (event[lang] ? event[lang].title : '');
-                }
+                heroImg.style.display = 'none';
             }
 
             if (titleEl) titleEl.textContent = (event[lang] ? event[lang].title : (event.titleKA || ''));
             if (authorEl) authorEl.textContent = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
             
+            // Show small author avatar image next to the mentor's name
             if (authorImgEl) {
-                if (isArtOrClubs || !event.mentorImg || (event.authorKA && (event.authorKA.includes('მეტაფორა') || event.authorKA.includes('Metaphora')))) {
-                    authorImgEl.style.display = 'none';
-                } else {
+                if (event.mentorImg) {
                     authorImgEl.style.display = '';
-                    authorImgEl.src = event.mentorImg || 'გუნდი/1.jpg';
+                    authorImgEl.src = event.mentorImg;
                     authorImgEl.alt = (lang === 'EN' ? (event.authorEN || event.authorKA) : event.authorKA);
+                } else {
+                    authorImgEl.style.display = 'none';
                 }
             }
 
@@ -4676,13 +4658,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Clean ALL prices, fee tables, financial details on service pages and general event views
+            // Clean only price rows and financial lines while preserving full, comprehensive Word doc content
+            function sanitizeEventContent(rawHtml) {
+                if (!rawHtml) return "";
+                let html = rawHtml;
+                // 1. Remove table rows that contain price / fee / payment information
+                html = html.replace(/<tr[^>]*>[\s\S]*?(?:ღირებულება|საფასური|თანხის გადახდა|₾|ლარი|სრული ღირებულება|Price|Fee|Payment|Cost)[\s\S]*?<\/tr>/gi, "");
+                // 2. Remove section headers that are strictly about finance/fee (without crossing tags)
+                html = html.replace(/<div class="word-section-title"[^>]*>[^<]*(?:ფინანსური|საფასური|ღირებულება|Financial|Fee|Price)[^<]*<\/div>/gi, "");
+                // 3. Remove standalone paragraphs that are purely about price/fees
+                html = html.replace(/<p[^>]*>[^<]*(?:სრული ღირებულება|საფასური:|ფასი:|კურსის ღირებულება|2 500 ₾|3 500 ₾|80 ლარი|100 ლარი|₾|ლარი)[^<]*<\/p>/gi, "");
+                // 4. Remove empty or header-only tables
+                html = html.replace(/<table[^>]*>\s*<tr>\s*<td>\s*დეტალი\s*<\/td>\s*<td>\s*ინფორმაცია\s*<\/td>\s*<\/tr>\s*<\/table>/gi, "");
+                html = html.replace(/<table[^>]*>\s*<\/table>/gi, "");
+                // 5. Remove trailing dividers
+                html = html.replace(/(?:<div class="word-divider">━ ❖ ━<\/div>\s*)+$/gi, "");
+                return html.trim();
+            }
+
             let rawContentHtml = (event[lang] ? event[lang].html : (event.KA ? event.KA.html : ''));
-            let cleanContentHtml = rawContentHtml
-                .replace(/<table[\s\S]*?<\/table>/gi, '')
-                .replace(/<div class="word-section-title"[^>]*>[\s\S]*?(?:ფინანსური|ორგანიზაციული|ღირებულება|საფასური|Financial|Fee|Price|Schedule)[\s\S]*?<\/div>/gi, '')
-                .replace(/<p[^>]*>[\s\S]*?(?:ღირებულება|სრული საფასური|თანხის გადახდა|50%|2 500|₾|ლარი|Fee|Price|Cost|Payment)[\s\S]*?<\/p>/gi, '')
-                .replace(/<div class="word-divider">━ ❖ ━<\/div>\s*$/gi, '');
+            let cleanContentHtml = sanitizeEventContent(rawContentHtml);
 
             if (contentEl) {
                 contentEl.innerHTML = cleanContentHtml;
