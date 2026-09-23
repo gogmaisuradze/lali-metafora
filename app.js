@@ -1536,6 +1536,87 @@ document.addEventListener('DOMContentLoaded', () => {
     if (staggerPrevBtn) staggerPrevBtn.addEventListener('click', () => moveStagger(-1));
     if (staggerNextBtn) staggerNextBtn.addEventListener('click', () => moveStagger(1));
 
+    // Touch Swipe, Wheel Scroll, and Mouse Drag gesture support for Afisha
+    const staggerCarouselWrap = document.getElementById('stagger-carousel-container') || staggerTrack;
+    if (staggerCarouselWrap) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isTouching = false;
+        let isDragging = false;
+        let dragStartX = 0;
+
+        // Mobile touch swipe
+        staggerCarouselWrap.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches.length > 0) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                isTouching = true;
+            }
+        }, { passive: true });
+
+        staggerCarouselWrap.addEventListener('touchend', (e) => {
+            if (!isTouching) return;
+            isTouching = false;
+            if (e.changedTouches && e.changedTouches.length > 0) {
+                const diffX = e.changedTouches[0].clientX - touchStartX;
+                const diffY = e.changedTouches[0].clientY - touchStartY;
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+                    if (diffX < 0) {
+                        moveStagger(1);
+                    } else {
+                        moveStagger(-1);
+                    }
+                }
+            }
+        }, { passive: true });
+
+        // Desktop mouse drag
+        staggerCarouselWrap.addEventListener('mousedown', (e) => {
+            if (e.target.closest('button, a, input, select')) return;
+            isDragging = true;
+            dragStartX = e.clientX;
+        });
+
+        window.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diffX = e.clientX - dragStartX;
+            if (Math.abs(diffX) > 40) {
+                if (diffX < 0) {
+                    moveStagger(1);
+                } else {
+                    moveStagger(-1);
+                }
+            }
+        });
+
+        // Wheel / Trackpad scroll over afisha carousel
+        let wheelCooldown = false;
+        staggerCarouselWrap.addEventListener('wheel', (e) => {
+            if (wheelCooldown) return;
+            const deltaX = e.deltaX;
+            const deltaY = e.deltaY;
+            
+            if (Math.abs(deltaX) > 20) {
+                wheelCooldown = true;
+                if (deltaX > 0) {
+                    moveStagger(1);
+                } else {
+                    moveStagger(-1);
+                }
+                setTimeout(() => { wheelCooldown = false; }, 260);
+            } else if (e.shiftKey && Math.abs(deltaY) > 20) {
+                wheelCooldown = true;
+                if (deltaY > 0) {
+                    moveStagger(1);
+                } else {
+                    moveStagger(-1);
+                }
+                setTimeout(() => { wheelCooldown = false; }, 260);
+            }
+        }, { passive: true });
+    }
+
     window.addEventListener('resize', updateStaggerLayout);
     updateStaggerLayout();
 
@@ -2464,6 +2545,11 @@ document.addEventListener('DOMContentLoaded', () => {
             showBookingStep('form');
             bookingModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            const activeLang = localStorage.getItem('metafora_lang') || 'KA';
+            if (activeLang === 'EN' && typeof translateDOMNodes === 'function') {
+                translateDOMNodes(bookingModalOverlay, 'EN');
+            }
         }
     }
     window.openBookingModal = openBookingModal;
@@ -5115,6 +5201,162 @@ document.addEventListener('DOMContentLoaded', () => {
     // 18. ROBUST BILINGUAL I18N ENGINE (KA ⇄ EN)
     // ==========================================================================
     const I18N_DICTIONARY = {
+        "შენი მესამე სივრცე": "Your Third Space",
+        "- „იდეალური გარემო პროდუქტიული მუშაობისა და განვითარებისათვის“": "- \"Ideal environment for productive work and development\"",
+        "მეტის ნახვა": "View More",
+        "მეტის ნახვა →": "Learn More →",
+        "- სივრცე, სადაც ყოველთვის გელიან": "- A space where you are always welcome",
+        "შექმნილია მათთვის, ვისაც სურს საკუთარი შინაგანი რესურსების აღმოჩენა, ემოციური ინტელექტის გაღრმავება და პიროვნული ტრანსფორმაცია.": "Created for those who seek to discover inner resources, deepen emotional intelligence, and achieve personal transformation.",
+        "თანამედროვე ორგანიზაციული გამოწვევების, ლიდერობის, გუნდური ეფექტურობისა და ახალი ბიზნეს-პარტნიორული კავშირების მხარდამჭერი სივრცე.": "A supportive environment for modern organizational challenges, leadership, team effectiveness, and new business partnerships.",
+        "აზროვნების, იდეებისა და სიღრმისეული დისკუსიების სივრცე, ინტელექტუალური დიალოგისა და ახალი პერსპექტივებისთვის.": "A space of thought, ideas, and deep discussions for intellectual dialogue and fresh perspectives.",
+        "ხელოვნება, როგორც თვითგამოხატვის, განტვირთვის, შემოქმედებითი პროცესებისა და შინაგან სამყაროსთან შეხების საუკეთესო გზა.": "Art as the prime pathway to self-expression, release, creative exploration, and connecting with one's inner world.",
+        "სივრცე, სადაც საერთო ინტერესების, ღირებულებებისა და განვითარების სურვილის მქონე ადამიანები ერთიანდებიან.": "A space where individuals with shared interests, values, and a passion for growth unite.",
+        "&copy; 2026 მეტაფორა. ყველა უფლება დაცულია.": "© 2026 METAPHORA. All rights reserved.",
+        "საკონტაქტო ტელეფონის ნომერი": "Contact Phone Number",
+        "ქეთი ჟვანია-ტაისონი": "Keti Zhvania-Tyson",
+        "მეტაფორა • აღმაშენებლის 63ა": "Metaphora • 63a Aghmashenebeli Ave",
+        "გსურთ ამ ღონისძიებაზე დასწრება?": "Want to attend this event?",
+        "დაჯავშნეთ თქვენი ადგილი ღონისძიებაზე ონლაინ.": "Book your spot for the event online.",
+        "✨ სწრაფი": "✨ Quick",
+        "რეგისტრაცია": "Registration",
+        "კომპანია, რომელსაც წარმოადგენთ": "Company / Organization",
+        "რეგისტრაციის გაგზავნა ✨": "Submit Registration ✨",
+        "შინაგანი რესურსების აღმოჩენა & პიროვნული ტრანსფორმაცია": "Discovering Inner Resources & Personal Transformation",
+        "ეს მიმართულება შექმნილია მათთვის, ვისაც სურს საკუთარი შინაგანი რესურსების აღმოჩენა, ემოციური ინტელექტის გაღრმავება და პიროვნული ტრანსფორმაცია. უსაფრთხო და მხარდამჭერ გარემოში, პროფესიონალური მეთოდოლოგიის გამოყენებით, აქ იქმნება პირობები ცხოვრებისეული გამოწვევების ახლებურად დანახვისა და ჰარმონიული თვითრეალიზაციის მიღწევისთვის.": "This pillar is created for those who wish to discover their inner resources, deepen emotional intelligence, and achieve personal transformation. In a safe, supportive environment with professional methodologies, conditions are fostered to view life challenges anew and reach harmonious self-fulfillment.",
+
+        "ვრცლად ნახვა": "View More",
+        "ორგანიზაციული ზრდა, ლიდერობა & პარტნიორობა": "Organizational Growth, Leadership & Partnership",
+        "თანამედროვე ორგანიზაციული გამოწვევების, ლიდერობისა და გუნდური ეფექტურობის მხარდამჭერი სივრცე. ფსიქოლოგიური, ქოუჩინგური და სტრატეგიული ინსტრუმენტების სინთეზით, იქმნება გარემო, სადაც ბიზნესის ზრდა და ჯანსაღი კორპორატიული კულტურა ერთიანდება. აქ იქმნება შესაძლებლობა გამოცდილების გაზიარების, რეალური პრობლემებისა და გამოწვევების ერთობლივი განხილვისთვის, ასევე ახალი, საინტერესო და საქმიანობისთვის საჭირო ადამიანების გაცნობისა და ახალი, ბიზნეს-პარტნიორული კავშირების დამყარებისთვის.": "A supportive space for modern organizational challenges, leadership, and team effectiveness. By combining psychological, coaching, and strategic tools, an environment is created where business growth and a healthy corporate culture unite. It offers an opportunity to share experience, address real challenges collaboratively, and meet valuable partners to establish fruitful business connections.",
+        "აზროვნების, იდეებისა და სიღრმისეული დისკუსიების სივრცე, სადაც ხვდებიან ადამიანები, რომლებსაც აინტერესებთ სამყაროს, საზოგადოებისა და ადამიანური ბუნების უკეთ გაგება. ეს არის პლატფორმა პირადი და პროფესიული გამოცდილების გაზიარებისა და ინტელექტუალური დიალოგისთვის, სადაც აზრთა გაცვლა ახალ პერსპექტივასა და შთაგონებას შობს.": "A space for thought, ideas, and deep discussions, bringing together people who seek a deeper understanding of the world, society, and human nature. A platform for sharing personal and professional experience and intellectual dialogue where exchanging ideas sparks fresh perspectives and inspiration.",
+        "მოდერირებული ინტელექტუალური დისკუსიები და გამოცდილების გაზიარება.": "Moderated intellectual discussions and experiential sharing.",
+        "ღია დიალოგის ფორუმი": "Open Dialogue Forum",
+        "ადამიანური ბუნება & საზოგადოება": "Human Nature & Society",
+        "ფსიქოლოგიის, კულტურისა და სოციალური ტენდენციების ანალიზი.": "Analysis of psychology, culture and social trends.",
+        "თვითგამოხატვა, შემოქმედება & შინაგანი ჰარმონია": "Self-Expression, Creativity & Inner Harmony",
+        "ხელოვნება, როგორც თვითგამოხატვის, განტვირთვისა და შინაგან სამყაროსთან შეხების საუკეთესო გზა. ეს მიმართულება აერთიანებს შემოქმედებით პროცესებს, ესთეტიკურ სიამოვნებასა და თავისუფალი დროის ხარისხიანად გატარებას. ეს პროცესი უსაფრთხო გზას ხსნის არაცნობიერ შრეებთან შესახებად, სადაც დაფარული ემოციებისა და შინაგანი სიმბოლოების გაცნობიერება იწვევს ღრმა ფსიქოლოგიურ განტვირთვას, შინაგან ჰარმონიასა და თვითაღქმის ახალ საფეხურზე გადასვლას.": "Art as the prime pathway to self-expression, release, and connecting with one's inner world. This pillar brings together creative processes, aesthetic pleasure, and quality leisure. The process opens a safe path to unconscious layers where realizing hidden emotions and internal symbols leads to deep psychological release, inner harmony, and higher self-awareness.",
+        "Playback იმპროვიზაციული თეატრი, არტ-თერაპია და თვითგამოხატვის თავისუფლება.": "Playback improvisation theatre, art therapy and freedom of self-expression.",
+        "სივრცე, სადაც საერთო ინტერესების, ღირებულებებისა და განვითარების სურვილის მქონე ადამიანები ერთიანდებიან. ეს არის პლატფორმა კომუნიკაციისთვის, გამოცდილების გაზიარებისა და ახალი კავშირების დამყარებისთვის. ამასთანავე, კლუბური შეხვედრები მოიცავს სპეციალურ მუშაობებს საკუთარი თავის უკეთ გასაცნობად და შინაგანი, ჯერ კიდევ აუთვისებელი შესაძლებლობების აღმოსაჩენად. აქ თანამოაზრეები თავად ქმნიან ცოცხალ, დინამიკურ და მხარდამჭერ გარემოს.": "A space where people with shared interests, values, and a desire for growth unite. A platform for communication, experience-sharing, and new connections. Club gatherings also feature focused sessions to better understand oneself and unlock untapped potential, while members co-create a vibrant, dynamic, and supportive environment.",
+        "კლუბი & „მესამე სივრცე“": "Clubs & \"Third Space\"",
+        "თანამოაზრეების ცოცხალი კომუნა, ახალი კავშირები და მყუდრო გარემო.": "Vibrant community of kindred spirits, new connections and a cozy atmosphere.",
+        "ლიტერატურული შედევრებისა და კინემატოგრაფიის მოდერირებული განხილვები.": "Moderated discussions of literary masterpieces and cinema.",
+        "50-ზე მეტი თანამედროვე სამაგიდო თამაში, გეიმ-მასტერები და განტვირთვა.": "50+ modern board games, experienced game masters and relaxation.",
+        "👤 ქეთი ჟვანია-ტაისონი": "👤 Keti Zhvania-Tyson",
+        "თამაშის არქიტექტურა - საბაზისო კურსი": "Game Architecture - Basic Course",
+        "ტრანსფორმაციული და ბიზნეს თამაშების შექმნის, დიზაინისა და მექანიკის პრაქტიკული საბაზისო კურსი.": "Practical basic course on design, mechanics, and creation of transformative and business games.",
+        "თამაშის არქიტექტორი - ჩაღრმავებული კურსი": "Game Architect - Advanced Course",
+        "სიღრმისეული ფასილიტაცია, ფსიქოლოგიური დინამიკები და საავტორო თამაშის შექმნა და გაშვება.": "Advanced facilitation, psychological dynamics, and creating & launching your author game.",
+        "არიტე - პიროვნული განვითარება": "Arete - Personal Development",
+        "სიღრმისეული 4-მოდულიანი საავტორო პროგრამა: ემოციების სამყარო, წარმატებული ადამიანი, მე და სხვები, ძნელი თამაშები.": "In-depth 4-module author program: World of Emotions, Successful Person, Me & Others, Difficult Games.",
+        "ქოუჩინგი არაქოუჩებისთვის": "Coaching for Non-Coaches",
+
+        "ორშ": "Mon",
+        "სამ": "Tue",
+        "ოთხ": "Wed",
+        "ხუთ": "Thu",
+        "პარ": "Fri",
+        "შაბ": "Sat",
+        "კვი": "Sun",
+        "დღე": "Day",
+        "თვე": "Month",
+        "წელი": "Year",
+        "დაჯავშნა": "Book Now",
+        "ადგილის დაჯავშნა": "Book a Spot",
+        "სივრცის დაჯავშნა": "Book Space",
+        "ღონისძიების სათაური": "Event Title",
+        "პროგრამის სათაური": "Program Title",
+        "მიმართულება / სერვისი": "Pillar / Service",
+        "არჩეული პროგრამა": "Selected Program",
+        "პროგრამა / მიმართულება": "Program / Pillar",
+        "სახელი, გვარი": "Full Name",
+        "ტელ. ნომერი": "Phone Number",
+        "მეილი": "Email",
+        "მაგ: 599 00 00 00": "e.g. 599 00 00 00",
+        "მაგ: example@mail.com": "e.g. example@mail.com",
+        "მაგ: კომპანიის ან ორგანიზაციის სახელი": "e.g. Company or Organization Name",
+        "მაგ: გიორგი მაისურაძე": "e.g. George Maisuradze",
+        "რეგისტრაცია — მეტაფორა": "Registration — METAPHORA",
+        "რეგისტრაცია წარმატებით გაიგზავნა!": "Registration Submitted Successfully!",
+        "მადლობა დაინტერესებისთვის. ჩვენი წარმომადგენელი უახლოეს დროში დაგიკავშირდებათ მითითებულ ნომერზე.": "Thank you for your interest. Our representative will contact you shortly on the provided number.",
+        "შეავსეთ მარტივი ფორმა და ჩვენი გუნდი მალე დაგიკავშირდებათ.": "Fill out this simple form and our team will get in touch shortly.",
+        "არც სახლი, არც სამსახური -": "Neither home, nor work -",
+        "ტრენინგები": "Trainings",
+        "მასტერკლასები": "Masterclasses",
+        "ჯგუფური მუშაობა": "Group Work",
+        "ორგანიზაციული განვითარება": "Organizational Development",
+        "ქოუჩინგ პროგრამები": "Coaching Programs",
+        "ბიზნეს კლუბი": "Business Club",
+        "სტრატეგიული თიმბილდინგი": "Strategic Teambuilding",
+        "სალონური შეხვედრები": "Salon Meetings",
+        "არგუმენტირებული მსჯელობა, თავისუფალი აზრთა გაცვლა და პოლემიკა.": "Argument-based reasoning, open exchange of views and polemics.",
+        "შემოქმედებითი აქტივობები": "Creative Activities",
+        "დღის აქტივობები": "Daytime Activities",
+        "ფერწერისა და კერამიკის მასტერკლასები, დღის შემოქმედებითი ვორქშოფები.": "Painting and ceramic masterclasses, daytime creative workshops.",
+        "გართობა": "Entertainment",
+        "აკუსტიკური ცოცხალი საღამოები, პოეზიის შეხვედრები და შთამაგონებელი ივენთები.": "Acoustic live evenings, poetry nights and inspiring events.",
+        "წიგნებისა & კინოკლუბი": "Book & Movie Club",
+        "პროგრამები & კურსები": "Programs & Courses",
+        "ბიზნეს პროგრამები & ქოუჩინგი": "Business Programs & Coaching",
+        "სალონური ფორმატები & დისკუსიები": "Salon Formats & Discussions",
+        "ტრენერობის ხელოვნება - ტრენერის გზა": "The Art of Training - Trainer's Path",
+        "ტრენერებისა და ფასილიტატორების პროფესიული განვითარების მოდულური ეკოსისტემა და პრაქტიკული მეთოდოლოგია.": "Modular ecosystem and practical methodology for professional development of trainers and facilitators.",
+        "გსურთ ამ პროგრამაში მონაწილეობა?": "Want to participate in this program?",
+        "გსურთ ამ შეხვედრაში მონაწილეობა?": "Want to participate in this meeting?",
+        "დაჯავშნეთ თქვენი ადგილი ონლაინ.": "Book your spot online.",
+        "ქოუჩინგური აზროვნება, ტექნიკები და ინსტრუმენტები ყოველდღიური მართვისა და კომუნიკაციისთვის.": "Coaching mindset, techniques and tools for daily management and communication.",
+        "ქოუჩინგი HR-ებისთვის": "Coaching for HR",
+        "ტალანტების განვითარება, თანამშრომელთა მოტივაცია და გუნდური ეფექტურობის ქოუჩინგური მიდგომები.": "Talent development, employee motivation and coaching leadership approaches.",
+        "ადამიანის ფსიქოლოგია ლიდერობაში": "Human Psychology in Leadership",
+        "გუნდის მართვა, არაცნობიერი მენეჯმენტი, ლიდერული ფსიქოლოგიური ინსტრუმენტები და ემოციური რესურსები.": "Team management, unconscious dynamics, leadership psychological tools and emotional resources.",
+        "ბიზნეს განვითარება & პარტნიორობა": "Business Development & Partnerships",
+        "ორგანიზაციული ზრდა, B2B პარტნიორობა, სტრატეგიული თანამშრომლობა და ახალი ბიზნეს-შესაძლებლობები.": "Organizational growth, B2B partnerships, strategic collaboration and new business opportunities.",
+        "სიყვარულის ხელოვნება": "Art of Loving",
+        "ურთიერთობების ფსიქოლოგია, გარი ჩაპმანის მოდელი, სიყვარულის 5 ენა და ემოციური სიახლოვის ხელოვნება.": "Relationship psychology, Gary Chapman's model, 5 love languages and art of emotional closeness.",
+        "რატომ ვირჩევთ ერთნაირ პარტნიორებს": "Why We Choose Similar Partners",
+        "მიჯაჭვულობის სტილები, ბავშვობის ტრავმები, განმეორებადი სცენარები და ურთიერთობების ფარული დინამიკა.": "Attachment styles, childhood blueprints, recurring patterns and hidden relationship dynamics.",
+        "ტრიგერებთან ურთიერთობა": "Relating to Triggers",
+        "რა შევუკვეთე და რა ჩამომივიდა: მოლოდინები, იმედგაცრუება, ემოციური ტრიგერები და რეალობასთან შეხვედრა.": "What I ordered vs what arrived: expectations, disappointment, emotional triggers and facing reality.",
+        "სისტემური განლაგება": "Systemic Constellations",
+        "ფარული ოჯახური დინამიკების, კარიერული და პირადი ბლოკების სიღრმისეული ხედვა და ტრანსფორმაციული ვორქშოფი.": "Deep insight into hidden family dynamics, career and personal blocks, and a transformative workshop.",
+        "ლილას თამაში": "Leela Game",
+        "თვითშემეცნების უძველესი ტრანსფორმაციული ინსტრუმენტი, შინაგანი პასუხებისა და ცნობიერების გაფართოების გზა.": "Ancient transformative self-discovery tool, a pathway to inner answers and expanded consciousness.",
+        "შეხვედრა შეჰერეზადასთან": "Meeting with Scheherazade",
+        "აღმოსავლური ისტორიები და ფსიქოთერაპიული მოგზაურობა, იგავების 15 თერაპიული საიდუმლო და აღმოსავლური ჩაის რიტუალი.": "Oriental parables and psychotherapeutic journey, 15 therapeutic secrets of parables and oriental tea ritual.",
+        "მოდი ვილაპარაკოთ": "Let's Talk",
+        "უნიკალური სალონური ფორმატი შინაგანი პასუხების, გულწრფელი საუბრებისა და ექსპერიმენტული დიალოგისთვის.": "Unique salon format for authentic answers, heartfelt conversations and experimental dialogue.",
+        "სამყაროს კანონები": "Universal Laws",
+        "სამყაროს ფუნდამენტური კანონზომიერებები, ცნობიერების ევოლუცია და ადამიანის ადგილი სამყაროს წესრიგში.": "Fundamental laws of the universe, evolution of consciousness and human place in the cosmic order.",
+        "იმპროვიზაციული, ინტერაქციული თეატრი, სადაც მაყურებლის პირადი ისტორიები სცენაზე ცოცხლდება.": "Improvisational, interactive theatre where audience members' personal stories come alive on stage.",
+        "არტ-თერაპია & თვითგამოხატვა": "Art Therapy & Self-Expression",
+        "ემოციური განტვირთვა, არაცნობიერი შრეების გაცნობიერება და შინაგანი ჰარმონიის აღდგენა ხელოვნებით.": "Emotional release, awareness of unconscious layers and restoring inner harmony through art.",
+        "ფერწერა & კერამიკის მასტერკლასები": "Painting & Ceramic Masterclasses",
+        "პრაქტიკული შემოქმედებითი სესიები, ხელით ძერწვა, მოხატვა და საკუთარი ხელნაკეთი ნამუშევრების შექმნა.": "Hands-on creative sessions, sculpting, painting and crafting your own handmade works.",
+        "პერფორმანსები & კულტურული საღამოები": "Performances & Cultural Evenings",
+        "კამერული აკუსტიკური კონცერტები, პოეზიის საღამოები, თანამედროვე გამოფენები და არტ-ინსტალაციები.": "Intimate acoustic concerts, poetry evenings, contemporary exhibitions and art installations.",
+        "მესამე სივრცე & კომუნა": "Third Space & Community",
+        "ადგილი სახლსა და სამსახურს მიღმა, სადაც საერთო ინტერესების მქონე ადამიანები ერთიანდებიან.": "A place beyond home and work where people with shared interests unite.",
+        "სამკითხველო & კინოკლუბი": "Reading & Film Club",
+        "ლიტერატურული შედევრებისა და საკულტო კინემატოგრაფიის მოდერირებული განხილვები მყუდრო სალონში.": "Moderated discussions of literary masterpieces and iconic cinema in a cozy salon.",
+        "სამაგიდო & ფსიქოლოგიური თამაშები": "Board & Psychological Games",
+        "სტრატეგიული და ფსიქოლოგიური სამაგიდო თამაშები (Mafia, Catan, Dixit, Chess) მეგობრებთან ერთად.": "Strategic and psychological board games (Mafia, Catan, Dixit, Chess) with friends.",
+        "მშვიდი, ერგონომიული სამუშაო სივრცე და Mastermind ჯგუფური შეხვედრები მაღალი კონცენტრაციისთვის.": "Quiet, ergonomic workspace and Mastermind group sessions for focused productivity.",
+        "გუნდური შეჭიდულობის, ბიზნეს-სიმულაციებისა და კორპორატიული კულტურის გაძლიერება.": "Team bonding, business simulations and strengthening corporate culture.",
+        "ემოციური ინტელექტი, ეფექტური კომუნიკაცია, თვითშეფასება და სტრესმედეგობა.": "Emotional intelligence, effective communication, self-esteem and resilience.",
+        "თვითშემეცნების თანამედროვე მეთოდოლოგია და გააზრებული გადაწყვეტილებები.": "Modern self-discovery methodology and mindful decision-making.",
+        "ქოუჩინგი, ფსიქოლოგიური მხარდაჭერა და გაცნობიერებული ტრანსფორმაცია.": "Coaching, psychological support and conscious transformation.",
+        "ტრენინგები და ვორქშოფები მოლაპარაკებების, დროისა და ცვლილებების მართვის მიმართულებით.": "Trainings and workshops in negotiation, time and change management.",
+        "გრძელვადიანი და მოკლევადიანი პროგრამები ლიდერებისა და მენეჯერებისთვის.": "Long-term and short-term programs for leaders and managers.",
+        "სივრცე პროფესიული ზრდის, ახალი პარტნიორული კავშირებისა და B2B ნეთვორქინგისთვის.": "Space for professional growth, new partnership ties and B2B networking.",
+        "👤 მარიკა ხალიანი": "👤 Marika Khaliani",
+        "👤 ლალი ბადრიძე": "👤 Lali Badridze",
+        "👤 ია ხიდირბეგიშვილი": "👤 Ia Khidirbegishvili",
+        "👤 თეო ფერაძე": "👤 Teo Peradze",
+        "👤 მეტაფორა Art": "👤 Metaphora Art",
+        "👤 მეტაფორა Clubs": "👤 Metaphora Clubs",
+        "🎭 Playback იმპროვიზაციის საღამო": "🎭 Playback Improvisation Evening",
+        "📅 28 აგვ | 19:00": "📅 Aug 28 | 19:00",
+        "28 აგვისტო · 19:30": "August 28 · 19:30",
+        "12 ოქტ | 18:30": "Oct 12 | 18:30",
+
         "„მესამე ადგილი“ არის სოციალური თავშესაფარი სახლსა და სამსახურს მიღმა. მეტაფორა Clubs გთავაზობთ მყუდრო Coworking ზონას დღისით, ხოლო საღამოს - თემატურ სამაგიდო თამაშებს, წიგნის კლუბსა და საავტორო სასმელების Themed Bar-ს.": "The 'Third Place' is a social sanctuary beyond home and work. Metaphora Clubs offers daytime coworking, followed by evening board games, book clubs, and an artisanal themed bar.",
         "თანამედროვე სამყაროში იშვიათია ადგილი, სადაც აჩქარების გარეშე, არგუმენტირებულად და სიღრმისეულად მსჯელობენ კულტურაზე, ფილოსოფიაზე, სოციალურ ტენდენციებსა და მომავლის ხედვებზე. მეტაფორას სალონი სწორედ ამისთვის შეიქმნა.": "In a fast-paced world, places for unhurried, nuanced discussions on culture, philosophy, and future trends are rare. Metaphora Salon was crafted for this purpose.",
         "„მეტაფორას“ პიროვნული განვითარების მიმართულება შექმნილია მათთვის, ვისაც სურს საკუთარი პოტენციალის აღმოჩენა, სტრესის დაძლევა და შინაგანი რესურსების გააქტიურება. ჩვენ გთავაზობთ პროფესიულ, ეთიკურ და მზრუნველ გარემოს.": "Metaphora Personal Development is designed for those seeking to discover their potential, overcome stress, and activate inner resilience in a caring setting.",
