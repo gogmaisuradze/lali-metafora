@@ -1981,8 +1981,7 @@ html.direct-main-mode #main-website {
     font-weight: 700;
     color: var(--primary-color, #016166);
     cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration: none;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
@@ -1991,15 +1990,18 @@ html.direct-main-mode #main-website {
 
 .stagger-card-author-btn:hover {
     color: var(--brand-gold, #ffba00);
+    text-decoration: none;
     transform: translateX(1px);
 }
 
 .stagger-card.center .stagger-card-author-btn {
     color: #ffffff;
+    text-decoration: none;
 }
 
 .stagger-card.center .stagger-card-author-btn:hover {
     color: #ffe082;
+    text-decoration: none;
 }
 
 .stagger-card-service-link {
