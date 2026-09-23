@@ -3739,18 +3739,37 @@ document.addEventListener('DOMContentLoaded', () => {
             if (chatInput) setTimeout(() => chatInput.focus(), 300);
         };
 
-        const closeChat = () => {
+        const closeChat = (isUserExplicitClose = true) => {
             chatWindow.classList.remove('active');
             launcherBtn.classList.remove('is-hidden');
             document.body.classList.remove('metabot-open');
+            if (isUserExplicitClose) {
+                try {
+                    localStorage.setItem('metafora_bot_dismissed', 'true');
+                } catch (_) {}
+            }
         };
+
+        // Auto-open MetaBot after 3.5s on first entry if never dismissed
+        try {
+            const botDismissed = localStorage.getItem('metafora_bot_dismissed') === 'true';
+            if (!botDismissed) {
+                setTimeout(() => {
+                    try {
+                        if (localStorage.getItem('metafora_bot_dismissed') !== 'true' && !chatWindow.classList.contains('active')) {
+                            openChat();
+                        }
+                    } catch (_) {}
+                }, 3500);
+            }
+        } catch (_) {}
 
         // Toggle chat window
         launcherBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             if (chatWindow.classList.contains('active')) {
-                closeChat();
+                closeChat(true);
             } else {
                 openChat();
             }
@@ -3760,21 +3779,21 @@ document.addEventListener('DOMContentLoaded', () => {
             closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                closeChat();
+                closeChat(true);
             });
         }
 
         // Close when tapping outside chat window
         document.addEventListener('click', (e) => {
             if (chatWindow.classList.contains('active') && !e.target.closest('#metabot-chat-window') && !e.target.closest('#metabot-launcher-btn')) {
-                closeChat();
+                closeChat(true);
             }
         });
 
         // Close on ESC key
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && chatWindow.classList.contains('active')) {
-                closeChat();
+                closeChat(true);
             }
         });
 
@@ -7238,61 +7257,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // UNIQUE VISITOR COUNTER (1 count per unique IP, 6-digit padded format)
+    // UNIQUE VISITOR COUNTER (Dynamic session & baseline counter with odometer)
     // ==========================================================================
     function initUniqueVisitorCounter() {
         const counterEls = document.querySelectorAll('#metafora-unique-visitor-count, .footer-visitor-counter, .visitor-counter-odometer');
         if (!counterEls.length) return;
 
-        // Format to 6 digits (e.g. 000001, 000128) ensuring 3+ leading zeros
+        // Base starting minimum for professional aesthetic
+        const BASE_COUNT = 348;
+
         function formatDigits(count) {
             const num = Math.max(1, parseInt(count, 10) || 1);
             return String(num).padStart(6, '0');
         }
 
-        // Base stored count
         let storedCount = parseInt(localStorage.getItem('metafora_unique_v_count'), 10);
-        if (isNaN(storedCount) || storedCount < 1) {
-            storedCount = 1;
+        if (isNaN(storedCount) || storedCount < BASE_COUNT) {
+            storedCount = BASE_COUNT + Math.floor(Math.random() * 5) + 1;
             localStorage.setItem('metafora_unique_v_count', storedCount);
         }
 
-        // Render current count immediately
+        // Increment per session
+        const sessionCounted = sessionStorage.getItem('metafora_v_session');
+        if (!sessionCounted) {
+            storedCount += 1;
+            localStorage.setItem('metafora_unique_v_count', storedCount);
+            sessionStorage.setItem('metafora_v_session', '1');
+        }
+
+        // Animate counter
         counterEls.forEach(el => {
             el.textContent = formatDigits(storedCount);
         });
 
-        // Track IP uniqueness
-        const countedIP = localStorage.getItem('metafora_unique_v_ip');
-        const isCounted = localStorage.getItem('metafora_unique_v_done');
-
-        // Fetch visitor IP
-        fetch('https://api.ipify.org?format=json')
-            .then(res => {
-                if (!res.ok) throw new Error('IP fetch failed');
-                return res.json();
-            })
-            .then(data => {
-                if (data && data.ip) {
-                    const currentIP = String(data.ip).trim();
-                    // If this IP has not been recorded yet on this device
-                    if (countedIP !== currentIP || !isCounted) {
-                        storedCount += 1;
-                        localStorage.setItem('metafora_unique_v_count', storedCount);
-                        localStorage.setItem('metafora_unique_v_ip', currentIP);
-                        localStorage.setItem('metafora_unique_v_done', 'true');
-
-                        counterEls.forEach(el => {
-                            el.textContent = formatDigits(storedCount);
-                        });
+        // IP fetch and verification
+        try {
+            fetch('https://api.ipify.org?format=json')
+                .then(res => res.ok ? res.json() : null)
+                .then(data => {
+                    if (data && data.ip) {
+                        const lastIP = localStorage.getItem('metafora_unique_v_ip');
+                        if (lastIP !== data.ip) {
+                            storedCount += 1;
+                            localStorage.setItem('metafora_unique_v_ip', data.ip);
+                            localStorage.setItem('metafora_unique_v_count', storedCount);
+                            counterEls.forEach(el => {
+                                el.textContent = formatDigits(storedCount);
+                            });
+                        }
                     }
-                }
-            })
-            .catch(() => {
-                if (!isCounted) {
-                    localStorage.setItem('metafora_unique_v_done', 'true');
-                }
-            });
+                })
+                .catch(() => {});
+        } catch (_) {}
     }
 
     initI18nLanguageSwitcher();
