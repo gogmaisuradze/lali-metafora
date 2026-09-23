@@ -1883,15 +1883,15 @@ html.direct-main-mode #main-website {
 .stagger-card-footer {
     margin-top: auto;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 8px;
-    padding-top: 6px;
     position: relative;
     z-index: 10;
 }
 
 .afisha-learn-more-row {
-    margin-top: auto;
+    margin-top: 4px;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
@@ -1902,13 +1902,13 @@ html.direct-main-mode #main-website {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 6px 14px;
+    padding: 5px 12px;
     background: #f0fdfa;
     color: var(--primary-color, #016166);
     border: 1.5px solid rgba(1, 97, 102, 0.35);
     border-radius: 9999px;
     font-family: inherit;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 700;
     line-height: 1.2;
     cursor: pointer;
@@ -1957,21 +1957,19 @@ html.direct-main-mode #main-website {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Mentor and Service Meta line */
+/* Mentor and Service Meta line (Clean, no dividing lines) */
 .stagger-card-meta-line {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 6px;
-    padding: 7px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .stagger-card.center .stagger-card-meta-line {
-    border-color: rgba(255, 255, 255, 0.2);
+    border: none;
 }
 
 .stagger-card-author-btn {

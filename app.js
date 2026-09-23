@@ -1386,9 +1386,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <h3 class="stagger-card-title">${item.title}</h3>
                     <p class="stagger-card-desc">„${item.testimonial}“</p>
-                </div>
-                <div class="stagger-card-footer">
-                    <div class="stagger-card-actions" style="margin-bottom: 8px;">
+                    <div class="afisha-learn-more-row">
                         <button class="afisha-learn-more-btn" data-event-id="${originalIndex}" aria-label="${learnMoreBtnText}">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -1396,13 +1394,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             </svg>
                             <span>${learnMoreBtnText}</span>
                         </button>
-                        <button class="open-booking-modal-btn btn btn-primary" 
-                                data-event-date="${item.date}" 
-                                data-event-time="${item.time}" 
-                                data-service="${item.serviceCategory}"
-                                data-event-title="${item.title}"
-                                style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
                     </div>
+                </div>
+                <div class="stagger-card-footer">
                     <div class="stagger-card-meta-line">
                         ${mentorIdx >= 0 ? `
                             <button class="stagger-card-author-btn" data-mentor-idx="${mentorIdx}" title="${isEn ? 'View Team Member' : 'გადასვლა გუნდის წევრზე'}">
@@ -1415,6 +1409,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>${srvInfo.icon}</span> <span>${srvName}</span>
                         </a>
                     </div>
+                    <button class="open-booking-modal-btn btn btn-primary" 
+                            data-event-date="${item.date}" 
+                            data-event-time="${item.time}" 
+                            data-service="${item.serviceCategory}"
+                            data-event-title="${item.title}"
+                            style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
                 </div>
             `;
 
