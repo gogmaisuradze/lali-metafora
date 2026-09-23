@@ -1308,6 +1308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.dataset.service = item.serviceCategory;
             card.dataset.eventTitle = item.title;
 
+            const authorText = item.by.split('•')[1] ? item.by.split('•')[1].trim() : '';
             const learnMoreBtnText = currentLang === 'EN' ? 'Learn More' : 'გაიგე მეტი';
             card.innerHTML = `
                 <span class="corner-accent-line"></span>
@@ -1319,21 +1320,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3 class="stagger-card-title">${item.title}</h3>
                     <p class="stagger-card-desc">„${item.testimonial}“</p>
                 </div>
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 8px;">
-                    <button class="afisha-learn-more-btn btn btn-outline" 
-                            data-event-id="${originalIndex}"
-                            style="padding: 5px 12px; font-size: 0.78rem; border-radius: 9999px; border: 1px solid rgba(1,97,102,0.4); color: var(--primary-color); background: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.2s ease;">${learnMoreBtnText}</button>
-                    <button class="open-booking-modal-btn btn btn-primary" 
-                            data-event-date="${item.date}" 
-                            data-event-time="${item.time}" 
-                            data-service="${item.serviceCategory}"
-                            data-event-title="${item.title}"
-                            style="padding: 5px 14px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
+                <div class="stagger-card-footer" style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding-top: 4px;">
+                    <span class="stagger-card-author">${authorText ? '👤 ' + authorText : ''}</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                        <button class="afisha-learn-more-btn btn btn-outline" 
+                                data-event-id="${originalIndex}"
+                                style="padding: 5px 12px; font-size: 0.78rem; border-radius: 9999px; border: 1px solid rgba(1,97,102,0.4); color: var(--primary-color); background: rgba(255,255,255,0.85); cursor: pointer; transition: all 0.2s ease; font-weight: 600;">${learnMoreBtnText}</button>
+                        <button class="open-booking-modal-btn btn btn-primary" 
+                                data-event-date="${item.date}" 
+                                data-event-time="${item.time}" 
+                                data-service="${item.serviceCategory}"
+                                data-event-title="${item.title}"
+                                style="padding: 5px 14px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
+                    </div>
                 </div>
             `;
 
             card.addEventListener('click', (e) => {
-                if (e.target.closest('.open-booking-modal-btn')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn')) return;
                 const currentPos = getPositionOf(originalIndex);
                 moveStagger(currentPos);
             });
@@ -1344,7 +1348,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let lastAfishaTap = 0;
             card.addEventListener('touchend', (e) => {
-                if (e.target.closest('.open-booking-modal-btn')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn')) return;
                 const now = Date.now();
                 if (now - lastAfishaTap < 350 && now - lastAfishaTap > 0) {
                     openBookingModal(item.serviceCategory || item.title, item.date, item.time);
@@ -1366,7 +1370,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCardDimensions() {
         const isMobile = window.innerWidth <= 640;
         const width = isMobile ? Math.min(310, window.innerWidth - 44) : 365;
-        const height = isMobile ? 360 : 365;
+        const height = isMobile ? 385 : 395;
         return { width, height, isMobile };
     }
 
