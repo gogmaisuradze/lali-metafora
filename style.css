@@ -1884,17 +1884,17 @@ html.direct-main-mode #main-website {
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     padding-top: 6px;
     position: relative;
     z-index: 10;
 }
 
-.stagger-card-actions {
+.afisha-learn-more-row {
+    margin-top: auto;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
 }
 
 .afisha-learn-more-btn {
@@ -1939,7 +1939,7 @@ html.direct-main-mode #main-website {
     transform: translateY(0);
 }
 
-/* Specific contrast for Center active card in Afisha */
+/* Center active card in Afisha */
 .stagger-card.center .afisha-learn-more-btn {
     background: rgba(255, 255, 255, 0.18);
     color: #ffffff;
@@ -1955,6 +1955,89 @@ html.direct-main-mode #main-website {
     border-color: #ffffff;
     transform: translateY(-1.5px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Mentor and Service Meta line */
+.stagger-card-meta-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+    padding: 7px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.stagger-card.center .stagger-card-meta-line {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.stagger-card-author-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary-color, #016166);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stagger-card-author-btn:hover {
+    color: var(--brand-gold, #ffba00);
+    transform: translateX(1px);
+}
+
+.stagger-card.center .stagger-card-author-btn {
+    color: #ffffff;
+}
+
+.stagger-card.center .stagger-card-author-btn:hover {
+    color: #ffe082;
+}
+
+.stagger-card-service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    background: rgba(1, 97, 102, 0.08);
+    color: var(--primary-color, #016166);
+    border: 1px solid rgba(1, 97, 102, 0.22);
+    border-radius: 9999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.22s ease;
+    white-space: nowrap;
+}
+
+.stagger-card-service-link:hover {
+    background: var(--primary-color, #016166);
+    color: #ffffff;
+    border-color: var(--primary-color, #016166);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(1, 97, 102, 0.2);
+}
+
+.stagger-card.center .stagger-card-service-link {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.stagger-card.center .stagger-card-service-link:hover {
+    background: #ffffff;
+    color: var(--primary-color, #016166);
+    border-color: #ffffff;
 }
 
 /* Calendar Day Banner Learn More */
@@ -2258,6 +2341,40 @@ html.direct-main-mode #main-website {
     font-size: 0.88rem;
     font-weight: 600;
     color: var(--brand-teal-dark);
+}
+
+.tw-services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.tw-service-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    background: #f0fdfa;
+    color: var(--primary-color, #016166);
+    border: 1px solid rgba(1, 97, 102, 0.25);
+    border-radius: 9999px;
+    font-family: inherit;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.tw-service-badge:hover {
+    background: var(--primary-color, #016166);
+    color: #ffffff;
+    border-color: var(--primary-color, #016166);
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 10px rgba(1, 97, 102, 0.25);
 }
 
 .tw-nav-arrows {

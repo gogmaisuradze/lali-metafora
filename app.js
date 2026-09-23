@@ -1285,6 +1285,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    const METAPHORA_SERVICES = {
+        'personal-development': {
+            key: 'personal-development',
+            nameKA: 'პერსონალური განვითარება',
+            nameEN: 'Personal Development',
+            icon: '🌿',
+            url: 'service-personal-development.html'
+        },
+        'business': {
+            key: 'business',
+            nameKA: 'ბიზნესი',
+            nameEN: 'Business',
+            icon: '💼',
+            url: 'service-business.html'
+        },
+        'think-tank': {
+            key: 'think-tank',
+            nameKA: 'Think Tank',
+            nameEN: 'Think Tank',
+            icon: '💡',
+            url: 'service-think-tank.html'
+        },
+        'art': {
+            key: 'art',
+            nameKA: 'ხელოვნება',
+            nameEN: 'Art',
+            icon: '🎨',
+            url: 'service-art.html'
+        },
+        'clubs': {
+            key: 'clubs',
+            nameKA: 'კლუბები',
+            nameEN: 'Clubs',
+            icon: '☕',
+            url: 'service-clubs.html'
+        }
+    };
+
+    function getServiceInfo(category) {
+        if (!category) return METAPHORA_SERVICES['personal-development'];
+        const cat = category.toLowerCase().trim();
+        if (cat.includes('personal') || cat.includes('პერსონალურ') || cat.includes('განვითარება')) return METAPHORA_SERVICES['personal-development'];
+        if (cat.includes('business') || cat.includes('ბიზნეს')) return METAPHORA_SERVICES['business'];
+        if (cat.includes('think') || cat.includes('თინკ') || cat.includes('ტინკ')) return METAPHORA_SERVICES['think-tank'];
+        if (cat.includes('art') || cat.includes('ხელოვნება') || cat.includes('არტ')) return METAPHORA_SERVICES['art'];
+        if (cat.includes('club') || cat.includes('კლუბ')) return METAPHORA_SERVICES['clubs'];
+        return METAPHORA_SERVICES['personal-development'];
+    }
+
+    function getMentorIndexByName(name) {
+        if (!name) return -1;
+        const n = name.toLowerCase();
+        if (n.includes('ლალი') || n.includes('ბადრიძე') || n.includes('lali')) return 0;
+        if (n.includes('ჟვანია') || n.includes('ტაისონ') || n.includes('zhvania')) return 1;
+        if (n.includes('ქოდუა') || n.includes('kodua') || n.includes('ნათია')) return 2;
+        if (n.includes('ხალიანი') || n.includes('khaliani') || n.includes('მარიკა')) return 3;
+        if (n.includes('ხიდირბეგ') || n.includes('khidirbeg') || n.includes('ია')) return 4;
+        if (n.includes('ფერაძე') || n.includes('peradze') || n.includes('თეო')) return 5;
+        if (n.includes('მირიან') || n.includes('mirian')) return 6;
+        return -1;
+    }
+
     const staggerTrack = document.getElementById('stagger-cards-track');
     const staggerPrevBtn = document.getElementById('stagger-prev-btn');
     const staggerNextBtn = document.getElementById('stagger-next-btn');
@@ -1297,7 +1359,9 @@ document.addEventListener('DOMContentLoaded', () => {
         staggerTrack.innerHTML = '';
         staggerCardDoms.length = 0;
         const currentLang = localStorage.getItem('metafora_lang') || 'KA';
-        const bookBtnText = currentLang === 'EN' ? 'Book Now' : 'დაჯავშნა';
+        const isEn = currentLang === 'EN';
+        const bookBtnText = isEn ? 'Book Now' : 'დაჯავშნა';
+        const learnMoreBtnText = isEn ? 'Learn More' : 'გაიგე მეტი';
 
         afishaEvents.forEach((item, originalIndex) => {
             const card = document.createElement('div');
@@ -1309,7 +1373,10 @@ document.addEventListener('DOMContentLoaded', () => {
             card.dataset.eventTitle = item.title;
 
             const authorText = item.by.split('•')[1] ? item.by.split('•')[1].trim() : '';
-            const learnMoreBtnText = currentLang === 'EN' ? 'Learn More' : 'გაიგე მეტი';
+            const mentorIdx = getMentorIndexByName(authorText);
+            const srvInfo = getServiceInfo(item.serviceCategory);
+            const srvName = isEn ? srvInfo.nameEN : srvInfo.nameKA;
+
             card.innerHTML = `
                 <span class="corner-accent-line"></span>
                 <div>
@@ -1321,8 +1388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="stagger-card-desc">„${item.testimonial}“</p>
                 </div>
                 <div class="stagger-card-footer">
-                    <span class="stagger-card-author">${authorText ? '👤 ' + authorText : ''}</span>
-                    <div class="stagger-card-actions">
+                    <div class="stagger-card-actions" style="margin-bottom: 8px;">
                         <button class="afisha-learn-more-btn" data-event-id="${originalIndex}" aria-label="${learnMoreBtnText}">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -1337,11 +1403,39 @@ document.addEventListener('DOMContentLoaded', () => {
                                 data-event-title="${item.title}"
                                 style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
                     </div>
+                    <div class="stagger-card-meta-line">
+                        ${mentorIdx >= 0 ? `
+                            <button class="stagger-card-author-btn" data-mentor-idx="${mentorIdx}" title="${isEn ? 'View Team Member' : 'გადასვლა გუნდის წევრზე'}">
+                                <span>👤</span> <span>${authorText}</span>
+                            </button>
+                        ` : `
+                            <span class="stagger-card-author">${authorText ? '👤 ' + authorText : ''}</span>
+                        `}
+                        <a href="${srvInfo.url}" class="stagger-card-service-link" title="${srvName}">
+                            <span>${srvInfo.icon}</span> <span>${srvName}</span>
+                        </a>
+                    </div>
                 </div>
             `;
 
             card.addEventListener('click', (e) => {
-                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn')) return;
+                const authorBtn = e.target.closest('.stagger-card-author-btn');
+                if (authorBtn) {
+                    const mIdx = parseInt(authorBtn.dataset.mentorIdx, 10);
+                    if (!isNaN(mIdx) && mIdx >= 0) {
+                        const teamSec = document.getElementById('team');
+                        if (teamSec) {
+                            teamSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                        if (typeof window.setTestimonial === 'function') {
+                            window.setTestimonial(mIdx, true);
+                        } else if (typeof setTestimonial === 'function') {
+                            setTestimonial(mIdx, true);
+                        }
+                    }
+                    return;
+                }
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-service-link')) return;
                 const currentPos = getPositionOf(originalIndex);
                 moveStagger(currentPos);
             });
@@ -1352,7 +1446,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let lastAfishaTap = 0;
             card.addEventListener('touchend', (e) => {
-                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-author-btn, .stagger-card-service-link')) return;
                 const now = Date.now();
                 if (now - lastAfishaTap < 350 && now - lastAfishaTap > 0) {
                     openBookingModal(item.serviceCategory || item.title, item.date, item.time);
@@ -1487,6 +1581,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ლალი',
             fullname: 'ლალი ბადრიძე',
             jobtitle: 'ფსიქოთერაპევტი, ტრენერი & ასოციაციის პრეზიდენტი',
+            serviceKeys: ['think-tank', 'business', 'personal-development'],
             facebook: 'https://www.facebook.com/lali.badridze',
             instagram: 'https://www.instagram.com/lali_badridze/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1500,6 +1595,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ქეთი',
             fullname: 'ქეთი ჟვანია',
             jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება',
+            serviceKeys: ['personal-development', 'think-tank'],
             facebook: 'https://www.facebook.com/profile.php?id=100054981263056',
             instagram: 'https://www.instagram.com/kety_zhvania_tyson/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1513,6 +1609,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ნათია',
             fullname: 'ნათია ქოდუა',
             jobtitle: 'პოზიტიური ფსიქოთერაპევტი & ფსიქოკონსულტანტი',
+            serviceKeys: ['personal-development'],
             facebook: 'https://www.facebook.com/natia.kodua.1',
             instagram: 'https://www.instagram.com/kodua.natia/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1526,6 +1623,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'მარიკა',
             fullname: 'მარიკა ხალიანი',
             jobtitle: 'პერსონალური & ბიზნეს განვითარების ქოუჩი',
+            serviceKeys: ['business', 'think-tank'],
             facebook: 'https://www.facebook.com/marika.khaliani',
             instagram: 'https://www.instagram.com/marikakhaliani',
             whatsapp: 'https://wa.me/995599228228',
@@ -1539,6 +1637,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ია',
             fullname: 'ია ხიდირბეგიშვილი',
             jobtitle: 'ბიზნეს განვითარება & პარტნიორობა',
+            serviceKeys: ['business'],
             facebook: 'https://www.facebook.com/ia.khidirbegishvili',
             instagram: 'https://www.instagram.com/istudioatelia/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1552,6 +1651,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'თეო',
             fullname: 'თეო ფერაძე',
             jobtitle: 'ქოუჩინგი, ტრენინგები & ფსიქოკონსულტირება',
+            serviceKeys: ['clubs', 'personal-development'],
             facebook: 'https://www.facebook.com/teo.peradze.7',
             instagram: 'https://www.instagram.com/teo_peradze16/',
             whatsapp: 'https://wa.me/995599228228',
@@ -1565,6 +1665,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'ქეთი',
             fullname: 'ქეთი მირიანაშვილი',
             jobtitle: 'ფსიქოკონსულტანტი, ტრენერი & სერტიფიცირებული ქოუჩი',
+            serviceKeys: ['personal-development'],
             facebook: 'https://www.facebook.com/keti.mirianasvili',
             instagram: 'https://www.instagram.com/keti.mirianasvili',
             whatsapp: 'https://wa.me/995599228228',
@@ -1815,6 +1916,25 @@ document.addEventListener('DOMContentLoaded', () => {
             twSocialWa.title = `${current.name} - WhatsApp`;
         }
 
+        const twServicesList = document.getElementById('tw-services-list');
+        if (twServicesList) {
+            twServicesList.innerHTML = '';
+            const currentLang = localStorage.getItem('metafora_lang') || 'KA';
+            const isEn = currentLang === 'EN';
+            const memberServices = current.serviceKeys || [];
+            memberServices.forEach(key => {
+                const srv = (typeof METAPHORA_SERVICES !== 'undefined') ? METAPHORA_SERVICES[key] : null;
+                if (srv) {
+                    const badge = document.createElement('a');
+                    badge.href = srv.url;
+                    badge.className = 'tw-service-badge';
+                    badge.title = isEn ? srv.nameEN : srv.nameKA;
+                    badge.innerHTML = `<span>${srv.icon}</span> <span>${isEn ? srv.nameEN : srv.nameKA}</span>`;
+                    twServicesList.appendChild(badge);
+                }
+            });
+        }
+
         // On team member switch: typewriter typing sound plays during typing!
         typewriteText(current.text, playSound);
 
@@ -1824,6 +1944,8 @@ document.addEventListener('DOMContentLoaded', () => {
             else c.classList.remove('active');
         });
     }
+
+    window.setTestimonial = setTestimonial;
 
     window.refreshTeamSectionLang = function() {
         if (twText && testimonials && testimonials[currentTwIdx]) {
