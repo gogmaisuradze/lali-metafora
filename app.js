@@ -4975,6 +4975,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     const origHtml = submitBtn.innerHTML;
                     submitBtn.innerHTML = `<span>⏳ ${isEn ? 'Sending...' : 'იგზავნება...'}</span>`;
 
+                    // Send Telegram Notification
+                    const regPayload = {
+                        type: 'registration',
+                        title: '📝 ახალი რეგისტრაცია მეტაფორადან',
+                        name: nameVal,
+                        phone: phoneVal,
+                        email: emailVal,
+                        company: companyVal || '—',
+                        service: programVal ? `რეგისტრაცია • ${programVal}` : 'ზოგადი რეგისტრაცია',
+                        date: new Date().toLocaleDateString('ka-GE'),
+                        time: new Date().toLocaleTimeString('ka-GE', { hour: '2-digit', minute: '2-digit' })
+                    };
+
+                    try {
+                        fetch('https://meticulous-oyster.pikapod.net/webhook/metafora-booking', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'x-booking-secret': 'aeYMKQvGD2j-Sh_j-5aOJvTg6Kg' },
+                            body: JSON.stringify(regPayload)
+                        }).catch(e => console.log('Telegram reg send error:', e));
+                    } catch (err) {}
+
                     setTimeout(() => {
                         submitBtn.disabled = false;
                         submitBtn.style.opacity = '1';
