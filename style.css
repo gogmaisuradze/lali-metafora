@@ -5487,6 +5487,49 @@ body.metabot-open .metabot-launcher-btn {
     gap: 14px;
 }
 
+.event-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.event-detail-card {
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.event-detail-card-label {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.event-detail-card-val {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.afisha-learn-more-btn {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.afisha-learn-more-btn:hover {
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 4px 12px rgba(1, 97, 102, 0.25);
+    transform: translateY(-1px);
+}
+
 @media (max-width: 600px) {
     .article-reader-drawer {
         width: 100vw;
