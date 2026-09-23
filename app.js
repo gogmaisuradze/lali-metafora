@@ -4994,6 +4994,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        // Auto-open if URL has #register or ?register or /register
+        function checkUrlTrigger() {
+            const hash = (window.location.hash || '').toLowerCase();
+            const search = (window.location.search || '').toLowerCase();
+            if (hash.includes('register') || search.includes('register') || window.location.pathname.includes('register')) {
+                setTimeout(() => {
+                    try {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const prog = urlParams.get('program') || '';
+                        openModal(prog);
+                    } catch (err) {
+                        openModal('');
+                    }
+                }, 350);
+            }
+        }
+
+        window.addEventListener('hashchange', checkUrlTrigger);
+        checkUrlTrigger();
     }
 
     initBUFigure();
