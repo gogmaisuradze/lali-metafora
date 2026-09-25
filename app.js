@@ -2759,7 +2759,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleMetaforaBankClick(bankType, btnElement) {
-        const targetIban = "GE93BG0000000192399800";
+        const targetIban = "GE66TB7992036020100008";
         const priceText = (pendingBookingPayload?.price || '').trim();
         const amountNum = priceText ? (parseInt(priceText.replace(/[^\d.]/g, ''), 10) || 0) : 0;
         const purposeStr = `მეტაფორას ჯავშანი - ${pendingBookingPayload?.name || 'სტუმარი'} (${pendingBookingPayload?.service || 'მეტაფორა'})`;
@@ -2859,14 +2859,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Copy Full Requisites
     if (btnCopyFullRequisites) {
         btnCopyFullRequisites.addEventListener('click', () => {
-            const iban = metaforaIbanVal?.textContent.trim() || "GE93BG0000000192399800";
+            const iban = metaforaIbanVal?.textContent.trim() || "GE66TB7992036020100008";
             const price = (pendingBookingPayload?.price || '').trim();
             const service = pendingBookingPayload?.service || "მეტაფორა";
             const name = pendingBookingPayload?.name || "სტუმარი";
             const purpose = `მეტაფორას ჯავშანი - ${name} (${service})`;
             const priceLine = price ? `\nსაფასური: ${price}` : '';
 
-            const fullText = `მიმღები: ანი მაისურაძე\nბანკი: საქართველოს ბანკი (BOG)\nIBAN: ${iban}${priceLine}\nდანიშნულება: ${purpose}`;
+            const fullText = `მიმღები: შპს. მეტაფორა1\nბანკი: თიბისი ბანკი (TBC Bank)\nIBAN: ${iban}${priceLine}\nდანიშნულება: ${purpose}`;
 
             copyTextToClipboard(fullText);
             if (copyFullText) copyFullText.textContent = "✓ სრული რეკვიზიტები დაკოპირდა!";
@@ -6795,6 +6795,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "კომუნა • 4 წთ": "Community • 4 min",
         "ღონისძიებებზე": "events",
         "ანი მაისურაძე": "Ani Maisuradze",
+        "შპს. მეტაფორა1": "Metafora 1 LLC",
+        "შპს მეტაფორა1": "Metafora 1 LLC",
+        "თიბისი ბანკი (TBC Bank)": "TBC Bank (TBC)",
+        "საქართველოს ბანკი (Bank of Georgia)": "Bank of Georgia (BOG)",
         "აფიშის ნახვა": "View Events",
         "ლალი ბადრიძე": "Lali Badridze",
         "ია ხიდირბეგიშვილი": "Ia Khidirbegishvili",

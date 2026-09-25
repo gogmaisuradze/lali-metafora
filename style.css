@@ -3250,10 +3250,10 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
 .bank-logo-icon {
     width: 42px;
     height: 42px;
-    border-radius: 12px;
-    background: #ffffff;
-    padding: 4px;
-    object-fit: contain;
+    border-radius: 8px;
+    background: transparent;
+    padding: 0;
+    object-fit: cover;
     flex-shrink: 0;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
 }
