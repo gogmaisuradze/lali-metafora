@@ -7638,42 +7638,11 @@ body:has(.service-page-main) .word-meta-table {
     color: #f1f5f9;
 }
 
-.slot-event-price {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #b45309;
-    background: rgba(255, 186, 0, 0.18);
-    border: 1px solid rgba(255, 186, 0, 0.5);
-    padding: 2px 7px;
-    border-radius: 6px;
-    white-space: nowrap !important;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    flex-shrink: 0;
-    transition: all 0.2s ease;
-}
-
-.slot.event-fixed-slot.sel .slot-event-price {
-    background: var(--brand-gold, #ffba00);
-    color: #0f172a;
-    border-color: #ffffff;
-    font-weight: 900;
-}
-
-[data-theme="dark"] .slot.event-fixed-slot {
-    background: rgba(30, 41, 59, 0.85) !important;
-    color: #f1f5f9 !important;
-    border-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-[data-theme="dark"] .slot-event-title-snippet {
-    color: #cbd5e1;
-}
-
-[data-theme="dark"] .slot-event-price {
-    color: #fef08a;
-    background: rgba(255, 186, 0, 0.25);
+/* Individual price badges in calendar cards, slots, and summary boxes hidden per user preference */
+.event-banner-price-tag,
+.slot-event-price,
+.picked-price-badge {
+    display: none !important;
 }
 
 .cal-card-book-action-btn {
@@ -7686,51 +7655,34 @@ body:has(.service-page-main) .word-meta-table {
     flex-shrink: 0;
 }
 
-.picked-price-badge {
+/* Proceed to Payment Button Price Pill */
+.btn-submit-price-pill {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    white-space: nowrap !important;
-    background: rgba(255, 186, 0, 0.18);
-    border: 1px solid var(--brand-gold, #ffba00);
-    color: #b45309;
-    font-weight: 800;
+    background: var(--brand-gold, #ffba00);
+    color: #0f172a;
     font-size: 0.88rem;
-    padding: 2px 10px;
-    border-radius: 6px;
-    margin-top: 4px;
-    box-shadow: 0 1px 4px rgba(255, 186, 0, 0.15);
+    font-weight: 900;
+    padding: 3px 12px;
+    border-radius: 9999px;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    margin-left: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    letter-spacing: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    vertical-align: middle;
 }
 
-[data-theme="plum"] .picked-price-badge,
-[data-theme="dark"] .picked-price-badge {
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.15);
+.btn-modal-submit:hover .btn-submit-price-pill {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.38);
 }
 
 /* Afisha cards price badge: Hidden as requested */
 .stagger-card-price-badge {
     display: none !important;
-}
-
-.event-banner-price-tag {
-    font-size: 0.76rem;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 8px;
-    background: rgba(255, 186, 0, 0.2);
-    border: 1px solid rgba(255, 186, 0, 0.5);
-    color: #b45309;
-    white-space: nowrap !important;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    flex-shrink: 0;
-}
-
-[data-theme="plum"] .event-banner-price-tag,
-[data-theme="dark"] .event-banner-price-tag {
-    color: #fbbf24;
 }
 
 .reader-book-price-pill {

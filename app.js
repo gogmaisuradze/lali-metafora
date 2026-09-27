@@ -2898,6 +2898,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        const pInput = document.getElementById('booking-price-input');
+        if (pInput) {
+            pInput.addEventListener('input', () => {
+                if (typeof window.updateBookingSummary === 'function') {
+                    window.updateBookingSummary();
+                }
+            });
+        }
     }
     initBookingInputListeners();
 
@@ -3214,7 +3223,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Format price badge so currency symbol stays attached to the digits without breaking/dropping below
     function formatPriceBadge(str) {
         if (!str) return '';
-        return String(str).replace(/(\d+)\s*₾/g, '$1\u00A0₾').trim();
+        let val = String(str).trim();
+        if (/^\d+$/.test(val)) {
+            return `${val}\u00A0₾`;
+        }
+        return val.replace(/(\d+)\s*₾/g, '$1\u00A0₾');
     }
 
     // ==========================================================================
@@ -3340,7 +3353,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="cal-event-card-top-row">
                                 <div class="cal-event-meta-left">
                                     <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
-                                    ${ev.price ? `<span class="event-banner-price-tag">💰&nbsp;${formatPriceBadge(ev.price)}</span>` : ''}
                                 </div>
                                 <button type="button" class="cal-card-book-action-btn ${isActive ? 'is-selected' : ''}" data-time="${ev.time}">
                                     <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
@@ -3428,7 +3440,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="slot-event-sub">
                             <span class="slot-event-title-snippet" title="${rawTitle}">${titleSnippet}</span>
-                            ${ev.price ? `<span class="slot-event-price">💰&nbsp;${formatPriceBadge(ev.price)}</span>` : ''}
                         </div>
                     `;
 
@@ -3484,12 +3495,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (matchedEvent) {
                     activePrice = matchedEvent.price || '';
                     const evTitle = isEn ? matchedEvent.titleEN : matchedEvent.titleKA;
-                    const priceBadge = matchedEvent.price ? `<span class="picked-price-badge">💰&nbsp;${formatPriceBadge(matchedEvent.price)}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
                             <span class="picked-event-title">${evTitle}</span>
-                            ${priceBadge}
                         </div>
                     `;
                 } else if (events.length > 0) {
@@ -3503,12 +3512,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     const sSelect = document.getElementById('booking-service-select');
                     activePrice = sSelect ? getServicePrice(sSelect.value) : '';
-                    const priceBadge = activePrice ? `<span class="picked-price-badge">💰&nbsp;${formatPriceBadge(activePrice)}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
                             <span class="picked-event-title" style="font-weight: 500; opacity: 0.85;">${isEn ? 'Individual Visit' : 'ინდივიდუალური ვიზიტი'}</span>
-                            ${priceBadge}
                         </div>
                     `;
                 }
@@ -3535,11 +3542,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Dynamically reflect active price on the proceed-to-payment submit button
             const submitBtn = document.getElementById('btn-proceed-to-payment');
             if (submitBtn) {
-                const finalPrice = activePrice || (pInput?.value || '').trim();
+                const finalPrice = (pInput?.value || '').trim() || activePrice;
+                const btnLabel = isEn ? 'Proceed to Payment' : 'გადახდაზე გადასვლა';
                 if (finalPrice) {
-                    submitBtn.innerHTML = `<span>${isEn ? `Proceed to Payment (${formatPriceBadge(finalPrice)}) 💳` : `გადახდაზე გადასვლა (${formatPriceBadge(finalPrice)}) 💳`}</span>`;
+                    submitBtn.innerHTML = `
+                        <span class="btn-submit-label">${btnLabel}</span>
+                        <span class="btn-submit-price-pill">💰&nbsp;${formatPriceBadge(finalPrice)}</span>
+                    `;
                 } else {
-                    submitBtn.innerHTML = `<span>${isEn ? 'Proceed to Payment 💳' : 'გადახდაზე გადასვლა 💳'}</span>`;
+                    submitBtn.innerHTML = `
+                        <span class="btn-submit-label">${btnLabel} 💳</span>
+                    `;
                 }
             }
         }
