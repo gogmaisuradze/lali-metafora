@@ -849,7 +849,7 @@
                     <!-- Left: Calendar & Time Slots Pane -->
                     <div class="cal-pane">
                         <div class="cal-top">
-                            <div class="m" id="cal-month-title">აგვისტო 2026</div>
+                            <div class="m" id="cal-month-title">ოქტომბერი 2026</div>
                             <div class="cal-nav">
                                 <button type="button" id="cal-prev-btn" aria-label="Previous month">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -877,22 +877,17 @@
 
                         <!-- Scheduled Event Banner directly below date grid -->
                         <div class="cal-day-event-banner" id="cal-day-event-banner">
-                            <span class="event-banner-badge">📅 28 აგვ | 19:00</span>
-                            <span class="event-banner-title">🎭 Playback იმპროვიზაციის საღამო</span>
+                            <span class="event-banner-badge">📅 05 ოქტ | 19:00</span>
+                            <span class="event-banner-price-tag">💰 650 ₾</span>
+                            <span class="event-banner-title">🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა</span>
                         </div>
 
                         <div class="slots-label">აირჩიე დრო</div>
-                        <div class="slots" id="cal-slots-container">
-                            <button type="button" class="slot" data-time="10:00">10:00</button>
-                            <button type="button" class="slot" data-time="11:30">11:30</button>
-                            <button type="button" class="slot" data-time="13:00">13:00</button>
-                            <button type="button" class="slot" data-time="14:30">14:30</button>
-                            <button type="button" class="slot" data-time="16:00">16:00</button>
-                            <button type="button" class="slot" data-time="17:30">17:30</button>
-                            <button type="button" class="slot sel" data-time="19:00">19:00</button>
-                            <button type="button" class="slot" data-time="20:00">20:00</button>
-                            <button type="button" class="slot" data-time="21:00">21:00</button>
-                            <button type="button" class="slot" data-time="22:00">22:00</button>
+                        <div class="slots has-single-slot" id="cal-slots-container">
+                            <button type="button" class="slot sel event-fixed-slot" data-time="19:00">
+                                <span class="slot-time-text">19:00</span>
+                                <span class="slot-event-tag">ღონისძიების დრო</span>
+                            </button>
                         </div>
                     </div>
 
@@ -905,21 +900,21 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/>
                             </svg>
-                            <span id="booking-picked-summary">28 აგვისტო · 19:30</span>
+                            <span id="booking-picked-summary">5 ოქტომბერი · 19:00</span>
                         </div>
 
                         <form class="modal-booking-form" id="metafora-booking-form" novalidate>
-                            <input type="hidden" id="booking-date-input" name="booking_date" value="2026-08-28" required>
-                            <input type="hidden" id="booking-time-input" name="booking_time" value="19:30" required>
+                            <input type="hidden" id="booking-date-input" name="booking_date" value="2026-10-05" required>
+                            <input type="hidden" id="booking-time-input" name="booking_time" value="19:00" required>
 
                             <div class="field">
                                 <label class="form-label">მიმართულება / სერვისი</label>
                                 <select class="form-input" id="booking-service-select" required>
-                                    <option value="Personal Development">🌱 1. მეტაფორა Personal Development</option>
+                                    <option value="Personal Development" selected>🌱 1. მეტაფორა Personal Development</option>
                                     <option value="Business">💼 2. მეტაფორა Business</option>
                                     <option value="Think Tank">🧠 3. მეტაფორა Think Tank</option>
                                     <option value="Art">🎨 4. მეტაფორა Art (Playback &amp; თერაპია)</option>
-                                    <option value="Clubs" selected>🏛️ 5. მეტაფორა Clubs (მესამე სივრცე)</option>
+                                    <option value="Clubs">🏛️ 5. მეტაფორა Clubs (მესამე სივრცე)</option>
                                 </select>
                             </div>
 
@@ -930,7 +925,7 @@
 
                             <div class="field">
                                 <label class="form-label" id="booking-price-label">სერვისის ფასი</label>
-                                <input type="text" class="form-input" id="booking-price-input" placeholder="მაგ: 50 ₾ (ან ცარიელი)">
+                                <input type="text" class="form-input" id="booking-price-input" value="650 ₾" placeholder="მაგ: 50 ₾ (ან ცარიელი)">
                             </div>
 
                             <div class="field">

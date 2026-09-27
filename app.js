@@ -1151,142 +1151,145 @@ document.addEventListener('DOMContentLoaded', () => {
     const afishaEvents = [
         {
             id: 0,
-            date: '2026-10-12',
-            time: '18:30',
-            serviceCategory: 'Personal Development',
-            title: "🎮 თამაშის არქიტექტორი - საბაზისო კურსი",
-            testimonial: "ტრანსფორმაციული და ბიზნეს თამაშების შექმნის, დიზაინისა და მექანიკის პრაქტიკული კურსი.",
-            by: "12 ოქტ | 18:30 • ქეთი ჟვანია-ტაისონი",
-            imgSrc: "გუნდი/2.jpg"
-        },
-        {
-            id: 1,
-            date: '2026-10-15',
+            date: '2026-10-05',
             time: '19:00',
+            price: '650 ₾',
             serviceCategory: 'Personal Development',
-            title: "🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი",
-            testimonial: "სიღრმისეული ფასილიტაცია, ფსიქოლოგიური დინამიკები და საავტორო თამაშის გაშვება.",
-            by: "15 ოქტ | 19:00 • ქეთი ჟვანია-ტაისონი",
+            title: "🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა",
+            testimonial: "ტრანსფორმაციული და საგანმანათლებლო თამაშების შექმნის, დიზაინისა და მექანიკის 8-შეხვედრიანი კურსი.",
+            by: "05 ოქტ | 19:00 • ქეთი ჟვანია-ტაისონი",
             imgSrc: "გუნდი/2.jpg"
-        },
-        {
-            id: 2,
-            date: '2026-10-18',
-            time: '18:00',
-            serviceCategory: 'Personal Development',
-            title: "🌿 პროგრამა არიტე - პიროვნული განვითარება",
-            testimonial: "4 მოდული: ემოციების სამყარო, წარმატებული ადამიანი, მე და სხვები, ძნელი თამაშები.",
-            by: "18 ოქტ | 18:00 • ქეთი ჟვანია-ტაისონი",
-            imgSrc: "გუნდი/2.jpg"
-        },
-        {
-            id: 3,
-            date: '2026-10-20',
-            time: '19:30',
-            serviceCategory: 'Think Tank',
-            title: "❤️ სიყვარულის ხელოვნება & სიყვარულის 5 ენა",
-            testimonial: "ურთიერთობების ფსიქოლოგია, გარი ჩაპმანის მოდელი და ემოციური სიახლოვის ხელოვნება.",
-            by: "20 ოქტ | 19:30 • ქეთი ჟვანია-ტაისონი",
-            imgSrc: "გუნდი/2.jpg"
-        },
-        {
-            id: 4,
-            date: '2026-10-22',
-            time: '18:30',
-            serviceCategory: 'Personal Development',
-            title: "🎓 ტრენერობის ხელოვნება - ტრენერის გზა",
-            testimonial: "ტრენერებისა და ფასილიტატორების პროფესიული განვითარების მოდულური ეკოსისტემა.",
-            by: "22 ოქტ | 18:30 • ქეთი ჟვანია-ტაისონი",
-            imgSrc: "გუნდი/2.jpg"
-        },
-        {
-            id: 5,
-            date: '2026-10-24',
-            time: '19:00',
-            serviceCategory: 'Business',
-            title: "💼 ქოუჩინგი არაქოუჩებისთვის",
-            testimonial: "ქოუჩინგური აზროვნება და ინსტრუმენტები ყოველდღიური მართვისა და კომუნიკაციისთვის.",
-            by: "24 ოქტ | 19:00 • მარიკა ხალიანი",
-            imgSrc: "გუნდი/4.jpg"
-        },
-        {
-            id: 6,
-            date: '2026-10-26',
-            time: '18:30',
-            serviceCategory: 'Business',
-            title: "👥 ქოუჩინგი HR-ებისთვის & ლიდერებისთვის",
-            testimonial: "ტალანტების განვითარება, მოტივაცია და გუნდური ეფექტურობის ქოუჩინგური მიდგომები.",
-            by: "26 ოქტ | 18:30 • მარიკა ხალიანი",
-            imgSrc: "გუნდი/4.jpg"
-        },
-        {
-            id: 7,
-            date: '2026-10-28',
-            time: '19:30',
-            serviceCategory: 'Think Tank',
-            title: "💔 რატომ გვტკივა სიყვარული & პარტნიორები",
-            testimonial: "მიჯაჭვულობის სტილები, ბავშვობის ტრავმები და ურთიერთობების ფარული დინამიკა.",
-            by: "28 ოქტ | 19:30 • მარიკა ხალიანი",
-            imgSrc: "გუნდი/4.jpg"
-        },
-        {
-            id: 8,
-            date: '2026-10-30',
-            time: '19:00',
-            serviceCategory: 'Think Tank',
-            title: "📦 რა შევუკვეთე და რა ჩამომივიდა",
-            testimonial: "მოლოდინები, იმედგაცრუება, ემოციური ტრიგერები და რეალობასთან შეხვედრა.",
-            by: "30 ოქტ | 19:00 • მარიკა ხალიანი",
-            imgSrc: "გუნდი/4.jpg"
-        },
-        {
-            id: 9,
-            date: '2026-11-02',
-            time: '18:00',
-            serviceCategory: 'Think Tank',
-            title: "🌌 სისტემური განლაგება - ვორქშოფი",
-            testimonial: "ფარული ოჯახური დინამიკების, კარიერული და პირადი ბლოკების სიღრმისეული ხედვა.",
-            by: "02 ნოე | 18:00 • მარიკა ხალიანი",
-            imgSrc: "გუნდი/4.jpg"
-        },
-        {
-            id: 10,
-            date: '2026-11-04',
-            time: '19:00',
-            serviceCategory: 'Business',
-            title: "💰 ფული, თუ პასუხისმგებლობა",
-            testimonial: "ფინანსური ბლოკები, შინაგანი წინააღმდეგობა და ფულთან ჯანსაღი ურთიერთობა.",
-            by: "04 ნოე | 19:00 • მარიკა ხალიანი",
-            imgSrc: "გუნდი/4.jpg"
         },
         {
             id: 11,
-            date: '2026-11-06',
-            time: '19:30',
-            serviceCategory: 'Think Tank',
-            title: "🌙 შეხვედრა შეჰერეზადასთან",
+            date: '2026-10-08',
+            time: '19:00',
+            price: '100 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🌙 აღმოსავლური ისტორიები (შეხვედრა შეჰერეზადასთან)",
             testimonial: "იგავების 15 თერაპიული საიდუმლო, აღმოსავლური ჩაის რიტუალი და ფსიქოთერაპიული მოგზაურობა.",
-            by: "06 ნოე | 19:30 • ლალი ბადრიძე",
+            by: "08 ოქტ | 19:00 - 22:00 • ლალი ბადრიძე",
             imgSrc: "გუნდი/1.jpg"
         },
         {
             id: 12,
-            date: '2026-11-08',
+            date: '2026-10-09',
             time: '19:00',
-            serviceCategory: 'Think Tank',
+            price: '100 ₾',
+            serviceCategory: 'Personal Development',
             title: "💬 მოდი ვილაპარაკოთ - ექსპერიმენტული დიალოგი",
-            testimonial: "უნიკალური სალონური ფორმატი შინაგანი პასუხებისა და გულწრფელი საუბრებისთვის.",
-            by: "08 ნოე | 19:00 • ლალი ბადრიძე",
+            testimonial: "უნიკალური სალონური ფორმატი შინაგანი პასუხებისა და გულწრფელი, უსაფრთხო საუბრებისთვის.",
+            by: "09 ოქტ | 19:00 - 22:00 • ლალი ბადრიძე",
             imgSrc: "გუნდი/1.jpg"
         },
         {
-            id: 13,
-            date: '2026-11-10',
-            time: '18:30',
+            id: 14,
+            date: '2026-10-11',
+            time: '12:00',
+            price: '200 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🎲 ლილას თამაში - თვითშემეცნების ტრანსფორმაციული თამაში",
+            testimonial: "72 უჯრედიანი უძველესი ველი საკუთარი გზის, შინაგანი ბლოკებისა და ჭეშმარიტი მიზნების გასაცნობიერებლად.",
+            by: "11 ოქტ | 12:00 - 19:00 • ლალი ბადრიძე",
+            imgSrc: "გუნდი/1.jpg"
+        },
+        {
+            id: 5,
+            date: '2026-10-14',
+            time: '19:00',
+            price: '100 ₾',
             serviceCategory: 'Business',
-            title: "🧠 ადამიანის ფსიქოლოგია ლიდერობაში",
-            testimonial: "გუნდის მართვა, არაცნობიერი მენეჯმენტი და ლიდერული ფსიქოლოგიური ინსტრუმენტები.",
-            by: "10 ნოე | 18:30 • ლალი ბადრიძე",
+            title: "💼 ქოუჩინგი არაქოუჩებისთვის",
+            testimonial: "ქოუჩინგური აზროვნება და ძლიერი კითხვები ყოველდღიური მართვისა და კომუნიკაციისთვის.",
+            by: "14 ოქტ | 19:00 - 22:00 • მარიკა ხალიანი",
+            imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 9,
+            date: '2026-10-18',
+            time: '12:00',
+            price: '180 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🌌 სისტემური განლაგება - ვორქშოფი",
+            testimonial: "ფარული ოჯახური დინამიკების, კარიერული და პირადი ბლოკების სიღრმისეული ხედვა და განბლოკვა.",
+            by: "18 ოქტ | 12:00 - 19:00 • მარიკა ხალიანი",
+            imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 3,
+            date: '2026-10-20',
+            time: '11:00',
+            price: '80 ₾',
+            serviceCategory: 'Think Tank',
+            title: "❤️ სიყვარულის 5 ენა - მასტერკლასი",
+            testimonial: "გარი ჩაპმანის მოდელი: როგორ გამოვხატოთ და მივიღოთ სიყვარული, ემოციური სიახლოვის ხელოვნება.",
+            by: "20 ოქტ | 11:00 - 14:00 • ქეთი ჟვანია-ტაისონი",
+            imgSrc: "გუნდი/2.jpg"
+        },
+        {
+            id: 6,
+            date: '2026-10-21',
+            time: '19:00',
+            price: '100 ₾',
+            serviceCategory: 'Business',
+            title: "👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის",
+            testimonial: "ტალანტების განვითარება, მოტივაცია და გუნდური ეფექტურობის თანამედროვე ქოუჩინგური მიდგომები.",
+            by: "21 ოქტ | 19:00 - 22:00 • მარიკა ხალიანი",
+            imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 15,
+            date: '2026-10-22',
+            time: '19:00',
+            price: '100 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🕯️ პაემანი სიბნელეში - სენსორული დიალოგი",
+            testimonial: "შეხვედრა სრულ სიბნელეში, სადაც ვიზუალური შეფასებები ქრება და იღვიძებს პირველადი გრძნობები და ინტუიცია.",
+            by: "22 ოქტ | 19:00 - 22:00 • ლალი ბადრიძე",
+            imgSrc: "გუნდი/1.jpg"
+        },
+        {
+            id: 16,
+            date: '2026-10-24',
+            time: '16:00',
+            price: '80 ₾',
+            serviceCategory: 'Think Tank',
+            title: "💔 ღალატის ანატომია — ესტერ პერელის მიხედვით",
+            testimonial: "ურთიერთობების, სურვილებისა და საზღვრების რთული სამყარო; ნდობა, საიდუმლო და კრიზისის გადალახვა.",
+            by: "24 ოქტ | 16:00 - 19:00 • ქეთი ჟვანია-ტაისონი",
+            imgSrc: "გუნდი/2.jpg"
+        },
+        {
+            id: 17,
+            date: '2026-10-27',
+            time: '11:00',
+            price: '80 ₾',
+            serviceCategory: 'Think Tank',
+            title: "🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით",
+            testimonial: "რა ხდება ტვინში როცა გვიყვარდება: ვნება, რომანტიკული მიზიდულობა და მიჯაჭვულობა ბიოლოგიის ჭრილში.",
+            by: "27 ოქტ | 11:00 - 13:30 • ქეთი ჟვანია-ტაისონი",
+            imgSrc: "გუნდი/2.jpg"
+        },
+        {
+            id: 7,
+            date: '2026-10-28',
+            time: '19:00',
+            price: '80 ₾',
+            serviceCategory: 'Personal Development',
+            title: "💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს & რატომ გვტკივა სიყვარული",
+            testimonial: "მიჯაჭვულობის სტილები, ბავშვობის ტრავმები, განმეორებადი სცენარები და ჯანსაღი ურთიერთობის აგება.",
+            by: "28 ოქტ | 19:00 - 22:00 • მარიკა ხალიანი",
+            imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 18,
+            date: '2026-10-29',
+            time: '19:00',
+            price: '100 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🌌 სამყაროს კანონები - სალონური ვორქშოფი",
+            testimonial: "სამყაროს ფუნდამენტური კანონზომიერებები, მიზეზ-შედეგობრიობა, ენერგია და ცხოვრებისეული სინქრონულობა.",
+            by: "29 ოქტ | 19:00 - 22:00 • ლალი ბადრიძე",
             imgSrc: "გუნდი/1.jpg"
         }
     ];
@@ -1376,6 +1379,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.dataset.eventDate = item.date;
             card.dataset.eventTime = item.time;
             card.dataset.service = item.serviceCategory;
+            card.dataset.price = item.price;
             card.dataset.eventTitle = item.title;
 
             const authorText = item.by.split('•')[1] ? item.by.split('•')[1].trim() : '';
@@ -1388,12 +1392,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <div class="stagger-card-header">
                         <img src="${item.imgSrc}" alt="${item.title}" class="stagger-card-img">
-                        <span class="stagger-card-date">${item.by.split('•')[0]}</span>
+                        <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                            <span class="stagger-card-date">${item.by.split('•')[0]}</span>
+                            <span class="stagger-card-price-badge">${item.price}</span>
+                        </div>
                     </div>
                     <h3 class="stagger-card-title">${item.title}</h3>
                     <p class="stagger-card-desc">„${item.testimonial}“</p>
                     <div class="afisha-learn-more-row">
-                        <button class="afisha-learn-more-btn" data-event-id="${originalIndex}" aria-label="${learnMoreBtnText}">
+                        <button class="afisha-learn-more-btn" data-event-id="${item.id}" aria-label="${learnMoreBtnText}">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
@@ -1416,8 +1423,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             data-event-date="${item.date}" 
                             data-event-time="${item.time}" 
                             data-service="${item.serviceCategory}"
+                            data-price="${item.price}"
                             data-event-title="${item.title}"
-                            style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">${bookBtnText}</button>
+                            style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">
+                        <span>${bookBtnText}</span>
+                    </button>
                 </div>
             `;
 
@@ -2418,14 +2428,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
     let pendingBookingPayload = null;
 
-    const SERVICE_PRICES = {};
+    const SERVICE_PRICES = {
+        // Specific Events from Excel Schedule
+        'თამაშის არქიტექტორი': '650 ₾',
+        'game architect': '650 ₾',
+        'აღმოსავლური ისტორიები': '100 ₾',
+        'შეჰერეზადა': '100 ₾',
+        'scheherazade': '100 ₾',
+        'მოდი ვილაპარაკოთ': '100 ₾',
+        'let\'s talk': '100 ₾',
+        'ლილას თამაში': '200 ₾',
+        'ლილა': '200 ₾',
+        'leela': '200 ₾',
+        'ქოუჩინგი არაქოუჩებისთვის': '100 ₾',
+        'non-coaches': '100 ₾',
+        'სისტემური განლაგება': '180 ₾',
+        'constellations': '180 ₾',
+        'სიყვარულის 5 ენა': '80 ₾',
+        '5 love languages': '80 ₾',
+        'ქოუჩინგი hr': '100 ₾',
+        'coaching for hr': '100 ₾',
+        'პაემანი სიბნელეში': '100 ₾',
+        'date in the dark': '100 ₾',
+        'ღალატის ანატომია': '80 ₾',
+        'infidelity': '80 ₾',
+        'შეყვარებული ტვინი': '80 ₾',
+        'brain in love': '80 ₾',
+        'რატომ ვირჩევთ ერთნაირ პარტნიორებს': '80 ₾',
+        'რატომ გვტკივა სიყვარული': '80 ₾',
+        'why love hurts': '80 ₾',
+        'სამყაროს კანონები': '100 ₾',
+        'universal laws': '100 ₾',
 
-    function getServicePrice(serviceName) {
-        if (!serviceName) return "";
-        const lower = serviceName.toLowerCase();
-        for (const [key, price] of Object.entries(SERVICE_PRICES)) {
-            if (lower.includes(key)) return price;
+        // Services & Programs
+        'personal development': '100 ₾',
+        'პერსონალური განვითარება': '100 ₾',
+        'პიროვნული განვითარება': '100 ₾',
+        'business': '100 ₾',
+        'ბიზნეს': '100 ₾',
+        'think tank': '80 ₾',
+        'თინკ ტანკი': '80 ₾',
+        'art': '50 ₾',
+        'ხელოვნება': '50 ₾',
+        'playback': '50 ₾',
+        'თერაპია': '80 ₾',
+        'კერამიკ': '60 ₾',
+        'clubs': '30 ₾',
+        'კლუბ': '30 ₾'
+    };
+
+    function getServicePrice(serviceOrTitle) {
+        if (!serviceOrTitle) return "";
+        const lower = String(serviceOrTitle).toLowerCase().trim();
+
+        // 1. Check in SCHEDULED_EVENTS if loaded
+        if (typeof SCHEDULED_EVENTS !== 'undefined') {
+            for (const d in SCHEDULED_EVENTS) {
+                for (const ev of SCHEDULED_EVENTS[d]) {
+                    if (ev.titleKA && (lower.includes(ev.titleKA.toLowerCase()) || ev.titleKA.toLowerCase().includes(lower))) {
+                        if (ev.price) return ev.price;
+                    }
+                    if (ev.titleEN && (lower.includes(ev.titleEN.toLowerCase()) || ev.titleEN.toLowerCase().includes(lower))) {
+                        if (ev.price) return ev.price;
+                    }
+                }
+            }
         }
+
+        // 2. Check in SERVICE_PRICES dictionary
+        for (const [key, price] of Object.entries(SERVICE_PRICES)) {
+            if (lower.includes(key.toLowerCase())) return price;
+        }
+
         return "";
     }
 
@@ -2523,18 +2597,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            if (priceInput) {
-                if (targetPrice !== undefined && targetPrice !== null && targetPrice !== '') {
-                    priceInput.value = targetPrice;
-                } else {
-                    const autoPrice = getServicePrice(preselectedService || (sSelect ? sSelect.value : ''));
-                    priceInput.value = autoPrice || '';
+            if (!targetPrice) {
+                if (targetDate && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[targetDate] && SCHEDULED_EVENTS[targetDate].length > 0) {
+                    targetPrice = SCHEDULED_EVENTS[targetDate][0].price;
                 }
+                if (!targetPrice) {
+                    targetPrice = getServicePrice(preselectedService || (sSelect ? sSelect.value : ''));
+                }
+            }
+
+            if (priceInput) {
+                priceInput.value = targetPrice || '';
             }
 
             if (targetDate || targetTime) {
                 if (typeof window.selectBookingDateAndTime === 'function') {
-                    window.selectBookingDateAndTime(targetDate, targetTime, preselectedService);
+                    window.selectBookingDateAndTime(targetDate, targetTime, preselectedService, preselectedService, targetPrice);
                 }
             } else {
                 if (typeof window.refreshSmileBookingCalendar === 'function') {
@@ -2676,10 +2754,19 @@ document.addEventListener('DOMContentLoaded', () => {
             sSelect.addEventListener('change', () => {
                 const pInput = document.getElementById('booking-price-input');
                 if (pInput) {
-                    const price = getServicePrice(sSelect.value);
-                    if (price) {
-                        pInput.value = price;
+                    const dateInput = document.getElementById('booking-date-input');
+                    const isoDate = dateInput ? dateInput.value : '';
+                    const evs = (typeof SCHEDULED_EVENTS !== 'undefined' && isoDate) ? (SCHEDULED_EVENTS[isoDate] || []) : [];
+                    const matched = evs.find(e => e.serviceCategory && e.serviceCategory.toLowerCase().includes(sSelect.value.toLowerCase()));
+                    if (matched && matched.price) {
+                        pInput.value = matched.price;
+                    } else {
+                        const price = getServicePrice(sSelect.value);
+                        if (price) pInput.value = price;
                     }
+                }
+                if (typeof window.updateBookingSummary === 'function') {
+                    window.updateBookingSummary();
                 }
             });
         }
@@ -2934,14 +3021,14 @@ document.addEventListener('DOMContentLoaded', () => {
             let targetPrice = btn.getAttribute('data-price') || '';
             let sName = btn.getAttribute('data-event-title') || '';
 
-            const card = btn.closest('.service-deep-section, .service-card, .afisha-event-card, .stagger-card');
+            const card = btn.closest('.service-deep-section, .service-card, .afisha-event-card, .stagger-card, .service-feature-box');
             if (card) {
                 if (!targetDate && card.dataset.eventDate) targetDate = card.dataset.eventDate;
                 if (!targetTime && card.dataset.eventTime) targetTime = card.dataset.eventTime;
                 if (!targetService && card.dataset.service) targetService = card.dataset.service;
                 if (!targetPrice && card.dataset.price) targetPrice = card.dataset.price;
                 if (!sName) {
-                    const titleElem = card.querySelector('.service-deep-title, .card-title, .afisha-title, .stagger-card-title');
+                    const titleElem = card.querySelector('.service-deep-title, .card-title, .afisha-title, .stagger-card-title, .service-feat-title');
                     if (titleElem) sName = titleElem.textContent;
                 }
             }
@@ -3011,56 +3098,61 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        let viewDate = new Date(2026, 9, 1); // August 1, 2026
-        let selectedDate = new Date(2026, 9, 12);
-        let selectedTime = '18:30';
+        let viewDate = new Date(2026, 9, 1); // October 1, 2026
+        let selectedDate = new Date(2026, 9, 5); // October 5, 2026
+        let selectedTime = '19:00';
 
         const ALL_TIME_SLOTS = ['10:00', '11:30', '13:00', '14:30', '16:00', '17:30', '19:00', '20:00', '21:00', '22:00'];
 
         const SCHEDULED_EVENTS = {
-            '2026-10-12': [
-                { eventId: 0, titleKA: '🎮 თამაშის არქიტექტორი - საბაზისო კურსი', titleEN: '🎮 Game Architect - Basic Course', time: '18:30', badgeKA: '12 ოქტ | 18:30', badgeEN: 'Oct 12 | 18:30' }
+            '2026-10-05': [
+                { eventId: 0, titleKA: '🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა', titleEN: '🎮 Game Architect - 8-Session Program', time: '19:00', timeRange: '19:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '05 ოქტ | 19:00', badgeEN: 'Oct 05 | 19:00' }
             ],
-            '2026-10-15': [
-                { eventId: 1, titleKA: '🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი', titleEN: '🕹️ Game Architect - Advanced Course', time: '19:00', badgeKA: '15 ოქტ | 19:00', badgeEN: 'Oct 15 | 19:00' }
+            '2026-10-08': [
+                { eventId: 11, titleKA: '🌙 აღმოსავლური ისტორიები (შეჰერეზადასთან)', titleEN: '🌙 Eastern Stories (with Scheherazade)', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '08 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 08 | 19:00 - 22:00' }
+            ],
+            '2026-10-09': [
+                { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (I შეხვედრა)', titleEN: "💬 Let's Talk (Session 1)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '09 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 09 | 19:00 - 22:00' }
+            ],
+            '2026-10-11': [
+                { eventId: 14, titleKA: '🎲 ლილას თამაში (I შეხვედრა)', titleEN: '🎲 Leela Game (Session 1)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '11 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 11 | 12:00 - 19:00' }
+            ],
+            '2026-10-14': [
+                { eventId: 5, titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '14 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 14 | 19:00 - 22:00' }
             ],
             '2026-10-18': [
-                { eventId: 2, titleKA: '🌿 პროგრამა არიტე - პიროვნული განვითარება', titleEN: '🌿 Program Arete - Personal Development', time: '18:00', badgeKA: '18 ოქტ | 18:00', badgeEN: 'Oct 18 | 18:00' }
+                { eventId: 9, titleKA: '🌌 სისტემური განლაგება - ვორქშოფი', titleEN: '🌌 Systemic Constellations - Workshop', time: '12:00', timeRange: '12:00 - 19:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 18 | 12:00 - 19:00' }
             ],
             '2026-10-20': [
-                { eventId: 3, titleKA: '❤️ სიყვარულის ხელოვნება & 5 ენა', titleEN: '❤️ Art of Loving & 5 Languages', time: '19:30', badgeKA: '20 ოქტ | 19:30', badgeEN: 'Oct 20 | 19:30' }
+                { eventId: 3, titleKA: '❤️ სიყვარულის 5 ენა - მასტერკლასი', titleEN: '❤️ 5 Love Languages - Masterclass', time: '11:00', timeRange: '11:00 - 14:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '20 ოქტ | 11:00 - 14:00', badgeEN: 'Oct 20 | 11:00 - 14:00' }
+            ],
+            '2026-10-21': [
+                { eventId: 6, titleKA: '👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის', titleEN: '👥 Coaching for HR Managers & Leaders', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '21 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 21 | 19:00 - 22:00' }
             ],
             '2026-10-22': [
-                { eventId: 4, titleKA: '🎓 ტრენერობის ხელოვნება - ტრენერის გზა', titleEN: "🎓 Art of Training - Trainer's Path", time: '18:30', badgeKA: '22 ოქტ | 18:30', badgeEN: 'Oct 22 | 18:30' }
+                { eventId: 15, titleKA: '🕯️ პაემანი სიბნელეში - სენსორული დიალოგი', titleEN: '🕯️ Blind Date - Sensory Dialogue', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 22 | 19:00 - 22:00' }
+            ],
+            '2026-10-23': [
+                { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (II შეხვედრა)', titleEN: "💬 Let's Talk (Session 2)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '23 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 23 | 19:00 - 22:00' }
             ],
             '2026-10-24': [
-                { eventId: 5, titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', badgeKA: '24 ოქტ | 19:00', badgeEN: 'Oct 24 | 19:00' }
+                { eventId: 16, titleKA: '💔 ღალატის ანატომია — ესტერ პერელის მიხედვით', titleEN: '💔 Anatomy of Infidelity - Esther Perel', time: '16:00', timeRange: '16:00 - 19:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '24 ოქტ | 16:00 - 19:00', badgeEN: 'Oct 24 | 16:00 - 19:00' }
             ],
-            '2026-10-26': [
-                { eventId: 6, titleKA: '👥 ქოუჩინგი HR-ებისთვის', titleEN: '👥 Coaching for HR Leaders', time: '18:30', badgeKA: '26 ოქტ | 18:30', badgeEN: 'Oct 26 | 18:30' }
+            '2026-10-25': [
+                { eventId: 14, titleKA: '🎲 ლილას თამაში (II შეხვედრა)', titleEN: '🎲 Leela Game (Session 2)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '25 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 25 | 12:00 - 19:00' }
+            ],
+            '2026-10-27': [
+                { eventId: 17, titleKA: '🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით', titleEN: '🧠 Brain in Love - Helen Fisher', time: '11:00', timeRange: '11:00 - 13:30', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '27 ოქტ | 11:00 - 13:30', badgeEN: 'Oct 27 | 11:00 - 13:30' }
             ],
             '2026-10-28': [
-                { eventId: 7, titleKA: '💔 რატომ გვტკივა სიყვარული', titleEN: '💔 Why Love Hurts', time: '19:30', badgeKA: '28 ოქტ | 19:30', badgeEN: 'Oct 28 | 19:30' }
+                { eventId: 7, titleKA: '💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს & რატომ გვტკივა სიყვარული', titleEN: '💔 Why We Choose Same Partners & Why Love Hurts', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '28 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 28 | 19:00 - 22:00' }
             ],
-            '2026-10-30': [
-                { eventId: 8, titleKA: '📦 რა შევუკვეთე და რა ჩამომივიდა', titleEN: '📦 What I Ordered vs Arrived', time: '19:00', badgeKA: '30 ოქტ | 19:00', badgeEN: 'Oct 30 | 19:00' }
-            ],
-            '2026-11-02': [
-                { eventId: 9, titleKA: '🌌 სისტემური განლაგება', titleEN: '🌌 Systemic Constellations', time: '18:00', badgeKA: '02 ნოე | 18:00', badgeEN: 'Nov 02 | 18:00' }
-            ],
-            '2026-11-04': [
-                { eventId: 10, titleKA: '💰 ფული, თუ პასუხისმგებლობა', titleEN: '💰 Money or Responsibility', time: '19:00', badgeKA: '04 ნოე | 19:00', badgeEN: 'Nov 04 | 19:00' }
-            ],
-            '2026-11-06': [
-                { eventId: 11, titleKA: '🌙 შეხვედრა შეჰერეზადასთან', titleEN: '🌙 Meeting with Scheherazade', time: '19:30', badgeKA: '06 ნოე | 19:30', badgeEN: 'Nov 06 | 19:30' }
-            ],
-            '2026-11-08': [
-                { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ', titleEN: "💬 Let's Talk Dialogue", time: '19:00', badgeKA: '08 ნოე | 19:00', badgeEN: 'Nov 08 | 19:00' }
-            ],
-            '2026-11-10': [
-                { eventId: 13, titleKA: '🧠 ადამიანის ფსიქოლოგია ლიდერობაში', titleEN: '🧠 Human Psychology in Leadership', time: '18:30', badgeKA: '10 ნოე | 18:30', badgeEN: 'Nov 10 | 18:30' }
+            '2026-10-29': [
+                { eventId: 18, titleKA: '🌌 სამყაროს კანონები - სალონური ვორქშოფი', titleEN: '🌌 Universal Laws - Salon Workshop', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '29 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 29 | 19:00 - 22:00' }
             ]
         };
+
+        window.SCHEDULED_EVENTS = SCHEDULED_EVENTS;
 
         const MONTHS_KA = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
         const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -3072,6 +3164,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const m = String(d.getMonth() + 1).padStart(2, '0');
             const day = String(d.getDate()).padStart(2, '0');
             return `${y}-${m}-${day}`;
+        }
+
+        function syncServiceAndPrice(ev) {
+            const sSelect = document.getElementById('booking-service-select');
+            const pInput = document.getElementById('booking-price-input');
+            if (ev) {
+                if (sSelect && ev.serviceCategory) {
+                    const catLower = ev.serviceCategory.toLowerCase();
+                    for (let opt of sSelect.options) {
+                        const optVal = opt.value.toLowerCase();
+                        const optTxt = opt.text.toLowerCase();
+                        if (optVal === catLower || optTxt.includes(catLower) || catLower.includes(optVal)) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                }
+                if (pInput && ev.price) {
+                    pInput.value = ev.price;
+                }
+            } else {
+                if (pInput && sSelect) {
+                    const fallbackPrice = getServicePrice(sSelect.value);
+                    if (fallbackPrice) pInput.value = fallbackPrice;
+                }
+            }
         }
 
         function updateEventBanner() {
@@ -3089,8 +3207,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="cal-event-card ${isActive ? 'active' : ''}" data-time="${ev.time}">
                             <div class="cal-event-card-top-row">
                                 <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
+                                ${ev.price ? `<span class="event-banner-price-tag">💰 ${ev.price}</span>` : ''}
                                 <div class="cal-event-card-actions">
-                                    ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
+                                    ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 1 3-3h7z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
                                     <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
                                 </div>
                             </div>
@@ -3101,7 +3220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cardsHtml += '</div>';
                 eventBanner.innerHTML = cardsHtml;
 
-                // Attach click listeners to cards so clicking an event selects that exact time!
+                // Attach click listeners to cards so clicking an event selects that exact time & syncs price
                 const cards = eventBanner.querySelectorAll('.cal-event-card');
                 cards.forEach(card => {
                     card.addEventListener('click', (e) => {
@@ -3109,6 +3228,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         const chosenTime = card.getAttribute('data-time');
                         if (chosenTime) {
                             selectedTime = chosenTime;
+                            const ev = events.find(item => item.time === chosenTime);
+                            if (ev) {
+                                syncServiceAndPrice(ev);
+                            }
                             renderTimeSlots();
                             updatePickedSummary();
                         }
@@ -3129,23 +3252,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function renderTimeSlots() {
             slotsContainer.innerHTML = '';
-            ALL_TIME_SLOTS.forEach(time => {
-                const isSel = (time === selectedTime);
+            const isoStr = selectedDate ? formatISODate(selectedDate) : '';
+            const events = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
+            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+
+            // Requirement: On dates with scheduled events, display strictly only the event's fixed time slot
+            if (events.length > 0) {
+                slotsContainer.classList.add('has-single-slot');
+                const ev = events[0];
+                const displayTime = ev.timeRange || ev.time;
+                selectedTime = ev.time;
+
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = `slot ${isSel ? 'sel' : ''}`;
-                btn.setAttribute('data-time', time);
-                btn.textContent = time;
+                btn.className = 'slot sel event-fixed-slot';
+                btn.setAttribute('data-time', ev.time);
+                btn.innerHTML = `<span class="slot-time-text">${displayTime}</span><span class="slot-event-tag">${isEn ? 'Event Time' : 'ღონისძიების დრო'}</span>`;
 
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    selectedTime = time;
-                    renderTimeSlots();
+                    selectedTime = ev.time;
+                    syncServiceAndPrice(ev);
                     updatePickedSummary();
                 });
 
                 slotsContainer.appendChild(btn);
-            });
+            } else {
+                slotsContainer.classList.remove('has-single-slot');
+                ALL_TIME_SLOTS.forEach(time => {
+                    const isSel = (time === selectedTime);
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `slot ${isSel ? 'sel' : ''}`;
+                    btn.setAttribute('data-time', time);
+                    btn.textContent = time;
+
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        selectedTime = time;
+                        renderTimeSlots();
+                        updatePickedSummary();
+                    });
+
+                    slotsContainer.appendChild(btn);
+                });
+            }
         }
 
         function updatePickedSummary() {
@@ -3153,7 +3304,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
             const isoStr = selectedDate ? formatISODate(selectedDate) : '';
             const events = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
-            const matchedEvent = events.find(e => e.time === selectedTime);
+            const matchedEvent = events.find(e => e.time === selectedTime) || (events.length > 0 ? events[0] : null);
 
             if (selectedDate && selectedTime) {
                 const dayNum = selectedDate.getDate();
@@ -3164,10 +3315,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (matchedEvent) {
                     const evTitle = isEn ? matchedEvent.titleEN : matchedEvent.titleKA;
+                    const priceBadge = matchedEvent.price ? `<span class="picked-price-badge">💰 ${matchedEvent.price}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
                             <span class="picked-event-title">${evTitle}</span>
+                            ${priceBadge}
                         </div>
                     `;
                 } else if (events.length > 0) {
@@ -3178,10 +3331,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
                 } else {
+                    const sSelect = document.getElementById('booking-service-select');
+                    const freePrice = sSelect ? getServicePrice(sSelect.value) : '';
+                    const priceBadge = freePrice ? `<span class="picked-price-badge">💰 ${freePrice}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
                             <span class="picked-event-title" style="font-weight: 500; opacity: 0.85;">${isEn ? 'Individual Visit' : 'ინდივიდუალური ვიზიტი'}</span>
+                            ${priceBadge}
                         </div>
                     `;
                 }
@@ -3203,6 +3360,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateEventBanner();
         }
+
+        window.updateBookingSummary = updatePickedSummary;
 
         function renderCalendar() {
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
@@ -3253,10 +3412,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dotsHtml = '';
                 if (events.length === 1) {
                     dotsHtml = `<span class="day-dots"><span class="dot"></span></span>`;
-                    dayBtn.setAttribute('title', isEn ? `${events[0].titleEN} (${events[0].time})` : `${events[0].titleKA} (${events[0].time})`);
+                    dayBtn.setAttribute('title', isEn ? `${events[0].titleEN} (${events[0].timeRange || events[0].time}) - ${events[0].price}` : `${events[0].titleKA} (${events[0].timeRange || events[0].time}) - ${events[0].price}`);
                 } else if (events.length >= 2) {
                     dotsHtml = `<span class="day-dots"><span class="dot"></span><span class="dot"></span></span>`;
-                    const tooltip = events.map(e => isEn ? `${e.titleEN} (${e.time})` : `${e.titleKA} (${e.time})`).join(' | ');
+                    const tooltip = events.map(e => isEn ? `${e.titleEN} (${e.timeRange || e.time}) - ${e.price}` : `${e.titleKA} (${e.timeRange || e.time}) - ${e.price}`).join(' | ');
                     dayBtn.setAttribute('title', tooltip);
                 }
 
@@ -3274,10 +3433,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         selectedDate = new Date(year, month, d);
                         const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
                         if (eventsForDate.length > 0) {
-                            const hasCurrentTime = eventsForDate.some(ev => ev.time === selectedTime);
-                            if (!hasCurrentTime) {
-                                selectedTime = eventsForDate[0].time;
-                            }
+                            selectedTime = eventsForDate[0].time;
+                            syncServiceAndPrice(eventsForDate[0]);
+                        } else {
+                            syncServiceAndPrice(null);
                         }
                         renderTimeSlots();
                         updatePickedSummary();
@@ -3314,7 +3473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
-        window.selectBookingDateAndTime = function(dateStr, timeStr, eventTitle) {
+        window.selectBookingDateAndTime = function(dateStr, timeStr, eventTitle, serviceCat, priceVal) {
             if (dateStr) {
                 const parts = dateStr.split('-');
                 if (parts.length === 3) {
@@ -3325,14 +3484,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     viewDate = new Date(y, m, 1);
                 }
             }
+            const isoStr = selectedDate ? formatISODate(selectedDate) : '';
+            const evs = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
+            const ev = evs.length > 0 ? evs[0] : null;
+
             if (timeStr) {
                 selectedTime = timeStr;
-            } else if (selectedDate) {
-                const evs = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
-                if (evs.length > 0) {
-                    selectedTime = evs[0].time;
+            } else if (ev) {
+                selectedTime = ev.time;
+            }
+
+            if (ev) {
+                syncServiceAndPrice(ev);
+            } else {
+                const sSelect = document.getElementById('booking-service-select');
+                const pInput = document.getElementById('booking-price-input');
+                if (serviceCat && sSelect) {
+                    const catLower = serviceCat.toLowerCase();
+                    for (let opt of sSelect.options) {
+                        const optVal = opt.value.toLowerCase();
+                        const optTxt = opt.text.toLowerCase();
+                        if (optVal === catLower || optTxt.includes(catLower) || catLower.includes(optVal)) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                }
+                if (pInput) {
+                    pInput.value = priceVal || (sSelect ? getServicePrice(sSelect.value) : '') || '';
                 }
             }
+
             renderCalendar();
             renderTimeSlots();
             updateEventBanner();
@@ -3342,6 +3524,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window.refreshSmileBookingCalendar = function() {
             renderCalendar();
         };
+
+        // Initial synchronization of service & price for the default selected event (October 5, 2026)
+        const initialDateStr = formatISODate(selectedDate);
+        if (SCHEDULED_EVENTS[initialDateStr] && SCHEDULED_EVENTS[initialDateStr].length > 0) {
+            syncServiceAndPrice(SCHEDULED_EVENTS[initialDateStr][0]);
+        }
 
         renderCalendar();
     }
@@ -4295,20 +4483,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 "category": "Personal Development",
                 "categoryKA": "🎮 Personal Development",
                 "categoryEN": "🎮 Personal Development",
-                "dateKA": "12 ოქტ | 18:30",
-                "dateEN": "Oct 12 | 18:30",
+                "dateKA": "05 ოქტ | 19:00",
+                "dateEN": "Oct 05 | 19:00",
                 "authorKA": "ქეთი ჟვანია-ტაისონი",
                 "authorEN": "Keti Zhvania-Tyson",
                 "mentorImg": "გუნდი/2.jpg",
-                "date": "2026-10-12",
-                "time": "18:30",
+                "date": "2026-10-05",
+                "time": "19:00",
+                "price": "650 ₾",
                 "KA": {
-                        "title": "🎮 თამაშის არქიტექტორი - საბაზისო კურსი",
-                        "html": "\n        <blockquote>„აქციე საგანმანათლებლო პროცესი ინტერაქციულ თავგადასავლად და დაეუფლე ჯგუფური დინამიკის მართვის ხელოვნებას.“</blockquote>\n        <p><strong>„თამაშის არქიტექტორი“</strong> არის ინტენსიური ერთთვიანი ვორქშოფების სერია მათთვის, ვისაც სურს საგანმანათლებლო პროცესი (ტრენინგი, ლექცია, გაკვეთილი) აქციოს ინტერაქციულ თავგადასავლად და დაეუფლოს ჯგუფური დინამიკის მართვის ხელოვნებას.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>✨ რას მიიღებთ პროგრამის ფარგლებში?</h4>\n          <ul>\n            <li>🎯 <strong>50-ზე მეტი პრაქტიკული თამაშისა და აქტივობის ბაზას</strong></li>\n            <li>⚡ <strong>ენერგიის მართვისა და ფასილიტაციის</strong> ქმედით ინსტრუმენტებს</li>\n            <li>🛠️ <strong>საავტორო საგანმანათლებლო თამაშების</strong> შექმნის უნიკალურ მეთოდოლოგიას</li>\n            <li>👥 <strong>ჯგუფური დინამიკის</strong>, წინააღმდეგობებისა და ჩართულობის მართვას</li>\n          </ul>\n        </div>\n\n        <h3>🗓️ ფორმატი და განრიგი</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ხანგრძლივობა</span><span class=\"event-detail-card-val\">8 ინტენსიური შეხვედრა</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">განრიგი</span><span class=\"event-detail-card-val\">კვირაში 2-ჯერ (3 საათი)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ლოკაცია</span><span class=\"event-detail-card-val\">მეტაფორა • აღმაშენებლის 63ა</span></div>\n        </div>\n      "
+                        "title": "🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა",
+                        "html": `
+        <blockquote>„აქციე საგანმანათლებლო პროცესი ინტერაქციულ თავგადასავლად და დაეუფლე ჯგუფური დინამიკის მართვის ხელოვნებას.“</blockquote>
+        <p><strong>„თამაშის არქიტექტორი“</strong> არის ინტენსიური ერთთვიანი ვორქშოფების სერია (8 შეხვედრა) მათთვის, ვისაც სურს საგანმანათლებლო პროცესი (ტრენინგი, ლექცია, გაკვეთილი) აქციოს ინტერაქციულ თავგადასავლად და დაეუფლოს ჯგუფური დინამიკის მართვის ხელოვნებას.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>✨ რას მიიღებთ პროგრამის ფარგლებში?</h4>
+          <ul>
+            <li>🎯 <strong>50-ზე მეტი პრაქტიკული თამაშისა და აქტივობის ბაზას</strong></li>
+            <li>⚡ <strong>ენერგიის მართვისა და ფასილიტაციის</strong> ქმედით ინსტრუმენტებს</li>
+            <li>🛠️ <strong>საავტორო საგანმანათლებლო თამაშების</strong> შექმნის უნიკალურ მეთოდოლოგიას</li>
+            <li>👥 <strong>ჯგუფური დინამიკის</strong>, წინააღმდეგობებისა და ჩართულობის მართვას</li>
+          </ul>
+        </div>
+
+        <h3>🗓️ ფორმატი და განრიგი</h3>
+        <div class="event-detail-grid">
+          <div class="event-detail-card"><span class="event-detail-card-label">ხანგრძლივობა</span><span class="event-detail-card-val">8 ინტენსიური შეხვედრა</span></div>
+          <div class="event-detail-card"><span class="event-detail-card-label">განრიგი</span><span class="event-detail-card-val">კვირაში 2-ჯერ (3 საათი)</span></div>
+          <div class="event-detail-card"><span class="event-detail-card-label">ლოკაცია</span><span class="event-detail-card-val">მეტაფორა • აღმაშენებლის 63ა</span></div>
+        </div>
+      `
                 },
                 "EN": {
-                        "title": "🎮 Game Architect - Basic Course",
-                        "html": "\n        <blockquote>“Turn your educational sessions into interactive adventures and master the art of group dynamics.”</blockquote>\n        <p><strong>Game Architect</strong> is an intensive 1-month workshop series designed for trainers, educators, and facilitators who want to make learning engaging, experiential, and impactful.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>✨ What you will gain:</h4>\n          <ul>\n            <li>🎯 <strong>50+ practical game & activity toolkit</strong></li>\n            <li>⚡ <strong>Energy management & facilitation</strong> tools</li>\n            <li>🛠️ <strong>Original educational game design</strong> methodology</li>\n            <li>👥 <strong>Group dynamics & engagement</strong> mastery</li>\n          </ul>\n        </div>\n\n        <h3>🗓️ Format & Schedule</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Duration</span><span class=\"event-detail-card-val\">8 Intensive Sessions</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Schedule</span><span class=\"event-detail-card-val\">Twice a week (3 hours)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Location</span><span class=\"event-detail-card-val\">Metaphora • 63a Aghmashenebeli</span></div>\n        </div>\n      "
+                        "title": "🎮 Game Architect - 8-Session Program",
+                        "html": `
+        <blockquote>“Turn your educational sessions into interactive adventures and master the art of group dynamics.”</blockquote>
+        <p><strong>Game Architect</strong> is an intensive 8-session program designed for trainers, educators, and facilitators who want to make learning engaging, experiential, and impactful.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>✨ What you will gain:</h4>
+          <ul>
+            <li>🎯 <strong>50+ practical game & activity toolkit</strong></li>
+            <li>⚡ <strong>Energy management & facilitation</strong> tools</li>
+            <li>🛠️ <strong>Original educational game design</strong> methodology</li>
+            <li>👥 <strong>Group dynamics & engagement</strong> mastery</li>
+          </ul>
+        </div>
+
+        <h3>🗓️ Format & Schedule</h3>
+        <div class="event-detail-grid">
+          <div class="event-detail-card"><span class="event-detail-card-label">Duration</span><span class="event-detail-card-val">8 Intensive Sessions</span></div>
+          <div class="event-detail-card"><span class="event-detail-card-label">Schedule</span><span class="event-detail-card-val">Twice a week (3 hours)</span></div>
+          <div class="event-detail-card"><span class="event-detail-card-label">Location</span><span class="event-detail-card-val">Metaphora • 63a Aghmashenebeli</span></div>
+        </div>
+      `
                 }
         },
         "1": {
@@ -4323,13 +4552,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 "mentorImg": "გუნდი/2.jpg",
                 "date": "2026-10-15",
                 "time": "19:00",
+                "price": "650 ₾",
                 "KA": {
                         "title": "🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი",
-                        "html": "\n        <blockquote>„გადადი თამაშების გამოყენებიდან მათ პროფესიულ დიზაინსა და არქიტექტურაზე.“</blockquote>\n        <p><strong>ჩაღრმავებული კურსი (Advanced Mastery)</strong> განკუთვნილია მათთვის, ვინც უკვე ფლობს არაფორმალურ განათლებაში თამაშების გამოყენების საბაზისო ინსტრუმენტებს და ახლა სურს თამაშების პროფესიულ შექმნასა და მართვაზე გადასვლა.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🚀 გემიფიკაციის 5 მთავარი სვეტი:</h4>\n          <ul>\n            <li>⚖️ <strong>ბალანსი და დინამიკა (Flow Theory):</strong> გამოწვევის შექმნა მოწყენილობისა და გადაღლის გარეშე</li>\n            <li>🔄 <strong>უკუკავშირის მექანიზმები:</strong> სწრაფი რეაგირების სისტემები მაღალი მოტივაციისთვის</li>\n            <li>📶 <strong>პროგრესის არქიტექტურა:</strong> პროცესის საფეხურებად (Level-ებად) დაყოფა ზრდის შეგრძნებისთვის</li>\n            <li>🧱 <strong>შეზღუდვების ძალა:</strong> როგორ აქცევს წესები აქტივობას კრეატიულ თავგადასავლად</li>\n            <li>💡 <strong>დებრიფინგის ოსტატობა:</strong> თამაშიდან რეალური ქცევითი ცვლილების მიღება</li>\n          </ul>\n        </div>\n\n        <h3>🛠️ ფორმატი</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ხანგრძლივობა</span><span class=\"event-detail-card-val\">6 შეხვედრა (თითო 4 საათი)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ფორმატი</span><span class=\"event-detail-card-val\">პრაქტიკული ლაბორატორია + პროტოტიპირება</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ლოკაცია</span><span class=\"event-detail-card-val\">მეტაფორა • აღმაშენებლის 63ა</span></div>\n        </div>\n      "
+                        "html": `
+        <blockquote>„გადადი თამაშების გამოყენებიდან მათ პროფესიულ დიზაინსა და არქიტექტურაზე.“</blockquote>
+        <p><strong>ჩაღრმავებული კურსი (Advanced Mastery)</strong> განკუთვნილია მათთვის, ვინც უკვე ფლობს არაფორმალურ განათლებაში თამაშების გამოყენების საბაზისო ინსტრუმენტებს და ახლა სურს თამაშების პროფესიულ შექმნასა და მართვაზე გადასვლა.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🚀 გემიფიკაციის 5 მთავარი სვეტი:</h4>
+          <ul>
+            <li>⚖️ <strong>ბალანსი და დინამიკა (Flow Theory):</strong> გამოწვევის შექმნა მოწყენილობისა და გადაღლის გარეშე</li>
+            <li>🔄 <strong>უკუკავშირის მექანიზმები:</strong> სწრაფი რეაგირების სისტემები მაღალი მოტივაციისთვის</li>
+            <li>📶 <strong>პროგრესის არქიტექტურა:</strong> პროცესის საფეხურებად (Level-ებად) დაყოფა ზრდის შეგრძნებისთვის</li>
+            <li>🧱 <strong>შეზღუდვების ძალა:</strong> როგორ აქცევს წესები აქტივობას კრეატიულ თავგადასავლად</li>
+            <li>💡 <strong>დებრიფინგის ოსტატობა:</strong> თამაშიდან რეალური ქცევითი ცვლილების მიღება</li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
                         "title": "🕹️ Game Architect - Advanced Course",
-                        "html": "\n        <blockquote>“Move from merely using games to designing and architecting them professionally.”</blockquote>\n        <p><strong>Advanced Mastery</strong> is designed for experienced trainers, facilitators, and educators who want to master custom game design from scratch and lead deep psychological dynamics.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🚀 5 Pillars of Gamification:</h4>\n          <ul>\n            <li>⚖️ <strong>Balance & Flow Theory:</strong> Creating challenges that avoid boredom and burnout</li>\n            <li>🔄 <strong>Feedback Mechanisms:</strong> Rapid response loops for sustained engagement</li>\n            <li>📶 <strong>Progress Architecture:</strong> Level design for continuous growth perception</li>\n            <li>🧱 <strong>Power of Constraints:</strong> Transforming rules into creative exploration</li>\n            <li>💡 <strong>Debriefing Mastery:</strong> Converting game insights into lasting behavioral change</li>\n          </ul>\n        </div>\n\n        <h3>🛠️ Format & Schedule</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Duration</span><span class=\"event-detail-card-val\">6 Sessions (4 hours each)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Format</span><span class=\"event-detail-card-val\">Live Lab + Game Prototyping</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Location</span><span class=\"event-detail-card-val\">Metaphora • 63a Aghmashenebeli</span></div>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Move from merely using games to designing and architecting them professionally.”</blockquote>
+        <p><strong>Advanced Mastery</strong> is designed for experienced trainers, facilitators, and educators who want to master custom game design from scratch and lead deep psychological dynamics.</p>
+      `
                 }
         },
         "2": {
@@ -4344,13 +4591,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 "mentorImg": "გუნდი/2.jpg",
                 "date": "2026-10-18",
                 "time": "18:00",
+                "price": "180 ₾",
                 "KA": {
                         "title": "🌿 პროგრამა არიტე - პიროვნული განვითარება",
-                        "html": "\n        <blockquote>„არეტე (ἀρετή) — ძველბერძნული ცნებაა: გახდე საუკეთესო, რაც შეგიძლია იყო.“</blockquote>\n        <p><strong>არიტე</strong> არის პიროვნული განვითარების პრაქტიკული პროგრამების ციკლი მათთვის, ვისაც საკუთარ თავზე მუშაობა და რეალურ ცხოვრებაში ახალი გზების მოსინჯვა სურს. აქ ნაკლებია მზა პასუხები და მეტი — პრაქტიკა, გამოცდილება, ექსპერიმენტი და რეფლექსია.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🌿 არიტეს 4 დამოუკიდებელი მოდული:</h4>\n          <ul>\n            <li>👥 <strong>მოდული 1: მე და სხვები</strong> — ურთიერთობების კვლევა, უკუკავშირი, სხვების უკეთ გაგება და მოქნილობა</li>\n            <li>🌊 <strong>მოდული 2: ემოციების სამყარო</strong> — ემოციური მდგომარეობის მართვა, ემოციებსა და ქცევას შორის კავშირი</li>\n            <li>🎯 <strong>მოდული 3: წარმატებული ადამიანი</strong> — მიზნების გარკვევა, პრიორიტეტები და სურვილების მოქმედებად ქცევა</li>\n            <li>🎲 <strong>მოდული 4: ძნელი თამაშები</strong> — გადაწყვეტილებები გაურკვევლობაში, კონფლიქტი, ლიდერობა და პასუხისმგებლობა</li>\n          </ul>\n        </div>\n\n        <h3>🗓️ ფორმატი და ჯგუფი</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ხანგრძლივობა</span><span class=\"event-detail-card-val\">თითო მოდული: 1 თვე (8 შეხვედრა)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ჯგუფი</span><span class=\"event-detail-card-val\">20-25 მონაწილე</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ლოკაცია</span><span class=\"event-detail-card-val\">მეტაფორა • აღმაშენებლის 63ა</span></div>\n        </div>\n      "
+                        "html": `
+        <blockquote>„არეტე (ἀρετή) — ძველბერძნული ცნებაა: გახდე საუკეთესო, რაც შეგიძლია იყო.“</blockquote>
+        <p><strong>არიტე</strong> არის პიროვნული განვითარების პრაქტიკული პროგრამების ციკლი მათთვის, ვისაც საკუთარ თავზე მუშაობა და რეალურ ცხოვრებაში ახალი გზების მოსინჯვა სურს.</p>
+      `
                 },
                 "EN": {
                         "title": "🌿 Program Arete - Personal Development",
-                        "html": "\n        <blockquote>“Arete (ἀρετή) — Ancient Greek virtue: Becoming the finest, fullest expression of who you can be.”</blockquote>\n        <p><strong>Arete</strong> is a transformative program cycle for those ready to explore deep self-awareness, practice new behaviors, and achieve emotional excellence.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🌿 4 Independent Modules:</h4>\n          <ul>\n            <li>👥 <strong>Module 1: Me & Others</strong> — Relational dynamics, feedback integration, and empathy</li>\n            <li>🌊 <strong>Module 2: World of Emotions</strong> — Emotional regulation, triggers, and state management</li>\n            <li>🎯 <strong>Module 3: Successful Individual</strong> — Purpose clarification, priority setting, and execution</li>\n            <li>🎲 <strong>Module 4: Difficult Games</strong> — Decision making in ambiguity, constructive conflict, and leadership</li>\n          </ul>\n        </div>\n\n        <h3>🗓️ Format & Structure</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Duration</span><span class=\"event-detail-card-val\">Each Module: 1 Month (8 Sessions)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Group Size</span><span class=\"event-detail-card-val\">20-25 Participants</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Location</span><span class=\"event-detail-card-val\">Metaphora • 63a Aghmashenebeli</span></div>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Arete (ἀρετή) — Ancient Greek virtue: Becoming the finest, fullest expression of who you can be.”</blockquote>
+        <p><strong>Arete</strong> is a transformative program cycle for those ready to explore deep self-awareness and practice new behaviors.</p>
+      `
                 }
         },
         "3": {
@@ -4358,20 +4612,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 "category": "Think Tank",
                 "categoryKA": "❤️ Think Tank",
                 "categoryEN": "❤️ Think Tank",
-                "dateKA": "20 ოქტ | 19:30",
-                "dateEN": "Oct 20 | 19:30",
+                "dateKA": "20 ოქტ | 11:00 - 14:00",
+                "dateEN": "Oct 20 | 11:00 - 14:00",
                 "authorKA": "ქეთი ჟვანია-ტაისონი",
                 "authorEN": "Keti Zhvania-Tyson",
                 "mentorImg": "გუნდი/2.jpg",
                 "date": "2026-10-20",
-                "time": "19:30",
+                "time": "11:00",
+                "price": "80 ₾",
                 "KA": {
-                        "title": "❤️ სიყვარულის ხელოვნება & სიყვარულის 5 ენა",
-                        "html": "\n        <blockquote>„შეიძლება გვიყვარდეს — და მაინც მეორე ადამიანი ამას ისე ვერ გრძნობდეს, როგორც ჩვენ გვგონია.“</blockquote>\n        <p>გარი ჩაპმანის ცნობილი მოდელის მიხედვით, ადამიანები სიყვარულს სხვადასხვა გზით გამოხატავენ და ღებულობენ. როცა პარტნიორები განსხვავებულ „ენებზე“ საუბრობენ, ჩნდება გაუცხოება და გაუგებრობა.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>❤️ სიყვარულის 5 ენა:</h4>\n          <ul>\n            <li>💬 <strong>აღიარების სიტყვები:</strong> მხარდაჭერა, კომპლიმენტი და გულწრფელი მადლიერება</li>\n            <li>⏳ <strong>ხარისხიანი დრო:</strong> გაუყოფელი ყურადღება, ერთობლივი საუბრები და აქტივობები</li>\n            <li>🎁 <strong>საჩუქრები:</strong> სიყვარულისა და ზრუნვის ვიზუალური სიმბოლოები</li>\n            <li>🤝 <strong>მზრუნველობა და საქმით დახმარება:</strong> ყოველდღიური გვერდში დგომა და მხარდაჭერა</li>\n            <li>🫂 <strong>ფიზიკური შეხება:</strong> ჩახუტება, სითბო და ფიზიკური სიახლოვე</li>\n          </ul>\n        </div>\n\n        <h3>✨ რას გაიგებთ მასტერკლასზე?</h3>\n        <p>როგორ ამოიცნოთ თქვენი და პარტნიორის წამყვანი ენა, როგორ გადალახოთ ემოციური დისტანცია და როგორ ააშენოთ ჰარმონიული, ღრმა კავშირი.</p>\n      "
+                        "title": "❤️ სიყვარულის 5 ენა - მასტერკლასი",
+                        "html": `
+        <blockquote>„შეიძლება გვიყვარდეს — და მაინც მეორე ადამიანი ამას ისე ვერ გრძნობდეს, როგორც ჩვენ გვგონია.“</blockquote>
+        <p>გარი ჩაპმანის ცნობილი მოდელის მიხედვით, ადამიანები სიყვარულს სხვადასხვა გზით გამოხატავენ და ღებულობენ. როცა პარტნიორები განსხვავებულ „ენებზე“ საუბრობენ, ჩნდება გაუცხოება და გაუგებრობა.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>❤️ სიყვარულის 5 ენა:</h4>
+          <ul>
+            <li>💬 <strong>აღიარების სიტყვები:</strong> მხარდაჭერა, კომპლიმენტი და გულწრფელი მადლიერება</li>
+            <li>⏳ <strong>ხარისხიანი დრო:</strong> გაუყოფელი ყურადღება, ერთობლივი საუბრები და აქტივობები</li>
+            <li>🎁 <strong>საჩუქრები:</strong> სიყვარულისა და ზრუნვის ვიზუალური სიმბოლოები</li>
+            <li>🤝 <strong>მზრუნველობა და საქმით დახმარება:</strong> ყოველდღიური გვერდში დგომა და მხარდაჭერა</li>
+            <li>🫂 <strong>ფიზიკური შეხება:</strong> ჩახუტება, სითბო და ფიზიკური სიახლოვე</li>
+          </ul>
+        </div>
+
+        <h3>✨ რას გაიგებთ მასტერკლასზე?</h3>
+        <p>როგორ ამოიცნოთ თქვენი და პარტნიორის წამყვანი ენა, როგორ გადალახოთ ემოციური დისტანცია და როგორ ააშენოთ ჰარმონიული, ღრმა კავშირი.</p>
+      `
                 },
                 "EN": {
-                        "title": "❤️ Art of Loving & 5 Love Languages",
-                        "html": "\n        <blockquote>“We may love deeply — yet our partner might not feel it the way we intended.”</blockquote>\n        <p>Based on Dr. Gary Chapman's renowned relationship model, this salon masterclass delves into how we give and receive love, and how to bridge communication gaps in relationships.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>❤️ The 5 Love Languages:</h4>\n          <ul>\n            <li>💬 <strong>Words of Affirmation:</strong> Genuine praise, appreciation, and verbal encouragement</li>\n            <li>⏳ <strong>Quality Time:</strong> Undivided attention and meaningful moments</li>\n            <li>🎁 <strong>Receiving Gifts:</strong> Thoughtful tokens of affection and care</li>\n            <li>🤝 <strong>Acts of Service:</strong> Thoughtful actions and supportive deeds</li>\n            <li>🫂 <strong>Physical Touch:</strong> Closeness, warmth, and reassuring touch</li>\n          </ul>\n        </div>\n      "
+                        "title": "❤️ 5 Love Languages - Masterclass",
+                        "html": `
+        <blockquote>“We may love deeply — yet our partner might not feel it the way we intended.”</blockquote>
+        <p>Based on Dr. Gary Chapman's renowned relationship model, this salon masterclass delves into how we give and receive love, and how to bridge communication gaps in relationships.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>❤️ The 5 Love Languages:</h4>
+          <ul>
+            <li>💬 <strong>Words of Affirmation:</strong> Genuine praise, appreciation, and verbal encouragement</li>
+            <li>⏳ <strong>Quality Time:</strong> Undivided attention and meaningful moments</li>
+            <li>🎁 <strong>Receiving Gifts:</strong> Thoughtful tokens of affection and care</li>
+            <li>🤝 <strong>Acts of Service:</strong> Thoughtful actions and supportive deeds</li>
+            <li>🫂 <strong>Physical Touch:</strong> Closeness, warmth, and reassuring touch</li>
+          </ul>
+        </div>
+      `
                 }
         },
         "4": {
@@ -4386,13 +4672,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 "mentorImg": "გუნდი/2.jpg",
                 "date": "2026-10-22",
                 "time": "18:30",
+                "price": "100 ₾",
                 "KA": {
                         "title": "🎓 ტრენერობის ხელოვნება - ტრენერის გზა",
-                        "html": "\n        <blockquote>„ერთი რუკა. ბევრი მარშრუტი. საკუთარი გზა ტრენერობის ოსტატობისკენ.“</blockquote>\n        <p><strong>„ტრენერის გზა“</strong> არის ტრენერებისა და ფასილიტატორების პროფესიული განვითარების მოდულური ეკოსისტემა, რომელიც აერთიანებს პედაგოგიურ დიზაინს, აუდიტორიის ფსიქოლოგიასა და სცენურ ოსტატობას.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🎓 ძირითადი მიმართულებები:</h4>\n          <ul>\n            <li>📐 <strong>საგანმანათლებლო პროგრამის არქიტექტურა:</strong> სასწავლო მიზნების დაგეგმვა და მეთოდოლოგია</li>\n            <li>🧠 <strong>ზრდასრულთა სწავლების ფსიქოლოგია (ანდრაგოგიკა):</strong> როგორ სწავლობენ უფროსები</li>\n            <li>⚡ <strong>ინტერაქციული ფასილიტაცია:</strong> ჯგუფური ენერგიისა და ჩართულობის მართვა</li>\n            <li>🛡️ <strong>რთული აუდიტორიის მართვა:</strong> პროვოკაციების, წინააღმდეგობისა და კრიზისების ნეიტრალიზება</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>„ერთი რუკა. ბევრი მარშრუტი. საკუთარი გზა ტრენერობის ოსტატობისკენ.“</blockquote>
+        <p><strong>„ტრენერის გზა“</strong> არის ტრენერებისა და ფასილიტატორების პროფესიული განვითარების მოდულური ეკოსისტემა.</p>
+      `
                 },
                 "EN": {
                         "title": "🎓 The Art of Training - Trainer's Path",
-                        "html": "\n        <blockquote>“One comprehensive map. Many distinct routes. Your personal path to training mastery.”</blockquote>\n        <p><strong>The Trainer's Path</strong> is an integrated modular ecosystem for facilitators and educators to elevate their methodology, audience psychology, and instructional design.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🎓 Core Competencies:</h4>\n          <ul>\n            <li>📐 <strong>Curriculum Architecture:</strong> Learning outcomes and interactive session flow</li>\n            <li>🧠 <strong>Adult Learning Psychology:</strong> Andragogy and cognitive retention</li>\n            <li>⚡ <strong>Dynamic Facilitation:</strong> Group energy and engagement leadership</li>\n            <li>🛡️ <strong>Overcoming Resistance:</strong> Managing challenging participants and tension</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>“One comprehensive map. Many distinct routes. Your personal path to training mastery.”</blockquote>
+      `
                 }
         },
         "5": {
@@ -4400,20 +4692,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 "category": "Business",
                 "categoryKA": "💼 Business",
                 "categoryEN": "💼 Business",
-                "dateKA": "24 ოქტ | 19:00",
-                "dateEN": "Oct 24 | 19:00",
+                "dateKA": "14 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 14 | 19:00 - 22:00",
                 "authorKA": "მარიკა ხალიანი",
                 "authorEN": "Marika Khaliani",
                 "mentorImg": "გუნდი/4.jpg",
-                "date": "2026-10-24",
+                "date": "2026-10-14",
                 "time": "19:00",
+                "price": "100 ₾",
                 "KA": {
                         "title": "💼 ქოუჩინგი არაქოუჩებისთვის",
-                        "html": "\n        <blockquote>„ქოუჩინგური აზროვნება ყოველდღიური მართვისა და კომუნიკაციის ყველაზე ძლიერი ინსტრუმენტია.“</blockquote>\n        <p>პრაქტიკული ვორქშოფი მათთვის, ვისაც სურს გააუმჯობესოს ურთიერთობა თანამშრომლებთან, პარტნიორებთან და ახლობლებთან ქოუჩინგური ინსტრუმენტების დახმარებით.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💼 რას ისწავლით ვორქშოფზე?</h4>\n          <ul>\n            <li>❓ <strong>ძლიერი კითხვების დასმა:</strong> როგორ გავაჩინოთ გაცნობიერება და მოტივაცია კითხვებით</li>\n            <li>👂 <strong>აქტიური მოსმენის 3 დონე:</strong> სიტყვებს მიღმა არსებული ემოციებისა და საჭიროებების გაგება</li>\n            <li>🧗 <strong>შინაგანი ბარიერების დაძლევა:</strong> ხელის შემშლელი რწმენების გარდაქმნა რესურსად</li>\n            <li>🎯 <strong>მიზნების მკაფიო ფორმულირება:</strong> SMART & GROW მოდელების გამოყენება ცხოვრებაში</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>„ქოუჩინგური აზროვნება ყოველდღიური მართვისა და კომუნიკაციის ყველაზე ძლიერი ინსტრუმენტია.“</blockquote>
+        <p>პრაქტიკული ვორქშოფი მათთვის, ვისაც სურს გააუმჯობესოს ურთიერთობა თანამშრომლებთან, პარტნიორებთან და ახლობლებთან ქოუჩინგური ინსტრუმენტების დახმარებით.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💼 რას ისწავლით ვორქშოფზე?</h4>
+          <ul>
+            <li>❓ <strong>ძლიერი კითხვების დასმა:</strong> როგორ გავაჩინოთ გაცნობიერება და მოტივაცია კითხვებით</li>
+            <li>👂 <strong>აქტიური მოსმენის 3 დონე:</strong> სიტყვებს მიღმა არსებული ემოციებისა და საჭიროებების გაგება</li>
+            <li>🧗 <strong>შინაგანი ბარიერების დაძლევა:</strong> ხელის შემშლელი რწმენების გარდაქმნა რესურსად</li>
+            <li>🎯 <strong>მიზნების მკაფიო ფორმულირება:</strong> SMART & GROW მოდელების გამოყენება ცხოვრებაში</li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
                         "title": "💼 Coaching for Non-Coaches",
-                        "html": "\n        <blockquote>“Coaching mindset is the ultimate superpower for everyday leadership and meaningful communication.”</blockquote>\n        <p>A hands-on workshop for managers, creators, and professionals seeking to apply practical coaching principles to empower teams and strengthen relationships.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💼 Key Takeaways:</h4>\n          <ul>\n            <li>❓ <strong>Powerful Questioning:</strong> Inspiring ownership and clarity through open inquiry</li>\n            <li>👂 <strong>3 Levels of Active Listening:</strong> Hearing nuances beyond spoken words</li>\n            <li>🧗 <strong>Overcoming Internal Blocks:</strong> Reframing limiting beliefs into actionable growth</li>\n            <li>🎯 <strong>Goal Alignment:</strong> Utilizing GROW and SMART frameworks effectively</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Coaching mindset is the ultimate superpower for everyday leadership and meaningful communication.”</blockquote>
+        <p>A hands-on workshop for managers, creators, and professionals seeking to apply practical coaching principles to empower teams and strengthen relationships.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💼 Key Takeaways:</h4>
+          <ul>
+            <li>❓ <strong>Powerful Questioning:</strong> Inspiring ownership and clarity through open inquiry</li>
+            <li>👂 <strong>3 Levels of Active Listening:</strong> Hearing nuances beyond spoken words</li>
+            <li>🧗 <strong>Overcoming Internal Blocks:</strong> Reframing limiting beliefs into actionable growth</li>
+            <li>🎯 <strong>Goal Alignment:</strong> Utilizing GROW and SMART frameworks effectively</li>
+          </ul>
+        </div>
+      `
                 }
         },
         "6": {
@@ -4421,41 +4740,95 @@ document.addEventListener('DOMContentLoaded', () => {
                 "category": "Business",
                 "categoryKA": "👥 Business",
                 "categoryEN": "👥 Business",
-                "dateKA": "26 ოქტ | 18:30",
-                "dateEN": "Oct 26 | 18:30",
+                "dateKA": "21 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 21 | 19:00 - 22:00",
                 "authorKA": "მარიკა ხალიანი",
                 "authorEN": "Marika Khaliani",
                 "mentorImg": "გუნდი/4.jpg",
-                "date": "2026-10-26",
-                "time": "18:30",
+                "date": "2026-10-21",
+                "time": "19:00",
+                "price": "100 ₾",
                 "KA": {
-                        "title": "👥 ქოუჩინგი HR-ებისთვის & ლიდერებისთვის",
-                        "html": "\n        <blockquote>„გარდაქმენით მენეჯმენტი შთაგონებად — გააძლიერეთ გუნდი ქოუჩინგური მიდგომებით.“</blockquote>\n        <p>სპეციალური პროგრამა HR პროფესიონალებისა და ბიზნეს ლიდერებისთვის, რომლებიც მიზნად ისახავენ ორგანიზაციული კულტურის გაჯანსაღებას და თანამშრომელთა პოტენციალის მაქსიმალურ გამოვლენას.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>👥 პროგრამის თემები:</h4>\n          <ul>\n            <li>🌱 <strong>ტალანტების განვითარება:</strong> როგორ გავზარდოთ თანამშრომელი კომპანიის შიგნით</li>\n            <li>🔋 <strong>გადაწვის (Burnout) პრევენცია:</strong> ემოციური ეკოლოგიის შენარჩუნება სამუშაო გარემოში</li>\n            <li>🗣️ <strong>1-on-1 ქოუჩინგ სესიები:</strong> ეფექტური ინდივიდუალური განვითარების შეხვედრების წარმართვა</li>\n            <li>💬 <strong>კონსტრუქციული უკუკავშირი:</strong> უკუკავშირი, რომელიც შთააგონებს და არ თრგუნავს</li>\n          </ul>\n        </div>\n      "
+                        "title": "👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის",
+                        "html": `
+        <blockquote>„გარდაქმენით მენეჯმენტი შთაგონებად — გააძლიერეთ გუნდი ქოუჩინგური მიდგომებით.“</blockquote>
+        <p>სპეციალური პროგრამა HR პროფესიონალებისა და ბიზნეს ლიდერებისთვის, რომლებიც მიზნად ისახავენ ორგანიზაციული კულტურის გაჯანსაღებას და თანამშრომელთა პოტენციალის მაქსიმალურ გამოვლენას.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>👥 პროგრამის თემები:</h4>
+          <ul>
+            <li>🌱 <strong>ტალანტების განვითარება:</strong> როგორ გავზარდოთ თანამშრომელი კომპანიის შიგნით</li>
+            <li>🔋 <strong>გადაწვის (Burnout) პრევენცია:</strong> ემოციური ეკოლოგიის შენარჩუნება სამუშაო გარემოში</li>
+            <li>🗣️ <strong>1-on-1 ქოუჩინგ სესიები:</strong> ეფექტური ინდივიდუალური განვითარების შეხვედრების წარმართვა</li>
+            <li>💬 <strong>კონსტრუქციული უკუკავშირი:</strong> უკუკავშირი, რომელიც შთააგონებს და არ თრგუნავს</li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
-                        "title": "👥 Coaching for HR & Business Leaders",
-                        "html": "\n        <blockquote>“Transform management into inspiration — empower talent through coaching leadership.”</blockquote>\n        <p>A specialized program for HR professionals and business executives aiming to foster a thriving workplace culture and unlock employee potential.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>👥 Program Highlights:</h4>\n          <ul>\n            <li>🌱 <strong>Talent Cultivation:</strong> Mentoring high performers into autonomous leaders</li>\n            <li>🔋 <strong>Burnout Prevention:</strong> Fostering psychological safety and emotional well-being</li>\n            <li>🗣️ <strong>1-on-1 Coaching Conversations:</strong> High-impact individual check-ins</li>\n            <li>💬 <strong>Transformative Feedback:</strong> Feedback frameworks that motivate action</li>\n          </ul>\n        </div>\n      "
+                        "title": "👥 Coaching for HR Managers & Leaders",
+                        "html": `
+        <blockquote>“Transform management into inspiration — empower talent through coaching leadership.”</blockquote>
+        <p>A specialized program for HR professionals and business executives aiming to foster a thriving workplace culture and unlock employee potential.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>👥 Program Highlights:</h4>
+          <ul>
+            <li>🌱 <strong>Talent Cultivation:</strong> Mentoring high performers into autonomous leaders</li>
+            <li>🔋 <strong>Burnout Prevention:</strong> Fostering psychological safety and emotional well-being</li>
+            <li>🗣️ <strong>1-on-1 Coaching Conversations:</strong> High-impact individual check-ins</li>
+            <li>💬 <strong>Transformative Feedback:</strong> Feedback frameworks that motivate action</li>
+          </ul>
+        </div>
+      `
                 }
         },
         "7": {
                 "id": 7,
-                "category": "Think Tank",
-                "categoryKA": "💔 Think Tank",
-                "categoryEN": "💔 Think Tank",
-                "dateKA": "28 ოქტ | 19:30",
-                "dateEN": "Oct 28 | 19:30",
+                "category": "Personal Development",
+                "categoryKA": "💔 Personal Development",
+                "categoryEN": "💔 Personal Development",
+                "dateKA": "28 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 28 | 19:00 - 22:00",
                 "authorKA": "მარიკა ხალიანი",
                 "authorEN": "Marika Khaliani",
                 "mentorImg": "გუნდი/4.jpg",
                 "date": "2026-10-28",
-                "time": "19:30",
+                "time": "19:00",
+                "price": "80 ₾",
                 "KA": {
-                        "title": "💔 რატომ გვტკივა სიყვარული & პარტნიორები",
-                        "html": "\n        <blockquote>„სიყვარული მხოლოდ რომანტიკა არ არის — ის არის სარკე, რომელიც ჩვენს შინაგან სამყაროს გვაჩვენებს.“</blockquote>\n        <p>— „რატომ მეორდება ერთი და იგივე სცენარი?“<br>— „რატომ მეშინია დაკარგვის, სიახლოვის ან უარყოფის?“<br>ამ ვორქშოფზე სიყვარულს შევხედავთ არა ზედაპირულად, არამედ სიღრმისეულად — ბავშვობის გამოცდილების, მიჯაჭვულობისა და ოჯახური სისტემის ჭრილში.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💔 რა თემებს შევეხებით:</h4>\n          <ul>\n            <li>🧲 <strong>რატომ გვიზიდავს ემოციურად მიუწვდომელი ადამიანი?</strong></li>\n            <li>⚖️ <strong>შიში: მიტოვება vs სიახლოვე</strong> და პირადი საზღვრები</li>\n            <li>🧩 <strong>მიჯაჭვულობის სტილები:</strong> შფოთვითი, არიდებითი და უსაფრთხო მიჯაჭვულობა</li>\n            <li>🌿 <strong>როგორ შევქმნათ უსაფრთხო და ჰარმონიული კავშირი</strong></li>\n          </ul>\n        </div>\n      "
+                        "title": "💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს (რატომ გვტკივა სიყვარული)",
+                        "html": `
+        <blockquote>„სიყვარული მხოლოდ რომანტიკა არ არის — ის არის სარკე, რომელიც ჩვენს შინაგან სამყაროს გვაჩვენებს.“</blockquote>
+        <p>— „რატომ მეორდება ერთი და იგივე სცენარი?“<br>— „რატომ მეშინია დაკარგვის, სიახლოვის ან უარყოფის?“<br>ამ ვორქშოფზე სიყვარულს შევხედავთ არა ზედაპირულად, არამედ სიღრმისეულად — ბავშვობის გამოცდილების, მიჯაჭვულობისა და ოჯახური სისტემის ჭრილში.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💔 რა თემებს შევეხებით:</h4>
+          <ul>
+            <li>🧲 <strong>რატომ გვიზიდავს ემოციურად მიუწვდომელი ადამიანი?</strong></li>
+            <li>⚖️ <strong>შიში: მიტოვება vs სიახლოვე</strong> და პირადი საზღვრები</li>
+            <li>🧩 <strong>მიჯაჭვულობის სტილები:</strong> შფოთვითი, არიდებითი და უსაფრთხო მიჯაჭვულობა</li>
+            <li>🌿 <strong>როგორ შევქმნათ უსაფრთხო და ჰარმონიული კავშირი</strong></li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
-                        "title": "💔 Why Love Hurts & Repeating Patterns",
-                        "html": "\n        <blockquote>“Love is not just romance — it is a mirror reflecting our deepest inner world.”</blockquote>\n        <p>Explore why relationship patterns repeat, understand attachment blueprints, and discover how to heal childhood wounds to build secure, loving partnerships.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💔 Topics Explored:</h4>\n          <ul>\n            <li>🧲 <strong>The lure of emotionally unavailable partners</strong></li>\n            <li>⚖️ <strong>The dual fears: Abandonment vs Engulfment</strong></li>\n            <li>🧩 <strong>Attachment Styles:</strong> Anxious, Avoidant, and Secure Dynamics</li>\n            <li>🌿 <strong>Cultivating secure intimacy and healthy boundaries</strong></li>\n          </ul>\n        </div>\n      "
+                        "title": "💔 Why We Choose Same Partners (Why Love Hurts)",
+                        "html": `
+        <blockquote>“Love is not just romance — it is a mirror reflecting our deepest inner world.”</blockquote>
+        <p>Explore why relationship patterns repeat, understand attachment blueprints, and discover how to heal childhood wounds to build secure, loving partnerships.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💔 Topics Explored:</h4>
+          <ul>
+            <li>🧲 <strong>The lure of emotionally unavailable partners</strong></li>
+            <li>⚖️ <strong>The dual fears: Abandonment vs Engulfment</strong></li>
+            <li>🧩 <strong>Attachment Styles:</strong> Anxious, Avoidant, and Secure Dynamics</li>
+            <li>🌿 <strong>Cultivating secure intimacy and healthy boundaries</strong></li>
+          </ul>
+        </div>
+      `
                 }
         },
         "8": {
@@ -4470,34 +4843,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 "mentorImg": "გუნდი/4.jpg",
                 "date": "2026-10-30",
                 "time": "19:00",
+                "price": "80 ₾",
                 "KA": {
                         "title": "📦 რა შევუკვეთე და რა ჩამომივიდა",
-                        "html": "\n        <blockquote>„სულ სხვა რამ მინდოდა… და სრულიად სხვა რეალობა მივიღე.“</blockquote>\n        <p>მასტერკლასი მათთვისაა, ვისაც ურთიერთობებში, კარიერაში ან საკუთარ თავთან აქვს განცდა, რომ სასურველსა და რეალობას შორის აცდენაა. განვიხილავთ, თუ როგორ ვაკეთებთ არჩევანს და როგორ დავინახოთ განსხვავება ჩვენს ნამდვილ სურვილსა და ქვეცნობიერ „შეკვეთას“ შორის.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>📦 რას მიიღებთ მასტერკლასზე:</h4>\n          <ul>\n            <li>🔍 <strong>გააცნობიერებთ აცდენას</strong> თქვენს სურვილსა და მიღებულ შედეგს შორის</li>\n            <li>🔁 <strong>დაინახავთ განმეორებად პატერნებს</strong> ურთიერთობებში, ფულსა და კარიერაში</li>\n            <li>🛡️ <strong>გაიგებთ, რას „უკვეთავთ“ რეალურად</strong> თქვენი შიშებითა და რწმენებით</li>\n            <li>🚀 <strong>გადასვლა შემთხვევითი რეალობიდან გაცნობიერებულად შექმნილ რეალობაზე</strong></li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>„სულ სხვა რამ მინდოდა… და სრულიად სხვა რეალობა მივიღე.“</blockquote>
+        <p>მასტერკლასი მათთვისაა, ვისაც ურთიერთობებში, კარიერაში ან საკუთარ თავთან აქვს განცდა, რომ სასურველსა და რეალობას შორის აცდენაა.</p>
+      `
                 },
                 "EN": {
                         "title": "📦 What I Ordered vs What Arrived",
-                        "html": "\n        <blockquote>“I wished for one thing… yet reality delivered something entirely different.”</blockquote>\n        <p>A transformative masterclass addressing the cognitive gaps between our conscious desires and the subconscious blueprints that shape our real outcomes in career, love, and life.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>📦 Workshop Insights:</h4>\n          <ul>\n            <li>🔍 <strong>Bridging the gap</strong> between intentions and outcomes</li>\n            <li>🔁 <strong>Identifying hidden recurring scripts</strong> across life domains</li>\n            <li>🛡️ <strong>Uncovering subconscious orders</strong> driven by fear or comfort</li>\n            <li>🚀 <strong>Shifting from accidental reality to intentional creation</strong></li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>“I wished for one thing… yet reality delivered something entirely different.”</blockquote>
+      `
                 }
         },
         "9": {
                 "id": 9,
-                "category": "Think Tank",
-                "categoryKA": "🌌 Think Tank",
-                "categoryEN": "🌌 Think Tank",
-                "dateKA": "02 ნოე | 18:00",
-                "dateEN": "Nov 02 | 18:00",
+                "category": "Personal Development",
+                "categoryKA": "🌌 Personal Development",
+                "categoryEN": "🌌 Personal Development",
+                "dateKA": "18 ოქტ | 12:00 - 19:00",
+                "dateEN": "Oct 18 | 12:00 - 19:00",
                 "authorKA": "მარიკა ხალიანი",
                 "authorEN": "Marika Khaliani",
                 "mentorImg": "გუნდი/4.jpg",
-                "date": "2026-11-02",
-                "time": "18:00",
+                "date": "2026-10-18",
+                "time": "12:00",
+                "price": "180 ₾",
                 "KA": {
                         "title": "🌌 სისტემური განლაგება - ვორქშოფი",
-                        "html": "\n        <blockquote>„დაინახე უხილავი კავშირები და გაათავისუფლე შენი ცხოვრება წინაპართა გადაუჭრელი სცენარებისგან.“</blockquote>\n        <p>სისტემური და ოჯახური განლაგება (Systemic Constellations) არის უნიკალური მეთოდი, რომელიც საშუალებას გაძლევთ დაინახოთ ოჯახის, გვარისა და ორგანიზაციული სისტემების ფარული დინამიკა.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🌌 რას მოიცავს ვორქშოფი:</h4>\n          <ul>\n            <li>🧬 <strong>ფარული ოჯახური ლოიალობებისა და ვალდებულებების</strong> გამოვლენა</li>\n            <li>🔒 <strong>ფინანსური, კარიერული და პირადი ბლოკების</strong> განბლოკვა</li>\n            <li>🕊️ <strong>წარსულის ტვირთისგან გათავისუფლება</strong> და საკუთარი ადგილის პოვნა სისტემაში</li>\n            <li>⚡ <strong>სასიცოცხლო ენერგიისა და შინაგანი რესურსების</strong> აღდგენა</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>„დაინახე უხილავი კავშირები და გაათავისუფლე შენი ცხოვრება წინაპართა გადაუჭრელი სცენარებისგან.“</blockquote>
+        <p>სისტემური და ოჯახური განლაგება (Systemic Constellations) არის უნიკალური მეთოდი, რომელიც საშუალებას გაძლევთ დაინახოთ ოჯახის, გვარისა და ორგანიზაციული სისტემების ფარული დინამიკა.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🌌 რას მოიცავს ვორქშოფი:</h4>
+          <ul>
+            <li>🧬 <strong>ფარული ოჯახური ლოიალობებისა და ვალდებულებების</strong> გამოვლენა</li>
+            <li>🔒 <strong>ფინანსური, კარიერული და პირადი ბლოკების</strong> განბლოკვა</li>
+            <li>🕊️ <strong>წარსულის ტვირთისგან გათავისუფლება</strong> და საკუთარი ადგილის პოვნა სისტემაში</li>
+            <li>⚡ <strong>სასიცოცხლო ენერგიისა და შინაგანი რესურსების</strong> აღდგენა</li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
                         "title": "🌌 Systemic Constellations - Workshop",
-                        "html": "\n        <blockquote>“Illuminate invisible systemic bonds and free your life from inherited unresolved scripts.”</blockquote>\n        <p>A deep phenomenological workshop utilizing systemic constellations to bring clarity to generational dynamics, career roadblocks, and deep emotional patterns.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🌌 Key Explorations:</h4>\n          <ul>\n            <li>🧬 <strong>Revealing hidden generational loyalties</strong></li>\n            <li>🔒 <strong>Dissolving persistent financial and emotional blocks</strong></li>\n            <li>🕊️ <strong>Releasing ancestral burdens</strong> to claim your rightful place</li>\n            <li>⚡ <strong>Reclaiming vital life energy and inner equilibrium</strong></li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Illuminate invisible systemic bonds and free your life from inherited unresolved scripts.”</blockquote>
+        <p>A deep phenomenological workshop utilizing systemic constellations to bring clarity to generational dynamics, career roadblocks, and deep emotional patterns.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🌌 Key Explorations:</h4>
+          <ul>
+            <li>🧬 <strong>Revealing hidden generational loyalties</strong></li>
+            <li>🔒 <strong>Dissolving persistent financial and emotional blocks</strong></li>
+            <li>🕊️ <strong>Releasing ancestral burdens</strong> to claim your rightful place</li>
+            <li>⚡ <strong>Reclaiming vital life energy and inner equilibrium</strong></li>
+          </ul>
+        </div>
+      `
                 }
         },
         "10": {
@@ -4512,55 +4918,112 @@ document.addEventListener('DOMContentLoaded', () => {
                 "mentorImg": "გუნდი/4.jpg",
                 "date": "2026-11-04",
                 "time": "19:00",
+                "price": "100 ₾",
                 "KA": {
                         "title": "💰 ფული, თუ პასუხისმგებლობა",
-                        "html": "\n        <blockquote>„ფული მიჰყვება პასუხისმგებლობასა და ენერგიას — განბლოკე შენი ფინანსური პოტენციალი.“</blockquote>\n        <p>სიღრმისეული და პრაქტიკული ვორქშოფი ფინანსურ ბლოკებზე, შინაგან წინააღმდეგობასა და ფულთან ჯანსაღ ურთიერთობაზე.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💰 რას განვიხილავთ:</h4>\n          <ul>\n            <li>🪙 <strong>ფულთან დაკავშირებული ქვეცნობიერი შიშები</strong> და „ფულის ჭერი“</li>\n            <li>⚖️ <strong>პასუხისმგებლობა როგორც შემოსავლის მთავარი მამოძრავებელი</strong></li>\n            <li>🧠 <strong>დეფიციტის აზროვნებიდან სიუხვის აზროვნებაზე</strong> გადასვლა</li>\n            <li>📈 <strong>პრაქტიკული სავარჯიშოები</strong> ფინანსური ნაკადის გასააქტიურებლად</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>„ფული მიჰყვება პასუხისმგებლობასა და ენერგიას — განბლოკე შენი ფინანსური პოტენციალი.“</blockquote>
+      `
                 },
                 "EN": {
                         "title": "💰 Money or Responsibility",
-                        "html": "\n        <blockquote>“Money naturally follows ownership and energy — unblock your financial capacity.”</blockquote>\n        <p>A psychological and strategic workshop addressing subconscious financial ceilings, avoidance patterns, and building an abundance-oriented relationship with money.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💰 Core Modules:</h4>\n          <ul>\n            <li>🪙 <strong>Subconscious financial ceilings and anxiety</strong></li>\n            <li>⚖️ <strong>Responsibility as the catalyst for wealth generation</strong></li>\n            <li>🧠 <strong>Shifting from scarcity mindset to generative abundance</strong></li>\n            <li>📈 <strong>Actionable exercises for financial expansion</strong></li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Money naturally follows ownership and energy — unblock your financial capacity.”</blockquote>
+      `
                 }
         },
         "11": {
                 "id": 11,
-                "category": "Think Tank",
-                "categoryKA": "🌙 Think Tank",
-                "categoryEN": "🌙 Think Tank",
-                "dateKA": "06 ნოე | 19:30",
-                "dateEN": "Nov 06 | 19:30",
+                "category": "Personal Development",
+                "categoryKA": "🌙 Personal Development",
+                "categoryEN": "🌙 Personal Development",
+                "dateKA": "08 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 08 | 19:00 - 22:00",
                 "authorKA": "ლალი ბადრიძე",
                 "authorEN": "Lali Badridze",
                 "mentorImg": "გუნდი/1.jpg",
-                "date": "2026-11-06",
-                "time": "19:30",
+                "date": "2026-10-08",
+                "time": "19:00",
+                "price": "100 ₾",
                 "KA": {
-                        "title": "🌙 შეხვედრა შეჰერეზადასთან",
-                        "html": "\n        <blockquote>„იგავების 15 თერაპიული საიდუმლო, აღმოსავლური ჩაის რიტუალი და ფსიქოთერაპიული მოგზაურობა.“</blockquote>\n        <p>აღმოსავლური ზღაპრები და იგავები, როგორც პოზიტიური ფსიქოთერაპიის მძლავრი სამკურნალო და თვითშემეცნების ინსტრუმენტი.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🌙 საღამოს პროგრამა:</h4>\n          <ul>\n            <li>📜 <strong>15 თერაპიული იგავი</strong> და მათი ფარული ფსიქოლოგიური კოდები</li>\n            <li>☕ <strong>აღმოსავლური ჩაის ცერემონია</strong> და მყუდრო სალონური გარემო</li>\n            <li>🗝️ <strong>არაცნობიერში არსებული რესურსების</strong> გააქტიურება მეტაფორებით</li>\n            <li>✨ <strong>შინაგანი სიმშვიდის, ჰარმონიისა და პასუხების პოვნა</strong></li>\n          </ul>\n        </div>\n      "
+                        "title": "🌙 აღმოსავლური ისტორიები (შეხვედრა შეჰერეზადასთან)",
+                        "html": `
+        <blockquote>„იგავების 15 თერაპიული საიდუმლო, აღმოსავლური ჩაის რიტუალი და ფსიქოთერაპიული მოგზაურობა.“</blockquote>
+        <p>აღმოსავლური ზღაპრები და იგავები, როგორც პოზიტიური ფსიქოთერაპიის მძლავრი სამკურნალო და თვითშემეცნების ინსტრუმენტი.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🌙 საღამოს პროგრამა:</h4>
+          <ul>
+            <li>📜 <strong>15 თერაპიული იგავი</strong> და მათი ფარული ფსიქოლოგიური კოდები</li>
+            <li>☕ <strong>აღმოსავლური ჩაის ცერემონია</strong> და მყუდრო სალონური გარემო</li>
+            <li>🗝️ <strong>არაცნობიერში არსებული რესურსების</strong> გააქტიურება მეტაფორებით</li>
+            <li>✨ <strong>შინაგანი სიმშვიდის, ჰარმონიისა და პასუხების პოვნა</strong></li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
-                        "title": "🌙 Meeting with Scheherazade",
-                        "html": "\n        <blockquote>“15 therapeutic secrets of parables, oriental tea ritual, and psychotherapeutic awakening.”</blockquote>\n        <p>An enchanting evening in positive psychotherapy using Eastern storytelling, mythic archetypes, and oriental tea rituals to uncover profound personal wisdom.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🌙 Evening Elements:</h4>\n          <ul>\n            <li>📜 <strong>15 therapeutic parables</strong> decoding human resilience</li>\n            <li>☕ <strong>Authentic Oriental Tea Ritual</strong> in our cozy lounge</li>\n            <li>🗝️ <strong>Activating unconscious resources</strong> via metaphors</li>\n            <li>✨ <strong>Finding harmony, clarity, and inner tranquility</strong></li>\n          </ul>\n        </div>\n      "
+                        "title": "🌙 Eastern Stories (Meeting with Scheherazade)",
+                        "html": `
+        <blockquote>“15 therapeutic secrets of parables, oriental tea ritual, and psychotherapeutic awakening.”</blockquote>
+        <p>An enchanting evening in positive psychotherapy using Eastern storytelling, mythic archetypes, and oriental tea rituals to uncover profound personal wisdom.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🌙 Evening Elements:</h4>
+          <ul>
+            <li>📜 <strong>15 therapeutic parables</strong> decoding human resilience</li>
+            <li>☕ <strong>Authentic Oriental Tea Ritual</strong> in our cozy lounge</li>
+            <li>🗝️ <strong>Activating unconscious resources</strong> via metaphors</li>
+            <li>✨ <strong>Finding harmony, clarity, and inner tranquility</strong></li>
+          </ul>
+        </div>
+      `
                 }
         },
         "12": {
                 "id": 12,
-                "category": "Think Tank",
-                "categoryKA": "💬 Think Tank",
-                "categoryEN": "💬 Think Tank",
-                "dateKA": "08 ნოე | 19:00",
-                "dateEN": "Nov 08 | 19:00",
+                "category": "Personal Development",
+                "categoryKA": "💬 Personal Development",
+                "categoryEN": "💬 Personal Development",
+                "dateKA": "09 & 23 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 09 & 23 | 19:00 - 22:00",
                 "authorKA": "ლალი ბადრიძე",
                 "authorEN": "Lali Badridze",
                 "mentorImg": "გუნდი/1.jpg",
-                "date": "2026-11-08",
+                "date": "2026-10-09",
                 "time": "19:00",
+                "price": "100 ₾",
                 "KA": {
                         "title": "💬 მოდი ვილაპარაკოთ - ექსპერიმენტული დიალოგი",
-                        "html": "\n        <blockquote>„ამ სივრცეში შემთხვევით არაფერი ხდება — მეორე ადამიანი იქცევა შენი შინაგანი ძიების პასუხად.“</blockquote>\n        <p><strong>„მოდი ვილაპარაკოთ“</strong> არის ექსპერიმენტული დიალოგისა და უსაფრთხო სივრცის სალონური ფორმატი მათთვის, ვინც ეძებს შინაგან პასუხებს და ღიაა ნამდვილი კომუნიკაციისთვის.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💬 შეხვედრის 3 ეტაპი (90 წუთი):</h4>\n          <ul>\n            <li>🟢 <strong>I ეტაპი: შესავალი და სივრცესთან შერწყმა</strong> — ჩაი, ყავა, ბარი, წესების გარეშე წესები</li>\n            <li>🔵 <strong>II ეტაპი: ძირითადი დიალოგი & გზამკვლევი ბარათები</strong> — პროვოკაციული და ღრმა კითხვები</li>\n            <li>🟣 <strong>III ეტაპი: რეფლექსია და სინქრონულობა</strong> — მიღებული ემოციებისა და მინიშნებების გააზრება</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>„ამ სივრცეში შემთხვევით არაფერი ხდება — მეორე ადამიანი იქცევა შენი შინაგანი ძიების პასუხად.“</blockquote>
+        <p><strong>„მოდი ვილაპარაკოთ“</strong> არის ექსპერიმენტული დიალოგისა და უსაფრთხო სივრცის სალონური ფორმატი მათთვის, ვინც ეძებს შინაგან პასუხებს და ღიაა ნამდვილი კომუნიკაციისთვის.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💬 შეხვედრის 3 ეტაპი (90 წუთი):</h4>
+          <ul>
+            <li>🟢 <strong>I ეტაპი: შესავალი და სივრცესთან შერწყმა</strong> — ჩაი, ყავა, ბარი, წესების გარეშე წესები</li>
+            <li>🔵 <strong>II ეტაპი: ძირითადი დიალოგი & გზამკვლევი ბარათები</strong> — პროვოკაციული და ღრმა კითხვები</li>
+            <li>🟣 <strong>III ეტაპი: რეფლექსია და სინქრონულობა</strong> — მიღებული ემოციებისა და მინიშნებების გააზრება</li>
+          </ul>
+        </div>
+      `
                 },
                 "EN": {
                         "title": "💬 Let's Talk - Experimental Dialogue",
-                        "html": "\n        <blockquote>“Nothing happens by coincidence here — another person becomes the mirror for your inner inquiry.”</blockquote>\n        <p>A uniquely structured 90-minute salon dialogue creating psychological safety for authentic, unscripted human connection and deep conversations.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>💬 3 Dynamic Stages (90 min):</h4>\n          <ul>\n            <li>🟢 <strong>Stage I: Arrival & Integration</strong> — Tea, refreshments, and liberating conversational rules</li>\n            <li>🔵 <strong>Stage II: Core Dialogue & Prompt Cards</strong> — Evocative thematic inquiries</li>\n            <li>🟣 <strong>Stage III: Reflection & Synchronicity</strong> — Integrating shared discoveries</li>\n          </ul>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Nothing happens by coincidence here — another person becomes the mirror for your inner inquiry.”</blockquote>
+        <p>A uniquely structured 90-minute salon dialogue creating psychological safety for authentic, unscripted human connection and deep conversations.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💬 3 Dynamic Stages (90 min):</h4>
+          <ul>
+            <li>🟢 <strong>Stage I: Arrival & Integration</strong> — Tea, refreshments, and liberating conversational rules</li>
+            <li>🔵 <strong>Stage II: Core Dialogue & Prompt Cards</strong> — Evocative thematic inquiries</li>
+            <li>🟣 <strong>Stage III: Reflection & Synchronicity</strong> — Integrating shared discoveries</li>
+          </ul>
+        </div>
+      `
                 }
         },
         "13": {
@@ -4575,13 +5038,276 @@ document.addEventListener('DOMContentLoaded', () => {
                 "mentorImg": "გუნდი/1.jpg",
                 "date": "2026-11-10",
                 "time": "18:30",
+                "price": "100 ₾",
                 "KA": {
                         "title": "🧠 ადამიანის ფსიქოლოგია ლიდერობაში - არაცნობიერი მენეჯმენტი",
-                        "html": "\n        <blockquote>„სანამ არაცნობიერს ცნობიერად არ აქცევ, ის მართავს შენს ცხოვრებას და შენ მას ბედისწერას უწოდებ.“ — კარლ გუსტავ იუნგი</blockquote>\n        <p>პრაქტიკული, ღრმა ტრანსფორმაციული კურსი მოქმედი ლიდერებისა და მენეჯერებისათვის. დღევანდელ სამყაროში მენეჯმენტი აღარ არის მხოლოდ პროცესების მართვა — ეს არის ადამიანის სულის, მოტივებისა და ემოციების გაგების ხელოვნება.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🧠 კურსის სტრუქტურა (12 შეხვედრა):</h4>\n          <ul>\n            <li>🟢 <strong>ნაწილი I: ლიდერობის ფარული ფსიქოლოგია (8 შეხვედრა)</strong> — Island of Sanctuary, ლიდერის ჩრდილი (Shadow), გუნდის არაცნობიერი როლები, ემოციური ინტელექტი (EQ), ემოციური ეკოლოგია & Burnout პრევენცია</li>\n            <li>🔵 <strong>ნაწილი II: პრაქტიკული ინტეგრაცია (4 შეხვედრა)</strong> — Level 5 & Servant Leadership, ტრანს-კულტურული ფსიქოლოგია, მეტაფორის ძალა და ფინალური ტრანსფორმაცია</li>\n          </ul>\n        </div>\n\n        <h3>🗓️ ფორმატი და მიღება</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ხანგრძლივობა</span><span class=\"event-detail-card-val\">12 შეხვედრა (კვირაში 1, 3 სთ)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">მიღება</span><span class=\"event-detail-card-val\">აპლიკაცია + პირისპირ გასაუბრება</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">ლოკაცია</span><span class=\"event-detail-card-val\">მეტაფორა • აღმაშენებლის 63ა</span></div>\n        </div>\n      "
+                        "html": `
+        <blockquote>„სანამ არაცნობიერს ცნობიერად არ აქცევ, ის მართავს შენს ცხოვრებას და შენ მას ბედისწერას უწოდებ.“ — კარლ გუსტავ იუნგი</blockquote>
+        <p>პრაქტიკული, ღრმა ტრანსფორმაციული კურსი მოქმედი ლიდერებისა და მენეჯერებისათვის.</p>
+      `
                 },
                 "EN": {
                         "title": "🧠 Human Psychology in Leadership",
-                        "html": "\n        <blockquote>“Until you make the unconscious conscious, it will direct your life and you will call it fate.” — Carl Jung</blockquote>\n        <p>A transformative master-level course for senior leaders and managers. Modern leadership is no longer just managing tasks — it is understanding human psychology, unconscious drivers, and authentic influence.</p>\n        \n        <div class=\"article-takeaway-box\">\n          <h4>🧠 Course Structure (12 Sessions):</h4>\n          <ul>\n            <li>🟢 <strong>Part I: Hidden Psychology of Leadership (8 Sessions)</strong> — Island of Sanctuary, Leader's Shadow, Team Unconscious Dynamics, EQ & Emotional Ecology</li>\n            <li>🔵 <strong>Part II: Practical Integration (4 Sessions)</strong> — Level 5 & Servant Leadership, Transcultural Management, and Metaphorical Influence</li>\n          </ul>\n        </div>\n\n        <h3>🗓️ Format & Admission</h3>\n        <div class=\"event-detail-grid\">\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Duration</span><span class=\"event-detail-card-val\">12 Sessions (Once a week, 3 hrs)</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Admission</span><span class=\"event-detail-card-val\">Application + 1-on-1 Interview</span></div>\n          <div class=\"event-detail-card\"><span class=\"event-detail-card-label\">Location</span><span class=\"event-detail-card-val\">Metaphora • 63a Aghmashenebeli</span></div>\n        </div>\n      "
+                        "html": `
+        <blockquote>“Until you make the unconscious conscious, it will direct your life and you will call it fate.” — Carl Jung</blockquote>
+      `
+                }
+        },
+        "14": {
+                "id": 14,
+                "category": "Personal Development",
+                "categoryKA": "🎲 Personal Development",
+                "categoryEN": "🎲 Personal Development",
+                "dateKA": "11 & 25 ოქტ | 12:00 - 19:00",
+                "dateEN": "Oct 11 & 25 | 12:00 - 19:00",
+                "authorKA": "ლალი ბადრიძე",
+                "authorEN": "Lali Badridze",
+                "mentorImg": "გუნდი/1.jpg",
+                "date": "2026-10-11",
+                "time": "12:00",
+                "price": "200 ₾",
+                "KA": {
+                        "title": "🎲 ლილას თამაში - თვითშემეცნების ტრანსფორმაციული თამაში",
+                        "html": `
+        <blockquote>„ლილა არ არის უბრალოდ თამაში — ის არის თქვენი ცხოვრების ზუსტი სარკე 72 უჯრედიან ველზე.“</blockquote>
+        <p><strong>ლილას თამაში (Leela)</strong> არის უძველესი ფილოსოფიური და ტრანსფორმაციული თამაში, რომელიც მოთამაშეს ეხმარება საკუთარი შინაგანი მდგომარეობების, ბარიერების, სურვილებისა და ცხოვრებისეული გზის დანახვაში.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🎲 რას გაძლევთ ლილას პროცესი?</h4>
+          <ul>
+            <li>🎯 <strong>აქტუალური შეკითხვის გააზრება:</strong> პასუხის პოვნა პირად, ფინანსურ თუ სულიერ ძიებებში</li>
+            <li>🧩 <strong>შინაგანი ბლოკებისა და ილუზიების გამოვლენა:</strong> რატომ ვერ გადავდივართ შემდეგ ეტაპზე</li>
+            <li>🧭 <strong>გაცნობიერებული არჩევანი:</strong> როგორ ვიმოქმედოთ ცხოვრებაში ჰარმონიულად</li>
+            <li>💫 <strong>ღრმა ემოციური განტვირთვა:</strong> უსაფრთხო, მხარდამჭერი ჯგუფური გარემო</li>
+          </ul>
+        </div>
+
+        <h3>🗓️ ფორმატი და დრო</h3>
+        <div class="event-detail-grid">
+          <div class="event-detail-card"><span class="event-detail-card-label">ხანგრძლივობა</span><span class="event-detail-card-val">12:00 - 19:00 (7 საათი)</span></div>
+          <div class="event-detail-card"><span class="event-detail-card-label">ჯგუფი</span><span class="event-detail-card-val">შეზღუდული რაოდენობა</span></div>
+          <div class="event-detail-card"><span class="event-detail-card-label">ლოკაცია</span><span class="event-detail-card-val">მეტაფორა • აღმაშენებლის 63ა</span></div>
+        </div>
+      `
+                },
+                "EN": {
+                        "title": "🎲 Leela Game - Transformational Self-Discovery Game",
+                        "html": `
+        <blockquote>“Leela is not just a game — it is an exact mirror of your life journey mapped across 72 sacred cells.”</blockquote>
+        <p><strong>Leela Game</strong> is an ancient Vedic transformational self-discovery board game guiding participants through their subconscious patterns, dilemmas, and authentic life purposes.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🎲 What you experience:</h4>
+          <ul>
+            <li>🎯 <strong>Core Inquiry Clarity:</strong> Illuminating key personal and professional questions</li>
+            <li>🧩 <strong>Dissolving Subconscious Blocks:</strong> Understanding recurring loops and barriers</li>
+            <li>🧭 <strong>Conscious Alignment:</strong> Discovering empowering pathways forward</li>
+            <li>💫 <strong>Catharsis & Connection:</strong> Supported by expert psychological facilitation</li>
+          </ul>
+        </div>
+      `
+                }
+        },
+        "15": {
+                "id": 15,
+                "category": "Personal Development",
+                "categoryKA": "🕯️ Personal Development",
+                "categoryEN": "🕯️ Personal Development",
+                "dateKA": "22 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 22 | 19:00 - 22:00",
+                "authorKA": "ლალი ბადრიძე",
+                "authorEN": "Lali Badridze",
+                "mentorImg": "გუნდი/1.jpg",
+                "date": "2026-10-22",
+                "time": "19:00",
+                "price": "100 ₾",
+                "KA": {
+                        "title": "🕯️ პაემანი სიბნელეში - სენსორული დიალოგი",
+                        "html": `
+        <blockquote>„როდესაც თვალები ისვენებს, იღვიძებს გული, ხმა, ინტუიცია და ნამდვილი კავშირი.“</blockquote>
+        <p><strong>„პაემანი სიბნელეში“</strong> არის ექსკლუზიური სენსორული და ფსიქოლოგიური გამოცდილება სრულ სიბნელეში. ვიზუალური სტერეოტიპებისა და შეფასებების გაქრობის შემდეგ, მონაწილეები აღმოაჩენენ კომუნიკაციის, მოსმენისა და ემპათიის სრულიად ახალ განზომილებას.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🕯️ რას განიცდით შეხვედრაზე?</h4>
+          <ul>
+            <li>🌑 <strong>ვიზუალური ფილტრების გაქრობა:</strong> ადამიანი შეიგრძნობა მისი არსით, ხმით და ენერგიით</li>
+            <li>👂 <strong>სმენისა და სენსორული შეგრძნებების გამძაფრება:</strong> ღრმა ყურადღება და მოსმენის ხელოვნება</li>
+            <li>🤝 <strong>ნდობა და უსაფრთხო სივრცე:</strong> პროფესიონალი ფსიქოთერაპევტის მიერ წარმართული პროცესი</li>
+            <li>✨ <strong>უნიკალური თვითშემეცნება:</strong> საკუთარი თავის დანახვა სხვებთან ურთიერთობაში</li>
+          </ul>
+        </div>
+      `
+                },
+                "EN": {
+                        "title": "🕯️ Blind Date - Sensory Dialogue in the Dark",
+                        "html": `
+        <blockquote>“When vision rests, the heart, voice, intuition, and authentic human connection awaken.”</blockquote>
+        <p>An exclusive sensory and psychological journey conducted in total darkness, stripping away visual pretenses to unlock genuine communication, active listening, and profound empathy.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🕯️ What you will experience:</h4>
+          <ul>
+            <li>🌑 <strong>Freedom from Visual Filters:</strong> Encountering others purely through presence and voice</li>
+            <li>👂 <strong>Heightened Sensory Acuity:</strong> Refining active listening and emotional attunement</li>
+            <li>🤝 <strong>Psychological Safety:</strong> Expertly facilitated by licensed psychotherapists</li>
+            <li>✨ <strong>Inner Mirroring:</strong> Deep insights into your relationship with uncertainty and intimacy</li>
+          </ul>
+        </div>
+      `
+                }
+        },
+        "16": {
+                "id": 16,
+                "category": "Think Tank",
+                "categoryKA": "💔 Think Tank",
+                "categoryEN": "💔 Think Tank",
+                "dateKA": "24 ოქტ | 16:00 - 19:00",
+                "dateEN": "Oct 24 | 16:00 - 19:00",
+                "authorKA": "ქეთი ჟვანია-ტაისონი",
+                "authorEN": "Keti Zhvania-Tyson",
+                "mentorImg": "გუნდი/2.jpg",
+                "date": "2026-10-24",
+                "time": "16:00",
+                "price": "80 ₾",
+                "KA": {
+                        "title": "💔 ღალატის ანატომია — ესტერ პერელის მიხედვით",
+                        "html": `
+        <blockquote>„რას ვეძებთ ურთიერთობის გარეთ — სხვა ადამიანს თუ საკუთარი თავის სხვა ვერსიას?“ — ესტერ პერელი</blockquote>
+        <p>რატომ ღალატობენ ადამიანები მაშინაც კი, როდესაც ურთიერთობაში სიყვარული ჯერ კიდევ არსებობს? ესტერ პერელი ღალატს მხოლოდ სექსისა და ტყუილის ისტორიად არ განიხილავს — მისთვის ის ურთიერთობების, სურვილების და იმ საზღვრების რთულ სამყაროში შესასვლელი კარია.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💔 შეხვედრის განმავლობაში:</h4>
+          <ul>
+            <li>🔍 <strong>ვიმსჯელებთ, რას ვუწოდებთ ღალატს</strong> თანამედროვე ურთიერთობებში;</li>
+            <li>👥 <strong>განვიხილავთ, რატომ შეიძლება ჩნდებოდეს მესამე ადამიანი</strong> ურთიერთობაში;</li>
+            <li>🗝️ <strong>ვისაუბრებთ სურვილზე, საიდუმლოზე, ნდობასა და ღალატზე</strong>;</li>
+            <li>⚖️ <strong>დავაკვირდებით ღალატის განსხვავებულ მნიშვნელობას</strong> ორივე პარტნიორისთვის;</li>
+            <li>🌱 <strong>ვიფიქრებთ, რა შეიძლება მოხდეს ურთიერთობაში ღალატის შემდეგ</strong> და როგორ გადავლახოთ კრიზისი.</li>
+          </ul>
+        </div>
+
+        <h3>🗓️ ფორმატი</h3>
+        <p>1 შეხვედრა | 2.5 - 3 საათი • ინტერაქციული სალონური მასტერკლასი მეტაფორას სივრცეში.</p>
+      `
+                },
+                "EN": {
+                        "title": "💔 Anatomy of Infidelity - According to Esther Perel",
+                        "html": `
+        <blockquote>“When we seek someone outside a relationship, are we looking for another person, or a different version of ourselves?” — Esther Perel</blockquote>
+        <p>Why do people stray even in loving relationships? Grounded in renowned therapist Esther Perel's groundbreaking work, this masterclass explores infidelity not simply as betrayal, but as a window into human desire, boundaries, and longing.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>💔 Workshop Inquiries:</h4>
+          <ul>
+            <li>🔍 <strong>Redefining infidelity</strong> in modern relationships</li>
+            <li>👥 <strong>Why third parties emerge</strong> within emotional ecosystems</li>
+            <li>🗝️ <strong>The interplay of secrecy, desire, and trust</strong></li>
+            <li>⚖️ <strong>Dual perspectives:</strong> Understanding impact on both partners</li>
+            <li>🌱 <strong>Life after betrayal:</strong> Pathways toward healing or conscious closure</li>
+          </ul>
+        </div>
+      `
+                }
+        },
+        "17": {
+                "id": 17,
+                "category": "Think Tank",
+                "categoryKA": "🧠 Think Tank",
+                "categoryEN": "🧠 Think Tank",
+                "dateKA": "27 ოქტ | 11:00 - 13:30",
+                "dateEN": "Oct 27 | 11:00 - 13:30",
+                "authorKA": "ქეთი ჟვანია-ტაისონი",
+                "authorEN": "Keti Zhvania-Tyson",
+                "mentorImg": "გუნდი/2.jpg",
+                "date": "2026-10-27",
+                "time": "11:00",
+                "price": "80 ₾",
+                "KA": {
+                        "title": "🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით",
+                        "html": `
+        <blockquote>„რა ხდება ჩვენს ტვინში, როდესაც გვიყვარდება და ადამიანზე ფიქრი აკვიატებად იქცევა?“</blockquote>
+        <p>ბიოლოგიური ანთროპოლოგის ჰელენ ფიშერის კვლევები სიყვარულს სამი ერთმანეთთან დაკავშირებული, მაგრამ განსხვავებული სისტემის — ვნების, რომანტიკული მიზიდულობისა და მიჯაჭვულობის — საშუალებით გვაჩვენებს.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🧠 შეხვედრის განმავლობაში:</h4>
+          <ul>
+            <li>🧪 <strong>გავარჩევთ ვნებას, რომანტიკულ სიყვარულსა და მიჯაჭვულობას</strong> (დოფამინი, ოქსიტოცინი, სეროტონინი);</li>
+            <li>🔬 <strong>ვნახავთ, რა ხდება შეყვარებულ ტვინში</strong> ნეირომეცნიერების პრიზმიდან;</li>
+            <li>🧲 <strong>ვისაუბრებთ მიზიდულობაზე</strong> და ერთ ადამიანზე ყურადღების ძლიერ კონცენტრაციაზე;</li>
+            <li>⚡ <strong>დავაკვირდებით, რატომ ჰგავს რომანტიკული სიყვარული ძლიერ მოტივაციურ სისტემას</strong>;</li>
+            <li>⏳ <strong>ვიფიქრებთ, როგორ იცვლება სიყვარული დროთა განმავლობაში</strong>.</li>
+          </ul>
+        </div>
+
+        <h3>🗓️ ფორმატი</h3>
+        <p>1 შეხვედრა | 2.5 საათი • სამეცნიერო-შემეცნებითი სალონური მასტერკლასი მეტაფორას სივრცეში.</p>
+      `
+                },
+                "EN": {
+                        "title": "🧠 Brain in Love - Based on Helen Fisher's Research",
+                        "html": `
+        <blockquote>“What happens inside our brain when we fall in love and thoughts of one person become consuming?”</blockquote>
+        <p>Based on biological anthropologist Dr. Helen Fisher's pioneering research, this masterclass investigates love through the lens of evolution, brain chemistry, and neural motivation systems.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🧠 Core Explorations:</h4>
+          <ul>
+            <li>🧪 <strong>3 Distinct Systems:</strong> Lust, Romantic Attraction, and Deep Attachment</li>
+            <li>🔬 <strong>Neurochemistry of Love:</strong> Dopamine, oxytocin, and cognitive obsession</li>
+            <li>🧲 <strong>Hyper-focus:</strong> Why the beloved becomes the center of our universe</li>
+            <li>⚡ <strong>Love as a primary drive:</strong> Understanding its immense motivational force</li>
+            <li>⏳ <strong>Evolution of relationships</strong> across time and life stages</li>
+          </ul>
+        </div>
+      `
+                }
+        },
+        "18": {
+                "id": 18,
+                "category": "Personal Development",
+                "categoryKA": "🌌 Personal Development",
+                "categoryEN": "🌌 Personal Development",
+                "dateKA": "29 ოქტ | 19:00 - 22:00",
+                "dateEN": "Oct 29 | 19:00 - 22:00",
+                "authorKA": "ლალი ბადრიძე",
+                "authorEN": "Lali Badridze",
+                "mentorImg": "გუნდი/1.jpg",
+                "date": "2026-10-29",
+                "time": "19:00",
+                "price": "100 ₾",
+                "KA": {
+                        "title": "🌌 სამყაროს კანონები - სალონური ვორქშოფი",
+                        "html": `
+        <blockquote>„ცხოვრებაში შემთხვევითი არაფერია — ყველაფერი ემორჩილება სამყაროს უხილავ, მაგრამ ურყევ კანონზომიერებებს.“</blockquote>
+        <p><strong>„სამყაროს კანონები“</strong> არის სიღრმისეული სალონური ვორქშოფი მათთვის, ვისაც სურს გააცნობიეროს მიზეზ-შედეგობრივი კავშირები, ენერგიის მოძრაობა და ის ფუნდამენტური პრინციპები, რომლებიც ჩვენს რეალობას აყალიბებს.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🌌 რას განვიხილავთ ვორქშოფზე?</h4>
+          <ul>
+            <li>⚖️ <strong>მიზეზ-შედეგობრიობის (კარმული) კანონი:</strong> ქმედება, აზრი და მათი ექო ცხოვრებაში</li>
+            <li>🔄 <strong>მიზიდულობისა და რეზონანსის კანონი:</strong> შინაგანი მდგომარეობა და გარეგანი მოვლენები</li>
+            <li>⚖️ <strong>ბალანსისა და წონასწორობის კანონი:</strong> გაცემა-მიღების ჰარმონია</li>
+            <li>🗝️ <strong>სინქრონულობა:</strong> ნიშნების, მინიშნებებისა და „შემთხვევითობების“ ამოცნობა</li>
+          </ul>
+        </div>
+      `
+                },
+                "EN": {
+                        "title": "🌌 Universal Laws - Salon Workshop",
+                        "html": `
+        <blockquote>“Nothing is accidental in life — reality unfolds according to profound universal principles.”</blockquote>
+        <p>A transformative salon workshop exploring causality, energy dynamics, synchronicity, and the universal laws governing human experience and fulfillment.</p>
+        
+        <div class="article-takeaway-box">
+          <h4>🌌 Workshop Modules:</h4>
+          <ul>
+            <li>⚖️ <strong>Cause & Effect:</strong> How intentions and actions shape outcomes</li>
+            <li>🔄 <strong>Resonance & Attraction:</strong> Inner state alignment with external realities</li>
+            <li>⚖️ <strong>Dynamic Equilibrium:</strong> The vital balance of giving and receiving</li>
+            <li>🗝️ <strong>Synchronicity:</strong> Recognizing meaningful patterns and guidance</li>
+          </ul>
+        </div>
+      `
                 }
         }
 };
@@ -5243,7 +5969,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isServicePage) {
                     durationEl.textContent = (lang === 'EN' ? 'Metaphora Hub' : 'მეტაფორა ჰაბი');
                 } else {
-                    durationEl.textContent = (lang === 'EN' ? event.dateEN : event.dateKA);
+                    const dtStr = (lang === 'EN' ? event.dateEN : event.dateKA);
+                    const prStr = event.price ? ` • 💰 ${event.price}` : '';
+                    durationEl.textContent = `${dtStr}${prStr}`;
                 }
             }
 
@@ -5308,7 +6036,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookBtn.setAttribute('data-event-time', event.time || '');
                 bookBtn.setAttribute('data-service', event.category || '');
                 bookBtn.setAttribute('data-event-title', (event[lang] ? event[lang].title : ''));
-                bookBtn.textContent = (lang === 'EN' ? 'Book Now' : 'ადგილის დაჯავშნა');
+                const evPrice = event.price || getServicePrice(event.category || '');
+                bookBtn.setAttribute('data-price', evPrice || '');
+                const priceBadgeHtml = evPrice ? ` <span class="reader-book-price-pill">💰 ${evPrice}</span>` : '';
+                bookBtn.innerHTML = `<span>${lang === 'EN' ? 'Book Seat' : 'ადგილის დაჯავშნა'}</span>${priceBadgeHtml}`;
             }
 
             if (ctaTitle) ctaTitle.textContent = (lang === 'EN' ? 'Want to attend this program?' : 'გსურთ ამ პროგრამაში მონაწილეობა?');
