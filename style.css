@@ -1557,6 +1557,18 @@ html.direct-main-mode #main-website {
     transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.45s ease;
     overflow: visible;
     cursor: pointer;
+    text-decoration: none !important;
+    color: inherit !important;
+    display: flex;
+    flex-direction: column;
+}
+
+a.feature-card,
+a.feature-card:hover,
+a.feature-card:visited,
+a.feature-card:active {
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
 .feature-card:hover {
@@ -1585,6 +1597,7 @@ html.direct-main-mode #main-website {
     filter: none;
     -webkit-filter: none;
     opacity: 1;
+    pointer-events: none !important;
     transform: scale(1);
     transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
@@ -4076,6 +4089,8 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), inset 0 1.5px 1.5px #ffffff !important;
         border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
         cursor: pointer !important;
+        text-decoration: none !important;
+        color: inherit !important;
         transition: transform 0.3s ease, box-shadow 0.3s ease !important;
     }
     .feature-card.service-five-card:active {
@@ -4108,6 +4123,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         filter: none !important;
         -webkit-filter: none !important;
         opacity: 1 !important;
+        pointer-events: none !important;
         transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     .feature-card:hover .card-feature-video,

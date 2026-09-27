@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="logo_o_teal.png">
     <link rel="shortcut icon" href="logo_o_teal.png">
     <link rel="apple-touch-icon" href="logo_o_teal.png">
-    <link rel="stylesheet" href="style.css?v=20260927_video_visible">
+    <link rel="stylesheet" href="style.css?v=20260927_mobile_click_fix">
     <!-- GSAP & ScrollTrigger Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -341,8 +341,8 @@
                 <div class="services-balanced-container">
                     <!-- Top Row: 3 Services -->
                     <div class="services-row-three">
-                        <div class="feature-card service-five-card" onclick="window.location.href='service-personal-development.html'" style="cursor: pointer;">
-                            <div class="card-image-wrapper">
+                        <a href="service-personal-development.html" class="feature-card service-five-card">
+                            <div class="card-image-wrapper" style="background-image: url('video_servisebi/poster_personal_development.jpg'); background-size: cover; background-position: center;">
                                 <video class="card-feature-video" poster="video_servisebi/poster_personal_development.jpg" autoplay muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/personal_development.mp4" type="video/mp4">
                                 </video>
@@ -357,10 +357,10 @@
                                 <p class="card-desc">შექმნილია მათთვის, ვისაც სურს საკუთარი შინაგანი რესურსების აღმოჩენა, ემოციური ინტელექტის გაღრმავება და პიროვნული ტრანსფორმაცია.</p>
                                 <span class="card-more-link">მეტის ნახვა →</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="feature-card service-five-card" onclick="window.location.href='service-business.html'" style="cursor: pointer;">
-                            <div class="card-image-wrapper">
+                        <a href="service-business.html" class="feature-card service-five-card">
+                            <div class="card-image-wrapper" style="background-image: url('video_servisebi/poster_business.jpg'); background-size: cover; background-position: center;">
                                 <video class="card-feature-video" poster="video_servisebi/poster_business.jpg" autoplay muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Business.mp4" type="video/mp4">
                                 </video>
@@ -375,10 +375,10 @@
                                 <p class="card-desc">თანამედროვე ორგანიზაციული გამოწვევების, ლიდერობის, გუნდური ეფექტურობისა და ახალი ბიზნეს-პარტნიორული კავშირების მხარდამჭერი სივრცე.</p>
                                 <span class="card-more-link">მეტის ნახვა →</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="feature-card service-five-card" onclick="window.location.href='service-think-tank.html'" style="cursor: pointer;">
-                            <div class="card-image-wrapper">
+                        <a href="service-think-tank.html" class="feature-card service-five-card">
+                            <div class="card-image-wrapper" style="background-image: url('video_servisebi/poster_think_tank.jpg'); background-size: cover; background-position: center;">
                                 <video class="card-feature-video" poster="video_servisebi/poster_think_tank.jpg" autoplay muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Think_tank.mp4" type="video/mp4">
                                 </video>
@@ -393,13 +393,13 @@
                                 <p class="card-desc">აზროვნების, იდეებისა და სიღრმისეული დისკუსიების სივრცე, ინტელექტუალური დიალოგისა და ახალი პერსპექტივებისთვის.</p>
                                 <span class="card-more-link">მეტის ნახვა →</span>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Bottom Row: 2 Centered Services -->
                     <div class="services-row-two">
-                        <div class="feature-card service-five-card" onclick="window.location.href='service-art.html'" style="cursor: pointer;">
-                            <div class="card-image-wrapper">
+                        <a href="service-art.html" class="feature-card service-five-card">
+                            <div class="card-image-wrapper" style="background-image: url('video_servisebi/poster_art.jpg'); background-size: cover; background-position: center;">
                                 <video class="card-feature-video" poster="video_servisebi/poster_art.jpg" autoplay muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Art.mp4" type="video/mp4">
                                 </video>
@@ -414,10 +414,10 @@
                                 <p class="card-desc">ხელოვნება, როგორც თვითგამოხატვის, განტვირთვის, შემოქმედებითი პროცესებისა და შინაგან სამყაროსთან შეხების საუკეთესო გზა.</p>
                                 <span class="card-more-link">მეტის ნახვა →</span>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="feature-card service-five-card featured-service" onclick="window.location.href='service-clubs.html'" style="cursor: pointer;">
-                            <div class="card-image-wrapper">
+                        <a href="service-clubs.html" class="feature-card service-five-card featured-service">
+                            <div class="card-image-wrapper" style="background-image: url('video_servisebi/poster_clubs.jpg'); background-size: cover; background-position: center;">
                                 <video class="card-feature-video" poster="video_servisebi/poster_clubs.jpg" autoplay muted loop playsinline webkit-playsinline preload="auto">
                                     <source src="video_servisebi/Clubs.mp4" type="video/mp4">
                                 </video>
@@ -432,7 +432,7 @@
                                 <p class="card-desc">სივრცე, სადაც საერთო ინტერესების, ღირებულებებისა და განვითარების სურვილის მქონე ადამიანები ერთიანდებიან.</p>
                                 <span class="card-more-link">მეტის ნახვა →</span>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -1373,6 +1373,6 @@
     </div>
 
     <!-- Application Script (Single Source of Truth) -->
-    <script src="app.js?v=20260927_video_visible"></script>
+    <script src="app.js?v=20260927_mobile_click_fix"></script>
 </body>
 </html>

@@ -1696,39 +1696,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStaggerLayout();
 
     // ==========================================================================
-    // 2.5 SERVICE CARDS VIDEO HOVER PLAY & COLORIZE
-    // ==========================================================================
-    const serviceVideoCards = document.querySelectorAll('.service-five-card');
-    serviceVideoCards.forEach(card => {
-        const video = card.querySelector('video');
-        if (!video || typeof video.pause !== 'function') return;
-
-        video.muted = true;
-        try { video.pause(); } catch(e) {}
-
-        if (typeof video.addEventListener === 'function') {
-            video.addEventListener('loadedmetadata', () => {
-                video.currentTime = 0.01;
-            });
-        }
-
-        card.addEventListener('mouseenter', () => {
-            if (typeof video.play === 'function') {
-                const playPromise = video.play();
-                if (playPromise !== undefined && typeof playPromise.catch === 'function') {
-                    playPromise.catch(() => {});
-                }
-            }
-        });
-
-        card.addEventListener('mouseleave', () => {
-            if (typeof video.pause === 'function') {
-                video.pause();
-            }
-        });
-    });
-
-    // ==========================================================================
     // 3. TYPEWRITER AUDIO TESTIMONIALS (Team Members)
     // ==========================================================================
         const testimonials = [
@@ -4641,28 +4608,43 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             // 1. Mouse & pointer hover: Play when mouse enters, pause when leaves
-            card.addEventListener('mouseenter', playVideo);
-            card.addEventListener('mouseleave', pauseVideo);
+            if (isMouseDevice) {
+                card.addEventListener('mouseenter', playVideo);
+                card.addEventListener('mouseleave', pauseVideo);
 
-            card.addEventListener('pointerenter', (e) => {
-                if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
-                    playVideo();
-                }
-            });
-            card.addEventListener('pointerleave', (e) => {
-                if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
-                    pauseVideo();
-                }
-            });
-
-            // 2. On touch/mobile devices: play automatically
-            if (!isMouseDevice) {
+                card.addEventListener('pointerenter', (e) => {
+                    if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+                        playVideo();
+                    }
+                });
+                card.addEventListener('pointerleave', (e) => {
+                    if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+                        pauseVideo();
+                    }
+                });
+            } else {
+                // 2. On touch/mobile devices: play automatically
                 playVideo();
             }
         });
 
+        // Ensure iOS Safari starts videos on first user interaction (touch or scroll)
+        const triggerMobilePlay = () => {
+            cards.forEach(card => {
+                const video = card.querySelector('.card-feature-video');
+                if (video && video.paused) {
+                    const p = video.play();
+                    if (p !== undefined) p.catch(() => {});
+                }
+            });
+            window.removeEventListener('touchstart', triggerMobilePlay);
+            window.removeEventListener('scroll', triggerMobilePlay);
+        };
+        window.addEventListener('touchstart', triggerMobilePlay, { passive: true, once: true });
+        window.addEventListener('scroll', triggerMobilePlay, { passive: true, once: true });
+
         // For mobile touch screens: play active videos when in view, pause when scrolled away
-        if (!isMouseDevice && 'IntersectionObserver' in window) {
+        if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     const video = entry.target.querySelector('.card-feature-video');
@@ -4671,14 +4653,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         entry.target.classList.add('is-playing');
                         const p = video.play();
                         if (p !== undefined) p.catch(() => {});
-                    } else {
+                    } else if (!isMouseDevice) {
                         entry.target.classList.remove('is-playing');
                         video.pause();
                     }
                 });
             }, {
                 threshold: 0.15,
-                rootMargin: '50px 0px 50px 0px'
+                rootMargin: '60px 0px 60px 0px'
             });
 
             cards.forEach(card => observer.observe(card));
