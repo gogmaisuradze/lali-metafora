@@ -4075,6 +4075,12 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         cursor: pointer !important;
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
     }
+    /* Flip Business and Art on mobile so their photo is on the right */
+    .feature-card.service-five-card.card-reverse-mobile,
+    .feature-card.service-five-card[onclick*="service-business"],
+    .feature-card.service-five-card[onclick*="service-art"] {
+        flex-direction: row-reverse !important;
+    }
     .feature-card.service-five-card:active {
         transform: scale(0.985) !important;
     }
@@ -4083,9 +4089,9 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         border-color: rgba(255, 255, 255, 0.12) !important;
     }
     .feature-card .card-image-wrapper {
-        width: 86px !important;
-        height: 86px !important;
-        min-width: 86px !important;
+        width: 90px !important;
+        height: 90px !important;
+        min-width: 90px !important;
         border-radius: 14px !important;
         margin-bottom: 0 !important;
         overflow: hidden !important;
@@ -4100,28 +4106,31 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         object-fit: cover !important;
         border-radius: 14px !important;
     }
+    /* High contrast, bright gold badge on photo so text is clearly readable */
     .feature-card .card-floating-badge {
         position: absolute !important;
-        bottom: 3px !important;
-        left: 3px !important;
-        right: 3px !important;
-        padding: 2px 4px !important;
-        border-radius: 6px !important;
-        background: rgba(15, 23, 42, 0.75) !important;
-        backdrop-filter: blur(4px) !important;
-        -webkit-backdrop-filter: blur(4px) !important;
+        bottom: 4px !important;
+        left: 4px !important;
+        right: 4px !important;
+        padding: 3px 4px !important;
+        border-radius: 7px !important;
+        background: #ffba00 !important;
+        border: 1.2px solid #ffffff !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
         text-align: center !important;
-        color: #ffffff !important;
-        border: none !important;
+        color: #00363a !important;
+        z-index: 5 !important;
     }
     .feature-card .card-floating-badge strong {
-        font-size: 0.62rem !important;
-        font-weight: 700 !important;
+        font-size: 0.65rem !important;
+        font-weight: 900 !important;
         display: block !important;
-        line-height: 1.1 !important;
+        line-height: 1.15 !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
+        color: #00363a !important;
+        letter-spacing: 0.2px !important;
     }
     .feature-card .card-floating-badge small {
         display: none !important;
