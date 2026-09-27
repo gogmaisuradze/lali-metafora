@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="logo_o_teal.png">
     <link rel="shortcut icon" href="logo_o_teal.png">
     <link rel="apple-touch-icon" href="logo_o_teal.png">
-    <link rel="stylesheet" href="style.css?v=20260927_cal_multi">
+    <link rel="stylesheet" href="style.css?v=20260927_reader_fix">
 </head>
 <body>
 
@@ -804,6 +804,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Slide-Out Glassmorphism Event & Article Reader Drawer -->
+    <div class="article-reader-overlay" id="article-reader-overlay" aria-hidden="true">
+        <div class="article-reader-drawer" role="dialog" aria-modal="true">
+            <div class="article-reader-header">
+                <div class="article-reader-header-meta">
+                    <span class="zone-badge" id="reader-topic-badge">🎮 Personal Development</span>
+                    <span class="article-pub-date" id="reader-duration">12 ოქტ | 18:30</span>
+                </div>
+                <button class="article-reader-close-btn" id="article-reader-close-btn" aria-label="დახურვა">&times;</button>
+            </div>
+
+            <div class="article-reader-hero-wrap">
+                <img src="გუნდი/2.jpg" alt="Event Hero" class="article-reader-hero-img" id="reader-hero-img" loading="lazy">
+            </div>
+
+            <div class="article-reader-body">
+                <h2 class="article-reader-title" id="reader-title">ღონისძიების სათაური</h2>
+                
+                <div class="article-reader-author-row">
+                    <img src="გუნდი/2.jpg" alt="მენტორი" id="reader-author-img" class="article-author-avatar" style="object-fit: cover;">
+                    <div class="article-author-details">
+                        <span class="article-author-name" id="reader-author">ქეთი ჟვანია-ტაისონი</span>
+                        <span class="article-pub-date" id="reader-date">მეტაფორა • აღმაშენებლის 63ა</span>
+                    </div>
+                </div>
+
+                <div class="article-reader-content" id="reader-content">
+                    <!-- Dynamic Event Content injected by JS -->
+                </div>
+
+                <div class="article-reader-footer-cta" id="reader-footer-cta">
+                    <div>
+                        <h4 style="font-family: var(--font-title); font-size: 1.1rem; color: var(--primary-color); margin: 0 0 4px 0;" id="reader-cta-title">გსურთ ამ ღონისძიებაზე დასწრება?</h4>
+                        <p style="font-size: 0.88rem; color: #64748b; margin: 0;" id="reader-cta-sub">დაჯავშნეთ თქვენი ადგილი ღონისძიებაზე ონლაინ.</p>
+                    </div>
+                    <button class="open-booking-modal-btn btn btn-primary" id="reader-book-btn" style="padding: 10px 22px; font-size: 0.88rem;">ადგილის დაჯავშნა</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ==========================================================================
          QUICK REGISTRATION POPUP MODAL (BLUR BACKGROUND)
          ========================================================================== -->
@@ -886,6 +928,6 @@
 
 
     <!-- Application Script -->
-    <script src="app.js?v=20260927_cal_multi"></script>
+    <script src="app.js?v=20260927_reader_fix"></script>
 </body>
 </html>

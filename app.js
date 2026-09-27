@@ -3179,6 +3179,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('keydown', (e) => {
+        const articleOverlay = document.getElementById('article-reader-overlay');
+        if (articleOverlay && articleOverlay.classList.contains('active')) {
+            return;
+        }
         if (e.key === 'Escape' && bookingModalOverlay && bookingModalOverlay.classList.contains('active')) {
             closeBookingModal();
         }
@@ -6273,7 +6277,12 @@ document.addEventListener('DOMContentLoaded', () => {
             currentOpenArticleId = null;
             overlay.classList.remove('active');
             overlay.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
+            const bookingModal = document.getElementById('metafora-booking-modal-overlay') || document.getElementById('booking-modal-overlay');
+            if (bookingModal && (bookingModal.classList.contains('active') || getComputedStyle(bookingModal).display !== 'none')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
 
         window.refreshActiveArticleLanguage = function(newLang) {
