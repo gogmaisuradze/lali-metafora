@@ -1205,6 +1205,17 @@ document.addEventListener('DOMContentLoaded', () => {
             imgSrc: "გუნდი/4.jpg"
         },
         {
+            id: 1,
+            date: '2026-10-15',
+            time: '19:00',
+            price: '650 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი",
+            testimonial: "გემიფიკაციის 5 მთავარი სვეტი, Flow Theory და საგანმანათლებლო თამაშების პროფესიული დიზაინი.",
+            by: "15 ოქტ | 19:00 - 22:00 • ქეთი ჟვანია-ტაისონი",
+            imgSrc: "გუნდი/2.jpg"
+        },
+        {
             id: 9,
             date: '2026-10-18',
             time: '12:00',
@@ -1214,6 +1225,17 @@ document.addEventListener('DOMContentLoaded', () => {
             testimonial: "ფარული ოჯახური დინამიკების, კარიერული და პირადი ბლოკების სიღრმისეული ხედვა და განბლოკვა.",
             by: "18 ოქტ | 12:00 - 19:00 • მარიკა ხალიანი",
             imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 2,
+            date: '2026-10-18',
+            time: '18:00',
+            price: '180 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🌿 პროგრამა არიტე - პიროვნული განვითარება",
+            testimonial: "არეტე — გახდე საუკეთესო, რაც შეგიძლია იყო: პიროვნული განვითარების პრაქტიკული პროგრამა.",
+            by: "18 ოქტ | 18:00 - 21:00 • ქეთი ჟვანია-ტაისონი",
+            imgSrc: "გუნდი/2.jpg"
         },
         {
             id: 3,
@@ -1236,6 +1258,17 @@ document.addEventListener('DOMContentLoaded', () => {
             testimonial: "ტალანტების განვითარება, მოტივაცია და გუნდური ეფექტურობის თანამედროვე ქოუჩინგური მიდგომები.",
             by: "21 ოქტ | 19:00 - 22:00 • მარიკა ხალიანი",
             imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 4,
+            date: '2026-10-22',
+            time: '18:30',
+            price: '100 ₾',
+            serviceCategory: 'Personal Development',
+            title: "🎓 ტრენერობის ხელოვნება - ტრენერის გზა",
+            testimonial: "ერთი რუკა, ბევრი მარშრუტი — ტრენერებისა და ფასილიტატორების პროფესიული განვითარების ეკოსისტემა.",
+            by: "22 ოქტ | 18:30 - 21:30 • ქეთი ჟვანია-ტაისონი",
+            imgSrc: "გუნდი/2.jpg"
         },
         {
             id: 15,
@@ -1290,6 +1323,39 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "🌌 სამყაროს კანონები - სალონური ვორქშოფი",
             testimonial: "სამყაროს ფუნდამენტური კანონზომიერებები, მიზეზ-შედეგობრიობა, ენერგია და ცხოვრებისეული სინქრონულობა.",
             by: "29 ოქტ | 19:00 - 22:00 • ლალი ბადრიძე",
+            imgSrc: "გუნდი/1.jpg"
+        },
+        {
+            id: 8,
+            date: '2026-10-30',
+            time: '19:00',
+            price: '80 ₾',
+            serviceCategory: 'Personal Development',
+            title: "📦 რა შევუკვეთე და რა ჩამომივიდა",
+            testimonial: "სულ სხვა რამ მინდოდა და სხვა რეალობა მივიღე — მოლოდინებისა და რეალობის აცდენის გარკვევა.",
+            by: "30 ოქტ | 19:00 - 22:00 • მარიკა ხალიანი",
+            imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 10,
+            date: '2026-11-04',
+            time: '19:00',
+            price: '100 ₾',
+            serviceCategory: 'Business',
+            title: "💰 ფული თუ პასუხისმგებლობა",
+            testimonial: "ფული მიჰყვება პასუხისმგებლობასა და ენერგიას — განბლოკე შენი ფინანსური პოტენციალი ბიზნესში.",
+            by: "04 ნოე | 19:00 - 22:00 • მარიკა ხალიანი",
+            imgSrc: "გუნდი/4.jpg"
+        },
+        {
+            id: 13,
+            date: '2026-11-10',
+            time: '18:00',
+            price: '100 ₾',
+            serviceCategory: 'Business',
+            title: "🧠 ადამიანის ფსიქოლოგია ლიდერობაში - არაცნობიერი მენეჯმენტი",
+            testimonial: "სანამ არაცნობიერს ცნობიერად არ აქცევ, ის მართავს შენს ცხოვრებას — არაცნობიერის მართვა ლიდერობაში.",
+            by: "10 ნოე | 18:00 - 21:00 • ლალი ბადრიძე",
             imgSrc: "გუნდი/1.jpg"
         }
     ];
@@ -2428,6 +2494,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
     let pendingBookingPayload = null;
 
+    const SCHEDULED_EVENTS = {
+        '2026-10-05': [
+            { eventId: 0, titleKA: '🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა', titleEN: '🎮 Game Architect - 8-Session Program', time: '19:00', timeRange: '19:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '05 ოქტ | 19:00', badgeEN: 'Oct 05 | 19:00' }
+        ],
+        '2026-10-08': [
+            { eventId: 11, titleKA: '🌙 აღმოსავლური ისტორიები (შეჰერეზადასთან)', titleEN: '🌙 Eastern Stories (with Scheherazade)', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '08 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 08 | 19:00 - 22:00' }
+        ],
+        '2026-10-09': [
+            { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (I შეხვედრა)', titleEN: "💬 Let's Talk (Session 1)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '09 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 09 | 19:00 - 22:00' }
+        ],
+        '2026-10-11': [
+            { eventId: 14, titleKA: '🎲 ლილას თამაში (I შეხვედრა)', titleEN: '🎲 Leela Game (Session 1)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '11 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 11 | 12:00 - 19:00' }
+        ],
+        '2026-10-14': [
+            { eventId: 5, titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '14 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 14 | 19:00 - 22:00' }
+        ],
+        '2026-10-15': [
+            { eventId: 1, titleKA: '🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი', titleEN: '🕹️ Game Architect - Advanced Course', time: '19:00', timeRange: '19:00 - 22:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '15 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 15 | 19:00 - 22:00' }
+        ],
+        '2026-10-18': [
+            { eventId: 9, titleKA: '🌌 სისტემური განლაგება - ვორქშოფი', titleEN: '🌌 Systemic Constellations - Workshop', time: '12:00', timeRange: '12:00 - 19:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 18 | 12:00 - 19:00' },
+            { eventId: 2, titleKA: '🌿 პროგრამა არიტე - პიროვნული განვითარება', titleEN: '🌿 Arete Program - Personal Development', time: '18:00', timeRange: '18:00 - 21:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 18:00 - 21:00', badgeEN: 'Oct 18 | 18:00 - 21:00' }
+        ],
+        '2026-10-20': [
+            { eventId: 3, titleKA: '❤️ სიყვარულის 5 ენა - მასტერკლასი', titleEN: '❤️ 5 Love Languages - Masterclass', time: '11:00', timeRange: '11:00 - 14:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '20 ოქტ | 11:00 - 14:00', badgeEN: 'Oct 20 | 11:00 - 14:00' }
+        ],
+        '2026-10-21': [
+            { eventId: 6, titleKA: '👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის', titleEN: '👥 Coaching for HR Managers & Leaders', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '21 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 21 | 19:00 - 22:00' }
+        ],
+        '2026-10-22': [
+            { eventId: 4, titleKA: '🎓 ტრენერობის ხელოვნება - ტრენერის გზა', titleEN: "🎓 Art of Training - Trainer's Path", time: '18:30', timeRange: '18:30 - 21:30', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 18:30 - 21:30', badgeEN: 'Oct 22 | 18:30 - 21:30' },
+            { eventId: 15, titleKA: '🕯️ პაემანი სიბნელეში - სენსორული დიალოგი', titleEN: '🕯️ Blind Date - Sensory Dialogue', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 22 | 19:00 - 22:00' }
+        ],
+        '2026-10-23': [
+            { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (II შეხვედრა)', titleEN: "💬 Let's Talk (Session 2)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '23 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 23 | 19:00 - 22:00' }
+        ],
+        '2026-10-24': [
+            { eventId: 16, titleKA: '💔 ღალატის ანატომია — ესტერ პერელის მიხედვით', titleEN: '💔 Anatomy of Infidelity - Esther Perel', time: '16:00', timeRange: '16:00 - 19:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '24 ოქტ | 16:00 - 19:00', badgeEN: 'Oct 24 | 16:00 - 19:00' }
+        ],
+        '2026-10-25': [
+            { eventId: 14, titleKA: '🎲 ლილას თამაში (II შეხვედრა)', titleEN: '🎲 Leela Game (Session 2)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '25 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 25 | 12:00 - 19:00' }
+        ],
+        '2026-10-27': [
+            { eventId: 17, titleKA: '🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით', titleEN: '🧠 Brain in Love - Helen Fisher', time: '11:00', timeRange: '11:00 - 13:30', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '27 ოქტ | 11:00 - 13:30', badgeEN: 'Oct 27 | 11:00 - 13:30' }
+        ],
+        '2026-10-28': [
+            { eventId: 7, titleKA: '💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს & რატომ გვტკივა სიყვარული', titleEN: '💔 Why We Choose Same Partners & Why Love Hurts', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '28 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 28 | 19:00 - 22:00' }
+        ],
+        '2026-10-29': [
+            { eventId: 18, titleKA: '🌌 სამყაროს კანონები - სალონური ვორქშოფი', titleEN: '🌌 Universal Laws - Salon Workshop', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '29 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 29 | 19:00 - 22:00' }
+        ],
+        '2026-10-30': [
+            { eventId: 8, titleKA: '📦 რა შევუკვეთე და რა ჩამომივიდა', titleEN: '📦 What I Ordered vs What Arrived', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '30 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 30 | 19:00 - 22:00' }
+        ],
+        '2026-11-04': [
+            { eventId: 10, titleKA: '💰 ფული თუ პასუხისმგებლობა', titleEN: '💰 Money or Responsibility', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '04 ნოე | 19:00 - 22:00', badgeEN: 'Nov 04 | 19:00 - 22:00' }
+        ],
+        '2026-11-10': [
+            { eventId: 13, titleKA: '🧠 ადამიანის ფსიქოლოგია ლიდერობაში - არაცნობიერი მენეჯმენტი', titleEN: '🧠 Human Psychology in Leadership', time: '18:00', timeRange: '18:00 - 21:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '10 ნოე | 18:00 - 21:00', badgeEN: 'Nov 10 | 18:00 - 21:00' }
+        ]
+    };
+    window.SCHEDULED_EVENTS = SCHEDULED_EVENTS;
+
     const SERVICE_PRICES = {
         // Specific Events from Excel Schedule
         'თამაშის არქიტექტორი': '650 ₾',
@@ -3104,56 +3233,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const ALL_TIME_SLOTS = ['10:00', '11:30', '13:00', '14:30', '16:00', '17:30', '19:00', '20:00', '21:00', '22:00'];
 
-        const SCHEDULED_EVENTS = {
-            '2026-10-05': [
-                { eventId: 0, titleKA: '🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა', titleEN: '🎮 Game Architect - 8-Session Program', time: '19:00', timeRange: '19:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '05 ოქტ | 19:00', badgeEN: 'Oct 05 | 19:00' }
-            ],
-            '2026-10-08': [
-                { eventId: 11, titleKA: '🌙 აღმოსავლური ისტორიები (შეჰერეზადასთან)', titleEN: '🌙 Eastern Stories (with Scheherazade)', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '08 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 08 | 19:00 - 22:00' }
-            ],
-            '2026-10-09': [
-                { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (I შეხვედრა)', titleEN: "💬 Let's Talk (Session 1)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '09 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 09 | 19:00 - 22:00' }
-            ],
-            '2026-10-11': [
-                { eventId: 14, titleKA: '🎲 ლილას თამაში (I შეხვედრა)', titleEN: '🎲 Leela Game (Session 1)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '11 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 11 | 12:00 - 19:00' }
-            ],
-            '2026-10-14': [
-                { eventId: 5, titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '14 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 14 | 19:00 - 22:00' }
-            ],
-            '2026-10-18': [
-                { eventId: 9, titleKA: '🌌 სისტემური განლაგება - ვორქშოფი', titleEN: '🌌 Systemic Constellations - Workshop', time: '12:00', timeRange: '12:00 - 19:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 18 | 12:00 - 19:00' }
-            ],
-            '2026-10-20': [
-                { eventId: 3, titleKA: '❤️ სიყვარულის 5 ენა - მასტერკლასი', titleEN: '❤️ 5 Love Languages - Masterclass', time: '11:00', timeRange: '11:00 - 14:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '20 ოქტ | 11:00 - 14:00', badgeEN: 'Oct 20 | 11:00 - 14:00' }
-            ],
-            '2026-10-21': [
-                { eventId: 6, titleKA: '👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის', titleEN: '👥 Coaching for HR Managers & Leaders', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '21 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 21 | 19:00 - 22:00' }
-            ],
-            '2026-10-22': [
-                { eventId: 15, titleKA: '🕯️ პაემანი სიბნელეში - სენსორული დიალოგი', titleEN: '🕯️ Blind Date - Sensory Dialogue', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 22 | 19:00 - 22:00' }
-            ],
-            '2026-10-23': [
-                { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (II შეხვედრა)', titleEN: "💬 Let's Talk (Session 2)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '23 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 23 | 19:00 - 22:00' }
-            ],
-            '2026-10-24': [
-                { eventId: 16, titleKA: '💔 ღალატის ანატომია — ესტერ პერელის მიხედვით', titleEN: '💔 Anatomy of Infidelity - Esther Perel', time: '16:00', timeRange: '16:00 - 19:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '24 ოქტ | 16:00 - 19:00', badgeEN: 'Oct 24 | 16:00 - 19:00' }
-            ],
-            '2026-10-25': [
-                { eventId: 14, titleKA: '🎲 ლილას თამაში (II შეხვედრა)', titleEN: '🎲 Leela Game (Session 2)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '25 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 25 | 12:00 - 19:00' }
-            ],
-            '2026-10-27': [
-                { eventId: 17, titleKA: '🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით', titleEN: '🧠 Brain in Love - Helen Fisher', time: '11:00', timeRange: '11:00 - 13:30', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '27 ოქტ | 11:00 - 13:30', badgeEN: 'Oct 27 | 11:00 - 13:30' }
-            ],
-            '2026-10-28': [
-                { eventId: 7, titleKA: '💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს & რატომ გვტკივა სიყვარული', titleEN: '💔 Why We Choose Same Partners & Why Love Hurts', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '28 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 28 | 19:00 - 22:00' }
-            ],
-            '2026-10-29': [
-                { eventId: 18, titleKA: '🌌 სამყაროს კანონები - სალონური ვორქშოფი', titleEN: '🌌 Universal Laws - Salon Workshop', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '29 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 29 | 19:00 - 22:00' }
-            ]
-        };
-
-        window.SCHEDULED_EVENTS = SCHEDULED_EVENTS;
-
         const MONTHS_KA = ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'];
         const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const WDS_KA = ['ორშ', 'სამ', 'ოთხ', 'ხუთ', 'პარ', 'შაბ', 'კვი'];
@@ -3192,6 +3271,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Activates an event, synchronizing time, price, inputs, cards, slots, and booking buttons
+        function activateScheduledEvent(ev) {
+            if (!ev) return;
+            const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+            selectedTime = ev.time;
+
+            if (timeInput) timeInput.value = ev.time;
+            if (dateInput && selectedDate) dateInput.value = formatISODate(selectedDate);
+            syncServiceAndPrice(ev);
+
+            // Highlight matching slot
+            if (slotsContainer) {
+                const slotBtns = slotsContainer.querySelectorAll('.slot');
+                slotBtns.forEach(btn => {
+                    if (btn.getAttribute('data-time') === ev.time) {
+                        btn.classList.add('sel');
+                    } else {
+                        btn.classList.remove('sel');
+                    }
+                });
+            }
+
+            // Highlight matching event card and sync pick indicator
+            if (eventBanner) {
+                const cards = eventBanner.querySelectorAll('.cal-event-card');
+                cards.forEach(card => {
+                    const isCur = (card.getAttribute('data-time') === ev.time);
+                    const ind = card.querySelector('.event-card-pick-indicator');
+                    const actBtn = card.querySelector('.cal-card-book-action-btn');
+                    if (isCur) {
+                        card.classList.add('active');
+                        if (actBtn) actBtn.classList.add('is-selected');
+                        if (ind) ind.textContent = isEn ? '✓ Selected' : '✓ არჩეულია';
+                    } else {
+                        card.classList.remove('active');
+                        if (actBtn) actBtn.classList.remove('is-selected');
+                        if (ind) ind.textContent = isEn ? 'Select' : 'არჩევა';
+                    }
+                });
+            }
+
+            updatePickedSummary();
+        }
+
         function updateEventBanner() {
             if (!eventBanner || !selectedDate) return;
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
@@ -3210,7 +3333,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ${ev.price ? `<span class="event-banner-price-tag">💰 ${ev.price}</span>` : ''}
                                 <div class="cal-event-card-actions">
                                     ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 1 3-3h7z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
-                                    <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
+                                    <button type="button" class="cal-card-book-action-btn ${isActive ? 'is-selected' : ''}" data-time="${ev.time}">
+                                        <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
+                                    </button>
                                 </div>
                             </div>
                             <div class="event-banner-title">${isEn ? ev.titleEN : ev.titleKA}</div>
@@ -3220,21 +3345,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 cardsHtml += '</div>';
                 eventBanner.innerHTML = cardsHtml;
 
-                // Attach click listeners to cards so clicking an event selects that exact time & syncs price
+                // Attach hover & click listeners to cards so hovering/clicking immediately switches active event
                 const cards = eventBanner.querySelectorAll('.cal-event-card');
                 cards.forEach(card => {
+                    const chosenTime = card.getAttribute('data-time');
+                    const ev = events.find(item => item.time === chosenTime);
+                    if (!ev) return;
+
+                    card.addEventListener('mouseenter', () => {
+                        activateScheduledEvent(ev);
+                    });
+
                     card.addEventListener('click', (e) => {
+                        if (e.target.closest('.afisha-learn-more-btn')) return;
                         e.preventDefault();
-                        const chosenTime = card.getAttribute('data-time');
-                        if (chosenTime) {
-                            selectedTime = chosenTime;
-                            const ev = events.find(item => item.time === chosenTime);
-                            if (ev) {
-                                syncServiceAndPrice(ev);
-                            }
-                            renderTimeSlots();
-                            updatePickedSummary();
-                        }
+                        activateScheduledEvent(ev);
                     });
                 });
             } else {
@@ -3256,29 +3381,55 @@ document.addEventListener('DOMContentLoaded', () => {
             const events = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
             const isEn = (localStorage.getItem('metafora_lang') === 'EN');
 
-            // Requirement: On dates with scheduled events, display strictly only the event's fixed time slot
             if (events.length > 0) {
-                slotsContainer.classList.add('has-single-slot');
-                const ev = events[0];
-                const displayTime = ev.timeRange || ev.time;
-                selectedTime = ev.time;
+                // Ensure selectedTime matches one of the day's events
+                const hasMatched = events.some(e => e.time === selectedTime);
+                if (!hasMatched) {
+                    selectedTime = events[0].time;
+                    syncServiceAndPrice(events[0]);
+                }
 
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'slot sel event-fixed-slot';
-                btn.setAttribute('data-time', ev.time);
-                btn.innerHTML = `<span class="slot-time-text">${displayTime}</span><span class="slot-event-tag">${isEn ? 'Event Time' : 'ღონისძიების დრო'}</span>`;
+                if (events.length === 1) {
+                    slotsContainer.className = 'slots has-single-slot';
+                } else {
+                    slotsContainer.className = 'slots has-multi-slots';
+                }
 
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    selectedTime = ev.time;
-                    syncServiceAndPrice(ev);
-                    updatePickedSummary();
+                events.forEach((ev, idx) => {
+                    const isSel = (ev.time === selectedTime);
+                    const displayTime = ev.timeRange || ev.time;
+                    const rawTitle = isEn ? ev.titleEN : ev.titleKA;
+                    const titleSnippet = rawTitle.replace(/^[^\w\s\u10A0-\u10FF]+/, '').split(' - ')[0].trim() || rawTitle;
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `slot event-fixed-slot ${isSel ? 'sel' : ''}`;
+                    btn.setAttribute('data-time', ev.time);
+
+                    btn.innerHTML = `
+                        <div class="slot-event-main">
+                            <span class="slot-time-text">🕒 ${displayTime}</span>
+                            <span class="slot-event-tag">${isEn ? `Event ${idx + 1}` : `ღონისძიება ${idx + 1}`}</span>
+                        </div>
+                        <div class="slot-event-sub">
+                            <span class="slot-event-title-snippet" title="${rawTitle}">${titleSnippet}</span>
+                            ${ev.price ? `<span class="slot-event-price">💰 ${ev.price}</span>` : ''}
+                        </div>
+                    `;
+
+                    btn.addEventListener('mouseenter', () => {
+                        activateScheduledEvent(ev);
+                    });
+
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        activateScheduledEvent(ev);
+                    });
+
+                    slotsContainer.appendChild(btn);
                 });
-
-                slotsContainer.appendChild(btn);
             } else {
-                slotsContainer.classList.remove('has-single-slot');
+                slotsContainer.className = 'slots';
                 ALL_TIME_SLOTS.forEach(time => {
                     const isSel = (time === selectedTime);
                     const btn = document.createElement('button');
@@ -3306,6 +3457,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const events = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
             const matchedEvent = events.find(e => e.time === selectedTime) || (events.length > 0 ? events[0] : null);
 
+            let activePrice = '';
+
             if (selectedDate && selectedTime) {
                 const dayNum = selectedDate.getDate();
                 const mName = isEn ? MONTHS_EN[selectedDate.getMonth()] : MONTHS_KA[selectedDate.getMonth()];
@@ -3314,6 +3467,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : `${dayNum} ${mName} · ${selectedTime}`;
                 
                 if (matchedEvent) {
+                    activePrice = matchedEvent.price || '';
                     const evTitle = isEn ? matchedEvent.titleEN : matchedEvent.titleKA;
                     const priceBadge = matchedEvent.price ? `<span class="picked-price-badge">💰 ${matchedEvent.price}</span>` : '';
                     pickedSummary.innerHTML = `
@@ -3324,6 +3478,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
                 } else if (events.length > 0) {
+                    activePrice = events[0].price || '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
@@ -3332,8 +3487,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                 } else {
                     const sSelect = document.getElementById('booking-service-select');
-                    const freePrice = sSelect ? getServicePrice(sSelect.value) : '';
-                    const priceBadge = freePrice ? `<span class="picked-price-badge">💰 ${freePrice}</span>` : '';
+                    activePrice = sSelect ? getServicePrice(sSelect.value) : '';
+                    const priceBadge = activePrice ? `<span class="picked-price-badge">💰 ${activePrice}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
@@ -3357,8 +3512,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (dateInput && selectedDate) dateInput.value = formatISODate(selectedDate);
             if (timeInput && selectedTime) timeInput.value = selectedTime;
+            const pInput = document.getElementById('booking-price-input');
+            if (pInput && activePrice && (!pInput.value || matchedEvent)) {
+                pInput.value = activePrice;
+            }
 
-            updateEventBanner();
+            // Dynamically reflect active price on the proceed-to-payment submit button
+            const submitBtn = document.getElementById('btn-proceed-to-payment');
+            if (submitBtn) {
+                const finalPrice = activePrice || (pInput?.value || '').trim();
+                if (finalPrice) {
+                    submitBtn.innerHTML = `<span>${isEn ? `Proceed to Payment (${finalPrice}) 💳` : `გადახდაზე გადასვლა (${finalPrice}) 💳`}</span>`;
+                } else {
+                    submitBtn.innerHTML = `<span>${isEn ? 'Proceed to Payment 💳' : 'გადახდაზე გადასვლა 💳'}</span>`;
+                }
+            }
         }
 
         window.updateBookingSummary = updatePickedSummary;
@@ -3410,11 +3578,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayBtn.type = 'button';
 
                 let dotsHtml = '';
-                if (events.length === 1) {
-                    dotsHtml = `<span class="day-dots"><span class="dot"></span></span>`;
-                    dayBtn.setAttribute('title', isEn ? `${events[0].titleEN} (${events[0].timeRange || events[0].time}) - ${events[0].price}` : `${events[0].titleKA} (${events[0].timeRange || events[0].time}) - ${events[0].price}`);
-                } else if (events.length >= 2) {
-                    dotsHtml = `<span class="day-dots"><span class="dot"></span><span class="dot"></span></span>`;
+                if (events.length > 0) {
+                    dotsHtml = `<span class="day-dots">${events.map((_, i) => `<span class="dot dot-${i + 1}"></span>`).join('')}</span>`;
                     const tooltip = events.map(e => isEn ? `${e.titleEN} (${e.timeRange || e.time}) - ${e.price}` : `${e.titleKA} (${e.timeRange || e.time}) - ${e.price}`).join(' | ');
                     dayBtn.setAttribute('title', tooltip);
                 }
@@ -3439,6 +3604,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             syncServiceAndPrice(null);
                         }
                         renderTimeSlots();
+                        updateEventBanner();
                         updatePickedSummary();
                         renderCalendar();
                     });
@@ -3454,6 +3620,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderTimeSlots();
+            updateEventBanner();
             updatePickedSummary();
         }
 
@@ -3486,17 +3653,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const isoStr = selectedDate ? formatISODate(selectedDate) : '';
             const evs = isoStr ? (SCHEDULED_EVENTS[isoStr] || []) : [];
-            const ev = evs.length > 0 ? evs[0] : null;
-
+            
+            let ev = null;
             if (timeStr) {
-                selectedTime = timeStr;
-            } else if (ev) {
-                selectedTime = ev.time;
+                ev = evs.find(e => e.time === timeStr);
+            }
+            if (!ev && eventTitle) {
+                const titleLower = eventTitle.toLowerCase();
+                ev = evs.find(e => (e.titleKA && (titleLower.includes(e.titleKA.toLowerCase()) || e.titleKA.toLowerCase().includes(titleLower))) ||
+                                  (e.titleEN && (titleLower.includes(e.titleEN.toLowerCase()) || e.titleEN.toLowerCase().includes(titleLower))));
+            }
+            if (!ev && evs.length > 0) {
+                ev = evs[0];
             }
 
             if (ev) {
+                selectedTime = ev.time;
                 syncServiceAndPrice(ev);
             } else {
+                if (timeStr) selectedTime = timeStr;
                 const sSelect = document.getElementById('booking-service-select');
                 const pInput = document.getElementById('booking-price-input');
                 if (serviceCat && sSelect) {

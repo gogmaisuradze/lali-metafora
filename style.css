@@ -6585,12 +6585,12 @@ body:has(.service-page-main) .word-meta-table {
     justify-content: center;
     gap: 3px;
     margin-top: 2px;
-    height: 4px;
+    height: 5px;
 }
 
 .day-dots .dot {
-    width: 4px;
-    height: 4px;
+    width: 4.5px;
+    height: 4.5px;
     border-radius: 50%;
     background: var(--brand-plum, #7a3963);
     box-shadow: 0 0 3px var(--brand-plum);
@@ -6598,9 +6598,19 @@ body:has(.service-page-main) .word-meta-table {
     display: inline-block;
 }
 
-.day.sel .day-dots .dot {
+.day-dots .dot.dot-2 {
+    background: var(--brand-teal, #016166);
+    box-shadow: 0 0 3px var(--brand-teal);
+}
+
+.day-dots .dot.dot-3 {
     background: var(--brand-gold, #ffba00);
-    box-shadow: 0 0 5px var(--brand-gold);
+    box-shadow: 0 0 3px var(--brand-gold);
+}
+
+.day.sel .day-dots .dot {
+    background: var(--brand-gold, #ffba00) !important;
+    box-shadow: 0 0 5px var(--brand-gold) !important;
 }
 
 [data-theme="dark"] .day {
@@ -7400,35 +7410,155 @@ body:has(.service-page-main) .word-meta-table {
 }
 
 /* ==========================================================================
-   EVENT FIXED SINGLE SLOT & PRICE BADGES (CALENDAR & AFISHA AUTO-PRICE)
+   EVENT FIXED SLOTS (SINGLE & MULTI-EVENT SUPPORT) & PRICE BADGES
    ========================================================================== */
 .slots.has-single-slot {
     grid-template-columns: 1fr !important;
 }
 
-.slot.event-fixed-slot {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    padding: 10px 16px !important;
-    font-size: 0.95rem !important;
-    cursor: pointer !important;
-    background: linear-gradient(135deg, var(--brand-teal, #016166), var(--brand-plum, #7a3963)) !important;
-    color: #ffffff !important;
-    border: 1.5px solid var(--brand-gold, #ffba00) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 14px rgba(1, 97, 102, 0.25), 0 0 10px rgba(255, 186, 0, 0.35) !important;
-    transform: none !important;
+.slots.has-multi-slots {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
 }
 
-.slot-event-tag {
-    font-size: 0.72rem;
-    background: rgba(255, 255, 255, 0.22);
-    padding: 3px 8px;
+.slot.event-fixed-slot {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    padding: 10px 14px !important;
+    font-size: 0.85rem !important;
+    cursor: pointer !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: #1e293b !important;
+    border: 1.5px solid rgba(1, 97, 102, 0.22) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-align: left !important;
+    position: relative !important;
+    user-select: none !important;
+}
+
+.slots.has-single-slot .slot.event-fixed-slot {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.slot.event-fixed-slot:hover {
+    border-color: var(--brand-teal, #016166) !important;
+    background: rgba(255, 255, 255, 1) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 16px rgba(1, 97, 102, 0.18) !important;
+}
+
+.slot.event-fixed-slot.sel {
+    background: linear-gradient(135deg, var(--brand-teal, #016166), var(--brand-plum, #7a3963)) !important;
+    color: #ffffff !important;
+    border: 1.8px solid var(--brand-gold, #ffba00) !important;
+    box-shadow: 0 5px 18px rgba(1, 97, 102, 0.35), 0 0 12px rgba(255, 186, 0, 0.5) !important;
+    transform: scale(1.02) !important;
+}
+
+.slot-event-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+
+.slot-event-main .slot-time-text {
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.2px;
+}
+
+.slot.event-fixed-slot .slot-event-tag {
+    font-size: 0.7rem;
+    background: rgba(1, 97, 102, 0.12);
+    color: var(--brand-teal, #016166);
+    padding: 2px 7px;
     border-radius: 999px;
     font-weight: 700;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.slot.event-fixed-slot.sel .slot-event-tag {
+    background: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+}
+
+.slot-event-sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+
+.slot-event-title-snippet {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #475569;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+    transition: all 0.2s ease;
+}
+
+.slot.event-fixed-slot.sel .slot-event-title-snippet {
+    color: #f1f5f9;
+}
+
+.slot-event-price {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #b45309;
+    background: rgba(255, 186, 0, 0.18);
+    border: 1px solid rgba(255, 186, 0, 0.5);
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.slot.event-fixed-slot.sel .slot-event-price {
+    background: var(--brand-gold, #ffba00);
+    color: #0f172a;
+    border-color: #ffffff;
+    font-weight: 900;
+}
+
+[data-theme="dark"] .slot.event-fixed-slot {
+    background: rgba(30, 41, 59, 0.85) !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="dark"] .slot-event-title-snippet {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .slot-event-price {
+    color: #fef08a;
+    background: rgba(255, 186, 0, 0.25);
+}
+
+.cal-card-book-action-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 }
 
 .picked-price-badge {
