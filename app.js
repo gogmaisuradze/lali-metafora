@@ -4617,6 +4617,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.service-five-card');
         if (!cards.length) return;
 
+        const isMouseDevice = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
         cards.forEach(card => {
             const video = card.querySelector('.card-feature-video');
             if (!video) return;
@@ -4626,15 +4628,6 @@ document.addEventListener('DOMContentLoaded', () => {
             video.playsInline = true;
             video.setAttribute('playsinline', '');
             video.setAttribute('webkit-playsinline', '');
-
-            // Ensure first frame of video is properly rendered in full color
-            if (video.readyState >= 1) {
-                if (video.currentTime === 0) video.currentTime = 0.01;
-            } else {
-                video.addEventListener('loadedmetadata', () => {
-                    if (video.currentTime === 0) video.currentTime = 0.01;
-                }, { once: true });
-            }
 
             const playVideo = () => {
                 card.classList.add('is-playing');
@@ -4647,11 +4640,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 video.pause();
             };
 
-            // Play on mouse hover on ALL screen sizes (desktop, tablet, mobile view)
+            // 1. Mouse & pointer hover: Play when mouse enters, pause when leaves
             card.addEventListener('mouseenter', playVideo);
             card.addEventListener('mouseleave', pauseVideo);
 
-            // Also support pointer hover for devices with mice / styluses
             card.addEventListener('pointerenter', (e) => {
                 if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
                     playVideo();
@@ -4662,7 +4654,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     pauseVideo();
                 }
             });
+
+            // 2. On touch/mobile devices: play automatically
+            if (!isMouseDevice) {
+                playVideo();
+            }
         });
+
+        // For mobile touch screens: play active videos when in view, pause when scrolled away
+        if (!isMouseDevice && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target.querySelector('.card-feature-video');
+                    if (!video) return;
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-playing');
+                        const p = video.play();
+                        if (p !== undefined) p.catch(() => {});
+                    } else {
+                        entry.target.classList.remove('is-playing');
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '50px 0px 50px 0px'
+            });
+
+            cards.forEach(card => observer.observe(card));
+        }
     }
 
     // ==========================================================================

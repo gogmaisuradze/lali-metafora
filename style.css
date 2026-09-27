@@ -1582,17 +1582,21 @@ html.direct-main-mode #main-website {
     object-fit: cover;
     display: block;
     border-radius: 22px;
-    filter: grayscale(100%) contrast(1.08) opacity(0.9);
+    filter: none;
+    -webkit-filter: none;
+    opacity: 1;
     transform: scale(1);
-    transition: filter 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 .feature-card:hover .card-feature-img,
 .feature-card:hover .card-feature-video,
 .feature-card.is-playing .card-feature-img,
 .feature-card.is-playing .card-feature-video {
-    filter: grayscale(0%) contrast(1) opacity(1) saturate(130%) !important;
-    transform: scale(1.08);
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 1 !important;
+    transform: scale(1.05);
 }
 
 /* Floating Gold Badge (Matching Official Brand Palette) */
