@@ -6387,9 +6387,17 @@ body:has(.service-page-main) .word-meta-table {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    flex-wrap: wrap;
     margin-top: auto;
     padding-top: 14px;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.service-feat-actions-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .service-feat-trainer-badge {
@@ -6413,13 +6421,14 @@ body:has(.service-page-main) .word-meta-table {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 3px 10px;
+    padding: 5px 12px;
     background: rgba(245, 158, 11, 0.12);
     color: #b45309;
-    border: 1px solid rgba(245, 158, 11, 0.28);
+    border: 1.5px solid rgba(245, 158, 11, 0.35);
     border-radius: 9999px;
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 [data-theme="plum"] .service-feat-price-badge {
