@@ -1466,9 +1466,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="stagger-card-desc">„${item.testimonial}“</p>
                     <div class="afisha-learn-more-row">
                         <button class="afisha-learn-more-btn" data-event-id="${item.id}" aria-label="${learnMoreBtnText}">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
                             </svg>
                             <span>${learnMoreBtnText}</span>
                         </button>
@@ -3340,7 +3341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${ev.eventId !== undefined ? `
                                 <div class="cal-event-card-bottom-row">
                                     <button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 1 3-3h7z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                                         <span>${isEn ? 'Details' : 'გაიგე მეტი'}</span>
                                     </button>
                                 </div>` : ''}
