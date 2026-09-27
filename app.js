@@ -2726,11 +2726,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!targetPrice) {
-                if (targetDate && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[targetDate] && SCHEDULED_EVENTS[targetDate].length > 0) {
-                    targetPrice = SCHEDULED_EVENTS[targetDate][0].price;
-                }
-                if (!targetPrice) {
-                    targetPrice = getServicePrice(preselectedService || (sSelect ? sSelect.value : ''));
+                if (targetDate && typeof SCHEDULED_EVENTS !== 'undefined') {
+                    if (SCHEDULED_EVENTS[targetDate] && SCHEDULED_EVENTS[targetDate].length > 0) {
+                        targetPrice = SCHEDULED_EVENTS[targetDate][0].price;
+                    } else {
+                        targetPrice = '';
+                    }
                 }
             }
 
@@ -2888,9 +2889,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const matched = evs.find(e => e.serviceCategory && e.serviceCategory.toLowerCase().includes(sSelect.value.toLowerCase()));
                     if (matched && matched.price) {
                         pInput.value = matched.price;
-                    } else {
+                    } else if (evs.length > 0) {
                         const price = getServicePrice(sSelect.value);
                         if (price) pInput.value = price;
+                    } else {
+                        // Empty date without scheduled events: clear price
+                        pInput.value = '';
+                        delete pInput.dataset.userEdited;
                     }
                 }
                 if (typeof window.updateBookingSummary === 'function') {
@@ -2902,6 +2907,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const pInput = document.getElementById('booking-price-input');
         if (pInput) {
             pInput.addEventListener('input', () => {
+                if (pInput.value.trim()) {
+                    pInput.dataset.userEdited = 'true';
+                } else {
+                    delete pInput.dataset.userEdited;
+                }
                 if (typeof window.updateBookingSummary === 'function') {
                     window.updateBookingSummary();
                 }
@@ -3286,9 +3296,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     pInput.value = ev.price;
                 }
             } else {
-                if (pInput && sSelect) {
-                    const fallbackPrice = getServicePrice(sSelect.value);
-                    if (fallbackPrice) pInput.value = fallbackPrice;
+                if (pInput) {
+                    pInput.value = '';
+                    delete pInput.dataset.userEdited;
                 }
             }
         }
@@ -3344,6 +3354,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const events = SCHEDULED_EVENTS[isoStr] || [];
 
             if (events.length > 0) {
+                eventBanner.style.display = 'flex';
                 eventBanner.className = 'cal-day-event-banner has-scheduled-event';
                 let cardsHtml = '<div class="cal-events-list">';
                 events.forEach(ev => {
@@ -3390,15 +3401,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
             } else {
-                eventBanner.className = 'cal-day-event-banner is-free';
-                eventBanner.innerHTML = `
-                    <div class="cal-event-card is-free-card">
-                        <div class="cal-event-card-top-row">
-                            <span class="event-banner-badge">${isEn ? '✨ Open Day' : '✨ თავისუფალი დღე'}</span>
-                        </div>
-                        <div class="event-banner-title" style="margin-top: 4px;">${isEn ? 'Individual Bookings & Lounge' : 'ინდივიდუალური ჯავშანი & ლაუნჯი'}</div>
-                    </div>
-                `;
+                // Empty date with no scheduled events: hide banner completely
+                eventBanner.className = 'cal-day-event-banner is-empty';
+                eventBanner.style.display = 'none';
+                eventBanner.innerHTML = '';
             }
         }
 
@@ -3510,12 +3516,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
                 } else {
-                    const sSelect = document.getElementById('booking-service-select');
-                    activePrice = sSelect ? getServicePrice(sSelect.value) : '';
+                    activePrice = '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
-                            <span class="picked-event-title" style="font-weight: 500; opacity: 0.85;">${isEn ? 'Individual Visit' : 'ინდივიდუალური ვიზიტი'}</span>
                         </div>
                     `;
                 }
@@ -3535,14 +3539,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dateInput && selectedDate) dateInput.value = formatISODate(selectedDate);
             if (timeInput && selectedTime) timeInput.value = selectedTime;
             const pInput = document.getElementById('booking-price-input');
-            if (pInput && activePrice && (!pInput.value || matchedEvent)) {
-                pInput.value = activePrice;
+            if (pInput) {
+                if (matchedEvent) {
+                    pInput.value = matchedEvent.price || '';
+                } else if (events.length === 0) {
+                    if (!pInput.dataset.userEdited) {
+                        pInput.value = '';
+                    }
+                }
             }
 
             // Dynamically reflect active price on the proceed-to-payment submit button
             const submitBtn = document.getElementById('btn-proceed-to-payment');
             if (submitBtn) {
-                const finalPrice = (pInput?.value || '').trim() || activePrice;
+                const manualPrice = (pInput?.value || '').trim();
+                const finalPrice = matchedEvent ? (matchedEvent.price || manualPrice) : (pInput?.dataset?.userEdited ? manualPrice : '');
                 const btnLabel = isEn ? 'Proceed to Payment' : 'გადახდაზე გადასვლა';
                 if (finalPrice) {
                     submitBtn.innerHTML = `
@@ -3625,10 +3636,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         e.preventDefault();
                         selectedDate = new Date(year, month, d);
                         const eventsForDate = SCHEDULED_EVENTS[formatISODate(selectedDate)] || [];
+                        const pInput = document.getElementById('booking-price-input');
                         if (eventsForDate.length > 0) {
                             selectedTime = eventsForDate[0].time;
+                            if (pInput) delete pInput.dataset.userEdited;
                             syncServiceAndPrice(eventsForDate[0]);
                         } else {
+                            if (pInput) {
+                                pInput.value = '';
+                                delete pInput.dataset.userEdited;
+                            }
                             syncServiceAndPrice(null);
                         }
                         renderTimeSlots();
@@ -3714,7 +3731,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 if (pInput) {
-                    pInput.value = priceVal || (sSelect ? getServicePrice(sSelect.value) : '') || '';
+                    pInput.value = priceVal || (evs.length > 0 && sSelect ? getServicePrice(sSelect.value) : '') || '';
+                    if (!pInput.value) delete pInput.dataset.userEdited;
                 }
             }
 

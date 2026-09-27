@@ -6890,16 +6890,18 @@ body:has(.service-page-main) .word-meta-table {
     border-color: #38bdf8;
 }
 
-.cal-event-card.is-free-card {
-    cursor: default;
-    background: rgba(1, 97, 102, 0.06);
-    border-color: rgba(1, 97, 102, 0.15);
-    width: 100%;
+.cal-day-event-banner.is-empty {
+    display: none !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
 }
 
-.cal-event-card.is-free-card:hover {
-    transform: none;
-    border-color: rgba(1, 97, 102, 0.15);
+.cal-event-card.is-free-card {
+    display: none !important;
 }
 
 .event-banner-badge {
