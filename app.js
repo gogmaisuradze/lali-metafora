@@ -1460,7 +1460,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <img src="${item.imgSrc}" alt="${item.title}" class="stagger-card-img">
                         <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
                             <span class="stagger-card-date">${item.by.split('•')[0]}</span>
-                            <span class="stagger-card-price-badge">${item.price}</span>
                         </div>
                     </div>
                     <h3 class="stagger-card-title">${item.title}</h3>
@@ -3212,6 +3211,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Format price badge so currency symbol stays attached to the digits without breaking/dropping below
+    function formatPriceBadge(str) {
+        if (!str) return '';
+        return String(str).replace(/(\d+)\s*₾/g, '$1\u00A0₾').trim();
+    }
+
     // ==========================================================================
     // SMILE AGENCY STYLE INTERACTIVE BOOKING CALENDAR & SLOTS ENGINE
     // ==========================================================================
@@ -3333,16 +3338,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     cardsHtml += `
                         <div class="cal-event-card ${isActive ? 'active' : ''}" data-time="${ev.time}">
                             <div class="cal-event-card-top-row">
-                                <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
-                                ${ev.price ? `<span class="event-banner-price-tag">💰 ${ev.price}</span>` : ''}
-                                <div class="cal-event-card-actions">
-                                    ${ev.eventId !== undefined ? `<button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 1 3-3h7z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>${isEn ? 'Details' : 'გაიგე მეტი'}</span></button>` : ''}
-                                    <button type="button" class="cal-card-book-action-btn ${isActive ? 'is-selected' : ''}" data-time="${ev.time}">
-                                        <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
-                                    </button>
+                                <div class="cal-event-meta-left">
+                                    <span class="event-banner-badge">${isEn ? ev.badgeEN : ev.badgeKA}</span>
+                                    ${ev.price ? `<span class="event-banner-price-tag">💰&nbsp;${formatPriceBadge(ev.price)}</span>` : ''}
                                 </div>
+                                <button type="button" class="cal-card-book-action-btn ${isActive ? 'is-selected' : ''}" data-time="${ev.time}">
+                                    <span class="event-card-pick-indicator">${isActive ? (isEn ? '✓ Selected' : '✓ არჩეულია') : (isEn ? 'Select' : 'არჩევა')}</span>
+                                </button>
                             </div>
                             <div class="event-banner-title">${isEn ? ev.titleEN : ev.titleKA}</div>
+                            ${ev.eventId !== undefined ? `
+                                <div class="cal-event-card-bottom-row">
+                                    <button type="button" class="afisha-learn-more-btn" data-event-id="${ev.eventId}">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 1 3-3h7z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                        <span>${isEn ? 'Details' : 'გაიგე მეტი'}</span>
+                                    </button>
+                                </div>` : ''}
                         </div>
                     `;
                 });
@@ -3417,7 +3428,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="slot-event-sub">
                             <span class="slot-event-title-snippet" title="${rawTitle}">${titleSnippet}</span>
-                            ${ev.price ? `<span class="slot-event-price">💰 ${ev.price}</span>` : ''}
+                            ${ev.price ? `<span class="slot-event-price">💰&nbsp;${formatPriceBadge(ev.price)}</span>` : ''}
                         </div>
                     `;
 
@@ -3473,7 +3484,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (matchedEvent) {
                     activePrice = matchedEvent.price || '';
                     const evTitle = isEn ? matchedEvent.titleEN : matchedEvent.titleKA;
-                    const priceBadge = matchedEvent.price ? `<span class="picked-price-badge">💰 ${matchedEvent.price}</span>` : '';
+                    const priceBadge = matchedEvent.price ? `<span class="picked-price-badge">💰&nbsp;${formatPriceBadge(matchedEvent.price)}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
@@ -3492,7 +3503,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     const sSelect = document.getElementById('booking-service-select');
                     activePrice = sSelect ? getServicePrice(sSelect.value) : '';
-                    const priceBadge = activePrice ? `<span class="picked-price-badge">💰 ${activePrice}</span>` : '';
+                    const priceBadge = activePrice ? `<span class="picked-price-badge">💰&nbsp;${formatPriceBadge(activePrice)}</span>` : '';
                     pickedSummary.innerHTML = `
                         <div class="picked-summary-content">
                             <span class="picked-datetime">📅 ${baseText}</span>
@@ -3526,7 +3537,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (submitBtn) {
                 const finalPrice = activePrice || (pInput?.value || '').trim();
                 if (finalPrice) {
-                    submitBtn.innerHTML = `<span>${isEn ? `Proceed to Payment (${finalPrice}) 💳` : `გადახდაზე გადასვლა (${finalPrice}) 💳`}</span>`;
+                    submitBtn.innerHTML = `<span>${isEn ? `Proceed to Payment (${formatPriceBadge(finalPrice)}) 💳` : `გადახდაზე გადასვლა (${formatPriceBadge(finalPrice)}) 💳`}</span>`;
                 } else {
                     submitBtn.innerHTML = `<span>${isEn ? 'Proceed to Payment 💳' : 'გადახდაზე გადასვლა 💳'}</span>`;
                 }
@@ -6217,7 +6228,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookBtn.setAttribute('data-event-title', (event[lang] ? event[lang].title : ''));
                 const evPrice = event.price || getServicePrice(event.category || '');
                 bookBtn.setAttribute('data-price', evPrice || '');
-                const priceBadgeHtml = evPrice ? ` <span class="reader-book-price-pill">💰 ${evPrice}</span>` : '';
+                const priceBadgeHtml = evPrice ? ` <span class="reader-book-price-pill">💰&nbsp;${formatPriceBadge(evPrice)}</span>` : '';
                 bookBtn.innerHTML = `<span>${lang === 'EN' ? 'Book Seat' : 'ადგილის დაჯავშნა'}</span>${priceBadgeHtml}`;
             }
 
