@@ -4593,13 +4593,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 18. SERVICE VIDEOS CONTROLLER (Desktop: Hover Only | Mobile: Centered Card Only)
+    // 18. SERVICE VIDEOS CONTROLLER (Hover/Pointer: Turns on when mouse enters, pauses when mouse leaves)
     // ==========================================================================
     function initServiceVideoInteractions() {
         const cards = document.querySelectorAll('.service-five-card');
         if (!cards.length) return;
-
-        let activeMobilePlayingVideo = null;
 
         cards.forEach(card => {
             const video = card.querySelector('.card-feature-video');
@@ -4611,68 +4609,41 @@ document.addEventListener('DOMContentLoaded', () => {
             video.setAttribute('playsinline', '');
             video.setAttribute('webkit-playsinline', '');
 
-            // 1. DESKTOP: Only play when mouse is hovered over this specific card
-            card.addEventListener('mouseenter', () => {
-                if (window.innerWidth > 992) {
-                    card.classList.add('is-playing');
-                    const p = video.play();
-                    if (p !== undefined) p.catch(() => {});
-                }
-            });
-
-            card.addEventListener('mouseleave', () => {
-                if (window.innerWidth > 992) {
-                    card.classList.remove('is-playing');
-                    video.pause();
-                }
-            });
-        });
-
-        // 2. MOBILE: IntersectionObserver that plays ONLY the single card centered in the viewport
-        if ('IntersectionObserver' in window) {
-            const mobileObserver = new IntersectionObserver((entries) => {
-                if (window.innerWidth <= 992) {
-                    entries.forEach(entry => {
-                        const video = entry.target.querySelector('.card-feature-video');
-                        if (!video) return;
-
-                        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                            // If another video was playing, pause it first
-                            if (activeMobilePlayingVideo && activeMobilePlayingVideo !== video) {
-                                activeMobilePlayingVideo.pause();
-                                if (activeMobilePlayingVideo.closest('.service-five-card')) {
-                                    activeMobilePlayingVideo.closest('.service-five-card').classList.remove('is-playing');
-                                }
-                            }
-                            activeMobilePlayingVideo = video;
-                            entry.target.classList.add('is-playing');
-                            const p = video.play();
-                            if (p !== undefined) p.catch(() => {});
-                        } else {
-                            entry.target.classList.remove('is-playing');
-                            if (activeMobilePlayingVideo === video) {
-                                video.pause();
-                                activeMobilePlayingVideo = null;
-                            } else {
-                                video.pause();
-                            }
-                        }
-                    });
-                }
-            }, {
-                threshold: [0.25, 0.5, 0.75],
-                rootMargin: "-5% 0px -5% 0px"
-            });
-
-            cards.forEach(card => mobileObserver.observe(card));
-        }
-
-        // On window resize, pause all videos if transitioning
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992 && activeMobilePlayingVideo) {
-                activeMobilePlayingVideo.pause();
-                activeMobilePlayingVideo = null;
+            // Ensure first frame of video is properly rendered in full color
+            if (video.readyState >= 1) {
+                if (video.currentTime === 0) video.currentTime = 0.01;
+            } else {
+                video.addEventListener('loadedmetadata', () => {
+                    if (video.currentTime === 0) video.currentTime = 0.01;
+                }, { once: true });
             }
+
+            const playVideo = () => {
+                card.classList.add('is-playing');
+                const p = video.play();
+                if (p !== undefined) p.catch(() => {});
+            };
+
+            const pauseVideo = () => {
+                card.classList.remove('is-playing');
+                video.pause();
+            };
+
+            // Play on mouse hover on ALL screen sizes (desktop, tablet, mobile view)
+            card.addEventListener('mouseenter', playVideo);
+            card.addEventListener('mouseleave', pauseVideo);
+
+            // Also support pointer hover for devices with mice / styluses
+            card.addEventListener('pointerenter', (e) => {
+                if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+                    playVideo();
+                }
+            });
+            card.addEventListener('pointerleave', (e) => {
+                if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+                    pauseVideo();
+                }
+            });
         });
     }
 

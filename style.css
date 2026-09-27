@@ -4100,11 +4100,28 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
         background: #0f172a !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
     }
-    .feature-card .card-image-wrapper video {
+    .feature-card .card-image-wrapper video,
+    .feature-card .card-feature-video,
+    .feature-card .card-feature-img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
         border-radius: 14px !important;
+        filter: none !important;
+        -webkit-filter: none !important;
+        opacity: 1 !important;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .feature-card:hover .card-feature-video,
+    .feature-card:hover .card-feature-img,
+    .feature-card.is-playing .card-feature-video,
+    .feature-card.is-playing .card-feature-img,
+    .feature-card:active .card-feature-video,
+    .feature-card:active .card-feature-img {
+        filter: none !important;
+        -webkit-filter: none !important;
+        opacity: 1 !important;
+        transform: scale(1.06) !important;
     }
     /* High contrast, bright gold badge on photo so text is clearly readable */
     .feature-card .card-floating-badge {
@@ -5126,17 +5143,23 @@ body.metabot-open .metabot-launcher-btn {
     }
 
     .card-feature-video {
-        filter: grayscale(100%) contrast(1.08) opacity(0.9);
+        filter: none !important;
+        -webkit-filter: none !important;
+        opacity: 1 !important;
         display: block !important;
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
-        transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .feature-card.is-playing .card-feature-video,
+    .feature-card:hover .card-feature-video,
     .feature-card:active .card-feature-video {
-        filter: grayscale(0%) contrast(1) opacity(1) saturate(125%) !important;
+        filter: none !important;
+        -webkit-filter: none !important;
+        opacity: 1 !important;
+        transform: scale(1.05) !important;
     }
 
     .slider-section {
