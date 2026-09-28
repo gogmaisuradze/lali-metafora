@@ -990,7 +990,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Automatically handle initial URL hash navigation on page load without any delay or flickering
-    if (window.location.hash && window.location.hash !== '#entrance') {
+    const initialIsBooking = isBookingUrl();
+    if ((window.location.hash && window.location.hash !== '#entrance') || initialIsBooking) {
         const entrancePortal = document.getElementById('entrance-portal');
         const mainWebsite = document.getElementById('main-website');
         if (entrancePortal) entrancePortal.style.display = 'none';
@@ -1001,7 +1002,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('initial-lock');
         document.documentElement.classList.remove('direct-main-mode');
 
-        if (window.location.hash.toLowerCase().includes('register')) {
+        if (initialIsBooking) {
+            setTimeout(() => {
+                openBookingModalFromUrl();
+            }, 80);
+        } else if (window.location.hash.toLowerCase().includes('register')) {
             setTimeout(() => {
                 if (typeof window.openQuickRegisterModal === 'function') {
                     window.openQuickRegisterModal();
@@ -2667,7 +2672,161 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function openBookingModal(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '') {
+    function isBookingUrl() {
+        const hash = (window.location.hash || '').toLowerCase();
+        const search = (window.location.search || '').toLowerCase();
+        return (
+            hash === '#booking' ||
+            hash.startsWith('#booking?') ||
+            hash.startsWith('#booking&') ||
+            hash === '#book' ||
+            hash.startsWith('#book?') ||
+            hash === '#javshani' ||
+            hash.startsWith('#javshani?') ||
+            hash === '#booking-modal' ||
+            hash.startsWith('#booking-modal?') ||
+            search.includes('booking') ||
+            search.includes('javshan')
+        );
+    }
+    window.isBookingUrl = isBookingUrl;
+
+    function getBookingUrlParams() {
+        let service = '';
+        let date = '';
+        let time = '';
+        let price = '';
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            service = urlParams.get('service') || '';
+            date = urlParams.get('date') || '';
+            time = urlParams.get('time') || '';
+            price = urlParams.get('price') || '';
+
+            const hash = window.location.hash || '';
+            if (hash.includes('?')) {
+                const hashSearch = hash.substring(hash.indexOf('?') + 1);
+                const hashParams = new URLSearchParams(hashSearch);
+                if (!service) service = hashParams.get('service') || '';
+                if (!date) date = hashParams.get('date') || '';
+                if (!time) time = hashParams.get('time') || '';
+                if (!price) price = hashParams.get('price') || '';
+            }
+        } catch (e) {}
+        return { service, date, time, price };
+    }
+    window.getBookingUrlParams = getBookingUrlParams;
+
+    function updateBookingUrlHash(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', usePush = true) {
+        let hash = '#booking';
+        const params = [];
+        if (preselectedService) params.push('service=' + encodeURIComponent(preselectedService));
+        if (targetDate) params.push('date=' + encodeURIComponent(targetDate));
+        if (targetTime) params.push('time=' + encodeURIComponent(targetTime));
+        if (targetPrice) params.push('price=' + encodeURIComponent(targetPrice));
+        if (params.length > 0) {
+            hash += '?' + params.join('&');
+        }
+
+        if (window.location.hash !== hash) {
+            try {
+                if (window.history) {
+                    const isAlreadyBooking = (window.location.hash || '').toLowerCase().includes('book');
+                    if (usePush && !isAlreadyBooking && window.history.pushState) {
+                        window.history.pushState({ bookingModal: true }, '', hash);
+                    } else if (window.history.replaceState) {
+                        window.history.replaceState({ bookingModal: true }, '', hash);
+                    } else {
+                        window.location.hash = hash;
+                    }
+                } else {
+                    window.location.hash = hash;
+                }
+            } catch (e) {
+                window.location.hash = hash;
+            }
+        }
+    }
+    window.updateBookingUrlHash = updateBookingUrlHash;
+
+    function syncBookingUrlHash() {
+        if (!bookingModalOverlay || !bookingModalOverlay.classList.contains('active')) return;
+        const sSelect = document.getElementById('booking-service-select');
+        const dInput = document.getElementById('booking-date-input');
+        const tInput = document.getElementById('booking-time-input');
+        const pInput = document.getElementById('booking-price-input');
+        
+        let sVal = sSelect ? sSelect.value : '';
+        let dVal = dInput ? dInput.value : '';
+        let tVal = tInput ? tInput.value : '';
+        let pVal = pInput ? pInput.value : '';
+        updateBookingUrlHash(sVal, dVal, tVal, pVal, false);
+    }
+    window.syncBookingUrlHash = syncBookingUrlHash;
+
+    function cleanUrlWithoutBooking() {
+        try {
+            const url = new URL(window.location.href);
+            url.hash = '';
+            url.searchParams.delete('booking');
+            url.searchParams.delete('book');
+            url.searchParams.delete('javshani');
+            const clean = url.pathname + (url.search && url.search !== '?' ? url.search : '');
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', clean);
+            } else {
+                window.location.hash = '';
+            }
+        } catch (e) {
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', window.location.pathname);
+            } else {
+                window.location.hash = '';
+            }
+        }
+    }
+    window.cleanUrlWithoutBooking = cleanUrlWithoutBooking;
+
+    function getBookingShareUrl() {
+        const baseUrl = window.location.href.split('#')[0].split('?')[0];
+        const sSelect = document.getElementById('booking-service-select');
+        const dInput = document.getElementById('booking-date-input');
+        const tInput = document.getElementById('booking-time-input');
+        const pInput = document.getElementById('booking-price-input');
+
+        let hash = '#booking';
+        const params = [];
+        if (sSelect && sSelect.value) params.push('service=' + encodeURIComponent(sSelect.value));
+        if (dInput && dInput.value) params.push('date=' + encodeURIComponent(dInput.value));
+        if (tInput && tInput.value) params.push('time=' + encodeURIComponent(tInput.value));
+        if (pInput && pInput.value) params.push('price=' + encodeURIComponent(pInput.value));
+        if (params.length > 0) {
+            hash += '?' + params.join('&');
+        }
+        return baseUrl + hash;
+    }
+    window.getBookingShareUrl = getBookingShareUrl;
+
+
+
+    function openBookingModalFromUrl() {
+        if (!bookingModalOverlay) return;
+        const entrancePortal = document.getElementById('entrance-portal');
+        const mainWebsite = document.getElementById('main-website');
+        if (entrancePortal) entrancePortal.style.display = 'none';
+        if (mainWebsite) {
+            mainWebsite.classList.add('active');
+            mainWebsite.style.opacity = '1';
+        }
+        document.body.classList.remove('initial-lock');
+        document.documentElement.classList.remove('direct-main-mode');
+
+        const params = getBookingUrlParams();
+        openBookingModal(params.service, params.date, params.time, params.price, true);
+    }
+    window.openBookingModalFromUrl = openBookingModalFromUrl;
+
+    function openBookingModal(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', skipHistory = false) {
         if (bookingModalOverlay) {
             // If opened from within an article reader, close the article reader drawer
             const articleOverlay = document.getElementById('article-reader-overlay');
@@ -2721,6 +2880,10 @@ document.addEventListener('DOMContentLoaded', () => {
             bookingModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
 
+            if (!skipHistory) {
+                updateBookingUrlHash(preselectedService, targetDate, targetTime, targetPrice, true);
+            }
+
             const activeLang = localStorage.getItem('metafora_lang') || 'KA';
             if (activeLang === 'EN' && typeof translateDOMNodes === 'function') {
                 translateDOMNodes(bookingModalOverlay, 'EN');
@@ -2729,10 +2892,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.openBookingModal = openBookingModal;
 
-    function closeBookingModal() {
+    function closeBookingModal(restoreHistory = true) {
         if (bookingModalOverlay) {
             bookingModalOverlay.classList.remove('active');
             document.body.style.overflow = '';
+
+            if (restoreHistory && isBookingUrl()) {
+                cleanUrlWithoutBooking();
+            }
+
             setTimeout(() => {
                 showBookingStep('form');
                 if (bookingFormStatus) bookingFormStatus.classList.add('hidden');
@@ -3173,6 +3341,39 @@ document.addEventListener('DOMContentLoaded', () => {
             closeBookingModal();
         }
     });
+
+    // Hash & History Change Listeners for Booking Modal
+    window.addEventListener('popstate', () => {
+        if (bookingModalOverlay && bookingModalOverlay.classList.contains('active')) {
+            if (!isBookingUrl()) {
+                closeBookingModal(false);
+            }
+        } else if (isBookingUrl()) {
+            openBookingModalFromUrl();
+        }
+    });
+
+    window.addEventListener('hashchange', () => {
+        if (isBookingUrl()) {
+            if (!bookingModalOverlay || !bookingModalOverlay.classList.contains('active')) {
+                openBookingModalFromUrl();
+            }
+        } else {
+            if (bookingModalOverlay && bookingModalOverlay.classList.contains('active')) {
+                closeBookingModal(false);
+            }
+        }
+    });
+
+    // Sync URL hash when service dropdown changes in the modal
+    const bookingServiceSelectElem = document.getElementById('booking-service-select');
+    if (bookingServiceSelectElem) {
+        bookingServiceSelectElem.addEventListener('change', () => {
+            if (typeof syncBookingUrlHash === 'function') {
+                syncBookingUrlHash();
+            }
+        });
+    }
 
     // Check if opened on mobile via QR scan (?pay_mobile=true)
     const urlParams = new URLSearchParams(window.location.search);
@@ -3708,6 +3909,9 @@ document.addEventListener('DOMContentLoaded', () => {
             renderTimeSlots();
             updateEventBanner();
             updatePickedSummary();
+            if (typeof syncBookingUrlHash === 'function') {
+                syncBookingUrlHash();
+            }
         };
 
         window.refreshSmileBookingCalendar = function() {

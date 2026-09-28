@@ -15,10 +15,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-        // Instant Zero-Flicker check: if navigated with a hash (e.g. #hero, #about, #services), immediately show main site
+        // Instant Zero-Flicker check: if navigated with a hash (e.g. #hero, #about, #services, #booking) or booking query, immediately show main site
         (function() {
-            var hash = window.location.hash;
-            if (hash && hash.length > 1 && hash !== '#entrance') {
+            var hash = window.location.hash || '';
+            var search = (window.location.search || '').toLowerCase();
+            if ((hash && hash.length > 1 && hash !== '#entrance') || 
+                search.indexOf('book') !== -1 || 
+                search.indexOf('javshan') !== -1 ||
+                search.indexOf('register') !== -1) {
                 document.documentElement.classList.add('direct-main-mode');
             }
         })();
