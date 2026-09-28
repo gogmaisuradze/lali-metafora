@@ -210,7 +210,429 @@
     preloadBuffers();
 })();
 
-document.addEventListener('DOMContentLoaded', () => {
+// ==========================================================================
+// TOP-LEVEL BOOKING CONSTANTS, DATE UTILITIES & DIRECT SHARING SYSTEM
+// ==========================================================================
+const SCHEDULED_EVENTS = {
+    '2026-10-05': [
+        { eventId: 0, titleKA: '🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა', titleEN: '🎮 Game Architect - 8-Session Program', time: '19:00', timeRange: '19:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '05 ოქტ | 19:00', badgeEN: 'Oct 05 | 19:00' }
+    ],
+    '2026-10-08': [
+        { eventId: 11, titleKA: '🌙 აღმოსავლური ისტორიები (შეჰერეზადასთან)', titleEN: '🌙 Eastern Stories (with Scheherazade)', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '08 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 08 | 19:00 - 22:00' }
+    ],
+    '2026-10-09': [
+        { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (I შეხვედრა)', titleEN: "💬 Let's Talk (Session 1)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '09 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 09 | 19:00 - 22:00' }
+    ],
+    '2026-10-11': [
+        { eventId: 14, titleKA: '🎲 ლილას თამაში (I შეხვედრა)', titleEN: '🎲 Leela Game (Session 1)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '11 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 11 | 12:00 - 19:00' }
+    ],
+    '2026-10-14': [
+        { eventId: 5, titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '14 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 14 | 19:00 - 22:00' }
+    ],
+    '2026-10-15': [
+        { eventId: 1, titleKA: '🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი', titleEN: '🕹️ Game Architect - Advanced Course', time: '19:00', timeRange: '19:00 - 22:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '15 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 15 | 19:00 - 22:00' }
+    ],
+    '2026-10-18': [
+        { eventId: 9, titleKA: '🌌 სისტემური განლაგება - ვორქშოფი', titleEN: '🌌 Systemic Constellations - Workshop', time: '12:00', timeRange: '12:00 - 19:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 18 | 12:00 - 19:00' },
+        { eventId: 2, titleKA: '🌿 პროგრამა არიტე - პიროვნული განვითარება', titleEN: '🌿 Arete Program - Personal Development', time: '18:00', timeRange: '18:00 - 21:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 18:00 - 21:00', badgeEN: 'Oct 18 | 18:00 - 21:00' }
+    ],
+    '2026-10-20': [
+        { eventId: 3, titleKA: '❤️ სიყვარულის 5 ენა - მასტერკლასი', titleEN: '❤️ 5 Love Languages - Masterclass', time: '11:00', timeRange: '11:00 - 14:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '20 ოქტ | 11:00 - 14:00', badgeEN: 'Oct 20 | 11:00 - 14:00' }
+    ],
+    '2026-10-21': [
+        { eventId: 6, titleKA: '👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის', titleEN: '👥 Coaching for HR Managers & Leaders', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '21 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 21 | 19:00 - 22:00' }
+    ],
+    '2026-10-22': [
+        { eventId: 4, titleKA: '🎓 ტრენერობის ხელოვნება - ტრენერის გზა', titleEN: "🎓 Art of Training - Trainer's Path", time: '18:30', timeRange: '18:30 - 21:30', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 18:30 - 21:30', badgeEN: 'Oct 22 | 18:30 - 21:30' },
+        { eventId: 15, titleKA: '🕯️ პაემანი სიბნელეში - სენსორული დიალოგი', titleEN: '🕯️ Blind Date - Sensory Dialogue', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 22 | 19:00 - 22:00' }
+    ],
+    '2026-10-23': [
+        { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (II შეხვედრა)', titleEN: "💬 Let's Talk (Session 2)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '23 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 23 | 19:00 - 22:00' }
+    ],
+    '2026-10-24': [
+        { eventId: 16, titleKA: '💔 ღალატის ანატომია — ესტერ პერელის მიხედვით', titleEN: '💔 Anatomy of Infidelity - Esther Perel', time: '16:00', timeRange: '16:00 - 19:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '24 ოქტ | 16:00 - 19:00', badgeEN: 'Oct 24 | 16:00 - 19:00' }
+    ],
+    '2026-10-25': [
+        { eventId: 14, titleKA: '🎲 ლილას თამაში (II შეხვედრა)', titleEN: '🎲 Leela Game (Session 2)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '25 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 25 | 12:00 - 19:00' }
+    ],
+    '2026-10-27': [
+        { eventId: 17, titleKA: '🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით', titleEN: '🧠 Brain in Love - Helen Fisher', time: '11:00', timeRange: '11:00 - 13:30', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '27 ოქტ | 11:00 - 13:30', badgeEN: 'Oct 27 | 11:00 - 13:30' }
+    ],
+    '2026-10-28': [
+        { eventId: 7, titleKA: '💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს & რატომ გვტკივა სიყვარული', titleEN: '💔 Why We Choose Same Partners & Why Love Hurts', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '28 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 28 | 19:00 - 22:00' }
+    ],
+    '2026-10-29': [
+        { eventId: 18, titleKA: '🌌 სამყაროს კანონები - სალონური ვორქშოფი', titleEN: '🌌 Universal Laws - Salon Workshop', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '29 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 29 | 19:00 - 22:00' }
+    ],
+    '2026-10-30': [
+        { eventId: 8, titleKA: '📦 რა შევუკვეთე და რა ჩამომივიდა', titleEN: '📦 What I Ordered vs What Arrived', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '30 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 30 | 19:00 - 22:00' }
+    ],
+    '2026-11-04': [
+        { eventId: 10, titleKA: '💰 ფული თუ პასუხისმგებლობა', titleEN: '💰 Money or Responsibility', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '04 ნოე | 19:00 - 22:00', badgeEN: 'Nov 04 | 19:00 - 22:00' }
+    ],
+    '2026-11-10': [
+        { eventId: 13, titleKA: '🧠 ადამიანის ფსიქოლოგია ლიდერობაში - არაცნობიერი მენეჯმენტი', titleEN: '🧠 Human Psychology in Leadership', time: '18:00', timeRange: '18:00 - 21:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '10 ნოე | 18:00 - 21:00', badgeEN: 'Nov 10 | 18:00 - 21:00' }
+    ]
+};
+window.SCHEDULED_EVENTS = SCHEDULED_EVENTS;
+
+const SERVICE_PRICES = {
+    'თამაშის არქიტექტორი': '650 ₾',
+    'game architect': '650 ₾',
+    'აღმოსავლური ისტორიები': '100 ₾',
+    'შეჰერეზადა': '100 ₾',
+    'scheherazade': '100 ₾',
+    'მოდი ვილაპარაკოთ': '100 ₾',
+    'let\'s talk': '100 ₾',
+    'ლილას თამაში': '200 ₾',
+    'ლილა': '200 ₾',
+    'leela': '200 ₾',
+    'ქოუჩინგი არაქოუჩებისთვის': '100 ₾',
+    'non-coaches': '100 ₾',
+    'სისტემური განლაგება': '180 ₾',
+    'constellations': '180 ₾',
+    'სიყვარულის 5 ენა': '80 ₾',
+    '5 love languages': '80 ₾',
+    'ქოუჩინგი hr': '100 ₾',
+    'coaching for hr': '100 ₾',
+    'პაემანი სიბნელეში': '100 ₾',
+    'date in the dark': '100 ₾',
+    'ღალატის ანატომია': '80 ₾',
+    'infidelity': '80 ₾',
+    'შეყვარებული ტვინი': '80 ₾',
+    'brain in love': '80 ₾',
+    'რატომ ვირჩევთ ერთნაირ პარტნიორებს': '80 ₾',
+    'რატომ გვტკივა სიყვარული': '80 ₾',
+    'why love hurts': '80 ₾',
+    'სამყაროს კანონები': '100 ₾',
+    'universal laws': '100 ₾',
+    'personal development': '100 ₾',
+    'პერსონალური განვითარება': '100 ₾',
+    'პიროვნული განვითარება': '100 ₾',
+    'business': '100 ₾',
+    'ბიზნეს': '100 ₾',
+    'think tank': '80 ₾',
+    'თინკ ტანკი': '80 ₾',
+    'art': '50 ₾',
+    'ხელოვნება': '50 ₾',
+    'playback': '50 ₾',
+    'თერაპია': '80 ₾',
+    'კერამიკ': '60 ₾',
+    'clubs': '30 ₾',
+    'კლუბ': '30 ₾'
+};
+window.SERVICE_PRICES = SERVICE_PRICES;
+
+function getServicePrice(serviceOrTitle) {
+    if (!serviceOrTitle) return "";
+    const lower = String(serviceOrTitle).toLowerCase().trim();
+    if (typeof SCHEDULED_EVENTS !== 'undefined') {
+        for (const d in SCHEDULED_EVENTS) {
+            for (const ev of SCHEDULED_EVENTS[d]) {
+                if (ev.titleKA && (lower.includes(ev.titleKA.toLowerCase()) || ev.titleKA.toLowerCase().includes(lower))) {
+                    if (ev.price) return ev.price;
+                }
+                if (ev.titleEN && (lower.includes(ev.titleEN.toLowerCase()) || ev.titleEN.toLowerCase().includes(lower))) {
+                    if (ev.price) return ev.price;
+                }
+            }
+        }
+    }
+    for (const [key, price] of Object.entries(SERVICE_PRICES)) {
+        if (lower.includes(key.toLowerCase())) return price;
+    }
+    return "";
+}
+window.getServicePrice = getServicePrice;
+
+function normalizeBookingDate(str) {
+    if (!str) return '';
+    str = String(str).trim();
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(str)) {
+        return str;
+    }
+
+    if (/^\d{6}$/.test(str)) {
+        const d = str.substring(0, 2);
+        const m = str.substring(2, 4);
+        const y = '20' + str.substring(4, 6);
+        return `${y}-${m}-${d}`;
+    }
+
+    const parts = str.split(/[-./_]/);
+    if (parts.length === 3) {
+        let p0 = parts[0];
+        let p1 = parts[1];
+        let p2 = parts[2];
+
+        if (p0.length === 4) {
+            const y = p0;
+            const m = String(p1).padStart(2, '0');
+            const d = String(p2).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        let y = p2;
+        if (y.length === 2) y = '20' + y;
+
+        let num0 = parseInt(p0, 10);
+        let num1 = parseInt(p1, 10);
+
+        let d, m;
+        if (num0 > 12) {
+            d = String(num0).padStart(2, '0');
+            m = String(num1).padStart(2, '0');
+        } else if (num1 > 12) {
+            m = String(num0).padStart(2, '0');
+            d = String(num1).padStart(2, '0');
+        } else {
+            const cand1 = `${y}-${String(num1).padStart(2, '0')}-${String(num0).padStart(2, '0')}`;
+            const cand2 = `${y}-${String(num0).padStart(2, '0')}-${String(num1).padStart(2, '0')}`;
+            if (typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[cand1]) {
+                return cand1;
+            } else if (typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[cand2]) {
+                return cand2;
+            }
+            d = String(num0).padStart(2, '0');
+            m = String(num1).padStart(2, '0');
+        }
+        return `${y}-${m}-${d}`;
+    }
+
+    return '';
+}
+window.normalizeBookingDate = normalizeBookingDate;
+
+function formatShortBookingDate(dateStr, timeStr) {
+    if (!dateStr) return '';
+    const norm = normalizeBookingDate(dateStr);
+    if (!norm) return dateStr;
+    const parts = norm.split('-');
+    if (parts.length === 3) {
+        const y = parts[0].slice(-2);
+        const m = parts[1];
+        const d = parts[2];
+        const base = `${d}-${m}-${y}`;
+        if (timeStr && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[norm] && SCHEDULED_EVENTS[norm].length > 1) {
+            const firstEv = SCHEDULED_EVENTS[norm][0];
+            if (firstEv.time !== timeStr) {
+                return `${base}?time=${encodeURIComponent(timeStr)}`;
+            }
+        }
+        return base;
+    }
+    return norm;
+}
+window.formatShortBookingDate = formatShortBookingDate;
+
+function isBookingUrl() {
+    const hash = (window.location.hash || '').toLowerCase();
+    const search = (window.location.search || '').toLowerCase();
+    const isDateHash = /^#\d{1,2}[-./]\d{1,2}[-./]\d{2,4}/.test(hash) || /^#booking[-=/]?.*/.test(hash);
+    return (
+        isDateHash ||
+        hash.includes('booking') ||
+        hash.includes('javshan') ||
+        search.includes('book') ||
+        search.includes('javshan') ||
+        search.includes('date=') ||
+        search.includes('d=')
+    );
+}
+window.isBookingUrl = isBookingUrl;
+
+function getBookingUrlParams() {
+    let service = '';
+    let date = '';
+    let time = '';
+    let price = '';
+    let event = '';
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        service = urlParams.get('service') || '';
+        date = urlParams.get('date') || urlParams.get('d') || '';
+        time = urlParams.get('time') || urlParams.get('t') || '';
+        price = urlParams.get('price') || '';
+        event = urlParams.get('event') || '';
+
+        const hash = window.location.hash || '';
+        const dateMatch = hash.match(/(?:date=|d=|booking[?=/_\-]?|^#)(\d{1,2}[-./]\d{1,2}[-./]\d{2,4}|\d{4}-\d{2}-\d{2})/i);
+        if (dateMatch && !date) {
+            date = dateMatch[1];
+        }
+
+        const qIdx = hash.indexOf('?');
+        if (qIdx !== -1) {
+            const hashParams = new URLSearchParams(hash.substring(qIdx + 1));
+            if (!service) service = hashParams.get('service') || '';
+            if (!date) date = hashParams.get('date') || hashParams.get('d') || '';
+            if (!time) time = hashParams.get('time') || hashParams.get('t') || '';
+            if (!price) price = hashParams.get('price') || '';
+            if (!event) event = hashParams.get('event') || '';
+        }
+    } catch (e) {}
+
+    if (date) {
+        date = normalizeBookingDate(date);
+    }
+
+    if (event !== '' && typeof SCHEDULED_EVENTS !== 'undefined') {
+        const evId = parseInt(event, 10);
+        for (const d in SCHEDULED_EVENTS) {
+            const found = SCHEDULED_EVENTS[d].find(ev => ev.eventId === evId || (ev.titleKA && ev.titleKA.includes(event)) || (ev.titleEN && ev.titleEN.includes(event)));
+            if (found) {
+                if (!date) date = d;
+                if (!time) time = found.time;
+                if (!service) service = found.serviceCategory || '';
+                if (!price) price = found.price || '';
+                break;
+            }
+        }
+    }
+
+    if (date && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[date] && SCHEDULED_EVENTS[date].length > 0) {
+        let matchedEv = null;
+        if (time) {
+            matchedEv = SCHEDULED_EVENTS[date].find(ev => ev.time === time);
+        }
+        if (!matchedEv) {
+            matchedEv = SCHEDULED_EVENTS[date][0];
+            if (!time) time = matchedEv.time;
+        }
+        if (matchedEv) {
+            if (!service) service = matchedEv.serviceCategory || '';
+            if (!price) price = matchedEv.price || '';
+        }
+    }
+
+    return { service, date, time, price, event };
+}
+window.getBookingUrlParams = getBookingUrlParams;
+
+function copyToClipboard(text, onSuccess) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            if (onSuccess) onSuccess();
+        }).catch(() => {
+            fallbackCopyText(text);
+            if (onSuccess) onSuccess();
+        });
+    } else {
+        fallbackCopyText(text);
+        if (onSuccess) onSuccess();
+    }
+}
+window.copyToClipboard = copyToClipboard;
+
+function fallbackCopyText(text) {
+    try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+    } catch(e) {}
+}
+
+function shareBookingEvent(dateStr, timeStr, eventTitle, btnElement) {
+    const origin = window.location.origin || 'https://metaphora.ge';
+    if (!dateStr) {
+        const dInput = document.getElementById('booking-date-input');
+        if (dInput && dInput.value) dateStr = dInput.value;
+    }
+    if (!timeStr) {
+        const tInput = document.getElementById('booking-time-input');
+        if (tInput && tInput.value) timeStr = tInput.value;
+    }
+    if (!eventTitle) {
+        const bannerTitle = document.querySelector('.cal-day-event-banner .event-banner-title');
+        if (bannerTitle) eventTitle = bannerTitle.textContent;
+    }
+
+    let shortCode = formatShortBookingDate(dateStr, timeStr);
+    if (!shortCode) shortCode = 'booking';
+    const shareUrl = `${origin}/#${shortCode}`;
+    const isEn = (localStorage.getItem('metafora_lang') === 'EN');
+    const title = eventTitle ? `${eventTitle} - მეტაფორა` : (isEn ? 'Metaphora Event Booking' : 'მეტაფორას ღონისძიებაზე დაჯავშნა');
+    const shareText = isEn 
+        ? `${title} - Online booking at Metaphora: ${shareUrl}` 
+        : `${title} - ონლაინ დაჯავშნა მეტაფორაში: ${shareUrl}`;
+
+    function triggerCopyFeedback() {
+        if (btnElement) {
+            btnElement.classList.add('copied');
+            const textSpan = btnElement.querySelector('span');
+            const originalText = textSpan ? textSpan.textContent : '';
+            if (textSpan) {
+                textSpan.textContent = isEn ? '✓ Copied!' : '✓ დაკოპირდა!';
+            }
+            setTimeout(() => {
+                btnElement.classList.remove('copied');
+                if (textSpan) textSpan.textContent = originalText;
+            }, 2200);
+        }
+        if (typeof showFloatingNotification === 'function') {
+            showFloatingNotification(isEn ? `✨ Short link copied: ${shareUrl}` : `✨ მოკლე ბმული დაკოპირდა: ${shareUrl}`);
+        }
+    }
+
+    if (navigator.share) {
+        navigator.share({
+            title: title,
+            text: shareText,
+            url: shareUrl
+        }).catch((err) => {
+            if (err && err.name !== 'AbortError') {
+                copyToClipboard(shareUrl, triggerCopyFeedback);
+            }
+        });
+    } else {
+        copyToClipboard(shareUrl, triggerCopyFeedback);
+    }
+}
+window.shareBookingEvent = shareBookingEvent;
+
+function initMainApp() {
+    // Glassmorphism Booking Modal & Elements references (hoisted early for instant zero-flicker startup)
+    var bookingModalOverlay = document.getElementById('booking-modal-overlay');
+    var bookingGlassCard = document.getElementById('booking-modal-glass-card');
+    var modalCloseBtn = document.getElementById('modal-close-btn');
+
+    var bookingStepForm = document.getElementById('booking-step-form');
+    var bookingStepPayment = document.getElementById('booking-step-payment');
+    var bookingStepSuccess = document.getElementById('booking-step-success');
+
+    var bookingForm = document.getElementById('metafora-booking-form');
+    var bookingFormStatus = document.getElementById('booking-form-status');
+    var btnProceedToPayment = document.getElementById('btn-proceed-to-payment');
+
+    var btnPaymentBack = document.getElementById('btn-payment-back');
+    var btnPaymentConfirm = document.getElementById('btn-payment-confirm');
+    var btnCloseSuccess = document.getElementById('btn-close-success');
+
+    var btnCopyIban = document.getElementById('btn-copy-iban');
+    var copyBtnText = document.getElementById('copy-btn-text');
+    var btnCopyAmount = document.getElementById('btn-copy-amount');
+    var copyAmountBtnText = document.getElementById('copy-amount-btn-text');
+    var btnCopyFullRequisites = document.getElementById('btn-copy-full-requisites');
+    var copyFullText = document.getElementById('copy-full-text');
+
+    var metaforaIbanVal = document.getElementById('metafora-iban-val');
+    var bookingPaymentAmount = document.getElementById('booking-payment-amount');
+    var bookingPaymentPurpose = document.getElementById('booking-payment-purpose');
+
+    var btnBogPay = document.getElementById('btn-bog-pay');
+    var btnTbcPay = document.getElementById('btn-tbc-pay');
+    var btnShareBooking = document.getElementById('btn-share-booking');
+
+    var isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    var pendingBookingPayload = null;
     
     // ==========================================================================
     // 1. Profile Data & Botanical 3D Dandelion Configuration (Home Page)
@@ -1016,8 +1438,19 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 window.scrollTo({ top: 0, behavior: 'instant' });
             }
+        } else {
+            // Immediate booking initialization on page load
+            try {
+                if (typeof initSmileBookingCalendar === 'function') {
+                    initSmileBookingCalendar();
+                }
+                if (typeof openBookingModalFromUrl === 'function') {
+                    openBookingModalFromUrl();
+                }
+            } catch (err) {
+                console.error('Initial booking open error:', err);
+            }
         }
-        // NOTE: If initialIsBooking, modal opening is safely triggered right after initSmileBookingCalendar()
     }
 
     // Search & Language Toggle
@@ -1489,17 +1922,42 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="stagger-card-author">${authorText ? '👤 ' + authorText : ''}</span>
                         `}
                     </span>
-                    <button class="open-booking-modal-btn btn btn-primary" 
-                            data-event-date="${item.date}" 
-                            data-event-time="${item.time}" 
-                            data-service="${item.serviceCategory}"
-                            data-price="${item.price}"
-                            data-event-title="${item.title}"
-                            style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">
-                        <span>${bookBtnText}</span>
-                    </button>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <button type="button" class="afisha-card-share-btn" 
+                                data-event-date="${item.date}" 
+                                data-event-time="${item.time}" 
+                                data-event-title="${item.title}"
+                                title="${isEn ? 'Share Event Link' : 'ღონისძიების ბმულის გაზიარება'}"
+                                aria-label="${isEn ? 'Share Event' : 'გაზიარება'}">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                        </button>
+                        <button class="open-booking-modal-btn btn btn-primary" 
+                                data-event-date="${item.date}" 
+                                data-event-time="${item.time}" 
+                                data-service="${item.serviceCategory}"
+                                data-price="${item.price}"
+                                data-event-title="${item.title}"
+                                style="padding: 6px 15px; font-size: 0.78rem; border-radius: 9999px;">
+                            <span>${bookBtnText}</span>
+                        </button>
+                    </div>
                 </div>
             `;
+
+            const cardShareBtn = card.querySelector('.afisha-card-share-btn');
+            if (cardShareBtn) {
+                cardShareBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shareBookingEvent(item.date, item.time, item.title, cardShareBtn);
+                });
+            }
 
             card.addEventListener('click', (e) => {
                 const authorBtn = e.target.closest('.stagger-card-author-btn');
@@ -1518,7 +1976,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     return;
                 }
-                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .afisha-card-share-btn')) return;
                 const currentPos = getPositionOf(originalIndex);
                 moveStagger(currentPos);
             });
@@ -1529,7 +1987,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let lastAfishaTap = 0;
             card.addEventListener('touchend', (e) => {
-                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-author-btn')) return;
+                if (e.target.closest('.open-booking-modal-btn, .afisha-learn-more-btn, .stagger-card-author-btn, .afisha-card-share-btn')) return;
                 const now = Date.now();
                 if (now - lastAfishaTap < 350 && now - lastAfishaTap > 0) {
                     openBookingModal(item.serviceCategory || item.title, item.date, item.time, item.price || '');
@@ -2432,176 +2890,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 6. GLASSMORPHISM BOOKING & PAYMENT SYSTEM ENGINE (PORTED & ADAPTED FROM IDC)
     // ==========================================================================
-    const bookingModalOverlay = document.getElementById('booking-modal-overlay');
-    const bookingGlassCard = document.getElementById('booking-modal-glass-card');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
+    bookingModalOverlay = bookingModalOverlay || document.getElementById('booking-modal-overlay');
+    bookingGlassCard = bookingGlassCard || document.getElementById('booking-modal-glass-card');
+    modalCloseBtn = modalCloseBtn || document.getElementById('modal-close-btn');
 
-    const bookingStepForm = document.getElementById('booking-step-form');
-    const bookingStepPayment = document.getElementById('booking-step-payment');
-    const bookingStepSuccess = document.getElementById('booking-step-success');
+    bookingStepForm = bookingStepForm || document.getElementById('booking-step-form');
+    bookingStepPayment = bookingStepPayment || document.getElementById('booking-step-payment');
+    bookingStepSuccess = bookingStepSuccess || document.getElementById('booking-step-success');
 
-    const bookingForm = document.getElementById('metafora-booking-form');
-    const bookingFormStatus = document.getElementById('booking-form-status');
-    const btnProceedToPayment = document.getElementById('btn-proceed-to-payment');
+    bookingForm = bookingForm || document.getElementById('metafora-booking-form');
+    bookingFormStatus = bookingFormStatus || document.getElementById('booking-form-status');
+    btnProceedToPayment = btnProceedToPayment || document.getElementById('btn-proceed-to-payment');
 
-    const btnPaymentBack = document.getElementById('btn-payment-back');
-    const btnPaymentConfirm = document.getElementById('btn-payment-confirm');
-    const btnCloseSuccess = document.getElementById('btn-close-success');
+    btnPaymentBack = btnPaymentBack || document.getElementById('btn-payment-back');
+    btnPaymentConfirm = btnPaymentConfirm || document.getElementById('btn-payment-confirm');
+    btnCloseSuccess = btnCloseSuccess || document.getElementById('btn-close-success');
 
-    const btnCopyIban = document.getElementById('btn-copy-iban');
-    const copyBtnText = document.getElementById('copy-btn-text');
-    const btnCopyAmount = document.getElementById('btn-copy-amount');
-    const copyAmountBtnText = document.getElementById('copy-amount-btn-text');
-    const btnCopyFullRequisites = document.getElementById('btn-copy-full-requisites');
-    const copyFullText = document.getElementById('copy-full-text');
+    btnCopyIban = btnCopyIban || document.getElementById('btn-copy-iban');
+    copyBtnText = copyBtnText || document.getElementById('copy-btn-text');
+    btnCopyAmount = btnCopyAmount || document.getElementById('btn-copy-amount');
+    copyAmountBtnText = copyAmountBtnText || document.getElementById('copy-amount-btn-text');
+    btnCopyFullRequisites = btnCopyFullRequisites || document.getElementById('btn-copy-full-requisites');
+    copyFullText = copyFullText || document.getElementById('copy-full-text');
 
-    const metaforaIbanVal = document.getElementById('metafora-iban-val');
-    const bookingPaymentAmount = document.getElementById('booking-payment-amount');
-    const bookingPaymentPurpose = document.getElementById('booking-payment-purpose');
+    metaforaIbanVal = metaforaIbanVal || document.getElementById('metafora-iban-val');
+    bookingPaymentAmount = bookingPaymentAmount || document.getElementById('booking-payment-amount');
+    bookingPaymentPurpose = bookingPaymentPurpose || document.getElementById('booking-payment-purpose');
 
-    const btnBogPay = document.getElementById('btn-bog-pay');
-    const btnTbcPay = document.getElementById('btn-tbc-pay');
-
-    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    let pendingBookingPayload = null;
-
-    const SCHEDULED_EVENTS = {
-        '2026-10-05': [
-            { eventId: 0, titleKA: '🎮 თამაშის არქიტექტორი - 8 შეხვედრიანი პროგრამა', titleEN: '🎮 Game Architect - 8-Session Program', time: '19:00', timeRange: '19:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '05 ოქტ | 19:00', badgeEN: 'Oct 05 | 19:00' }
-        ],
-        '2026-10-08': [
-            { eventId: 11, titleKA: '🌙 აღმოსავლური ისტორიები (შეჰერეზადასთან)', titleEN: '🌙 Eastern Stories (with Scheherazade)', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '08 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 08 | 19:00 - 22:00' }
-        ],
-        '2026-10-09': [
-            { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (I შეხვედრა)', titleEN: "💬 Let's Talk (Session 1)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '09 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 09 | 19:00 - 22:00' }
-        ],
-        '2026-10-11': [
-            { eventId: 14, titleKA: '🎲 ლილას თამაში (I შეხვედრა)', titleEN: '🎲 Leela Game (Session 1)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '11 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 11 | 12:00 - 19:00' }
-        ],
-        '2026-10-14': [
-            { eventId: 5, titleKA: '💼 ქოუჩინგი არაქოუჩებისთვის', titleEN: '💼 Coaching for Non-Coaches', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '14 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 14 | 19:00 - 22:00' }
-        ],
-        '2026-10-15': [
-            { eventId: 1, titleKA: '🕹️ თამაშის არქიტექტორი - ჩაღრმავებული კურსი', titleEN: '🕹️ Game Architect - Advanced Course', time: '19:00', timeRange: '19:00 - 22:00', price: '650 ₾', serviceCategory: 'Personal Development', badgeKA: '15 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 15 | 19:00 - 22:00' }
-        ],
-        '2026-10-18': [
-            { eventId: 9, titleKA: '🌌 სისტემური განლაგება - ვორქშოფი', titleEN: '🌌 Systemic Constellations - Workshop', time: '12:00', timeRange: '12:00 - 19:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 18 | 12:00 - 19:00' },
-            { eventId: 2, titleKA: '🌿 პროგრამა არიტე - პიროვნული განვითარება', titleEN: '🌿 Arete Program - Personal Development', time: '18:00', timeRange: '18:00 - 21:00', price: '180 ₾', serviceCategory: 'Personal Development', badgeKA: '18 ოქტ | 18:00 - 21:00', badgeEN: 'Oct 18 | 18:00 - 21:00' }
-        ],
-        '2026-10-20': [
-            { eventId: 3, titleKA: '❤️ სიყვარულის 5 ენა - მასტერკლასი', titleEN: '❤️ 5 Love Languages - Masterclass', time: '11:00', timeRange: '11:00 - 14:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '20 ოქტ | 11:00 - 14:00', badgeEN: 'Oct 20 | 11:00 - 14:00' }
-        ],
-        '2026-10-21': [
-            { eventId: 6, titleKA: '👥 ქოუჩინგი HR მენეჯერებისთვის & ლიდერებისთვის', titleEN: '👥 Coaching for HR Managers & Leaders', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '21 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 21 | 19:00 - 22:00' }
-        ],
-        '2026-10-22': [
-            { eventId: 4, titleKA: '🎓 ტრენერობის ხელოვნება - ტრენერის გზა', titleEN: "🎓 Art of Training - Trainer's Path", time: '18:30', timeRange: '18:30 - 21:30', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 18:30 - 21:30', badgeEN: 'Oct 22 | 18:30 - 21:30' },
-            { eventId: 15, titleKA: '🕯️ პაემანი სიბნელეში - სენსორული დიალოგი', titleEN: '🕯️ Blind Date - Sensory Dialogue', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '22 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 22 | 19:00 - 22:00' }
-        ],
-        '2026-10-23': [
-            { eventId: 12, titleKA: '💬 მოდი ვილაპარაკოთ (II შეხვედრა)', titleEN: "💬 Let's Talk (Session 2)", time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '23 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 23 | 19:00 - 22:00' }
-        ],
-        '2026-10-24': [
-            { eventId: 16, titleKA: '💔 ღალატის ანატომია — ესტერ პერელის მიხედვით', titleEN: '💔 Anatomy of Infidelity - Esther Perel', time: '16:00', timeRange: '16:00 - 19:00', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '24 ოქტ | 16:00 - 19:00', badgeEN: 'Oct 24 | 16:00 - 19:00' }
-        ],
-        '2026-10-25': [
-            { eventId: 14, titleKA: '🎲 ლილას თამაში (II შეხვედრა)', titleEN: '🎲 Leela Game (Session 2)', time: '12:00', timeRange: '12:00 - 19:00', price: '200 ₾', serviceCategory: 'Personal Development', badgeKA: '25 ოქტ | 12:00 - 19:00', badgeEN: 'Oct 25 | 12:00 - 19:00' }
-        ],
-        '2026-10-27': [
-            { eventId: 17, titleKA: '🧠 შეყვარებული ტვინი — ჰელენ ფიშერის კვლევების მიხედვით', titleEN: '🧠 Brain in Love - Helen Fisher', time: '11:00', timeRange: '11:00 - 13:30', price: '80 ₾', serviceCategory: 'Think Tank', badgeKA: '27 ოქტ | 11:00 - 13:30', badgeEN: 'Oct 27 | 11:00 - 13:30' }
-        ],
-        '2026-10-28': [
-            { eventId: 7, titleKA: '💔 რატომ ვირჩევთ ერთნაირ პარტნიორებს & რატომ გვტკივა სიყვარული', titleEN: '💔 Why We Choose Same Partners & Why Love Hurts', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '28 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 28 | 19:00 - 22:00' }
-        ],
-        '2026-10-29': [
-            { eventId: 18, titleKA: '🌌 სამყაროს კანონები - სალონური ვორქშოფი', titleEN: '🌌 Universal Laws - Salon Workshop', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Personal Development', badgeKA: '29 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 29 | 19:00 - 22:00' }
-        ],
-        '2026-10-30': [
-            { eventId: 8, titleKA: '📦 რა შევუკვეთე და რა ჩამომივიდა', titleEN: '📦 What I Ordered vs What Arrived', time: '19:00', timeRange: '19:00 - 22:00', price: '80 ₾', serviceCategory: 'Personal Development', badgeKA: '30 ოქტ | 19:00 - 22:00', badgeEN: 'Oct 30 | 19:00 - 22:00' }
-        ],
-        '2026-11-04': [
-            { eventId: 10, titleKA: '💰 ფული თუ პასუხისმგებლობა', titleEN: '💰 Money or Responsibility', time: '19:00', timeRange: '19:00 - 22:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '04 ნოე | 19:00 - 22:00', badgeEN: 'Nov 04 | 19:00 - 22:00' }
-        ],
-        '2026-11-10': [
-            { eventId: 13, titleKA: '🧠 ადამიანის ფსიქოლოგია ლიდერობაში - არაცნობიერი მენეჯმენტი', titleEN: '🧠 Human Psychology in Leadership', time: '18:00', timeRange: '18:00 - 21:00', price: '100 ₾', serviceCategory: 'Business', badgeKA: '10 ნოე | 18:00 - 21:00', badgeEN: 'Nov 10 | 18:00 - 21:00' }
-        ]
-    };
-    window.SCHEDULED_EVENTS = SCHEDULED_EVENTS;
-
-    const SERVICE_PRICES = {
-        // Specific Events from Excel Schedule
-        'თამაშის არქიტექტორი': '650 ₾',
-        'game architect': '650 ₾',
-        'აღმოსავლური ისტორიები': '100 ₾',
-        'შეჰერეზადა': '100 ₾',
-        'scheherazade': '100 ₾',
-        'მოდი ვილაპარაკოთ': '100 ₾',
-        'let\'s talk': '100 ₾',
-        'ლილას თამაში': '200 ₾',
-        'ლილა': '200 ₾',
-        'leela': '200 ₾',
-        'ქოუჩინგი არაქოუჩებისთვის': '100 ₾',
-        'non-coaches': '100 ₾',
-        'სისტემური განლაგება': '180 ₾',
-        'constellations': '180 ₾',
-        'სიყვარულის 5 ენა': '80 ₾',
-        '5 love languages': '80 ₾',
-        'ქოუჩინგი hr': '100 ₾',
-        'coaching for hr': '100 ₾',
-        'პაემანი სიბნელეში': '100 ₾',
-        'date in the dark': '100 ₾',
-        'ღალატის ანატომია': '80 ₾',
-        'infidelity': '80 ₾',
-        'შეყვარებული ტვინი': '80 ₾',
-        'brain in love': '80 ₾',
-        'რატომ ვირჩევთ ერთნაირ პარტნიორებს': '80 ₾',
-        'რატომ გვტკივა სიყვარული': '80 ₾',
-        'why love hurts': '80 ₾',
-        'სამყაროს კანონები': '100 ₾',
-        'universal laws': '100 ₾',
-
-        // Services & Programs
-        'personal development': '100 ₾',
-        'პერსონალური განვითარება': '100 ₾',
-        'პიროვნული განვითარება': '100 ₾',
-        'business': '100 ₾',
-        'ბიზნეს': '100 ₾',
-        'think tank': '80 ₾',
-        'თინკ ტანკი': '80 ₾',
-        'art': '50 ₾',
-        'ხელოვნება': '50 ₾',
-        'playback': '50 ₾',
-        'თერაპია': '80 ₾',
-        'კერამიკ': '60 ₾',
-        'clubs': '30 ₾',
-        'კლუბ': '30 ₾'
-    };
-
-    function getServicePrice(serviceOrTitle) {
-        if (!serviceOrTitle) return "";
-        const lower = String(serviceOrTitle).toLowerCase().trim();
-
-        // 1. Check in SCHEDULED_EVENTS if loaded
-        if (typeof SCHEDULED_EVENTS !== 'undefined') {
-            for (const d in SCHEDULED_EVENTS) {
-                for (const ev of SCHEDULED_EVENTS[d]) {
-                    if (ev.titleKA && (lower.includes(ev.titleKA.toLowerCase()) || ev.titleKA.toLowerCase().includes(lower))) {
-                        if (ev.price) return ev.price;
-                    }
-                    if (ev.titleEN && (lower.includes(ev.titleEN.toLowerCase()) || ev.titleEN.toLowerCase().includes(lower))) {
-                        if (ev.price) return ev.price;
-                    }
-                }
-            }
-        }
-
-        // 2. Check in SERVICE_PRICES dictionary
-        for (const [key, price] of Object.entries(SERVICE_PRICES)) {
-            if (lower.includes(key.toLowerCase())) return price;
-        }
-
-        return "";
-    }
+    btnBogPay = btnBogPay || document.getElementById('btn-bog-pay');
+    btnTbcPay = btnTbcPay || document.getElementById('btn-tbc-pay');
 
     // Helper: Set dynamic QR code with fallback providers
     function setBookingQrCodeUrl(url) {
@@ -2671,182 +2988,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function normalizeBookingDate(str) {
-        if (!str) return '';
-        str = String(str).trim();
-
-        if (/^\d{4}-\d{2}-\d{2}$/.test(str)) {
-            return str;
-        }
-
-        if (/^\d{6}$/.test(str)) {
-            const d = str.substring(0, 2);
-            const m = str.substring(2, 4);
-            const y = '20' + str.substring(4, 6);
-            return `${y}-${m}-${d}`;
-        }
-
-        const parts = str.split(/[-./_]/);
-        if (parts.length === 3) {
-            let p0 = parts[0];
-            let p1 = parts[1];
-            let p2 = parts[2];
-
-            if (p0.length === 4) {
-                const y = p0;
-                const m = String(p1).padStart(2, '0');
-                const d = String(p2).padStart(2, '0');
-                return `${y}-${m}-${d}`;
-            }
-
-            let y = p2;
-            if (y.length === 2) y = '20' + y;
-
-            let num0 = parseInt(p0, 10);
-            let num1 = parseInt(p1, 10);
-
-            let d, m;
-            if (num0 > 12) {
-                d = String(num0).padStart(2, '0');
-                m = String(num1).padStart(2, '0');
-            } else if (num1 > 12) {
-                m = String(num0).padStart(2, '0');
-                d = String(num1).padStart(2, '0');
-            } else {
-                const cand1 = `${y}-${String(num1).padStart(2, '0')}-${String(num0).padStart(2, '0')}`;
-                const cand2 = `${y}-${String(num0).padStart(2, '0')}-${String(num1).padStart(2, '0')}`;
-                if (typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[cand1]) {
-                    return cand1;
-                } else if (typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[cand2]) {
-                    return cand2;
-                }
-                d = String(num0).padStart(2, '0');
-                m = String(num1).padStart(2, '0');
-            }
-            return `${y}-${m}-${d}`;
-        }
-
-        return '';
-    }
-    window.normalizeBookingDate = normalizeBookingDate;
-
-    function formatShortBookingDate(isoDateStr, timeStr) {
-        if (!isoDateStr) return '';
-        const parts = isoDateStr.split('-');
-        if (parts.length === 3) {
-            const y = parts[0].slice(-2);
-            const m = parts[1];
-            const d = parts[2];
-            const base = `${d}-${m}-${y}`;
-            if (timeStr && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[isoDateStr] && SCHEDULED_EVENTS[isoDateStr].length > 1) {
-                const firstEv = SCHEDULED_EVENTS[isoDateStr][0];
-                if (firstEv.time !== timeStr) {
-                    return `${base}?time=${encodeURIComponent(timeStr)}`;
-                }
-            }
-            return base;
-        }
-        return isoDateStr;
-    }
-    window.formatShortBookingDate = formatShortBookingDate;
-
-    function isBookingUrl() {
-        const hash = (window.location.hash || '').toLowerCase();
-        const search = (window.location.search || '').toLowerCase();
-        const isDateHash = /^#\d{1,2}[-./]\d{1,2}[-./]\d{2,4}/.test(hash) || /^#booking[-=/]?.*/.test(hash);
-        return (
-            isDateHash ||
-            hash.includes('book') ||
-            hash.includes('javshan') ||
-            search.includes('book') ||
-            search.includes('javshan') ||
-            search.includes('date=') ||
-            search.includes('d=')
-        );
-    }
-    window.isBookingUrl = isBookingUrl;
-
-    function getBookingUrlParams() {
-        let service = '';
-        let date = '';
-        let time = '';
-        let price = '';
-        let event = '';
-        try {
-            const urlParams = new URLSearchParams(window.location.search);
-            service = urlParams.get('service') || '';
-            date = urlParams.get('date') || urlParams.get('d') || '';
-            time = urlParams.get('time') || urlParams.get('t') || '';
-            price = urlParams.get('price') || '';
-            event = urlParams.get('event') || '';
-
-            const hash = window.location.hash || '';
-            const dateMatch = hash.match(/(?:date=|d=|booking[?=/_\-]?|^#)(\d{1,2}[-./]\d{1,2}[-./]\d{2,4}|\d{4}-\d{2}-\d{2})/i);
-            if (dateMatch && !date) {
-                date = dateMatch[1];
-            }
-
-            const qIdx = hash.indexOf('?');
-            if (qIdx !== -1) {
-                const hashParams = new URLSearchParams(hash.substring(qIdx + 1));
-                if (!service) service = hashParams.get('service') || '';
-                if (!date) date = hashParams.get('date') || hashParams.get('d') || '';
-                if (!time) time = hashParams.get('time') || hashParams.get('t') || '';
-                if (!price) price = hashParams.get('price') || '';
-                if (!event) event = hashParams.get('event') || '';
-            }
-        } catch (e) {}
-
-        if (date) {
-            date = normalizeBookingDate(date);
-        }
-
-        // 1. If event ID or title is specified in URL, resolve it from SCHEDULED_EVENTS
-        if (event !== '' && typeof SCHEDULED_EVENTS !== 'undefined') {
-            const evId = parseInt(event, 10);
-            for (const d in SCHEDULED_EVENTS) {
-                const found = SCHEDULED_EVENTS[d].find(ev => ev.eventId === evId || (ev.titleKA && ev.titleKA.includes(event)) || (ev.titleEN && ev.titleEN.includes(event)));
-                if (found) {
-                    if (!date) date = d;
-                    if (!time) time = found.time;
-                    if (!service) service = found.serviceCategory || '';
-                    if (!price) price = found.price || '';
-                    break;
-                }
-            }
-        }
-
-        // 2. If date is specified, resolve default time/service/price from SCHEDULED_EVENTS if not set
-        if (date && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[date] && SCHEDULED_EVENTS[date].length > 0) {
-            let matchedEv = null;
-            if (time) {
-                matchedEv = SCHEDULED_EVENTS[date].find(ev => ev.time === time);
-            }
-            if (!matchedEv) {
-                matchedEv = SCHEDULED_EVENTS[date][0];
-                if (!time) time = matchedEv.time;
-            }
-            if (matchedEv) {
-                if (!service) service = matchedEv.serviceCategory || '';
-                if (!price) price = matchedEv.price || '';
-            }
-        }
-
-        return { service, date, time, price, event };
-    }
-    window.getBookingUrlParams = getBookingUrlParams;
-
     function updateBookingUrlHash(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', usePush = false) {
+        if (!targetDate) {
+            const dInput = document.getElementById('booking-date-input');
+            if (dInput && dInput.value) targetDate = dInput.value;
+        }
+        if (!targetTime) {
+            const tInput = document.getElementById('booking-time-input');
+            if (tInput && tInput.value) targetTime = tInput.value;
+        }
         let hash = '#booking';
         if (targetDate) {
             const shortD = formatShortBookingDate(targetDate, targetTime);
-            hash = '#' + shortD;
+            if (shortD) hash = '#' + shortD;
         }
 
-        if (window.location.hash !== hash) {
+        const cleanPath = window.location.pathname + hash;
+        if (window.location.hash !== hash || window.location.search) {
             try {
                 if (window.history && window.history.replaceState) {
-                    window.history.replaceState({ bookingModal: true }, '', hash);
+                    window.history.replaceState({ bookingModal: true }, '', cleanPath);
                 } else {
                     window.location.hash = hash;
                 }
@@ -2858,6 +3019,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.updateBookingUrlHash = updateBookingUrlHash;
 
     function syncBookingUrlHash() {
+        bookingModalOverlay = bookingModalOverlay || document.getElementById('booking-modal-overlay');
         if (!bookingModalOverlay) return;
         const isActive = bookingModalOverlay.classList.contains('active');
         if (!isActive) return;
@@ -2876,31 +3038,16 @@ document.addEventListener('DOMContentLoaded', () => {
     window.syncBookingUrlHash = syncBookingUrlHash;
 
     function cleanUrlWithoutBooking() {
+        document.documentElement.classList.remove('direct-booking-mode');
         try {
-            const url = new URL(window.location.href);
-            url.hash = '';
-            url.searchParams.delete('booking');
-            url.searchParams.delete('book');
-            url.searchParams.delete('javshani');
-            url.searchParams.delete('date');
-            url.searchParams.delete('d');
-            url.searchParams.delete('time');
-            url.searchParams.delete('t');
-            url.searchParams.delete('service');
-            url.searchParams.delete('price');
-            url.searchParams.delete('event');
-            const clean = url.pathname + (url.search && url.search !== '?' ? url.search : '');
+            const clean = window.location.pathname;
             if (window.history && window.history.replaceState) {
                 window.history.replaceState(null, '', clean);
             } else {
                 window.location.hash = '';
             }
         } catch (e) {
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState(null, '', window.location.pathname);
-            } else {
-                window.location.hash = '';
-            }
+            window.location.hash = '';
         }
     }
     window.cleanUrlWithoutBooking = cleanUrlWithoutBooking;
@@ -2919,6 +3066,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.getBookingShareUrl = getBookingShareUrl;
 
     function openBookingModalFromUrl() {
+        bookingModalOverlay = bookingModalOverlay || document.getElementById('booking-modal-overlay');
         if (!bookingModalOverlay) return;
         const entrancePortal = document.getElementById('entrance-portal');
         const mainWebsite = document.getElementById('main-website');
@@ -2935,6 +3083,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openBookingModalFromUrl = openBookingModalFromUrl;
 
     function openBookingModal(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', skipHistory = false) {
+        bookingModalOverlay = bookingModalOverlay || document.getElementById('booking-modal-overlay');
         if (bookingModalOverlay) {
             // If opened from within an article reader, close the article reader drawer
             const articleOverlay = document.getElementById('article-reader-overlay');
@@ -2986,6 +3135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showBookingStep('form');
             bookingModalOverlay.classList.add('active');
+            document.documentElement.classList.add('direct-booking-mode');
             document.body.style.overflow = 'hidden';
 
             if (!skipHistory) {
@@ -3435,6 +3585,47 @@ document.addEventListener('DOMContentLoaded', () => {
         modalCloseBtn.addEventListener('click', closeBookingModal);
     }
 
+    const btnShareBookingEl = document.getElementById('btn-share-booking');
+    if (btnShareBookingEl) {
+        btnShareBookingEl.addEventListener('click', (e) => {
+            e.preventDefault();
+            const dInput = document.getElementById('booking-date-input');
+            const tInput = document.getElementById('booking-time-input');
+            const dVal = dInput ? dInput.value : '';
+            const tVal = tInput ? tInput.value : '';
+            let evTitle = '';
+            const bannerTitle = document.querySelector('.cal-day-event-banner .event-banner-title');
+            if (bannerTitle) evTitle = bannerTitle.textContent;
+            shareBookingEvent(dVal, tVal, evTitle, btnShareBookingEl);
+        });
+    }
+
+    // Delegated click listener for direct sharing from any button
+    document.addEventListener('click', (e) => {
+        const shareBtn = e.target.closest('#btn-share-booking, .btn-share-booking');
+        if (shareBtn) {
+            e.preventDefault();
+            const dInput = document.getElementById('booking-date-input');
+            const tInput = document.getElementById('booking-time-input');
+            const dVal = dInput ? dInput.value : '';
+            const tVal = tInput ? tInput.value : '';
+            let evTitle = '';
+            const bannerTitle = document.querySelector('.cal-day-event-banner .event-banner-title');
+            if (bannerTitle) evTitle = bannerTitle.textContent;
+            shareBookingEvent(dVal, tVal, evTitle, shareBtn);
+            return;
+        }
+        const cardShareBtn = e.target.closest('.afisha-card-share-btn');
+        if (cardShareBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const dVal = cardShareBtn.dataset.eventDate || '';
+            const tVal = cardShareBtn.dataset.eventTime || '';
+            const evTitle = cardShareBtn.dataset.eventTitle || '';
+            shareBookingEvent(dVal, tVal, evTitle, cardShareBtn);
+        }
+    });
+
     if (bookingModalOverlay) {
         bookingModalOverlay.addEventListener('click', (e) => {
             if (e.target === bookingModalOverlay) {
@@ -3540,6 +3731,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const eventBanner = document.getElementById('cal-day-event-banner');
 
         if (!calGrid || !slotsContainer) return;
+        if (calGrid.dataset.calendarInitialized === 'true') {
+            if (typeof window.refreshSmileBookingCalendar === 'function') {
+                window.refreshSmileBookingCalendar();
+            }
+            return;
+        }
+        calGrid.dataset.calendarInitialized = 'true';
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -7415,6 +7613,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "✨ ონლაინ დაჯავშნა": "✨ Online Booking",
         "აირჩიე დღე და დრო": "Choose Date & Time",
         "დაჯავშნე ვიზიტი კალენდარში - დაგიდასტურებთ ტელეფონით.": "Book your visit in the calendar - we will confirm by phone.",
+        "გაზიარება": "Share",
+        "ღონისძიების გაზიარება": "Share Event",
+        "ღონისძიების მოკლე ბმულის გაზიარება": "Share short event link",
         "აირჩიე დრო": "Select Time",
         "ვიზიტის დეტალები": "Visit Details",
         "შეავსე ველები და გადადი გადახდაზე.": "Fill fields and proceed to payment.",
@@ -8727,4 +8928,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initI18nLanguageSwitcher();
     initUniqueVisitorCounter();
-});
+}
+
+if (document.readyState !== 'loading') {
+    initMainApp();
+} else {
+    document.addEventListener('DOMContentLoaded', initMainApp);
+}

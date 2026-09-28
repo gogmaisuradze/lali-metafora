@@ -2887,9 +2887,12 @@ a.feature-card:active {
     transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
 }
 
-.booking-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
+.booking-modal-overlay.active,
+html.direct-booking-mode .booking-modal-overlay {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    pointer-events: auto !important;
 }
 
 .booking-modal-glass {
@@ -2912,8 +2915,70 @@ a.feature-card:active {
     margin: auto 0;
 }
 
-.booking-modal-overlay.active .booking-modal-glass {
-    transform: scale(1) translateY(0);
+.booking-modal-overlay.active .booking-modal-glass,
+html.direct-booking-mode .booking-modal-overlay .booking-modal-glass {
+    transform: scale(1) translateY(0) !important;
+    opacity: 1 !important;
+}
+
+/* Event Direct Sharing Buttons */
+.btn-share-booking {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1.5px solid rgba(203, 213, 225, 0.85);
+    border-radius: 9999px;
+    padding: 7px 15px;
+    font-size: 0.80rem;
+    font-weight: 700;
+    color: #1e293b;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.btn-share-booking:hover {
+    background: #ffffff;
+    border-color: #0284c7;
+    color: #0284c7;
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.22);
+}
+
+.btn-share-booking.copied,
+.afisha-card-share-btn.copied {
+    background: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    color: #059669 !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25) !important;
+}
+
+.afisha-card-share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(203, 213, 225, 0.85);
+    border-radius: 9999px;
+    padding: 6px 12px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    line-height: 1;
+}
+
+.afisha-card-share-btn:hover {
+    background: #ffffff;
+    border-color: #0284c7;
+    color: #0284c7;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(2, 132, 199, 0.18);
 }
 
 .modal-close-btn {

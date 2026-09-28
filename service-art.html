@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="logo_o_teal.png">
     <link rel="shortcut icon" href="logo_o_teal.png">
     <link rel="apple-touch-icon" href="logo_o_teal.png">
-    <link rel="stylesheet" href="style.css?v=20260929_v3">
+    <link rel="stylesheet" href="style.css?v=20260929_v4">
 </head>
 <body>
 
@@ -425,10 +425,22 @@
             
             <!-- STEP 1: BOOKING DETAILS FORM (SMILE AGENCY STYLE) -->
             <div id="booking-step-form" class="booking-step-content active">
-                <div class="modal-header" style="margin-bottom: 12px;">
-                    <span class="modal-badge">✨ ონლაინ დაჯავშნა</span>
-                    <h3 class="modal-title">აირჩიე დღე და დრო</h3>
-                    <p class="modal-desc">დაჯავშნე ვიზიტი კალენდარში - დაგიდასტურებთ ტელეფონით.</p>
+                <div class="modal-header" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+                    <div>
+                        <span class="modal-badge">✨ ონლაინ დაჯავშნა</span>
+                        <h3 class="modal-title">აირჩიე დღე და დრო</h3>
+                        <p class="modal-desc">დაჯავშნე ვიზიტი კალენდარში - დაგიდასტურებთ ტელეფონით.</p>
+                    </div>
+                    <button type="button" class="btn-share-booking" id="btn-share-booking" title="ღონისძიების მოკლე ბმულის გაზიარება" aria-label="ღონისძიების გაზიარება">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        <span id="btn-share-booking-text">გაზიარება</span>
+                    </button>
                 </div>
 
                 <div class="booking smile-style-booking">
@@ -953,6 +965,6 @@
 
 
     <!-- Application Script (Single Source of Truth) -->
-    <script src="app.js?v=20260929_v3"></script>
+    <script src="app.js?v=20260929_v4"></script>
 </body>
 </html>

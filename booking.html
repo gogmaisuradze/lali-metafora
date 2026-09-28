@@ -10,7 +10,24 @@
         var target = 'index.html#booking';
         var dateMatch = (h + ' ' + s).match(/(?:date=|d=|booking[?=/_\-]?|^#?)(\d{1,2}[-./]\d{1,2}[-./]\d{2,4}|\d{4}-\d{2}-\d{2})/i);
         if (dateMatch) {
-            target = 'index.html#' + dateMatch[1];
+            var raw = dateMatch[1];
+            var parts = raw.split(/[-./_]/);
+            if (parts.length === 3) {
+                var p0 = parts[0], p1 = parts[1], p2 = parts[2];
+                var d, m, y;
+                if (p0.length === 4) {
+                    y = p0.slice(-2);
+                    m = ('0' + p1).slice(-2);
+                    d = ('0' + p2).slice(-2);
+                } else {
+                    d = ('0' + p0).slice(-2);
+                    m = ('0' + p1).slice(-2);
+                    y = p2.slice(-2);
+                }
+                target = 'index.html#' + d + '-' + m + '-' + y;
+            } else {
+                target = 'index.html#' + raw;
+            }
         } else if (h) {
             target = 'index.html#' + h;
         }
