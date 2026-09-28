@@ -8,15 +8,11 @@
         var s = (window.location.search || '').replace(/^\?/, '');
         var h = (window.location.hash || '').replace(/^#/, '');
         var target = 'index.html#booking';
-        var combinedParams = [];
-        if (s) combinedParams.push(s);
-        if (h && h.indexOf('?') !== -1) {
-            combinedParams.push(h.substring(h.indexOf('?') + 1));
-        } else if (h && h !== 'booking' && h.indexOf('=') !== -1) {
-            combinedParams.push(h);
-        }
-        if (combinedParams.length > 0) {
-            target += '?' + combinedParams.join('&');
+        var dateMatch = (h + ' ' + s).match(/(?:date=|d=|booking[?=/_\-]?|^#?)(\d{1,2}[-./]\d{1,2}[-./]\d{2,4}|\d{4}-\d{2}-\d{2})/i);
+        if (dateMatch) {
+            target = 'index.html#' + dateMatch[1];
+        } else if (h) {
+            target = 'index.html#' + h;
         }
         window.location.replace(target);
     </script>

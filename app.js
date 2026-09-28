@@ -2671,21 +2671,97 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function normalizeBookingDate(str) {
+        if (!str) return '';
+        str = String(str).trim();
+
+        if (/^\d{4}-\d{2}-\d{2}$/.test(str)) {
+            return str;
+        }
+
+        if (/^\d{6}$/.test(str)) {
+            const d = str.substring(0, 2);
+            const m = str.substring(2, 4);
+            const y = '20' + str.substring(4, 6);
+            return `${y}-${m}-${d}`;
+        }
+
+        const parts = str.split(/[-./_]/);
+        if (parts.length === 3) {
+            let p0 = parts[0];
+            let p1 = parts[1];
+            let p2 = parts[2];
+
+            if (p0.length === 4) {
+                const y = p0;
+                const m = String(p1).padStart(2, '0');
+                const d = String(p2).padStart(2, '0');
+                return `${y}-${m}-${d}`;
+            }
+
+            let y = p2;
+            if (y.length === 2) y = '20' + y;
+
+            let num0 = parseInt(p0, 10);
+            let num1 = parseInt(p1, 10);
+
+            let d, m;
+            if (num0 > 12) {
+                d = String(num0).padStart(2, '0');
+                m = String(num1).padStart(2, '0');
+            } else if (num1 > 12) {
+                m = String(num0).padStart(2, '0');
+                d = String(num1).padStart(2, '0');
+            } else {
+                const cand1 = `${y}-${String(num1).padStart(2, '0')}-${String(num0).padStart(2, '0')}`;
+                const cand2 = `${y}-${String(num0).padStart(2, '0')}-${String(num1).padStart(2, '0')}`;
+                if (typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[cand1]) {
+                    return cand1;
+                } else if (typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[cand2]) {
+                    return cand2;
+                }
+                d = String(num0).padStart(2, '0');
+                m = String(num1).padStart(2, '0');
+            }
+            return `${y}-${m}-${d}`;
+        }
+
+        return '';
+    }
+    window.normalizeBookingDate = normalizeBookingDate;
+
+    function formatShortBookingDate(isoDateStr, timeStr) {
+        if (!isoDateStr) return '';
+        const parts = isoDateStr.split('-');
+        if (parts.length === 3) {
+            const y = parts[0].slice(-2);
+            const m = parts[1];
+            const d = parts[2];
+            const base = `${d}-${m}-${y}`;
+            if (timeStr && typeof SCHEDULED_EVENTS !== 'undefined' && SCHEDULED_EVENTS[isoDateStr] && SCHEDULED_EVENTS[isoDateStr].length > 1) {
+                const firstEv = SCHEDULED_EVENTS[isoDateStr][0];
+                if (firstEv.time !== timeStr) {
+                    return `${base}?time=${encodeURIComponent(timeStr)}`;
+                }
+            }
+            return base;
+        }
+        return isoDateStr;
+    }
+    window.formatShortBookingDate = formatShortBookingDate;
+
     function isBookingUrl() {
         const hash = (window.location.hash || '').toLowerCase();
         const search = (window.location.search || '').toLowerCase();
+        const isDateHash = /^#\d{1,2}[-./]\d{1,2}[-./]\d{2,4}/.test(hash) || /^#booking[-=/]?.*/.test(hash);
         return (
-            hash === '#booking' ||
-            hash.startsWith('#booking?') ||
-            hash.startsWith('#booking&') ||
-            hash === '#book' ||
-            hash.startsWith('#book?') ||
-            hash === '#javshani' ||
-            hash.startsWith('#javshani?') ||
-            hash === '#booking-modal' ||
-            hash.startsWith('#booking-modal?') ||
-            search.includes('booking') ||
-            search.includes('javshan')
+            isDateHash ||
+            hash.includes('book') ||
+            hash.includes('javshan') ||
+            search.includes('book') ||
+            search.includes('javshan') ||
+            search.includes('date=') ||
+            search.includes('d=')
         );
     }
     window.isBookingUrl = isBookingUrl;
@@ -2699,22 +2775,31 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const urlParams = new URLSearchParams(window.location.search);
             service = urlParams.get('service') || '';
-            date = urlParams.get('date') || '';
-            time = urlParams.get('time') || '';
+            date = urlParams.get('date') || urlParams.get('d') || '';
+            time = urlParams.get('time') || urlParams.get('t') || '';
             price = urlParams.get('price') || '';
             event = urlParams.get('event') || '';
 
             const hash = window.location.hash || '';
+            const dateMatch = hash.match(/(?:date=|d=|booking[?=/_\-]?|^#)(\d{1,2}[-./]\d{1,2}[-./]\d{2,4}|\d{4}-\d{2}-\d{2})/i);
+            if (dateMatch && !date) {
+                date = dateMatch[1];
+            }
+
             const qIdx = hash.indexOf('?');
             if (qIdx !== -1) {
                 const hashParams = new URLSearchParams(hash.substring(qIdx + 1));
                 if (!service) service = hashParams.get('service') || '';
-                if (!date) date = hashParams.get('date') || '';
-                if (!time) time = hashParams.get('time') || '';
+                if (!date) date = hashParams.get('date') || hashParams.get('d') || '';
+                if (!time) time = hashParams.get('time') || hashParams.get('t') || '';
                 if (!price) price = hashParams.get('price') || '';
                 if (!event) event = hashParams.get('event') || '';
             }
         } catch (e) {}
+
+        if (date) {
+            date = normalizeBookingDate(date);
+        }
 
         // 1. If event ID or title is specified in URL, resolve it from SCHEDULED_EVENTS
         if (event !== '' && typeof SCHEDULED_EVENTS !== 'undefined') {
@@ -2753,25 +2838,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateBookingUrlHash(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', usePush = false) {
         let hash = '#booking';
-        const params = [];
-        if (targetDate) params.push('date=' + encodeURIComponent(targetDate));
-        if (targetTime) params.push('time=' + encodeURIComponent(targetTime));
-        if (preselectedService) params.push('service=' + encodeURIComponent(preselectedService));
-        if (params.length > 0) {
-            hash += '?' + params.join('&');
+        if (targetDate) {
+            const shortD = formatShortBookingDate(targetDate, targetTime);
+            hash = '#' + shortD;
         }
 
         if (window.location.hash !== hash) {
             try {
-                if (window.history) {
-                    const isAlreadyBooking = (window.location.hash || '').toLowerCase().includes('book');
-                    if (usePush && !isAlreadyBooking && window.history.pushState) {
-                        window.history.pushState({ bookingModal: true }, '', hash);
-                    } else if (window.history.replaceState) {
-                        window.history.replaceState({ bookingModal: true }, '', hash);
-                    } else {
-                        window.location.hash = hash;
-                    }
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState({ bookingModal: true }, '', hash);
                 } else {
                     window.location.hash = hash;
                 }
@@ -2808,7 +2883,9 @@ document.addEventListener('DOMContentLoaded', () => {
             url.searchParams.delete('book');
             url.searchParams.delete('javshani');
             url.searchParams.delete('date');
+            url.searchParams.delete('d');
             url.searchParams.delete('time');
+            url.searchParams.delete('t');
             url.searchParams.delete('service');
             url.searchParams.delete('price');
             url.searchParams.delete('event');
@@ -2830,21 +2907,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getBookingShareUrl() {
         const origin = window.location.origin || 'https://metaphora.ge';
-        let bookingUrl = origin + '/#booking';
-        const sSelect = document.getElementById('booking-service-select');
         const dInput = document.getElementById('booking-date-input');
         const tInput = document.getElementById('booking-time-input');
-        const pInput = document.getElementById('booking-price-input');
-
-        const params = [];
-        if (dInput && dInput.value) params.push('date=' + encodeURIComponent(dInput.value));
-        if (tInput && tInput.value) params.push('time=' + encodeURIComponent(tInput.value));
-        if (sSelect && sSelect.value) params.push('service=' + encodeURIComponent(sSelect.value));
-        if (pInput && pInput.value) params.push('price=' + encodeURIComponent(pInput.value));
-        if (params.length > 0) {
-            bookingUrl += '?' + params.join('&');
+        let dVal = dInput ? dInput.value : '';
+        let tVal = tInput ? tInput.value : '';
+        if (dVal) {
+            return origin + '/#' + formatShortBookingDate(dVal, tVal);
         }
-        return bookingUrl;
+        return origin + '/#booking';
     }
     window.getBookingShareUrl = getBookingShareUrl;
 
