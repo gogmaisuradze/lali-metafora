@@ -992,6 +992,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Automatically handle initial URL hash navigation on page load without any delay or flickering
     const initialIsBooking = isBookingUrl();
     if ((window.location.hash && window.location.hash !== '#entrance') || initialIsBooking) {
+        if (initialIsBooking && !document.body.classList.contains('booking-page-view') && !window.location.pathname.toLowerCase().includes('booking')) {
+            window.location.replace('booking.html' + window.location.search + window.location.hash);
+            return;
+        }
+
         const entrancePortal = document.getElementById('entrance-portal');
         const mainWebsite = document.getElementById('main-website');
         if (entrancePortal) entrancePortal.style.display = 'none';
@@ -2718,6 +2723,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.getBookingUrlParams = getBookingUrlParams;
 
     function updateBookingUrlHash(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', usePush = true) {
+        if (document.body.classList.contains('booking-page-view')) {
+            try {
+                const url = new URL(window.location.href);
+                if (preselectedService) url.searchParams.set('service', preselectedService);
+                if (targetDate) url.searchParams.set('date', targetDate);
+                if (targetTime) url.searchParams.set('time', targetTime);
+                if (targetPrice) url.searchParams.set('price', targetPrice);
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState({ bookingModal: true }, '', url.toString());
+                }
+            } catch (e) {}
+            return;
+        }
+
         let hash = '#booking';
         const params = [];
         if (preselectedService) params.push('service=' + encodeURIComponent(preselectedService));
@@ -2750,7 +2769,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.updateBookingUrlHash = updateBookingUrlHash;
 
     function syncBookingUrlHash() {
-        if (!bookingModalOverlay || !bookingModalOverlay.classList.contains('active')) return;
+        if (!bookingModalOverlay) return;
+        const isActive = bookingModalOverlay.classList.contains('active') || document.body.classList.contains('booking-page-view');
+        if (!isActive) return;
+
         const sSelect = document.getElementById('booking-service-select');
         const dInput = document.getElementById('booking-date-input');
         const tInput = document.getElementById('booking-time-input');
@@ -2765,6 +2787,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.syncBookingUrlHash = syncBookingUrlHash;
 
     function cleanUrlWithoutBooking() {
+        if (document.body.classList.contains('booking-page-view')) return;
         try {
             const url = new URL(window.location.href);
             url.hash = '';
@@ -2788,22 +2811,22 @@ document.addEventListener('DOMContentLoaded', () => {
     window.cleanUrlWithoutBooking = cleanUrlWithoutBooking;
 
     function getBookingShareUrl() {
-        const baseUrl = window.location.href.split('#')[0].split('?')[0];
+        const origin = window.location.origin || 'https://metaphora.ge';
+        let bookingUrl = origin + '/booking.html';
         const sSelect = document.getElementById('booking-service-select');
         const dInput = document.getElementById('booking-date-input');
         const tInput = document.getElementById('booking-time-input');
         const pInput = document.getElementById('booking-price-input');
 
-        let hash = '#booking';
         const params = [];
         if (sSelect && sSelect.value) params.push('service=' + encodeURIComponent(sSelect.value));
         if (dInput && dInput.value) params.push('date=' + encodeURIComponent(dInput.value));
         if (tInput && tInput.value) params.push('time=' + encodeURIComponent(tInput.value));
         if (pInput && pInput.value) params.push('price=' + encodeURIComponent(pInput.value));
         if (params.length > 0) {
-            hash += '?' + params.join('&');
+            bookingUrl += '?' + params.join('&');
         }
-        return baseUrl + hash;
+        return bookingUrl;
     }
     window.getBookingShareUrl = getBookingShareUrl;
 
@@ -2893,6 +2916,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openBookingModal = openBookingModal;
 
     function closeBookingModal(restoreHistory = true) {
+        if (document.body.classList.contains('booking-page-view')) {
+            window.location.href = 'index.html';
+            return;
+        }
         if (bookingModalOverlay) {
             bookingModalOverlay.classList.remove('active');
             document.body.style.overflow = '';
@@ -3918,13 +3945,23 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCalendar();
         };
 
-        // Initial synchronization of service & price for the default selected event (October 5, 2026)
-        const initialDateStr = formatISODate(selectedDate);
-        if (SCHEDULED_EVENTS[initialDateStr] && SCHEDULED_EVENTS[initialDateStr].length > 0) {
-            syncServiceAndPrice(SCHEDULED_EVENTS[initialDateStr][0]);
+        // Initial synchronization of service & price for the default or URL-requested event
+        const urlBookingParams = (typeof getBookingUrlParams === 'function') ? getBookingUrlParams() : null;
+        if (urlBookingParams && (urlBookingParams.date || urlBookingParams.time || urlBookingParams.service || urlBookingParams.price)) {
+            selectDateAndTime(
+                urlBookingParams.date || '2026-10-05',
+                urlBookingParams.time || '19:00',
+                urlBookingParams.service,
+                urlBookingParams.service,
+                urlBookingParams.price
+            );
+        } else {
+            const initialDateStr = formatISODate(selectedDate);
+            if (SCHEDULED_EVENTS[initialDateStr] && SCHEDULED_EVENTS[initialDateStr].length > 0) {
+                syncServiceAndPrice(SCHEDULED_EVENTS[initialDateStr][0]);
+            }
+            renderCalendar();
         }
-
-        renderCalendar();
     }
 
     initSmileBookingCalendar();
