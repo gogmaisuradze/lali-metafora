@@ -88,23 +88,6 @@ html.direct-main-mode #main-website {
     pointer-events: auto !important;
 }
 
-/* Zero-Flicker Instant Direct Booking Modal Popup Mode ("ფორთოჩკა") */
-html.direct-booking-mode body.initial-lock,
-html.direct-booking-mode body {
-    overflow: hidden !important;
-}
-
-html.direct-booking-mode #booking-modal-overlay {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: flex !important;
-    pointer-events: auto !important;
-}
-
-html.direct-booking-mode #booking-modal-glass-card {
-    transform: scale(1) translateY(0) !important;
-}
-
 /* ==========================================================================
    1. ENTRANCE PORTAL & BOTANICAL 3D DANDELION FLOWER
    ========================================================================== */
