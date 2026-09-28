@@ -992,11 +992,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Automatically handle initial URL hash navigation on page load without any delay or flickering
     const initialIsBooking = isBookingUrl();
     if ((window.location.hash && window.location.hash !== '#entrance') || initialIsBooking) {
-        if (initialIsBooking && !document.body.classList.contains('booking-page-view') && !window.location.pathname.toLowerCase().includes('booking')) {
-            window.location.replace('booking.html' + window.location.search + window.location.hash);
-            return;
-        }
-
         const entrancePortal = document.getElementById('entrance-portal');
         const mainWebsite = document.getElementById('main-website');
         if (entrancePortal) entrancePortal.style.display = 'none';
@@ -1005,24 +1000,26 @@ document.addEventListener('DOMContentLoaded', () => {
             mainWebsite.style.opacity = '1';
         }
         document.body.classList.remove('initial-lock');
-        document.documentElement.classList.remove('direct-main-mode');
 
         if (initialIsBooking) {
             setTimeout(() => {
                 openBookingModalFromUrl();
-            }, 80);
-        } else if (window.location.hash.toLowerCase().includes('register')) {
-            setTimeout(() => {
-                if (typeof window.openQuickRegisterModal === 'function') {
-                    window.openQuickRegisterModal();
-                }
-            }, 60);
-        } else if (window.location.hash !== '#hero') {
-            setTimeout(() => {
-                scrollToAnchor(window.location.hash);
             }, 60);
         } else {
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            document.documentElement.classList.remove('direct-main-mode');
+            if (window.location.hash.toLowerCase().includes('register')) {
+                setTimeout(() => {
+                    if (typeof window.openQuickRegisterModal === 'function') {
+                        window.openQuickRegisterModal();
+                    }
+                }, 60);
+            } else if (window.location.hash !== '#hero') {
+                setTimeout(() => {
+                    scrollToAnchor(window.location.hash);
+                }, 60);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
         }
     }
 
@@ -2723,20 +2720,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.getBookingUrlParams = getBookingUrlParams;
 
     function updateBookingUrlHash(preselectedService = '', targetDate = '', targetTime = '', targetPrice = '', usePush = true) {
-        if (document.body.classList.contains('booking-page-view')) {
-            try {
-                const url = new URL(window.location.href);
-                if (preselectedService) url.searchParams.set('service', preselectedService);
-                if (targetDate) url.searchParams.set('date', targetDate);
-                if (targetTime) url.searchParams.set('time', targetTime);
-                if (targetPrice) url.searchParams.set('price', targetPrice);
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState({ bookingModal: true }, '', url.toString());
-                }
-            } catch (e) {}
-            return;
-        }
-
         let hash = '#booking';
         const params = [];
         if (preselectedService) params.push('service=' + encodeURIComponent(preselectedService));
@@ -2770,7 +2753,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function syncBookingUrlHash() {
         if (!bookingModalOverlay) return;
-        const isActive = bookingModalOverlay.classList.contains('active') || document.body.classList.contains('booking-page-view');
+        const isActive = bookingModalOverlay.classList.contains('active') || document.documentElement.classList.contains('direct-booking-mode');
         if (!isActive) return;
 
         const sSelect = document.getElementById('booking-service-select');
@@ -2787,7 +2770,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.syncBookingUrlHash = syncBookingUrlHash;
 
     function cleanUrlWithoutBooking() {
-        if (document.body.classList.contains('booking-page-view')) return;
         try {
             const url = new URL(window.location.href);
             url.hash = '';
@@ -2812,7 +2794,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getBookingShareUrl() {
         const origin = window.location.origin || 'https://metaphora.ge';
-        let bookingUrl = origin + '/booking.html';
+        let bookingUrl = origin + '/#booking';
         const sSelect = document.getElementById('booking-service-select');
         const dInput = document.getElementById('booking-date-input');
         const tInput = document.getElementById('booking-time-input');
@@ -2830,8 +2812,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.getBookingShareUrl = getBookingShareUrl;
 
-
-
     function openBookingModalFromUrl() {
         if (!bookingModalOverlay) return;
         const entrancePortal = document.getElementById('entrance-portal');
@@ -2842,7 +2822,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mainWebsite.style.opacity = '1';
         }
         document.body.classList.remove('initial-lock');
-        document.documentElement.classList.remove('direct-main-mode');
 
         const params = getBookingUrlParams();
         openBookingModal(params.service, params.date, params.time, params.price, true);
@@ -2916,10 +2895,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openBookingModal = openBookingModal;
 
     function closeBookingModal(restoreHistory = true) {
-        if (document.body.classList.contains('booking-page-view')) {
-            window.location.href = 'index.html';
-            return;
-        }
+        document.documentElement.classList.remove('direct-booking-mode');
         if (bookingModalOverlay) {
             bookingModalOverlay.classList.remove('active');
             document.body.style.overflow = '';

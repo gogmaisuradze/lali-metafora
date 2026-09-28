@@ -88,6 +88,23 @@ html.direct-main-mode #main-website {
     pointer-events: auto !important;
 }
 
+/* Zero-Flicker Instant Direct Booking Modal Popup Mode ("ფორთოჩკა") */
+html.direct-booking-mode body.initial-lock,
+html.direct-booking-mode body {
+    overflow: hidden !important;
+}
+
+html.direct-booking-mode #booking-modal-overlay {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    pointer-events: auto !important;
+}
+
+html.direct-booking-mode #booking-modal-glass-card {
+    transform: scale(1) translateY(0) !important;
+}
+
 /* ==========================================================================
    1. ENTRANCE PORTAL & BOTANICAL 3D DANDELION FLOWER
    ========================================================================== */
@@ -7758,83 +7775,4 @@ body:has(.service-page-main) .word-meta-table {
     align-items: center;
     gap: 3px;
     margin-left: 6px;
-}
-
-/* ==========================================================================
-   23. DEDICATED STANDALONE BOOKING PAGE VIEW (booking.html)
-   ========================================================================== */
-body.booking-page-view {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-color);
-}
-
-body.booking-page-view .booking-page-main {
-    flex: 1 0 auto;
-    padding: 24px 20px 80px 20px;
-    max-width: 960px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-body.booking-page-view .booking-modal-overlay {
-    position: static !important;
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    padding: 0 !important;
-    min-height: auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    pointer-events: auto !important;
-    z-index: auto !important;
-}
-
-body.booking-page-view .booking-modal-glass {
-    transform: none !important;
-    margin: 0 auto !important;
-    max-height: none !important;
-    overflow-y: visible !important;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.08), inset 0 1.5px 1.5px #ffffff !important;
-}
-
-body.booking-page-view .modal-close-btn {
-    display: none !important;
-}
-
-body.booking-page-view .booking-page-header-intro {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-body.booking-page-view .booking-page-title {
-    font-family: var(--font-playfair);
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    font-weight: 700;
-    margin: 12px 0 8px 0;
-    color: var(--text-color);
-}
-
-body.booking-page-view .booking-page-desc {
-    font-size: 0.98rem;
-    color: var(--text-muted);
-    max-width: 560px;
-    margin: 0 auto;
-    line-height: 1.55;
-}
-
-@media (max-width: 768px) {
-    body.booking-page-view .booking-page-main {
-        padding: 16px 12px 60px 12px !important;
-    }
-    body.booking-page-view .booking-modal-glass {
-        padding: 20px 12px 20px 12px !important;
-        border-radius: 20px !important;
-    }
 }
