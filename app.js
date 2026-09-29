@@ -2173,7 +2173,7 @@ function initMainApp() {
             serviceKeys: ['think-tank', 'business'],
             facebook: 'https://www.facebook.com/lali.badridze',
             instagram: 'https://www.instagram.com/lali_badridze/',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '0:00 / 1:20'
         },
         {
@@ -2187,7 +2187,7 @@ function initMainApp() {
             serviceKeys: ['personal-development', 'think-tank'],
             facebook: 'https://www.facebook.com/profile.php?id=100054981263056',
             instagram: 'https://www.instagram.com/kety_zhvania_tyson/',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '0:11 / 1:20'
         },
         {
@@ -2201,7 +2201,7 @@ function initMainApp() {
             serviceKeys: ['personal-development'],
             facebook: 'https://www.facebook.com/natia.kodua.1',
             instagram: 'https://www.instagram.com/kodua.natia/',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '0:23 / 1:20'
         },
         {
@@ -2215,7 +2215,7 @@ function initMainApp() {
             serviceKeys: ['business', 'think-tank'],
             facebook: 'https://www.facebook.com/marika.khaliani',
             instagram: 'https://www.instagram.com/marikakhaliani',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '0:34 / 1:20'
         },
         {
@@ -2229,7 +2229,7 @@ function initMainApp() {
             serviceKeys: ['business', 'art'],
             facebook: 'https://www.facebook.com/ia.khidirbegishvili',
             instagram: 'https://www.instagram.com/istudioatelia/',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '0:46 / 1:20'
         },
         {
@@ -2243,7 +2243,7 @@ function initMainApp() {
             serviceKeys: ['clubs', 'personal-development'],
             facebook: 'https://www.facebook.com/teo.peradze.7',
             instagram: 'https://www.instagram.com/teo_peradze16/',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '0:57 / 1:20'
         },
         {
@@ -2257,7 +2257,7 @@ function initMainApp() {
             serviceKeys: ['personal-development'],
             facebook: 'https://www.facebook.com/keti.mirianasvili',
             instagram: 'https://www.instagram.com/keti.mirianasvili',
-            whatsapp: 'https://wa.me/995599228228',
+            whatsapp: 'https://wa.me/995598228228',
             time: '1:08 / 1:20'
         }
     ];
@@ -2501,7 +2501,7 @@ function initMainApp() {
 
         const twSocialWa = document.getElementById('tw-social-wa');
         if (twSocialWa) {
-            twSocialWa.href = current.whatsapp || 'https://wa.me/995599228228';
+            twSocialWa.href = current.whatsapp || 'https://wa.me/995598228228';
             twSocialWa.title = `${current.name} - WhatsApp`;
         }
 
@@ -3240,7 +3240,7 @@ function initMainApp() {
                 phoneInput.classList.add('input-error');
                 phoneInput.focus();
             }
-            showBookingStatus(isEn ? '⚠️ Invalid phone number (must start with 5 and contain 9 digits, e.g. 599 22 82 28).' : '⚠️ ტელეფონის ნომერი არასწორია (უნდა იწყებოდეს 5-ით და შედგებოდეს 9 ციფრისგან, მაგ: 599 22 82 28).', true);
+            showBookingStatus(isEn ? '⚠️ Invalid phone number (must start with 5 and contain 9 digits, e.g. 598 228 228).' : '⚠️ ტელეფონის ნომერი არასწორია (უნდა იწყებოდეს 5-ით და შედგებოდეს 9 ციფრისგან, მაგ: 598 228 228).', true);
             return null;
         }
 
@@ -4928,9 +4928,9 @@ function initMainApp() {
 
             if (q.includes('ლოკაცი') || q.includes('სად') || q.includes('მისამართ') || q.includes('კონტაქტ') || q.includes('ტელეფონ') || q.includes('ნომერ') || q.includes('location')) {
                 if (isEn) {
-                    return `<p>📍 <strong>Contact &amp; Location:</strong></p><p>Metaphora is located at 63a Aghmashenebeli Ave, Tbilisi, Georgia.<br>📞 Phone: <strong>+995 599 22 82 28</strong><br>✉️ Email: <strong>club@metaphora.ge</strong><br>⏰ Working Hours: Daily 10:00 - 23:00.</p>`;
+                    return `<p>📍 <strong>Contact &amp; Location:</strong></p><p>Metaphora is located at 63a Aghmashenebeli Ave, Tbilisi, Georgia.<br>📞 Phone: <strong>+995 598 228 228</strong><br>✉️ Email: <strong>club@metaphora.ge</strong><br>⏰ Working Hours: Daily 10:00 - 23:00.</p>`;
                 }
-                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, აღმაშენებლის 63ა-ში.<br>📞 ტელეფონი: <strong>+995 599 22 82 28</strong><br>✉️ ელ.ფოსტა: <strong>club@metaphora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
+                return `<p>📍 <strong>კონტაქტი &amp; ლოკაცია:</strong></p><p>მეტაფორა მდებარეობს თბილისში, აღმაშენებლის 63ა-ში.<br>📞 ტელეფონი: <strong>+995 598 228 228</strong><br>✉️ ელ.ფოსტა: <strong>club@metaphora.ge</strong><br>⏰ სამუშაო საათები: ყოველდღე 10:00 - 23:00.</p>`;
             }
 
             if (q.includes('გალერე') || q.includes('ფოტო') || q.includes('gallery') || q.includes('სივრცე')) {
@@ -4948,9 +4948,9 @@ function initMainApp() {
             }
 
             if (isEn) {
-                return `<p>Thank you for reaching out! ✨</p><p>For further information about Metaphora, select any quick prompt below or call us directly at <strong>📞 +995 599 22 82 28</strong>.</p>`;
+                return `<p>Thank you for reaching out! ✨</p><p>For further information about Metaphora, select any quick prompt below or call us directly at <strong>📞 +995 598 228 228</strong>.</p>`;
             }
-            return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ქვემოთ, ან დაგვიკავშირდეთ ნომერზე <strong>📞 599 22 82 28</strong>.</p>`;
+            return `<p>დიდი მადლობა შეკითხვისთვის! ✨</p><p>მეტაფორას შესახებ დამატებითი ინფორმაციისთვის შეგიძლიათ აირჩიოთ ერთ-ერთი სწრაფი ღილაკი ქვემოთ, ან დაგვიკავშირდეთ ნომერზე <strong>📞 598 228 228</strong>.</p>`;
         }
 
         function escapeHtml(text) {
@@ -7044,7 +7044,7 @@ function initMainApp() {
                 lblName: isEn ? 'Full Name *' : 'სახელი, გვარი *',
                 namePlaceholder: isEn ? 'e.g. John Doe' : 'მაგ: გიორგი მაისურაძე',
                 lblPhone: isEn ? 'Phone Number *' : 'ტელ. ნომერი *',
-                phonePlaceholder: isEn ? 'e.g. +995 599 00 00 00' : 'მაგ: 599 00 00 00',
+                phonePlaceholder: isEn ? 'e.g. +995 598 228 228' : 'მაგ: 598 228 228',
                 lblEmail: isEn ? 'Email *' : 'მეილი (ელ-ფოსტა) *',
                 emailPlaceholder: isEn ? 'e.g. info@example.com' : 'მაგ: example@mail.com',
                 lblCompany: isEn ? 'Company / Organization' : 'კომპანია, რომელსაც წარმოადგენთ',
@@ -7382,6 +7382,7 @@ function initMainApp() {
         "სახელი, გვარი": "Full Name",
         "ტელ. ნომერი": "Phone Number",
         "მეილი": "Email",
+        "მაგ: 598 228 228": "e.g. +995 598 228 228",
         "მაგ: 599 00 00 00": "e.g. 599 00 00 00",
         "მაგ: example@mail.com": "e.g. example@mail.com",
         "მაგ: კომპანიის ან ორგანიზაციის სახელი": "e.g. Company or Organization Name",
